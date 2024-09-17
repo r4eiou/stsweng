@@ -1,0 +1,201 @@
+<link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+
+<div class = "main-container">
+            <div class= "header light" id="header">
+                <div class = "header-left">
+                    <a href="/tanod-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+                    <a href="/tanod-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+                </div>
+                
+                <div class = "header-title">
+                    <div class = "header-text">
+                        <h3>Sangguniang Barangay ng Parang</h3>
+                        <h5>Marikina City</h5>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-user-profile">
+                        <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
+                        <img src="/images/tanod-profile.png" class="header-user-profile" id="profile-img">
+                    </div>
+                    <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+                </div>
+            </div>
+            <div class="upper-container" id="white-upper-container">
+                <a href="/tanod-home" class="back-button" id="white-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Back
+                </a>
+            </div>
+            <div class = "page-content-container"  id="create-case-page">
+                <h1 id = "tanod-case-title">Creating a New Tanod Case</h1>
+                <div class = "form-encasing-container">
+                    <div class = "form-actual-container">
+                         
+                        <form class="case-form" id="caseForm" action="tanod-submit-case" method="post">
+                            <div class="message">{{message}}</div>
+                            <div class = "form-section" id = "basic-info">
+                                <div class = "column-section">
+                                    <label for="entry-number-input" class ="bold-label">Entry Number</label>
+                                    <input class = "entry-number-input" type = "text"  name="entryNumber" placeholder= "Entry Number">
+                                </div>
+                                <div class = "column-section">
+                                    <label for="date" class ="bold-label">Date</label>
+                                    <input type = "date"  id = "dateInput" name="date">
+                                </div>
+                                <div class = "column-section1">
+                                    <label for="case-form" class ="bold-label">Status</label>
+                                    <select name="status" class="status-dropdown" selected = "1">
+                                        <option value="" selected hidden>Select Status</option>
+                                        <option value="Resolved">Resolved</option>
+                                        <option value="Ongoing">Ongoing</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <span class = "section-name">Reportee Information</span>
+                            <div class = "form-section" id = "reportee-info">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="reporteeLastName" placeholder="Last Name">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="reporteeMiddleInitial" placeholder="M.I." maxlength="1">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="reporteeFirstName" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="form-section" id = "reportee-additional-info">
+                                <div class = "input-pair">
+                                    <label for="">Reportee Address</label>
+                                    <input class = "address-input" type = "text" name="reporteeAddress" placeholder="Reportee Address"> 
+                                </div>
+                            </div>
+                            <span class="section-name">Nature of Blotter</span>
+                            <div class = "form-section">
+                                <div class = "input-pair">
+                                    <input class = "nature-of-blotter-input" type = "text" name="natureOfBlotter" placeholder="Nature of Blotter">
+                                </div>
+                            </div>
+                            <span class = "section-name">Respondent Information</span>
+                            <div class = "form-section" id = "respondent-info">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="respondentLastName" placeholder="Last Name">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="respondentMiddleInitial" placeholder="M.I." maxlength="1">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="respondentFirstName" placeholder="First Name">
+                                </div>
+                            </div>
+                            <span class = "section-name">Desk Officer Information</span>
+
+                            <div class = "form-section" id = "desk-officer-information">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text"  name="deskOfficerLastName" placeholder="Last Name">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="deskOfficerMiddleInitial" placeholder="M.I." maxlength="1">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="deskOfficerFirstName" placeholder="First Name">
+                                </div>
+                            </div>
+                            <span class = "section-name">Witness Information</span>
+                            <div class = "form-section" id = "witness-information">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="witnessLastName" placeholder="Last Name">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="witnessMiddleInitial" placeholder="M.I." maxlength="1">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="witnessFirstName" placeholder="First Name">
+                                </div>
+                            </div>
+                            <span class ="section-name">Location</h5>
+                            <div class = "form-section" id="location">
+                                <div class = "input-pair">
+                                    <input class = "location-input" type = "text" name="location" placeholder="Location">
+                                </div>
+                            </div>
+                        </form>
+                    </div>  
+                </div>
+                    <div class = "buttons-container">
+                    <button type="submit" form="caseForm" class="form-btn save" id="resolved-button">
+                        <img src="/images/form-check.png" id="form-check-icon">
+                        <span id="">Save Changes</span>
+                    </button>
+                    <a href="/tanod-create">
+                    <button class = "form-btn discard" id="delete-button">
+                        <img src="/images/action-delete.png" id="form-delete-icon">
+                        <span id="">Discard Changes</span>
+                    </button>
+                    </div> 
+            </div>
+        </div>
+
+
+        <script>
+            document.getElementById('caseForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+
+             // Client-side validation (optional, as server-side validation is primary)
+            let formIsValid = true;
+            for (const key in formObject) {
+                if (!formObject[key].trim()) {
+                    formIsValid = false;
+                    break;
+                }
+            }
+
+            if (!formIsValid) {
+                alert('Please fill in all required fields.');
+                return;
+            } 
+
+
+           try {
+            const response = await fetch('/tanod-submit-case', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                window.location.href = result.redirectUrl;
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the form. Please try again.');
+        }
+        });
+        </script>

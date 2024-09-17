@@ -1,0 +1,96 @@
+/* FOR DB VIEWING ONLY */
+
+.db-main-box {
+    width: 800px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.db-main-box-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 930px;
+    height: 45px;
+    background-color: var(--dgreen);
+
+    border: 1px solid black;
+}
+
+        .checkboxCol {
+            width: 104px;
+            height: 45px;
+
+            padding-top: 3%;
+        }
+
+        .nameCol {
+            width: 274px;
+            height: 45px;
+
+            padding-top: 3%;
+        }
+
+        .statusCol {
+            width: 181px;
+            height: 45px;
+
+            padding-top: 3%;
+        }
+
+        .viewCol {
+            width: 181px;
+            height: 45px;
+        }
+
+
+.db-main-box-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: #fff;
+    border: 1px solid black;
+
+    width: 930px;
+    height: 65px;
+}
+
+.checkboxCol-Content {
+    width: 104px;
+    height: 45px;
+
+    padding-top: 3%;
+}
+
+.nameCol-Content {
+    width: 274px;
+    height: 45px;
+
+    padding-top: 3%;
+    color: black;
+    font-size: 12px;
+}
+
+.statusCol-Content {
+    width: 181px;
+    height: 45px;
+
+    padding-top: 1%;
+}
+
+.viewCol-Content {
+    width: 181px;
+    height: 45px;
+
+    padding-top: 3%;
+    font-size: 12px;
+    color: black;
+    
+    text-decoration: underline;
+}

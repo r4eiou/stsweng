@@ -1,0 +1,172 @@
+<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/header.js" type="text/javascript"></script>
+
+<div class = "main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/admin-homepage" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/admin-homepage" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Admin</span>
+                <img src="/images/admin-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <button type="button" class="header-logout-btn" id="logout-btn">Logout</button>
+        </div>
+    </div>
+</div>
+<!--New addition-->
+<div class="upper-container" id="black-upper-container">
+    <a href="/admin-homepage" class="back-button" id="black-back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+        </svg>
+        Back
+    </a>
+</div>
+<div class="content-container-tanod-home">
+    <div class="box-content-top">
+        <!-- missing: functions -->
+        <a href="/A-tanod-create-case">
+            <button type="button" class="form-btn create size">                             <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+        </a>
+        <button type="button" class="form-btn resolved margin size" id="resolvedButton">    <img src="/images/form-check.png">  <span>Mark as Resolved</span>   </button>
+        <button type="button" class="form-btn delete margin size"   id="deleteButton">      <img src="/images/form-trash.png">  <span>Delete Selection</span>   </button>
+        <div class="search-name-reg margin">
+
+            <!-- implement search function -->
+            <form id="searchForm">
+                <button type="submit"><img src="/images/search-reg.png"></button>
+                <input type="text" placeholder="Search Name" name="search_name">
+            </form>
+        </div>
+    </div>
+
+    <div class="db-main-box">
+        <!--
+        <div class="db-main-box-header">
+            <div class="checkboxCol"></div>
+            <div class="nameCol">Name</div>
+            <div class="statusCol">Tanod Case Status</div>
+            <div class="viewCol"></div>
+            
+        </div>
+
+        <form id="checkboxForm" action="/checkbox-action" method="POST">
+            {{#each cases}}
+                <div class="db-main-box-content">
+                    <div class="checkboxCol-Content">
+                        <input type="checkbox" name="caseIds" value="{{this._id}}" class="checkbox margin">
+                    </div>
+
+                    <div class="nameCol-Content">{{fullName ReporteeInfo.FirstName ReporteeInfo.MiddleInitial ReporteeInfo.LastName}}</div>
+
+                    {{!-- implement UPDATE --}}
+                    {{#checkStatus Status}}
+                        <div class="statusCol-Content">
+                            {{!-- <a href="/update-Status/{{this._id}}/{{this.Status}}"><button type="button" class="status resolved" ><img src="/images/resolved-circle.png"><span>Resolved</span></button></a> --}}
+                            <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
+                        </div>
+                    {{else}}
+                        <div class="statusCol-Content">
+                            {{!-- <a href="/update-Status/{{this._id}}/{{this.Status}}"><button type="button" class="status ongoing"><img src="/images/ongoing-circle.png"><span>Ongoing</span></button></a> --}}
+                            <button type="button" class="status ongoing" onclick="updateStatus('{{this._id}}', '{{this.Status}}')">
+                                <img src="/images/ongoing-circle.png"><span>Ongoing</span>
+                            </button>
+                        </div>
+                    {{/checkStatus}}
+
+                    <div class="viewCol-Content">
+                        <a href="/A-tanod-view-case/{{this._id}}" class="content-text-main underline">View Tanod Case</a>
+                    </div>
+        
+                </div>
+            {{/each}}
+        </form>
+        -->
+    </div>
+    <table class="tanod-lupon-db-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Tanod Case Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cases}}
+                        <tr>
+                            <td data-label="checkbox" class="align-right check-view-cell">
+                                <button type="button" class="checkbox" name="caseIds" value="{{this._id}}"><img src="/images/Done.png"></button>
+                            </td>
+                            <td class="truncate-text-150px">
+                                {{fullName ReporteeInfo.FirstName ReporteeInfo.MiddleInitial ReporteeInfo.LastName}}
+                            </td>
+                            {{#checkStatus Status}}
+                            <td class="case-status-cell-admin">
+                                <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
+                            </td>
+                            {{else}}
+                            <td class="fit-button">
+                                <button type="button" class="status ongoing" onclick="updateStatus('{{this._id}}', '{{this.Status}}')">
+                                    <img src="/images/ongoing-circle.png"><span>Ongoing</span>
+                                </button>
+                            </td>
+                            {{/checkStatus}}
+                            <td>
+                                <a href="/A-tanod-view-case/{{this._id}}" class="content-text-main underline">View Tanod Case</a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+    <!-- to be fixed -->
+    <div class="box-content-page">
+        <button class="page-btn" id="count-down">&lt;</button>
+        <div class="page-count" id="page-num">{{currentPage}}</div>
+        <button class="page-btn" id="count-up">&gt;</button>
+        {{#if (eq 0 totalPages)}}
+            <div class="page-number">Page {{currentPage}} of 1</div>
+        {{else}}
+            <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
+        {{/if}}
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const currentPage = {{currentPage}};
+            const totalPages = {{totalPages}};
+            const baseUrl = '/admin-tanod-db-view?page=';
+
+            $('#count-down').click(function() {
+                if (currentPage > 1) {
+                    window.location.href = baseUrl + (currentPage - 1);
+                }
+            });
+
+            $('#count-up').click(function() {
+                if (currentPage < totalPages) {
+                    window.location.href = baseUrl + (currentPage + 1);
+                }
+            });
+
+            window.updateStatus = function(caseId, currentStatus) {
+                window.location.href = `/update-Status/${caseId}/${currentStatus}/${currentPage}`;
+            };
+        });
+    </script>
+</div>

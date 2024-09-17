@@ -1,0 +1,160 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<script src="/js/sweetalert.min.js"></script>
+<script src="/js/webcam.min.js"></script>
+{{!-- <script src="/js/print.js"></script> --}}
+<script src ="/js/header.js"></script>
+
+<style id="dynamic-styles"></style>
+<link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/input-details-page.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+<div class="main-container" id="main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/index" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/index" class="header-home" id="home-link2"><p class="leftTitle">Home</p></a>
+        </div>
+        
+        {{!-- <div class = "">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div> --}}
+
+        <div class="midHeader">
+            <p class="title">Sangguniang Barangay ng Parang</p>
+            <p class="title-place" >Marikina City</p>
+        </div>
+        
+        
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Employee</span>
+                <img src="/images/employee-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <button type="button" class="header-logout-btn" id="logout-btn">Logout</button>
+        </div>
+    </div>
+
+    
+
+    <div class="sub-container">
+        <div class = "upper-container" id="certificate-upper-container">
+            <a href="/certificate-db" class="back-button" id="white-back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+                </svg>
+                Back
+            </a>
+        </div>
+        <div class = "text-container">
+            <!--<div class="action-text">Please input your details below to proceed with certification printing.</div>-->
+        </div>
+
+        <form action="#" method="post" class="print-form">
+            <div class = "print-panel">
+                <!-- for Photo-->
+                <div class="photo-container">
+                    <img src="{{certificates.img}}" class="details-profile" id="deets-profile-img">
+                    {{!-- <button type="button" class="image-upload-button" id="accesscamera" data-toggle="modal" data-target="#photoModal">Capture Photo</button> --}}
+                </div>
+                
+                <!-- Modal for Webcam -->
+                <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="my_camera" class="d-block mx-auto rounded overflow-hidden"></div>
+                                <div id="results" class="d-none"></div>
+                                <form method="post" id="photoForm">
+                                    <input type="hidden" id="photoStore" name="photoStore" value="">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning mx-auto text-white" id="takephoto">Capture Photo</button>
+                                <button type="button" class="btn btn-warning mx-auto text-white d-none" id="retakephoto">Retake</button>
+                                <button type="button" class="btn btn-warning mx-auto text-white d-none" id="uploadphoto">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- for Name and Birthday-->
+                <div class="deets1-container">
+                    <div class="name-container">
+                        <div class="deets-text">Name</div>
+                        <input type="text" id="name" name="name" placeholder="Juan C. Dela Cruz" value="{{certificates.name}}" readonly>
+                    </div>
+
+                    <div class="date-container">
+                        <div class="deets-text">Birthday</div>
+                        <input type="Date" id="Birthday" class="date" name="bday-date" placeholder="MM/DD/YYYY" value="{{certificates.birthday}}" readonly>                             
+                    </div>
+                </div>
+
+                <!-- for Address -->
+                <div class="deets2-container">
+                    <div class="address-container">
+                        <div class="deets-text">Address</div>
+                        <input type="text" id="address" name="address" placeholder="" value="{{certificates.address}}" readonly>
+                    </div>
+                </div>
+
+                <!-- for Place of Birth and Place of Issuance -->
+                <div class="deets3-container">
+                    <div class="birthplace-container">
+                        <div class="deets-text">Place of Birth<span> (City)</span></div>
+                        <input type="text" id="birthplace" name="birthplace" placeholder="Marikina City" value="{{certificates.birthplace}}" readonly>                             
+                    </div>
+                    
+
+                    <div class="location-container">
+                        <div class="deets-text">Place of CTC Issuance<span> (City)</span></div>
+                        <input type="text" id="location" name="location" placeholder="Marikina City" value="{{certificates.ctc_location}}" readonly>
+                    </div>
+                </div>
+
+                <!-- for Cedula Number and CTC Issuance Date -->
+                <div class="deets4-container">
+                    <div class="cedula-container">
+                        <div class="deets-text">CTC Number</div>
+                        <input type="text" id="cedula" name="cedula" placeholder="12345678" value="{{certificates.ctc_no}}" readonly> 
+                    </div>
+
+                    <div class="date-container">
+                        <div class="deets-text">CTC Issuance Date</div>
+                        <input type="Date" id="ctc-date-issued" class="date" name="ctc-date" placeholder="MM/DD/YYYY" value="{{certificates.ctc_date_issued}}" readonly>                             
+                    </div>
+                </div>
+
+                <!-- for Reason For Certificate -->
+                <div class="deets5-container"> 
+                    <div class="deets-text">Reason For Certificate</div>
+                    <input type="text" id="reason" name="reason" placeholder="" value="{{certificates.reason}}" readonly>
+                </div>
+
+                
+            </div>
+            <div class="cert-buttons-container">
+                    {{!-- <button type="button" class="download-btn lrg dark" onclick="downloadFileEmployee()"><img src="/images/download-dark.png"><span>Download</span></button> --}}
+                    {{!-- <button type="button" class="cancel-btn light" onclick="cancelForm()"><img src="/images/cancel-light.png"><span>Cancel</span></button> --}}
+                    
+                    {{!-- <a href="/certificate-edit/{{certificates._id}}" class="cert-link"><button type="button" class="form-btn edit cert"><img src="/images/form-edit.png"><span>Edit Data</span></button></a> --}}
+                    <a href="/delete-certificate/{{certificates._id}}" class="cert-link"><button type="button" class="form-btn delete cert"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
+                </div>
+        </form>
+    </div>
+
+</div>

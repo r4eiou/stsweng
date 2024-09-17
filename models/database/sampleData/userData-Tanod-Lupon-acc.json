@@ -1,0 +1,24 @@
+[{
+  "_id": "668ab92f2832ee6be40b3532",
+  "email": "ckbrodeth@gmail.com",
+  "password": "password1",
+  "role": "employee"
+},
+{
+  "_id": "668ab97b523f0e9e51d891f6",
+  "email": "ckbrodie@gmail.com",
+  "password": "password1",
+  "role": "tanod"
+},
+{
+  "_id": "668ab97b523f0e9e51d891f7",
+  "email": "charlzzbrodie@gmail.com",
+  "password": "password1",
+  "role": "lupon"
+},
+{
+  "_id": "6690a8a3f94f64c8d6fd9122",
+  "email": "charlize@gmail.com",
+  "password": "password1",
+  "role": "admin"
+}]

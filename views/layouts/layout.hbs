@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {{#if cssFile1}}
+      <link rel="stylesheet" href="/css/{{cssFile1}}.css" />
+    {{/if}}
+
+    {{#if cssFile2}}
+      <link rel="stylesheet" href="/css/{{cssFile2}}.css">
+    {{/if}}
+
+    {{#if javascriptFile1}}
+      <script src="/js/{{javascriptFile1}}.js"></script>
+    {{/if}}
+
+    {{#if javascriptFile2}}
+      <script src="/js/{{javascriptFile2}}.js"></script>
+    {{/if}}
+
+    <title>{{title}}</title>
+  </head>
+  <body>
+{{{body}}}
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/index.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/form.css">
+<script src = "/js/components.js" type="text/javascript"></script>
+<script src = "/js/header.js" type="text/javascript"></script>
+<script src = "/js/accounts-db.js" type="text/javascript"></script>
+
+
+<div class = "main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/admin-homepage" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/admin-homepage" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Admin</span>
+                <img src="/images/tanod-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/index"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+        </div>
+    </div>
+</div>
+
+<div class="upper-container" id="white-upper-container">
+    <a href="/admin-view-acct-tanod/{{accounts._id}}" class="back-button" id="white-back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+        </svg>
+        Back
+    </a>
+</div>
+
+<div class="content-container-tanod-home">
+    <table class="indiv-acct-table">
+        <tbody>
+            <tr>
+                <td rowspan="5" class="no-border no-padding">
+                    <div class="main-table-content">
+                        <div>
+                            <div class="role-profile">
+                                <img src="/images/tanod-profile.png" class="role-icon-main">
+                                <span class="role-name tanod">Tanod</span>
+                            </div>
+                        </div>
+
+                        <form action="/submit-edit-tanod-acc" method="post" class = "acc-info-form">
+
+                            {{!-- for submission --}}
+                            <input type="hidden" name="_id" value="{{accounts._id}}">  
+
+                            <div class = "field">
+                                <label for="acct-email-info" class ="bold-label-left">Email</label>
+                                <div class="input-container">
+                                    <input class = "acct-email" type = "text" id="admin-email" value="{{accounts.email}}" name="email">  
+                                </div>
+                            </div>
+
+                            <div class = "field">
+                                <label for="acct-pw-info" class ="bold-label-left">New Password</label>
+                                <div class="input-container">
+                                    <input class = "acct-pw" type = "password" id = "admin-pw" placeholder="Password" name="password">
+                                    <button type="button" class="form-action-btn" title="View Password" id="togglePassword">
+                                        <img id="eye_con" src="/images/action-view.png">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class = "field">
+                                <label for="acct-pw-info" class ="bold-label-left">Confirm Password</label>
+                                <div class="input-container">
+                                    <input class = "acct-pw" type = "password" id="admin-pw1" placeholder="Confirm Password" name="confirmPW">
+                                    <button type="button" class="form-action-btn" title="View Password" id="togglePassword1">
+                                        <img id="eye_con1" src="/images/action-view.png">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="edit-btn-container">
+                                <button type="submit" class="form-btn save" id="saveButtonTanod">
+                                    <img src="/images/form-check.png"><span>Save Changes</span>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="validationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+</div>
+    

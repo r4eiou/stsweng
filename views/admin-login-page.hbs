@@ -1,0 +1,60 @@
+<div class = "main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+                    <a href="/index" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+                    <a href="/index" class="header-home" id="home-link2"><h3>Home</h3></a>
+                </div>
+
+                <div class = "header-title">
+                    <div class = "header-text">
+                        <h3>Sangguniang Barangay ng Parang</h3>
+                        <h5>Marikina City</h5>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-user-profile">
+                        <span class="header-user-profile-text" id="profile-text"></span>
+                        <img class="header-user-profile" id="profile-img">
+                    </div>
+                    {{!-- <a href="#"><button type="button" class="header-logout-btn" id="logout-btn" ></button></a> --}}
+                </div>
+    </div>
+
+    <div class = "login-panel">
+        <div class = "login-panel-left">
+            <img src="/images/logo.png" class="login-panel-logo">
+            <h1>Barangay Certificate Verification Portal</h1>
+        </div>
+
+        <div class = "login-panel-admin">
+            <span class="login-panel-title" id="login-title">Administrator Log-in:</span>
+                <div>{{error}}</div>    
+                <form action="/admin-login-page" method="post" class = "login-form">
+                    <div class="login-field" id = "login-field">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="login-field" id = "login-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="pw" name="password" placeholder="Password">
+                    </div>
+                    <p id="forgot-password">Forgot password?</p>
+                    <div class="login-submit">
+                        <input type="submit" value="Submit" id="login-submit-btn">
+                    </div>
+                </form>
+                <div class="login-return">
+                    <a href="/index"><button type="button" value="return" id="return-btn">Return</button></a>
+                </div>
+        </div>
+    </div>
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Security Question</h2>
+            <p>{{securityQues}}</p>
+            <input type="text" id="securityAnswer" placeholder="Enter your answer" autocomplete="off">
+            <button id="submitAnswer">Submit</button>
+        </div>
+    </div>
+</div>

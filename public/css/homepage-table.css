@@ -1,0 +1,411 @@
+table {
+    color: #717171;
+    margin: 0;
+    padding: 0;
+    width: 65%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    max-width: 1000px;
+    margin-top: 50px;
+    min-width: 820px;
+    font-size: 12px;
+}
+
+.indiv-acct-table {
+    color: #717171;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    font-size: 14px;
+    width: 700px;
+
+    max-width: 1000px;
+    min-width: 500px;
+    font-size: 12px;
+}
+
+.accts-db-table thead {
+    width: 100%;
+    color: white;
+    border-bottom: #717171;
+    background-color: #004112;
+    font-size: 14px;
+    display: table-header-group;
+}
+
+.indiv-acct-table thead {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    border-bottom: 1px solid #717171;
+}
+
+.cert-db-table thead {
+    width: 100%;
+    color: white;
+    border-bottom: #717171;
+    font-size: 20px;
+    background-color: #004112;
+    font-size: 14px;
+    display: table-header-group;
+}
+
+.cert-db-table td {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    border-bottom: 1px solid #717171;
+}
+
+.tanod-lupon-db-table {
+    margin-top: 0px;
+}
+
+.tanod-lupon-db-table td {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    border-bottom: 1px solid #717171;
+}
+
+.tanod-lupon-db-table td.case-status-cell-admin {
+    background-color: white;
+    width: 150px;
+    text-align: start;
+}
+
+.tanod-lupon-db-table thead {
+    width: 100%;
+    color: white;
+    background-color: #004112;
+    font-size: 14px;
+    display: table-header-group;
+}
+
+table th, td {
+    padding: 1em;
+    padding-left: 40px;
+    text-align: start;
+}
+
+.entryNumMargin{
+    margin: -10px;
+}
+
+table tbody {
+    padding: 15px;
+}
+
+.accts-db-table td {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    border-bottom: 1px solid #717171;
+}
+
+table td.align-right{
+    width: 45px;
+    padding-right: 0px;
+    text-align: end;
+}
+
+table td.align-right-padded{
+    width: 45px;
+    text-align: end;
+}
+
+table td.align-left {
+    padding-left: 0px;
+    text-align: start;
+}
+
+th:first-of-type {
+    border-top-left-radius: 10px;
+}
+th:last-of-type {
+    border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: 10px;
+}
+
+tr:last-child td{
+    border-bottom: none;
+}
+
+.role-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 30px;
+  }
+
+
+.view-cell > a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: black;
+    font-size: 12px;
+    margin-left: 30px;
+    width: 100%;
+    max-width: none; 
+    white-space: nowrap; 
+    text-decoration: underline;
+    color: #4C73FC;
+}
+
+.margin-20px-right {
+    margin-right: 20px;
+}
+
+.main-table-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    text-align: center;
+    margin: 20px;
+}
+
+.main-table-content.view{
+    margin-bottom: 150px;
+}
+
+.main-section {
+    width: 80%;
+}
+
+.acct-text {
+    text-align: center;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-border {
+    border: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.indiv-acct-table td:not(.role-cell)  {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    font-size: 14px;
+}
+
+.indiv-acct-table td:first-of-type {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.role-cell {
+    background-color: #004112;
+    width: fit-content;
+    text-align: start;
+    font-size: 14px;
+}
+
+#accounts-header {
+    background-color: #004112;
+    border-bottom: 1px solid white;
+    font-size: 20px;
+}
+
+#last-accts-cell {
+    height: 190px;
+}
+
+.main-section {
+    background-color: white;
+}
+
+.role-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.role-icon-main {
+    height: 60px;
+}
+
+.role-name {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.role-name.admin {
+    color: var(--tangerine);
+}
+
+.role-name.employee {
+    color: var(--blue);
+}
+
+.role-name.lupon {
+    color: var(--orange);
+}
+
+.role-name.tanod {
+    color: var(--minty);
+}
+
+.role-name.create{
+    color: black;
+    padding: 20px;
+}
+
+.edit-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container {
+    display: flex;
+    width: 60%;
+    position: relative;
+    align-items: center;
+}
+
+.input-container input{
+    width: 100%;
+} 
+
+.input-container button{
+    position: absolute;
+    right: 0;
+} 
+
+.select-container {
+    display: flex;
+    width: 60%;
+    position: relative;
+    align-items: center;
+}
+
+.select-container select{
+    width: 100%;
+} 
+
+.bold-label-left {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    width: 60%;
+    margin-bottom: 5px;
+  }
+
+.form-btn.edit {
+    color: #1486B5; 
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 14px;
+    justify-content: center ;
+    gap: 10px;
+    
+    height: 34px;
+    background-color: #efefef !important;
+    
+    border-radius: 20px;
+    border: none;
+    width: 190px;
+}
+
+.form-btn.save {
+    color: #50AF12; 
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 14px;
+    justify-content: center ;
+    gap: 10px;
+
+    height: 34px;
+    background-color: #efefef !important;
+
+    border-radius: 20px;
+    border: none;
+    width: 190px;
+}
+
+.last-main-cell {
+    height: 2px;
+}
+
+.truncate-text-150px {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.entry-date-cell {
+    width: fit-content;
+    padding-left: 0px;
+    text-align: start;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    color: green;
+    font-family: 'Inter';
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

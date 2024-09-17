@@ -1,0 +1,152 @@
+/*
+.upper-container {
+    margin-top: -20px;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.5;
+    margin-left: 7.5%;
+  }
+  
+  #back-button {
+    display: flex;
+    align-items: center;
+    text-decoration: none; 
+    color: black; 
+    margin-right: 10px; 
+  }
+  */
+  
+  .size-4 {
+    width: 16px; 
+    height: 16px;
+    margin-right: 5px; 
+  }
+  .size-6{
+    border:none;
+    background-color: transparent;
+  }
+  
+  .size-6:hover{
+    border:none;
+    background-color: transparent;
+    box-shadow: none;
+    
+  }
+
+  .searchpage-container svg {
+    width: 20px;
+    height: 20px;
+  }
+  .searchpage-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border: 2px solid var(--gray);
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5%;
+    /* border-radius: 10px; */
+    background-color: white;
+    height: 60px;
+    justify-content:space-evenly;
+
+    /* background: var(--gray); */
+  }
+  
+  #search-box {
+    width: 85%; 
+    padding: 10px;
+    /* border-radius: 10px;  */
+    outline: none; 
+    border: none;
+    transition: width 0.3s; 
+    font-size: large;
+    padding-left: 2%;
+    margin-left: 2%;
+
+    /* background: var(--gray); */
+  }
+  
+  #search-button-container {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #search-icon {
+    width: 24px;
+    height: 24px;
+    color: gray; 
+  }
+  
+
+#results-container {
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    position: relative; 
+    background: white; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+
+    margin-top: -1%;
+    /* border-radius: 10px;  */
+}
+
+.results-list {
+    list-style-type: none;
+    padding: 0;
+    color: gray;
+    padding-left: 2%;
+
+    background-color: white;
+    /* border-radius: 10px;  */
+}
+
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+    margin: 1%;
+
+    color: grey;
+    font-weight: bold;
+
+    list-style-type: none;
+}
+
+/* .result-item:hover,
+.result-item.active {
+    background-color: #f0f0f0;
+    color: black;
+    font-weight: bold;
+} */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  margin-top: 1%;
+}
+
+.flex-container a {
+  margin-left: auto;
+  margin-top: 2%;
+  margin-right: 2%;
+  color: #1C8A3B;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Default style for the link with the class 'result-link' */
+.result-link {
+  color: grey; 
+  text-decoration: none; 
+  font-weight: bold;
+}
+
+.result-link:hover {
+  color: green; 
+  text-decoration: underline; 
+}

@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+    color: white;
+    font-size: 100%;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+
+    --blue: #779FE5;
+    --tangerine: #F07507;
+    --minty: #AFE1D7;
+    --orange: #F3BE72;
+    --dgreen: #004112;
+    --lgreen: #1C8A3B;
+    --gray: #D9D9D9;
+    --lblue: #EAF3F7;
+    --red: #B51D14;
+}
+
+html { 
+    background: url(../images/bg-light.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  body{
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 { /* 36px font size */
+    font-weight: bold;
+    font-size: 2.00rem; 
+    margin: 0;
+  }
+  
+  h2 { /* 32px font size */
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  h3 { /* 20px font size */
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  h4 { /* 18px font size */
+    font-weight: bold;
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  h5 { /* 16px font size */
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+    margin: 0;
+  }
+
+  h5:not(.section-name) { /* 16px font size */
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+    margin: 0;
+  }
+
+  /*Labels are used per input*/
+  label {
+    font-size: 0.750rem;
+    color: black;
+    font-weight: 300;
+  }
+
+  /*Makes inputs and selects (for status) gray*/
+  input, select{
+    background-color: #EAF3F7;
+    border-style: hidden;
+    padding-left: 5px;
+  }
+
+  /*Makes all the buttons round*/
+  button {
+    height: 2.750rem;
+    width: 13.250rem;
+    margin: 1rem;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-radius: 2.875rem;
+  }
+
+  button:hover{
+    box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+  }
+
+ 
+
+  @media only screen and (max-width: 1048px) {
+    .header-user-profile {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    .header-text, .header-title {
+      display: none;
+    }
+    .login-header-right {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .header-logout-btn {
+      display: none;
+    }
+    .header-right {
+      display: none;
+    }
+  }
+
+  /*END OF HEADER CSS*/
+
+  /**START OF FORM CSS**/
+  /*For all inputs, and dates to be a standardized height*/
+  input, #dateInput{
+    height: 2.188rem;
+    background-color: #EAF3F7;
+  }
+
+  input[readonly], .status-dropdown-view, textarea[readonly]{
+    background-color: var(--gray) !important;
+  }
+
+  .status-dropdown, .status-dropdown-view {
+    height: 2.188rem;
+    width: 9.65rem;
+  }
+
+  #dateInput {
+    width: 16rem;
+  }
+
+  .last-name-input, .entry-number-input{
+    width: 17.313rem
+  } 
+
+  .case-title-input {
+    width: 22rem;
+  }
+
+  .case-type-input {
+    width: 11rem;
+  }
+
+  .middle-name-input {
+    width: 4.5rem;
+  }
+
+  .first-name-input {
+    width: 21.438rem
+  }
+
+  .nature-of-blotter-input, .address-input, .location-input {
+    width: 49.563rem;
+  }
+
+/*Form sections are the divs created for each major part of the form*/
+  .form-section {
+    display: flex;
+    padding-left: 3.125rem;
+    padding-right: 3.125rem;
+  }
+
+  .case-form > *{
+    margin-bottom: 0.5rem;
+  }
+
+  /*Column sections are for the unique inputs at the tops of the 
+  forms that do not belong to a form section*/
+  .column-section {
+    padding-right: 3.125rem;
+  }
+
+  .column-section1 {
+    padding-right: 0rem;
+  }
+
+  .section-name {
+    color: black;
+    margin-top: 0.50rem;
+    padding-left: 3.125rem;
+    font-weight: bold;
+  }
+
+  /*Used for the labels above the non-section inputs (entry number, date, etc.)*/
+  .bold-label {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  /*Allows for a space between last name and middle initial*/
+  .last-name-input {
+    margin-right: 3.125rem;
+  }
+
+  #tanod-case-title, #lupon-case-title {
+    color:var(--dgreen);
+    text-align: center;
+  }
+
+  /*The white box around (behind) the form*/
+  .form-encasing-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43rem;
+    width: 56.125rem;
+    background-color: #FFFFFF;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-color: black;
+
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  /*The actual div for the form*/
+  .form-actual-container {
+    display: flex;
+  }
+
+  #resolved-button {
+    color: var(--lgreen);
+  }
+
+  #edit-button {
+    color: var(--blue)
+  }
+
+  #delete-button {
+    color: var(--red)
+  }
+
+  .buttons-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /*
+  .upper-container-black {
+    margin-top: -20px;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.5;
+    margin-left: 7.5%;
+  }
+  
+  #back-button-black {
+    display: flex;
+    align-items: center;
+    text-decoration: none; 
+    color: black; 
+    margin-right: 10px; 
+    cursor: pointer;
+  }
+  .size-4 {
+    width: 16px; 
+    height: 16px;
+    margin-right: 5px; 
+  }
+
+  .upper-container-white {
+    margin-top: -20px;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.9;
+    margin-left: 7.5%;
+  }
+  
+  #back-button-white {
+    display: flex;
+    align-items: center;
+    text-decoration: none; 
+    color: white; 
+    margin-right: 10px; 
+  }
+  */
+
+.status-dropdown-view[readonly] {
+    pointer-events: none;
+}
+
+.status-dropdown-view-edit {
+  background-color: var(--lblue);
+  height: 2.188rem;
+  width: 9.65rem;
+}
+
+.status-dropdown.role{
+  margin-left: -450px;
+}
+
+.role-dropdown{
+  height: 2.188rem;
+  width: 9.65rem;
+  position: relative;
+  margin-left: -450px;
+}
+
+.role-dropdown1 {
+  height: 2.188rem;
+  position: relative;
+  width: 100%;
+}
+
+textarea {
+  height: 4rem;
+  background-color: #EAF3F7;
+  border-style: hidden;
+  padding-left: 5px;
+  font-family: "Inter", sans-serif;
+  resize: none;
+  line-height: 1.3rem;
+}
+
+.message{
+  color: var(--dgreen);
+  font: 15px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

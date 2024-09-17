@@ -1,0 +1,15 @@
+[
+    {
+        "_id" : "1",
+        "email" : "garciareinaalthea@gmail.com",
+        "password" : "12345678",
+        "role" : "admin"
+    },
+
+    {
+        "_id" : "2",
+        "email" : "reina_garcia@dlsu.edu.ph",
+        "password" : "12345678",
+        "role" : "employee"
+    }
+]

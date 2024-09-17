@@ -1,0 +1,246 @@
+<link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+<script src="/js/header.js" type="text/javascript"></script>
+
+<div class="main-container">
+    <div class="header" id="header">
+        <div class="header-left">
+            <a href="/index" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/index" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class="header-title">
+            <div class="header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Employee</span>
+                <img src="/images/employee-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <button type="button" class="header-logout-btn" id="logout-btn">Logout</button>
+        </div>
+    </div>
+</div>
+
+<div class="upper-container" id="black-upper-container">
+    <a href="/employee-check-clearance" class="back-button" id="black-back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+        </svg>
+        Back
+    </a>
+</div>
+
+<div class="search-page">
+
+    <div class="user-indicator">
+        <div class="user-name-column">
+            <div id="user-header-name" class="user-header">
+                <h5> Name </h5>
+            </div>
+
+            {{#if (eq typeCase "tanod")}}
+                <div id="user-data-name" class="user-data">
+                    <p> {{cases.ReporteeInfo.FirstName}} {{cases.ReporteeInfo.MiddleInitial}}. {{cases.ReporteeInfo.LastName}}</p>
+                </div>
+            {{else if (eq typeCase "lupon")}}
+                <div id="user-data-name" class="user-data">
+                    <p> {{cases.RespondentInfo.FirstName}} {{cases.RespondentInfo.MiddleInitial}}. {{cases.RespondentInfo.LastName}}</p>
+                </div>
+            {{else if (eq typeCase "both")}}
+                <div id="user-data-name" class="user-data">
+                    <p> {{cases.ReporteeInfo.FirstName}} {{cases.ReporteeInfo.MiddleInitial}}. {{cases.ReporteeInfo.LastName}}</p>
+                </div>
+            {{/if}}
+            
+        </div>
+
+        
+        {{#if (eq typeCase "tanod")}}
+            <div id="tanod-column" class="user-tanod-column">
+                <div class="user-header">
+                    <h5> Tanod Case Status </h5>
+                </div>
+                <div class="user-data">
+                    {{#checkStatus cases.Status}}
+                        <select name="case-form" class="status resolved" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1" selected>Resolved</option>
+                            <option value="0">Ongoing</option>
+                        </select>
+                    {{else}}
+                        <select name="case-form" class="status ongoing" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1">Resolved</option>
+                            <option value="0" selected>Ongoing</option>
+                        </select>
+                    {{/checkStatus}}
+                </div>
+            </div>
+
+        {{else if (eq typeCase "lupon")}}
+            <div class="user-lupon-column">
+                <div class="user-header">
+                    <h5> Lupon Case Status </h5>
+                </div>
+                <div class="user-data">
+                    {{#checkStatus cases.Status}}
+                        <select name="case-form" class="status resolved" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1" selected>Resolved</option>
+                            <option value="0">Ongoing</option>
+                        </select>
+                    {{else}}
+                        <select name="case-form" class="status ongoing" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1">Resolved</option>
+                            <option value="0" selected>Ongoing</option>
+                        </select>
+                    {{/checkStatus}}
+                </div>
+            </div>
+
+        {{else if (eq typeCase "both")}}
+            <div id="tanod-column" class="user-tanod-column">
+                <div class="user-header">
+                    <h5> Tanod Case Status </h5>
+                </div>
+                <div class="user-data">
+                    {{#if (eq StatusT "Resolved")}}
+                        <select name="case-form" class="status resolved" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1" selected>Resolved</option>
+                            <option value="0">Ongoing</option>
+                        </select>
+                    {{else}}
+                        <select name="case-form" class="status ongoing" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1">Resolved</option>
+                            <option value="0" selected>Ongoing</option>
+                        </select>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="user-lupon-column">
+                <div class="user-header">
+                    <h5> Lupon Case Status </h5>
+                </div>
+                <div class="user-data">
+                    {{#if (eq StatusL "Resolved")}}
+                        <select name="case-form" class="status resolved" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1" selected>Resolved</option>
+                            <option value="0">Ongoing</option>
+                        </select>
+                    {{else}}
+                        <select name="case-form" class="status ongoing" disabled>
+                            <option value="" disabled hidden>Select Status</option>
+                            <option value="1">Resolved</option>
+                            <option value="0" selected>Ongoing</option>
+                        </select>
+                    {{/if}}
+                </div>
+            </div>
+
+        {{/if}}
+    </div>
+
+    <div class="user-print">
+            <div class="header-alert">
+                {{!-- PRINTING NAME DISPLAY --}}
+                {{#if (eq typeCase "tanod")}}
+                    <div class="name-display">
+                        <h2> {{cases.ReporteeInfo.FirstName}} {{cases.ReporteeInfo.MiddleInitial}}. {{cases.ReporteeInfo.LastName}} </h2>
+                    </div>
+                {{else if (eq typeCase "lupon")}}
+                    <div class="name-display">
+                        <h2> {{cases.RespondentInfo.FirstName}} {{cases.RespondentInfo.MiddleInitial}}. {{cases.RespondentInfo.LastName}} </h2>
+                    </div>
+                {{else if (eq typeCase "both")}}
+                    <div class="name-display">
+                        <h2> {{cases.ReporteeInfo.FirstName}} {{cases.ReporteeInfo.MiddleInitial}}. {{cases.ReporteeInfo.LastName}} </h2>
+                    </div>
+                {{/if}}
+                
+                {{!-- CLEARANCE ALERT --}}
+                {{#if (eq typeCase "tanod")}}
+                    <div class="clearance-alert">
+                        {{#checkStatus cases.Status}}
+                            <p id="cleared"> Cleared for Certification Printing </p>
+                        {{else}}
+                            <p id="ongoing"> Ongoing Case Found </p>
+                        {{/checkStatus}}
+                    </div>
+                {{else if (eq typeCase "lupon")}}
+                    <div class="clearance-alert">
+                        {{#checkStatus cases.Status}}
+                            <p id="cleared"> Cleared for Certification Printing </p>
+                        {{else}}
+                            <p id="ongoing"> Ongoing Case Found </p>
+                        {{/checkStatus}}
+                    </div>
+                {{else if (eq typeCase "both")}}
+                    <div class="clearance-alert">
+                        {{#if (eq StatusL "Ongoing")}}
+                            <p id="ongoing"> Ongoing Case Found </p>
+                        {{else if (eq StatusT "Ongoing")}}
+                            <p id="ongoing"> Ongoing Case Found </p>
+                        {{else}}
+                            <p id="cleared"> Cleared for Certification Printing </p>
+                        {{/if}}
+                    </div>
+                {{/if}}
+            </div>
+
+            {{!--  --}}
+            {{#if (eq typeCase "tanod")}}
+                <div class="alert-mssg">
+                    <div class="clearance-alert">
+                        {{#checkStatus cases.Status}}
+                            <h3 id="alert-cleared"> No ongoing case is found, would you like to continue printing the certificate? </h3>
+                        {{else}}
+                            <h3 id="alert-ongoing"> An ongoing case is found, would you like to continue downloading the certificate? </h3>
+                        {{/checkStatus}}
+                    </div>
+                </div>
+            {{else if (eq typeCase "lupon")}}
+                <div class="alert-mssg">
+                    <div class="clearance-alert">
+                        {{#checkStatus cases.Status}}
+                            <h3 id="alert-cleared"> No ongoing case is found, would you like to continue printing the certificate? </h3>
+                        {{else}}
+                            <h3 id="alert-ongoing"> An ongoing case is found, would you like to continue downloading the certificate? </h3>
+                        {{/checkStatus}}
+                    </div>
+                </div>
+            {{else if (eq typeCase "both")}}
+                <div class="alert-mssg">
+                    {{#if (eq StatusL "Ongoing")}}
+                            <h3 id="alert-ongoing"> An ongoing case is found, would you like to continue downloading the certificate? </h3>
+                        {{else if (eq StatusT "Ongoing")}}
+                            <h3 id="alert-ongoing"> An ongoing case is found, would you like to continue downloading the certificate? </h3>
+                        {{else}}
+                            <h3 id="alert-cleared"> No ongoing case is found, would you like to continue printing the certificate? </h3>
+                    {{/if}}
+                </div>
+            {{/if}}
+            
+            {{!--  --}}
+            <div class="print-buttons">
+                {{#if (eq StatusL "Ongoing")}}
+                    <a href="/employee-input-page-clearance"><button type="button" class="print-btn lrg light"><img src="/images/print-light.png"><span>Print</span></button></a>
+                    <a href="/employee-check-clearance"><button type="button" class="cancel-btn dark"><img src="/images/cancel-dark.png"><span>Cancel</span></button></a>
+                {{else if (eq StatusT "Ongoing")}}
+                    <a href="/employee-input-page-clearance"><button type="button" class="print-btn lrg light"><img src="/images/print-light.png"><span>Print</span></button></a>
+                    <a href="/employee-check-clearance"><button type="button" class="cancel-btn dark"><img src="/images/cancel-dark.png"><span>Cancel</span></button></a>
+                {{else}}
+                    <a href="/employee-input-page-clearance"><button type="button" class="print-btn lrg dark"><img src="/images/print-dark.png"><span>Print</span></button></a>
+                    <a href="/employee-check-clearance"><button type="button" class="cancel-btn light"><img src="/images/cancel-light.png"><span>Cancel</span></button></a>
+                {{/if}}
+            </div>
+    </div>
+</div>
+    

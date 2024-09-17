@@ -1,0 +1,408 @@
+[
+    {
+      "_id": "1",
+      "CaseTitle": "Land Dispute",
+      "CaseType": "Civil",
+      "Status": "Pending",
+      "RespondentInfo": {
+        "FirstName": "John",
+        "MiddleInitial": "A",
+        "LastName": "Doe"
+      },
+      "ComplainerInfo": {
+        "FirstName": "Jane",
+        "MiddleInitial": "B",
+        "LastName": "Smith"
+      },
+      "MediationInfo": {
+        "FirstName": "Alice",
+        "MiddleInitial": "C",
+        "LastName": "Johnson"
+      },
+      "ConciliationInfo": {
+        "FirstName": "Robert",
+        "MiddleInitial": "D",
+        "LastName": "Brown"
+      },
+      "Case": "Dispute over property boundaries"
+    },
+    {
+      "_id": "2",
+      "CaseTitle": "Breach of Contract",
+      "CaseType": "Civil",
+      "Status": "Resolved",
+      "RespondentInfo": {
+        "FirstName": "Michael",
+        "MiddleInitial": "E",
+        "LastName": "Jones"
+      },
+      "ComplainerInfo": {
+        "FirstName": "Emily",
+        "MiddleInitial": "F",
+        "LastName": "Davis"
+      },
+      "MediationInfo": {
+        "FirstName": "Patricia",
+        "MiddleInitial": "G",
+        "LastName": "Miller"
+      },
+      "ConciliationInfo": {
+        "FirstName": "William",
+        "MiddleInitial": "H",
+        "LastName": "Wilson"
+      },
+      "Case": "Failure to deliver goods as per contract"
+    },
+    {
+      "_id": "3",
+      "CaseTitle": "Assault",
+      "CaseType": "Criminal",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+        "FirstName": "David",
+        "MiddleInitial": "I",
+        "LastName": "Garcia"
+      },
+      "ComplainerInfo": {
+        "FirstName": "Sophia",
+        "MiddleInitial": "J",
+        "LastName": "Martinez"
+      },
+      "MediationInfo": {
+        "FirstName": "Nancy",
+        "MiddleInitial": "K",
+        "LastName": "Anderson"
+      },
+      "ConciliationInfo": {
+        "FirstName": "James",
+        "MiddleInitial": "L",
+        "LastName": "Taylor"
+      },
+      "Case": "Physical altercation resulting in injury"
+    },
+    {
+      "_id": "4",
+      "CaseTitle": "Defamation",
+      "CaseType": "Civil",
+      "Status": "Pending",
+      "RespondentInfo": {
+        "FirstName": "Anthony",
+        "MiddleInitial": "M",
+        "LastName": "Thomas"
+      },
+      "ComplainerInfo": {
+        "FirstName": "Olivia",
+        "MiddleInitial": "N",
+        "LastName": "Hernandez"
+      },
+      "MediationInfo": {
+        "FirstName": "Sandra",
+        "MiddleInitial": "O",
+        "LastName": "Moore"
+      },
+      "ConciliationInfo": {
+        "FirstName": "Charles",
+        "MiddleInitial": "P",
+        "LastName": "Martin"
+      },
+      "Case": "False statements causing harm to reputation"
+    },
+    {
+      "_id": "5",
+      "CaseTitle": "Domestic Violence",
+      "CaseType": "Criminal",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+        "FirstName": "Joseph",
+        "MiddleInitial": "Q",
+        "LastName": "Jackson"
+      },
+      "ComplainerInfo": {
+        "FirstName": "Isabella",
+        "MiddleInitial": "R",
+        "LastName": "White"
+      },
+      "MediationInfo": {
+        "FirstName": "Donna",
+        "MiddleInitial": "S",
+        "LastName": "Lee"
+      },
+      "ConciliationInfo": {
+        "FirstName": "George",
+        "MiddleInitial": "T",
+        "LastName": "Perez"
+      },
+      "Case": "Repeated instances of physical abuse"
+    },
+    {
+      "_id": "6",
+      "CaseTitle": "Land Dispute",
+      "CaseType": "Civil",
+      "Status": "Resolved",
+      "RespondentInfo": {
+          "FirstName": "Robert",
+          "MiddleInitial": "A",
+          "LastName": "Johnson"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Maria",
+          "MiddleInitial": "B",
+          "LastName": "Garcia"
+      },
+      "MediationInfo": {
+          "FirstName": "Lisa",
+          "MiddleInitial": "C",
+          "LastName": "Martinez"
+      },
+      "ConciliationInfo": {
+          "FirstName": "James",
+          "MiddleInitial": "D",
+          "LastName": "Lopez"
+      },
+      "Case": "Dispute over property boundaries"
+  },
+  {
+      "_id": "7",
+      "CaseTitle": "Debt Settlement",
+      "CaseType": "Civil",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+          "FirstName": "Michael",
+          "MiddleInitial": "E",
+          "LastName": "Brown"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Emily",
+          "MiddleInitial": "F",
+          "LastName": "Davis"
+      },
+      "MediationInfo": {
+          "FirstName": "Christopher",
+          "MiddleInitial": "G",
+          "LastName": "Wilson"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Patricia",
+          "MiddleInitial": "H",
+          "LastName": "Anderson"
+      },
+      "Case": "Unpaid loan agreement"
+  },
+  {
+      "_id": "8",
+      "CaseTitle": "Child Custody",
+      "CaseType": "Family",
+      "Status": "Resolved",
+      "RespondentInfo": {
+          "FirstName": "David",
+          "MiddleInitial": "I",
+          "LastName": "Miller"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Linda",
+          "MiddleInitial": "J",
+          "LastName": "Taylor"
+      },
+      "MediationInfo": {
+          "FirstName": "Anthony",
+          "MiddleInitial": "K",
+          "LastName": "Hernandez"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Barbara",
+          "MiddleInitial": "L",
+          "LastName": "Moore"
+      },
+      "Case": "Dispute over child custody"
+  },
+  {
+      "_id": "9",
+      "CaseTitle": "Noise Complaint",
+      "CaseType": "Civil",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+          "FirstName": "Steven",
+          "MiddleInitial": "M",
+          "LastName": "Thomas"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Karen",
+          "MiddleInitial": "N",
+          "LastName": "Jackson"
+      },
+      "MediationInfo": {
+          "FirstName": "Edward",
+          "MiddleInitial": "O",
+          "LastName": "Lee"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Jessica",
+          "MiddleInitial": "P",
+          "LastName": "Perez"
+      },
+      "Case": "Loud music disturbing neighbors"
+  },
+  {
+      "_id": "10",
+      "CaseTitle": "Property Damage",
+      "CaseType": "Criminal",
+      "Status": "Resolved",
+      "RespondentInfo": {
+          "FirstName": "Joshua",
+          "MiddleInitial": "Q",
+          "LastName": "Martinez"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Susan",
+          "MiddleInitial": "R",
+          "LastName": "White"
+      },
+      "MediationInfo": {
+          "FirstName": "Daniel",
+          "MiddleInitial": "S",
+          "LastName": "Clark"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Nancy",
+          "MiddleInitial": "T",
+          "LastName": "Rodriguez"
+      },
+      "Case": "Vandalism of private property"
+  },
+  {
+      "_id": "11",
+      "CaseTitle": "Defamation",
+      "CaseType": "Civil",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+          "FirstName": "Paul",
+          "MiddleInitial": "U",
+          "LastName": "Lewis"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Michelle",
+          "MiddleInitial": "V",
+          "LastName": "Walker"
+      },
+      "MediationInfo": {
+          "FirstName": "Richard",
+          "MiddleInitial": "W",
+          "LastName": "Hall"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Laura",
+          "MiddleInitial": "X",
+          "LastName": "Allen"
+      },
+      "Case": "Spreading false rumors"
+  },
+  {
+      "_id": "12",
+      "CaseTitle": "Harassment",
+      "CaseType": "Criminal",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+          "FirstName": "Mark",
+          "MiddleInitial": "Y",
+          "LastName": "Young"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Elizabeth",
+          "MiddleInitial": "Z",
+          "LastName": "Hernandez"
+      },
+      "MediationInfo": {
+          "FirstName": "Andrew",
+          "MiddleInitial": "A",
+          "LastName": "King"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Sarah",
+          "MiddleInitial": "B",
+          "LastName": "Wright"
+      },
+      "Case": "Repeated instances of verbal harassment"
+  },
+  {
+      "_id": "13",
+      "CaseTitle": "Trespassing",
+      "CaseType": "Criminal",
+      "Status": "Resolved",
+      "RespondentInfo": {
+          "FirstName": "Kenneth",
+          "MiddleInitial": "C",
+          "LastName": "Lopez"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Deborah",
+          "MiddleInitial": "D",
+          "LastName": "Scott"
+      },
+      "MediationInfo": {
+          "FirstName": "Charles",
+          "MiddleInitial": "E",
+          "LastName": "Green"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Betty",
+          "MiddleInitial": "F",
+          "LastName": "Adams"
+      },
+      "Case": "Unauthorized entry into private property"
+  },
+  {
+      "_id": "14",
+      "CaseTitle": "Illegal Parking",
+      "CaseType": "Civil",
+      "Status": "Ongoing",
+      "RespondentInfo": {
+          "FirstName": "Brian",
+          "MiddleInitial": "G",
+          "LastName": "Hill"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Dorothy",
+          "MiddleInitial": "H",
+          "LastName": "Baker"
+      },
+      "MediationInfo": {
+          "FirstName": "Ronald",
+          "MiddleInitial": "I",
+          "LastName": "Gonzalez"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Helen",
+          "MiddleInitial": "J",
+          "LastName": "Nelson"
+      },
+      "Case": "Repeated parking violations"
+  },
+  {
+      "_id": "15",
+      "CaseTitle": "Fraud",
+      "CaseType": "Criminal",
+      "Status": "Resolved",
+      "RespondentInfo": {
+          "FirstName": "Kevin",
+          "MiddleInitial": "K",
+          "LastName": "Carter"
+      },
+      "ComplainerInfo": {
+          "FirstName": "Sharon",
+          "MiddleInitial": "L",
+          "LastName": "Mitchell"
+      },
+      "MediationInfo": {
+          "FirstName": "Jeffrey",
+          "MiddleInitial": "M",
+          "LastName": "Perez"
+      },
+      "ConciliationInfo": {
+          "FirstName": "Kimberly",
+          "MiddleInitial": "N",
+          "LastName": "Roberts"
+      },
+      "Case": "Deception for personal gain"
+    }
+  ]
+  

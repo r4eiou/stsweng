@@ -1,0 +1,9 @@
+#new-button-black {
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    opacity: .5; 
+    width: fit-content;
+  }

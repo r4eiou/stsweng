@@ -1,0 +1,180 @@
+<link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+<div class = "main-container">
+            <div class= "header light" id="header">
+                <div class = "header-left">
+                    <a href="/lupon-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+                    <a href="/lupon-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+                </div>
+                
+                <div class = "header-title">
+                    <div class = "header-text">
+                        <h3>Sangguniang Barangay ng Parang</h3>
+                        <h5>Marikina City</h5>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-user-profile">
+                        <span class="header-user-profile-text lupon" id="profile-text">Lupon</span>
+                        <img src="/images/lupon-profile.png" class="header-user-profile" id="profile-img">
+                    </div>
+                    <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+                </div>
+            </div>
+            
+            <div class = "page-content-container" id="edit-case-page">
+                <div class="back-and-title">
+                    <div class="upper-container" id="form-upper-container">
+                        <a href="/lupon-view-case/{{case._id}}" class="back-button" id="white-back-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                            </svg>
+                        Back
+                        </a>
+                    </div>
+                    <h1 id = "lupon-case-title">Editing Lupon Case Details</h1>
+                </div>
+                <div class = "form-encasing-container">
+                    <div class = "form-actual-container">
+                        <form id="caseForm" class="case-form" action="/update-lupon-case/{{case._id}}" method="post">
+                            <div class = "form-section" id = "basic-info">
+                                <div class = "column-section">
+                                    <label for="case-title" class ="bold-label">Case Title</label>
+                                    <input class = "case-title-input" id="case-title" type = "text" name="caseTitle" placeholder= "Case Title" value="{{case.CaseTitle}}" >
+                                </div>
+                                <div class = "column-section">
+                                    <label for="case-type" class ="bold-label">Case Type</label>
+                                    <input class="case-type-input" type = "text" id = "case-type" name="caseType" placeholder="Case Type" value="{{case.CaseType}}">
+                                </div>
+                                <div class = "column-section1">
+                                    <label for="case-form" class ="bold-label">Status</label>
+                                    <select name="status" class="status-dropdown" selected = "{{case.Status}}">
+                                        <option value="" selected disabled hidden>Select Status</option>
+                                        <option value="Resolved" {{resolveStat}}>Resolved</option>
+                                        <option value="Ongoing" {{ongoingStat}}>Ongoing</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <span class = "section-name">Respondent Information</span>
+                            <div class = "form-section" id = "respondent-info">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="respondentLastName" placeholder="Last Name" value="{{respondentInfo.LastName}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="respondentMiddleInitial" placeholder="M.I." maxlength="1" value="{{respondentInfo.MiddleInitial}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="respondentFirstName" placeholder="First Name" value="{{respondentInfo.FirstName}}" >
+                                </div>
+                            </div>
+                            <span class = "section-name">Complainer Information</span>
+                            <div class = "form-section" id = "complainer-info">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="complainerLastName" placeholder="Last Name" value="{{complainerInfo.LastName}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="complainerMiddleInitial" placeholder="M.I." maxlength="1" value="{{complainerInfo.MiddleInitial}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="complainerFirstName" placeholder="First Name" value="{{complainerInfo.FirstName}}" >
+                                </div>
+                            </div>
+                            <span class = "section-name">Mediation Information</span>
+                            <div class = "form-section" id = "mediation-info">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="mediationLastName" placeholder="Last Name" value="{{mediationInfo.LastName}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="mediationMiddleInitial" placeholder="M.I." maxlength="1" value="{{mediationInfo.MiddleInitial}}" >
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="mediationFirstName" placeholder="First Name" value="{{mediationInfo.FirstName}}" >
+                                </div>
+                            </div>
+                            <span class = "section-name">Consilation Information</span>
+                            <div class = "form-section" id = "consilation-information">
+                                <div class = "input-pair">
+                                    <label for="last-name-input">Last Name</label>
+                                    <input class = "last-name-input" type ="text" name="conciliationLastName" placeholder="Last Name" value="{{conciliationInfo.LastName}}">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="middle-initial-input">Middle Initial</label>
+                                    <input class = "middle-name-input" type = "text" name="conciliationMiddleInitial" placeholder="M.I." maxlength="1" value="{{conciliationInfo.MiddleInitial}}">
+                                </div>
+                                <div class = "input-pair">
+                                    <label for="first-name-input">First Name</label>
+                                    <input class = "first-name-input" type = "text" name="conciliationFirstName" placeholder="First Name" value="{{conciliationInfo.FirstName}}">
+                                </div>
+                            </div>
+                            <span class ="section-name">Case</span>
+                            <div class = "form-section" id="location">
+                                <div class = "input-pair">
+                                    <textarea class = "location-input" id="case-description" type = "text" name="Case" >{{case.Case}}</textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>  
+                </div>
+                <div class = "buttons-container">
+                    <button type="submit" form="caseForm" class="form-btn save"><img src="/images/form-check.png"><span>Save Changes</span></button>
+                    <a href="/lupon-home"><button type="button" class="form-btn discard"><img src="/images/form-trash.png"><span>Discard Changes</span></button></a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('caseForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+
+             // Client-side validation (optional, as server-side validation is primary)
+            let formIsValid = true;
+            for (const key in formObject) {
+                if (!formObject[key].trim()) {
+                    formIsValid = false;
+                    break;
+                }
+            }
+
+            if (!formIsValid) {
+                alert('Please fill in all required fields.');
+                return;
+            } 
+
+
+           try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                window.location.href = result.redirectUrl;
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the form. Please try again.');
+        }
+        });
+        </script>

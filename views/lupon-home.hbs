@@ -1,0 +1,141 @@
+ <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<script src = "/js/header.js" type="text/javascript"></script>
+ <div class = "main-container">
+            <div class= "header" id="header">
+                <div class = "header-left">
+                    <a href="/lupon-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+                    <a href="/lupon-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+                </div>
+                
+                <div class = "header-title">
+                    <div class = "header-text">
+                        <h3>Sangguniang Barangay ng Parang</h3>
+                        <h5>Marikina City</h5>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-user-profile">
+                        <span class="header-user-profile-text lupon" id="profile-text">Lupon</span>
+                        <img src="/images/lupon-profile.png" class="header-user-profile" id="profile-img">
+                    </div>
+                    <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
+                </div>
+            </div>
+        </div>
+        <!--New addition-->
+        <div class="content-container-tanod-home">
+            <div class="box-content-top">
+                <a href="/lupon-create"><button type="button" class="form-btn create size"><img src="/images/form-create.png"><span>Create New Record</span></button></a>
+                <button type="button"  id="resolve-btn" class="form-btn resolved margin size" ><img src="/images/form-check.png"><span>Mark as Resolved</span></button>
+                <button type="button" id="delete-btn" class="form-btn delete margin size"><img src="/images/form-trash.png"><span>Delete Selection</span></button>
+                <div class="search-name-reg margin">
+                    <form id="search-form" method="GET" action="/lupon-home">
+                        <button type="submit"><img src="/images/search-reg.png"></button>
+                        <input type="text" placeholder="Search Name" name="search_name">
+                    </form>
+                  </div>
+            </div>
+            <div class="box-content">
+                <!--
+                <div class="box-content-header lupon-tanod">
+                    <div class="content-text-group left">
+                        <div class="content-text-group title">
+                            <div class="content-text">Case Title</div>
+                        </div>
+                        <div  class="content-text-group type">
+                            <div class="content-text">Case Type</div>
+                        </div>
+                        <div class="content-text lupon-margin">Respondent</div>
+                    </div>
+                    <div class="content-text-group right">
+                        <div class="content-text">Complainer</div>
+                        <div class="content-text">Case Status</div>
+                    </div>
+                </div>
+                {{#each cases}}
+                <div class="box-content-main">
+                    <button type="button" class="checkbox margin" data-case-id="{{this.caseID}}"><img src="/images/Done.png"></button>
+                    <a href="/lupon-view-case/{{this.caseID}}" class="content-text-main underline-lupon-tanod">View</a>
+                    <div class="content-text-main tanod-lupon">{{this.caseTitle}}</div>
+                    <div class="content-text-main date">{{this.caseType}}</div>
+                    <div class="content-text-main reportee">{{this.respondentFirstName}} {{this.respondentLastName}}</div>
+                    <div class="content-text-main respondent">{{this.complainerFirstName}} {{this.complainerLastName}}</div>
+                    <button type="button" class="status {{this.stat_lc}} margin2 markResolve" data-case-id="{{this.caseID}}"><img src="/images/{{this.stat_lc}}-circle.png"><span>{{this.status}}</span></button>
+                    <button type="button" class="form-action-btn margin" title="Edit Case Details" {{this.isEditable}}><a href="/lupon-edit-case/{{this.caseID}}" {{this.isEditable}}><img src="/images/action-edit.png"></a></button>
+                </div>
+                {{/each}}
+                -->                
+            </div>
+
+            <table class="tanod-lupon-db-table">
+                <thead>
+                    <tr>
+                        <th colspan="2"></th>
+                        <th>Case Title</th>
+                        <th>Case Type</th>
+                        <th>Respondent</th>
+                        <th>Complainer</th>
+                        <th colspan="2">Case Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cases}}
+                        <tr>
+                            <td data-label="checkbox" class="align-right check-view-cell">
+                                <button type="button" class="checkbox" data-case-id="{{this.caseID}}"><img src="/images/Done.png"></button>
+                            </td>
+                            <td class="align-left">
+                                <a href="/lupon-view-case/{{this.caseID}}" class="content-text-main underline-lupon-tanod">View</a>
+                            </td>
+                            <td>
+                                {{this.caseTitle}}
+                            </td>
+                            <td>
+                                {{this.caseType}}
+                            </td>
+                            <td class="name-cell">
+                                {{this.respondentFirstName}} {{this.respondentLastName}}    
+                            </td>
+                            <td class="name-cell">
+                                {{this.complainerFirstName}} {{this.complainerLastName}}    
+                            </td>
+                            <td class="case-status-cell">
+                                <button type="button" class="status {{this.stat_lc}} margin3 markResolve" data-case-id="{{this.caseID}}"><img src="/images/{{this.stat_lc}}-circle.png"><span>{{this.status}}</span></button>
+                            </td>
+                            <td class="case-status-cell align-left">
+                                <a href="/lupon-edit-case/{{this.caseID}}" {{this.isEditable}}>
+                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+            <div class="box-content-page">
+                <button class="page-btn" id="count-down">&lt;</button>
+                <div class="page-count" id="page-num">{{currentPage}}</div>
+                <button class="page-btn" id="count-up">&gt;</button>
+                <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
+            </div>
+        </div>
+
+         <script>
+            $(document).ready(function() {
+                const currentPage = {{currentPage}};
+                const totalPages = {{totalPages}};
+                const baseUrl = '/lupon-home?page=';
+
+                $('#count-down').click(function() {
+                    if (currentPage > 1) {
+                        window.location.href = baseUrl + (currentPage - 1);
+                    }
+                });
+
+                $('#count-up').click(function() {
+                    if (currentPage < totalPages) {
+                        window.location.href = baseUrl + (currentPage + 1);
+                    }
+                });
+            });
+        </script>
