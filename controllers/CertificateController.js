@@ -2,7 +2,7 @@ const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
 
-//employee
+//EMPLOYEE
 const viewCertClearance = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-check-clearance',{
