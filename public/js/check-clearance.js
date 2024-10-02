@@ -84,16 +84,24 @@ function displayNoResult() {
     resultsContainer.appendChild(wrapper);
 }
 
+const resultsPerPage = 10; // Number of results to show per page
+let currentPage = 1; // Current page
+
 function displayResults(results) {
     const searchBox = document.getElementById("search-box");
     const resultsContainer = document.getElementById('results-container');
     resultsContainer.innerHTML = ""; // Clear previous results
 
     if (results.length > 0) {
+        const totalPages = Math.ceil(results.length / resultsPerPage);
+        const startIndex = (currentPage - 1) * resultsPerPage;
+        const endIndex = Math.min(startIndex + resultsPerPage, results.length);
+        const paginatedResults = results.slice(startIndex, endIndex);
+
         const listElement = document.createElement("ul");
         listElement.className = "results-list";
 
-        results.forEach(result => {
+        paginatedResults.forEach(result => {
             const { ReporteeInfo } = result;
 
             const listItem = document.createElement("li");
@@ -119,6 +127,47 @@ function displayResults(results) {
         });
 
         resultsContainer.appendChild(listElement);
+
+        // Add pagination controls
+        const paginationControls = document.createElement("div");
+        paginationControls.className = "pagination-controls";
+
+        if (currentPage > 1) {
+            const prevLink = document.createElement("a");
+            prevLink.textContent = "Previous";
+            prevLink.href = "#";
+            prevLink.style.textDecoration = "underline"; 
+            prevLink.style.cursor = "pointer";
+            prevLink.style.marginLeft = "35px";
+            prevLink.style.color = "gray"
+
+            prevLink.addEventListener("click", function() {
+                currentPage--;
+                displayResults(results); // Redisplay results for previous page
+            });
+            paginationControls.appendChild(prevLink);
+        }
+
+        if (currentPage < totalPages) {
+            const nextLink = document.createElement("a");
+            nextLink.textContent = "Next";
+            nextLink.href = "#";
+            nextLink.style.textDecoration = "underline"; 
+            nextLink.style.cursor = "pointer"; 
+            nextLink.style.marginLeft = "35px";
+            nextLink.style.color = "gray"
+        
+            nextLink.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                currentPage++;
+                displayResults(results); // Redisplay results for next page
+            });
+            
+            paginationControls.appendChild(nextLink);
+        }
+        
+
+        resultsContainer.appendChild(paginationControls);
     } else {
         const listItem = document.createElement("li");
         listItem.className = "result-item";
@@ -127,12 +176,18 @@ function displayResults(results) {
     }
 }
 
+
 function displayResultsLupon(results) {
     const searchBox = document.getElementById("search-box");
     const resultsContainer = document.getElementById('results-container');
     resultsContainer.innerHTML = ""; // Clear previous results
 
     if (results.length > 0) {
+        const totalPages = Math.ceil(results.length / resultsPerPage);
+        const startIndex = (currentPage - 1) * resultsPerPage;
+        const endIndex = Math.min(startIndex + resultsPerPage, results.length);
+        const paginatedResults = results.slice(startIndex, endIndex);
+
         const listElement = document.createElement("ul");
         listElement.className = "results-list";
 
@@ -162,6 +217,47 @@ function displayResultsLupon(results) {
         });
 
         resultsContainer.appendChild(listElement);
+
+        // Add pagination controls
+        const paginationControls = document.createElement("div");
+        paginationControls.className = "pagination-controls";
+
+        if (currentPage > 1) {
+            const prevLink = document.createElement("a");
+            prevLink.textContent = "Previous";
+            prevLink.href = "#";
+            prevLink.style.textDecoration = "underline"; 
+            prevLink.style.cursor = "pointer";
+            prevLink.style.marginLeft = "35px";
+            prevLink.style.color = "gray"
+
+            prevLink.addEventListener("click", function() {
+                currentPage--;
+                displayResults(results); // Redisplay results for previous page
+            });
+            paginationControls.appendChild(prevLink);
+        }
+
+        if (currentPage < totalPages) {
+            const nextLink = document.createElement("a");
+            nextLink.textContent = "Next";
+            nextLink.href = "#";
+            nextLink.style.textDecoration = "underline"; 
+            nextLink.style.cursor = "pointer"; 
+            nextLink.style.marginLeft = "35px";
+            nextLink.style.color = "gray"
+        
+            nextLink.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                currentPage++;
+                displayResults(results); // Redisplay results for next page
+            });
+            
+            paginationControls.appendChild(nextLink);
+        }
+        
+
+        resultsContainer.appendChild(paginationControls);
     } else {
         const listItem = document.createElement("li");
         listItem.className = "result-item";
