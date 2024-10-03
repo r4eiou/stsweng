@@ -1,165 +1,213 @@
+.login-panel-main {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  background: linear-gradient(180deg, #0a421e 0%, #19a84c 100%);
+  border-radius: 0rem 0.3rem 0.3rem 0rem;
+  padding: 1rem;
+}
+
 .login-panel-admin {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    background: var(--tangerine);
-    border-radius: 0rem 0.3rem 0.3rem 0rem;
+  background: var(--tangerine);
+  border-radius: 0rem 0.3rem 0.3rem 0rem;
 
-    padding: 1rem;
-  }
+  padding: 1rem;
+}
 
-  .login-panel-employee {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.login-panel-employee {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    background: var(--blue);
-    border-radius: 0rem 0.3rem 0.3rem 0rem;
+  background: var(--blue);
+  border-radius: 0rem 0.3rem 0.3rem 0rem;
 
-    padding: 1rem;
-  }
+  padding: 1rem;
+}
 
-  .login-panel-employee.tanod{
-    color: black;
-    background: #AFE1D7;
-  }
+.login-panel-employee.tanod {
+  color: black;
+  background: #afe1d7;
+}
 
-  .login-panel-employee.lupon{
-    color: black;
-    background: #F3BE72;
-  }
-  
-  .login-panel-title {
-    font-weight: bold;
-    font-size: 2rem; 
-    margin: 5%;
-  }
+.login-panel-employee.lupon {
+  color: black;
+  background: #f3be72;
+}
 
-  .login-form {
-    margin-top: 10%;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
-    padding: 10%;
-  }
+.login-panel-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 5%;
+}
 
-  .login-field {
-    font-family: "Inter";
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
+.signup-panel-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 5%;
+}
 
-  input {
-    cursor: pointer;
-  }
+.login-form {
+  margin-top: 10%;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  padding: 10%;
+}
 
-  input[type="submit"]:hover, button[type="button"]:hover {
-    box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-  }
+.signup-form {
+  margin-top: 10%;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  padding: 10%;
+}
 
-  input[type="text"] {
-    height: 1.8rem;
-    width: 100%;
-  }
+.login-field {
+  font-family: "Inter";
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
-  input[type="password"] {
-    height: 1.8rem;
-    width: 100%;
-  }
+.signup-field {
+  font-family: "Inter";
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
-  input[type="submit"] {
-    height: 1.8rem;
-    width: 8rem;
-    background: white;
-    box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
-    border-radius: 0.4rem;
-    border: 0;
+input {
+  cursor: pointer;
+}
 
-    color: black;
+input[type="submit"]:hover,
+button[type="button"]:hover {
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
 
-    font-weight: bold;
-    font-size: 1rem;
-  }
+input[type="text"] {
+  height: 1.8rem;
+  width: 100%;
+}
 
-  .login-submit {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
+input[type="password"] {
+  height: 1.8rem;
+  width: 100%;
+}
 
-  button[value="return"] {
-    height: 1.8rem;
-    width: 8rem;
-    background: white;
-    box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
-    border-radius: 0.4rem;
-    border: 0;
+input[type="submit"] {
+  height: 1.8rem;
+  width: 8rem;
+  background: white;
+  box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.4rem;
+  border: 0;
 
-    color: black;
+  color: black;
 
-    font-weight: bold;
-    font-size: 1rem;
-  }
+  font-weight: bold;
+  font-size: 1rem;
+}
 
-  .login-return {
-    display: flex;
-    align-self: flex-end;
-    width: 100%;
-  }
+.login-submit {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 
-  .emp-lupon-tanod-btns{
-    display: flex;
-    flex-direction: row;
-    align-content: space-evenly;
-    justify-content: center;
-    width: 100%;
-    margin: 15%;
+.signup-submit {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 
-    color: black;
-    font-size: 1.5rem;
-    font-family: "Inter";
-  }
+button[value="return"] {
+  height: 1.8rem;
+  width: 8rem;
+  background: white;
+  box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.4rem;
+  border: 0;
 
-  .emp-tanod-btn {
-    height: 2.8rem;
-    width: 8rem;
-    background: var(--minty);
-    box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
-    border-radius: 0.4rem;
-    border: 0;
+  color: black;
 
-    margin-right: 1rem;
-    font-size: 1em;
-    font-weight: bold;
-  }
+  font-weight: bold;
+  font-size: 1rem;
+}
 
-  .emp-lupon-btn {
-    height: 2.8rem;
-    width: 8rem;
-    background: var(--orange);
-    box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
-    border-radius: 0.4rem;
-    border: 0;
-    font-size: 1em;
-    font-weight: bold;
-  }
+.return-btn {
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+}
 
-  .input-error {
-    border: 2px solid #F3533B;
-    background: lightgray;
-  }
+.login-return {
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+}
 
+.emp-lupon-tanod-btns {
+  display: flex;
+  flex-direction: row;
+  align-content: space-evenly;
+  justify-content: center;
+  width: 100%;
+  margin: 15%;
+
+  color: black;
+  font-size: 1.5rem;
+  font-family: "Inter";
+}
+
+.emp-tanod-btn {
+  height: 2.8rem;
+  width: 8rem;
+  background: var(--minty);
+  box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.4rem;
+  border: 0;
+
+  margin-right: 1rem;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.emp-lupon-btn {
+  height: 2.8rem;
+  width: 8rem;
+  background: var(--orange);
+  box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.4rem;
+  border: 0;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.input-error {
+  border: 2px solid #f3533b;
+  background: lightgray;
+}
 
 /* Modal styles */
 .modal {
@@ -171,14 +219,14 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   padding-top: 60px;
 }
 
 .modal-content {
   color: green;
-  font-family: 'Inter';
+  font-family: "Inter";
   background-color: #fefefe;
   margin: 5% auto;
   padding: 20px;
@@ -219,4 +267,25 @@
 
 #forgot-password {
   cursor: pointer;
+}
+
+.login-link {
+  color: white;
+  text-decoration: underline;
+}
+
+.signup-link {
+  color: white;
+  text-decoration: underline;
+}
+
+.ls-error-notice {
+  width: 90%;
+  height: fit-content;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #ffaaaa;
+  color: #b51d14;
 }
