@@ -1,3 +1,5 @@
+const { ResidentModel } = require("../models/database/mongoose");
+
 const UserModel = require("../models/database/mongoose").UserModel;
 
 const login = async (req, res) => {
@@ -86,6 +88,42 @@ const signup = async (req, res) => {
         layout: 'index-login',
         title: 'Signup Page'
     });
+}
+
+const checkSignup = async (req, res) => {
+    const { lastname, firstname, email, password } = req.body; // Retrieve email and password from request body
+
+    //try to find user
+    try{
+        const residentUser = await ResidentModel.findOne({
+            firstname: firstname, 
+            lastname: lastname 
+        });
+        var errorMsg = "";
+
+        if (!email || !password ||!firstname ||!lastname) {
+            errorMsg = "All fields must be complete."
+        }
+        else if (!email.includes("@")) {
+            errorMsg = "Invalid email.";
+        }
+
+        //di pa complete
+
+        console.log("ERROR IN SIGNUP")
+        res.render('login', {
+            layout: 'index-login',
+            title: 'Login Page',
+            error: errorMsg
+        });
+        
+    } catch(error){
+        console.error('Error during login:', error);
+        res.render('signup', {
+            layout: 'index-login',
+            title: 'Signup Page'
+        });
+    }
 }
 
 
