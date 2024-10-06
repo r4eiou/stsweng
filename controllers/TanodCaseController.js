@@ -169,7 +169,7 @@ const viewSearchTanodDB = async (req, res) => {
             } else if (selectedStatus === "2") { // Resolved
                 query['Status'] = "Resolved"; 
             } else if (selectedStatus === "3") { // Archived
-                query['Status'] = "Archived"; 
+                query['isArchived'] = true; 
             }
             // You can add more conditions as needed
         }
@@ -583,7 +583,8 @@ const restoreRecord = async (req, res) => {
 
         await TanodCaseModel.findOneAndUpdate(
             { _id : caseId},
-            { isArchived : false}
+            { isArchived : false},
+            { new: true }
         );
 
         res.redirect("/admin-tanod-db-view");

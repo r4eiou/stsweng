@@ -166,6 +166,10 @@ const LuponCase = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const TanodCase = new mongoose.Schema ({

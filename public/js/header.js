@@ -159,11 +159,12 @@ document.addEventListener("DOMContentLoaded", function() {
         logoutBtn.addEventListener('click', function(){
             window.location.href="/logout";
             localStorage.setItem('selectedStatus', "0");
+            localStorage.setItem('selectedLuponStatus', "0");
         });
     }
 });
 
-//for modal
+//for modal tanod
 function openRestoreModal(caseId) {
     // Open the modal
     document.getElementById('restoreModal').style.display = 'block';
@@ -176,6 +177,13 @@ function openRestoreModal(caseId) {
 function closeRestoreModal() {
     document.getElementById('restoreModal').style.display = 'none';
 }
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModal');
+    if (event.target == modal) {
+        closeRestoreModal();
+    }
+};
 
 function openArchiveModal(caseId) {
     // Open the archive modal
@@ -193,15 +201,51 @@ function closeArchiveModal() {
 }
 
 window.onclick = function(event) {
-    const modal = document.getElementById('restoreModal');
-    if (event.target == modal) {
-        closeRestoreModal();
-    }
-};
-
-window.onclick = function(event) {
     const modal = document.getElementById('archiveModal');
     if (event.target == modal) {
         closeArchiveModal();
+    }
+};
+
+//modal lupon
+function openArchiveModalLupon(caseId) {
+    // Open the archive modal
+    document.getElementById('archiveModalLupon').style.display = 'block';
+
+    // Set up the confirm button to archive the record
+    document.getElementById('confirmArchiveBtnLupon').onclick = function() {
+        window.location.href = '/delete-case-lupon/' + caseId; // Redirect to archive URL
+    };
+}
+
+function closeArchiveModalLupon() {
+    // Close the archive modal
+    document.getElementById('archiveModalLupon').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('archiveModalLupon');
+    if (event.target == modal) {
+        closeArchiveModal();
+    }
+};
+
+function openRestoreModalLupon(caseId) {
+    // Open the modal
+    document.getElementById('restoreModalLupon').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtnLupon').onclick = function() {
+        window.location.href = '/restore-case-lupon/' + caseId; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModalLupon() {
+    document.getElementById('restoreModalLupon').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModalLupon');
+    if (event.target == modal) {
+        closeRestoreModalLupon();
     }
 };
