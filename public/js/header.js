@@ -158,6 +158,50 @@ document.addEventListener("DOMContentLoaded", function() {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function(){
             window.location.href="/logout";
+            localStorage.setItem('selectedStatus', "0");
         });
     }
 });
+
+//for modal
+function openRestoreModal(caseId) {
+    // Open the modal
+    document.getElementById('restoreModal').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtn').onclick = function() {
+        window.location.href = '/restore-case/' + caseId; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModal() {
+    document.getElementById('restoreModal').style.display = 'none';
+}
+
+function openArchiveModal(caseId) {
+    // Open the archive modal
+    document.getElementById('archiveModal').style.display = 'block';
+
+    // Set up the confirm button to archive the record
+    document.getElementById('confirmArchiveBtn').onclick = function() {
+        window.location.href = '/delete-case/' + caseId; // Redirect to archive URL
+    };
+}
+
+function closeArchiveModal() {
+    // Close the archive modal
+    document.getElementById('archiveModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModal');
+    if (event.target == modal) {
+        closeRestoreModal();
+    }
+};
+
+window.onclick = function(event) {
+    const modal = document.getElementById('archiveModal');
+    if (event.target == modal) {
+        closeArchiveModal();
+    }
+};

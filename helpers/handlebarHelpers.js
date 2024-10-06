@@ -54,6 +54,14 @@ const registerHelpers = () => {
     handlebars.registerHelper('getStatus', function(statusArray, index) {
         return statusArray[index];
     });
+
+    handlebars.registerHelper('checkArchived', function(isArchived, options) {
+        if (isArchived === false) {
+            return options.fn(this); 
+        } else {
+            return options.inverse(this); 
+        }
+    });
 };
 
 

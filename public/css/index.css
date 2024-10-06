@@ -370,6 +370,8 @@ html {
     border: 1px solid white;
     color: white;
     background-color: var(--dgreen);
+
+    margin-left: -50px;
   }
 
   button:hover{
@@ -883,3 +885,24 @@ html {
     margin-top: -0.8%;
   }
   /* ================= */
+
+  .status-dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 14px;
+    justify-content: center ;
+    gap: 10px;
+
+    height: 34px;
+
+    border-radius: 20px;
+    border: none;
+    width: 140px;
+    white-space: nowrap;
+  }
+
+  .dropdown {
+    margin-left: 25px;
+    margin-right: -105px;
+  }

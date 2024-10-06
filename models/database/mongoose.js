@@ -253,6 +253,10 @@ const TanodCase = new mongoose.Schema ({
         type: String,
         required: true
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const SecurityQuestion = new mongoose.Schema ({

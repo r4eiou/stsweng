@@ -26,9 +26,9 @@
             "MiddleInitial": "B",
             "LastName": "Gonzales"
         },
-        "Location": "Barangay Hall, Barangay Parang, Marikina City"
+        "Location": "Barangay Hall, Barangay Parang, Marikina City",
+        "isArchived": false
     },
-
     {
         "_id": "2",
         "EntryNo": 12346,
@@ -56,9 +56,9 @@
             "MiddleInitial": "H",
             "LastName": "Domingo"
         },
-        "Location": "Barangay Hall, Barangay Sto. Niño, Marikina City"
+        "Location": "Barangay Hall, Barangay Sto. Niño, Marikina City",
+        "isArchived": false
     },
-
     {
         "_id": "3",
         "EntryNo": 12347,
@@ -86,9 +86,9 @@
             "MiddleInitial": "J",
             "LastName": "Fernandez"
         },
-        "Location": "Barangay Hall, Barangay Concepcion, Marikina City"
+        "Location": "Barangay Hall, Barangay Concepcion, Marikina City",
+        "isArchived": true
     },
-
     {
         "_id": "4",
         "EntryNo": 12348,
@@ -116,9 +116,9 @@
             "MiddleInitial": "N",
             "LastName": "Ortiz"
         },
-        "Location": "Barangay Hall, Barangay Marikina Heights, Marikina City"
+        "Location": "Barangay Hall, Barangay Marikina Heights, Marikina City",
+        "isArchived": false
     },
-
     {
         "_id": "5",
         "EntryNo": 12349,
@@ -146,9 +146,9 @@
             "MiddleInitial": "R",
             "LastName": "Martinez"
         },
-        "Location": "Barangay Hall, Barangay Tumana, Marikina City"
+        "Location": "Barangay Hall, Barangay Tumana, Marikina City",
+        "isArchived": false
     },
-    
     {
         "_id": "6",
         "EntryNo": 1006,
@@ -176,7 +176,8 @@
             "MiddleInitial": "G",
             "LastName": "Brown"
         },
-        "Location": "Market"
+        "Location": "Market",
+        "isArchived": false
     },
     {
         "_id": "7",
@@ -205,7 +206,8 @@
             "MiddleInitial": "K",
             "LastName": "Wilson"
         },
-        "Location": "Park"
+        "Location": "Park",
+        "isArchived": true
     },
     {
         "_id": "8",
@@ -234,7 +236,8 @@
             "MiddleInitial": "O",
             "LastName": "Clark"
         },
-        "Location": "Mall"
+        "Location": "Mall",
+        "isArchived": false
     },
     {
         "_id": "9",
@@ -261,9 +264,10 @@
         "WitnessInfo": {
             "FirstName": "Olivia",
             "MiddleInitial": "S",
-            "LastName": "Evans"
+            "LastName": "Young"
         },
-        "Location": "School"
+        "Location": "Neighborhood",
+        "isArchived": false
     },
     {
         "_id": "10",
@@ -271,57 +275,59 @@
         "Date": "2024-07-05",
         "Status": "Resolved",
         "ReporteeInfo": {
-            "FirstName": "Mia",
+            "FirstName": "Oscar",
             "MiddleInitial": "T",
-            "LastName": "Gold",
-            "Address": "456 Birch St"
+            "LastName": "Williams",
+            "Address": "456 Cedar St"
         },
-        "natureOfBlotter": "Vandalism",
+        "natureOfBlotter": "Domestic Dispute",
         "RespondentInfo": {
-            "FirstName": "Hank",
+            "FirstName": "Paul",
             "MiddleInitial": "U",
-            "LastName": "Silver"
+            "LastName": "Carter"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Nick",
+            "FirstName": "Sally",
             "MiddleInitial": "V",
-            "LastName": "Garcia"
+            "LastName": "Morris"
         },
         "WitnessInfo": {
-            "FirstName": "Emma",
+            "FirstName": "Tommy",
             "MiddleInitial": "W",
-            "LastName": "Martinez"
+            "LastName": "Lee"
         },
-        "Location": "Library"
+        "Location": "Home",
+        "isArchived": true
     },
     {
         "_id": "11",
         "EntryNo": 1011,
         "Date": "2024-07-06",
-        "Status": "Ongoing",
+        "Status": "Resolved",
         "ReporteeInfo": {
-            "FirstName": "Noah",
+            "FirstName": "Rita",
             "MiddleInitial": "X",
-            "LastName": "White",
-            "Address": "789 Cedar St"
+            "LastName": "Adams",
+            "Address": "789 Spruce St"
         },
-        "natureOfBlotter": "Assault",
+        "natureOfBlotter": "Vandalism",
         "RespondentInfo": {
-            "FirstName": "Ivy",
+            "FirstName": "Victor",
             "MiddleInitial": "Y",
-            "LastName": "Grey"
+            "LastName": "Nelson"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Owen",
+            "FirstName": "Walter",
             "MiddleInitial": "Z",
-            "LastName": "Lee"
+            "LastName": "Evans"
         },
         "WitnessInfo": {
-            "FirstName": "Liam",
+            "FirstName": "Xena",
             "MiddleInitial": "A",
-            "LastName": "Taylor"
+            "LastName": "Harris"
         },
-        "Location": "Gym"
+        "Location": "School",
+        "isArchived": true
     },
     {
         "_id": "12",
@@ -329,28 +335,29 @@
         "Date": "2024-07-07",
         "Status": "Ongoing",
         "ReporteeInfo": {
-            "FirstName": "Ava",
+            "FirstName": "Zoe",
             "MiddleInitial": "B",
-            "LastName": "Black",
-            "Address": "123 Walnut St"
+            "LastName": "Parker",
+            "Address": "234 Birch St"
         },
-        "natureOfBlotter": "Theft",
+        "natureOfBlotter": "Fraud",
         "RespondentInfo": {
-            "FirstName": "Jack",
+            "FirstName": "Aaron",
             "MiddleInitial": "C",
-            "LastName": "Brown"
+            "LastName": "Carter"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Zack",
+            "FirstName": "Bella",
             "MiddleInitial": "D",
-            "LastName": "Harris"
+            "LastName": "Bennett"
         },
         "WitnessInfo": {
-            "FirstName": "Ella",
+            "FirstName": "Charlie",
             "MiddleInitial": "E",
-            "LastName": "King"
+            "LastName": "Fisher"
         },
-        "Location": "Supermarket"
+        "Location": "Bank",
+        "isArchived": false
     },
     {
         "_id": "13",
@@ -358,28 +365,29 @@
         "Date": "2024-07-08",
         "Status": "Resolved",
         "ReporteeInfo": {
-            "FirstName": "Sophia",
+            "FirstName": "Daniel",
             "MiddleInitial": "F",
-            "LastName": "Gold",
-            "Address": "456 Elm St"
+            "LastName": "Harris",
+            "Address": "345 Willow St"
         },
-        "natureOfBlotter": "Robbery",
+        "natureOfBlotter": "Theft",
         "RespondentInfo": {
-            "FirstName": "Ken",
+            "FirstName": "Ella",
             "MiddleInitial": "G",
-            "LastName": "Silver"
+            "LastName": "Rodriguez"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Ryan",
+            "FirstName": "Fred",
             "MiddleInitial": "H",
-            "LastName": "Clark"
+            "LastName": "Martin"
         },
         "WitnessInfo": {
-            "FirstName": "James",
+            "FirstName": "Gina",
             "MiddleInitial": "I",
-            "LastName": "Martinez"
+            "LastName": "Rogers"
         },
-        "Location": "Office"
+        "Location": "Store",
+        "isArchived": true
     },
     {
         "_id": "14",
@@ -387,28 +395,29 @@
         "Date": "2024-07-09",
         "Status": "Ongoing",
         "ReporteeInfo": {
-            "FirstName": "Lucas",
+            "FirstName": "Hannah",
             "MiddleInitial": "J",
-            "LastName": "Brown",
-            "Address": "789 Ash St"
+            "LastName": "Baker",
+            "Address": "456 Cherry St"
         },
-        "natureOfBlotter": "Assault",
+        "natureOfBlotter": "Harassment",
         "RespondentInfo": {
-            "FirstName": "Mia",
+            "FirstName": "Isaac",
             "MiddleInitial": "K",
-            "LastName": "White"
+            "LastName": "Bell"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Henry",
+            "FirstName": "Jack",
             "MiddleInitial": "L",
-            "LastName": "Johnson"
+            "LastName": "Lee"
         },
         "WitnessInfo": {
-            "FirstName": "Amelia",
+            "FirstName": "Kathy",
             "MiddleInitial": "M",
-            "LastName": "Evans"
+            "LastName": "Young"
         },
-        "Location": "Stadium"
+        "Location": "Café",
+        "isArchived": false
     },
     {
         "_id": "15",
@@ -416,27 +425,28 @@
         "Date": "2024-07-10",
         "Status": "Resolved",
         "ReporteeInfo": {
-            "FirstName": "Emily",
+            "FirstName": "Laura",
             "MiddleInitial": "N",
-            "LastName": "Gold",
-            "Address": "123 Spruce St"
+            "LastName": "Smith",
+            "Address": "123 Elm St"
         },
-        "natureOfBlotter": "Vandalism",
+        "natureOfBlotter": "Fraud",
         "RespondentInfo": {
-            "FirstName": "Nick",
+            "FirstName": "Mike",
             "MiddleInitial": "O",
-            "LastName": "Black"
+            "LastName": "Anderson"
         },
         "DeskOfficerInfo": {
-            "FirstName": "Sam",
+            "FirstName": "Nina",
             "MiddleInitial": "P",
-            "LastName": "Garcia"
+            "LastName": "Carter"
         },
         "WitnessInfo": {
-            "FirstName": "Isabella",
+            "FirstName": "Oscar",
             "MiddleInitial": "Q",
-            "LastName": "Lee"
+            "LastName": "Gonzales"
         },
-        "Location": "Playground"
+        "Location": "Office",
+        "isArchived": true
     }
 ]
