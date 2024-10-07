@@ -40,7 +40,7 @@
 <div class="content-container-tanod-home">
     <div class="box-content-top">
         <a href="/A-lupon-create-case">
-            <button type="button" class="form-btn create size">                                  <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+            <button type="button" class="form-btn create size" id="createButtonLupon">           <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
         </a>
         <button type="button" class="form-btn resolved margin size" id="resolvedButtonLupon">    <img src="/images/form-check.png">  <span>Mark as Resolved</span>   </button>
         <button type="button" class="form-btn delete margin size"   id="deleteButtonLupon">      <img src="/images/form-trash.png">  <span>Archive Selection</span>   </button>
@@ -161,6 +161,45 @@
 
                 window.location.href = `/admin-lupon-db-view?status=${selectedValue}`; //automatic refresh
             });
+
+            // Function to disable or enable buttons based on dropdown value
+            function updateButtonState() {
+                const dropdown          = document.getElementById('AdminCaseLuponDropdown');
+                const createButton      = document.getElementById('createButtonLupon');
+                const resolvedButton    = document.getElementById('resolvedButtonLupon');
+                const deleteButton      = document.getElementById('deleteButtonLupon');
+
+                switch (dropdown.value) {
+                    case '2':
+                        resolvedButton.style.pointerEvents = 'none';
+                        resolvedButton.style.opacity = '0.5';
+
+                        break;
+                    case '3':
+                        // Disable pointer events for all buttons
+                        createButton.style.pointerEvents = 'none';
+                        resolvedButton.style.pointerEvents = 'none';
+                        deleteButton.style.pointerEvents = 'none';
+
+                        createButton.style.opacity = '0.5';
+                        resolvedButton.style.opacity = '0.5';
+                        deleteButton.style.opacity = '0.5';
+                        
+                        break;
+                    default:
+                        createButton.style.pointerEvents = 'auto';
+                        resolvedButton.style.pointerEvents = 'auto';
+                        deleteButton.style.pointerEvents = 'auto';
+
+                        // Restore button appearance
+                        createButton.style.opacity = '1';
+                        resolvedButton.style.opacity = '1';
+                        deleteButton.style.opacity = '1';
+                }
+            }
+
+            // Call function
+            updateButtonState();
         });
     </script>
 </div>
