@@ -83,6 +83,33 @@ table {
     display: table-header-group;
 }
 
+
+.events-db-table {
+    margin-top: 0px;
+    min-width: fit-content;
+}
+
+.events-db-table td {
+    background-color: white;
+    width: fit-content;
+    text-align: start;
+    border-bottom: 1px solid #717171;
+}
+
+.events-db-table td.events-status {
+    background-color: white;
+    width: 150px;
+    text-align: start;
+}
+
+.events-db-table thead {
+    width: 100%;
+    color: white;
+    background-color: #004112;
+    font-size: 14px;
+    display: table-header-group;
+}
+
 table th, td {
     padding: 1em;
     padding-left: 40px;
@@ -359,6 +386,13 @@ tr:last-child td{
 
 .truncate-text-150px {
     max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.truncate-text-300px {
+    max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

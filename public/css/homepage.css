@@ -788,6 +788,19 @@ html {
   background-color: transparent;
 }
 
+.box-content-top-1000px{
+  display: flex;
+  flex-direction: row;
+  border: transparent;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 1000px;
+  height: 40px;
+  padding: 0px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
 
 .box-content {
   border: 1px solid transparent;
@@ -935,9 +948,19 @@ html {
   font-size: 16px;
 }
 
+.content-text-main.view-events {
+  width:fit-content;
+  margin-left: 50px;
+}
+
 .underline{
     text-decoration: underline;
     margin-left: 70px;
+}
+
+.view-events-link{
+  text-decoration: underline;
+  color: black;
 }
 
 .opaque {
