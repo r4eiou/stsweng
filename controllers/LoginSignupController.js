@@ -1,12 +1,34 @@
 const { ResidentModel } = require("../models/database/mongoose");
 
 const UserModel = require("../models/database/mongoose").UserModel;
+const SecurityModel = require("../models/database/mongoose").SecurityQuestionModel;
 
 const login = async (req, res) => {
+    const question = await SecurityModel.findOne({ _id : 1 }).lean();
     res.render('login', {
         layout: 'index-login',
-        title: 'Login Page'
+        title: 'Login Page',
+        securityQues : question.Question
     });
+}
+
+const checkUserRole = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Find user by email
+        const user = await UserModel.findOne({ email: email });
+
+        if (user) {
+            // Return user role as JSON response
+            res.json({ role: user.role });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error checking user role:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
 }
 
 const checkLogin = async (req, res) => {
@@ -129,6 +151,7 @@ const checkSignup = async (req, res) => {
 
 module.exports = {
     checkLogin,
+    checkUserRole,
     login,
     signup
 }
