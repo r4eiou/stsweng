@@ -961,6 +961,8 @@ html {
 .view-events-link{
   text-decoration: underline;
   color: black;
+  margin: 10px;
+  width: 100%;
 }
 
 .opaque {

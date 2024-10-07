@@ -17,7 +17,7 @@ router.get('/events-db-view',                           EventsController.viewEve
 // router.get('/delete-case/:id',                          EventsController.deleteEvent); //delete button sa specific event view page
 
             //filename for create events
-// router.get('/create-event',                             EventsController.viewCreateEvent); //create event
+ router.get('/create-event',                             EventsController.createEvent); //create event
 
             //route ng submit button for create 
 // router.post('/submit-new-event',                        EventsController.submitCreateEvent); //submit button

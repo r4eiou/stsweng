@@ -86,7 +86,7 @@ table {
 
 .events-db-table {
     margin-top: 0px;
-    min-width: fit-content;
+    min-width: 980px;
 }
 
 .events-db-table td {
