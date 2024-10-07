@@ -175,12 +175,12 @@
     async function downloadFileEmployee() 
     {
         // Perform validation
-        const isValid = await validateForm();
+        //const isValid = await validateForm();
         
         // If validation fails, exit the function
-        if (!isValid) {
-            return;
-        }
+        //if (!isValid) {
+        //    return;
+        //}
 
         const form = document.querySelector('.print-form');
         const name = titleCase(form.elements['name'].value);
@@ -216,7 +216,7 @@
         };
 
         //console.log(JSON.stringify(data));
-        
+        /*
         fetch('/saveCertificate', {
             method: 'POST',
             headers: {
@@ -232,7 +232,7 @@
             console.log("error here fetch")
             console.error('Error:', error);
         });
-
+        */
         //generating part
         const doc = new jsPDF({
             orientation: 'portrait',
@@ -243,10 +243,13 @@
         doc.setFont('Times', 'bold'); 
 
         // Title and Header
-        
-        const logoWidth = 100;
+        //const imageFile = '/images/' + userInputFileName;
+
+        const logoWidth = 30;
         const logolength = 30;
-        doc.addImage('/images/logo-cert.png', 'PNG', 57, 10, logoWidth, logolength);
+        doc.addImage('/images/logo-left.jpg',   'JPG', 60, 8, logoWidth, logolength);
+        doc.addImage('/images/logo-middle.png', 'PNG', 88, 6, 37, 37);
+        doc.addImage('/images/logo-right.png',  'PNG', 125, 10, 27, 27);
 
         doc.setFontSize(12);
         doc.text('Republic of the Philippines',     105, 45, null, null, 'center');
@@ -446,13 +449,31 @@
         doc.text(`Parang, Marikina City.`, 20, 157 + (splitText.length * 6) + (splitTextAdd.length * 6));
 
         // Signature
-        doc.addImage('/images/footer-cert.png', 'PNG', 20, 200, 155, 75);
-        
+        //doc.addImage('/images/footer-cert.png', 'PNG', 20, 200, 155, 75);
+                    
+                    //brgy-capt-name 
+        var brgy_capt_name  = "RONALD \"TATANG\" ZULUETA" //dynamic papalitan
+        var capt_nameWidth = doc.getTextWidth(brgy_capt_name);
+
+        var brgy_title = "Punong Barangay";
+        var brgy_capt_width = doc.getTextWidth(brgy_title);
+        var xPositionTitle = 20 + (capt_nameWidth - brgy_capt_width) / 2;
+
+        doc.text(brgy_capt_name, 20, 215);
+        doc.text(brgy_title,  xPositionTitle   , 221)
+
+        doc.addImage('/images/logo-parang.jpg',  'JPG', xPositionTitle, 223, 35, 32);
+
+        var slogan = '\"Maayos, Maaasahan at Maunlad\"' //dynamic papalitan
+        doc.text(slogan,  xPositionTitle + 40, 240)
+
+        doc.addImage('/images/footer.png', 'PNG', 20, 252, 150, 20);
+
 
         // Open PDF in a new window
         // doc.output('dataurlnewwindow');
 
-        var pdfBlob = doc.output('blob');
+        var pdfBlob = doc.output('blob'); 
         var url = URL.createObjectURL(pdfBlob);
         var newWindow = window.open(url, '_blank');
 

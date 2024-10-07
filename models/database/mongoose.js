@@ -270,13 +270,32 @@ const SecurityQuestion = new mongoose.Schema ({
     },
 });
 
+const CertificateInfo = new mongoose.Schema ({
+    _id: {
+        type: String,
+        required: true
+    },
+    img : {
+        type: String, //di ko pa sure
+        required: true
+    },
+    brgy_capt_name: {
+        type: String,
+        required: true,
+    },
+    slogan: {
+        type: String,
+        required: true,
+    },
+});
+
 // MODELS //
 const CertificateModel          = mongoose.model("CertificateModel",        CertificateSchema,     "certificate");
 const UserModel                 = mongoose.model("UserModel",               UserSchema,            "user");
 const LuponCaseModel            = mongoose.model("LuponCaseModel",          LuponCase,             "lupon_case");
 const TanodCaseModel            = mongoose.model("TanodCaseModel",          TanodCase,             "tanod_case");
 const SecurityQuestionModel     = mongoose.model("SecurityQuestionModel",   SecurityQuestion,      "securityQuestion");
-
+const CertificateInfoModel      = mongoose.model("CertificateInfoModel",    CertificateInfo,       "certificateInfo");
 
 // EXPORTS //
 module.exports = {
@@ -285,5 +304,6 @@ module.exports = {
     LuponCaseModel,
     TanodCaseModel,
     SecurityQuestionModel,
+    CertificateInfoModel,
     mongo_uri
 };
