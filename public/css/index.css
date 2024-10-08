@@ -345,10 +345,14 @@ h5 {
 
   height: 34px;
 
+  background-color: white;
   border-radius: 20px;
   border: none;
   width: 190px;
   white-space: nowrap;
+
+  border: 1px solid;
+  border-color: #C7C7C7;
 }
 
 .form-btn img {
@@ -369,6 +373,11 @@ h5 {
 
 .form-btn.delete {
   color: #b51d14;
+}
+
+.form-btn.archive {
+  color: #b51d14;
+  width: fit-content;
 }
 
 .form-btn.discard {

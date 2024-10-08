@@ -91,6 +91,10 @@ button[value="back"] {
   background-color: #eaf3f7;
 }
 
+.view-mode input, .view-mode textarea {
+  background-color: white !important;
+}
+
 .photo-container {
   width: 130px;
   height: 130px;

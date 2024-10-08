@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else if (document.querySelector(".search-page") || document.querySelector("#view-case-page") ||
                 (document.querySelector(".tanod-lupon-db-table")) || (document.querySelector(".accts-db-table")) || 
-                (document.querySelector(".cert-db-table")) || (document.querySelector("#acct-indiv-view")) || (document.querySelector(".events-db-table"))){
+                (document.querySelector(".cert-db-table")) || (document.querySelector("#acct-indiv-view")) || 
+                (document.querySelector(".events-db-table")) || (document.querySelector("#view-event-page"))
+            ){
             toggleLightPage();
             // console.log("toggled light");
         } else {

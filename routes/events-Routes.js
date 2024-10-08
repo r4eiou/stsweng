@@ -6,9 +6,9 @@ const EventsController = require('../controllers/EventsController');
 router.get('/events-db-view',                           EventsController.viewEventsDB);       //main events view db
 
             //filename for view events (id not included)
-// router.get('/view-event/:id',                           EventsController.viewEvent);     //view specific (1) event
+ router.get('/view-event',                             EventsController.viewEvent);     //view specific (1) event
             //filename for edit events (id not included)
-// router.get('/edit-event/:id',                           EventsController.editEvent);     //edit specific (1) event
+ router.get('/edit-event',                              EventsController.editEvent);     //edit specific (1) event
 
             //route ng submit button edit
 // router.post('/submit-edit-event',                       EventsController.submitEditEvent); //submit button
