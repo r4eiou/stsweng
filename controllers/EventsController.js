@@ -73,8 +73,8 @@ const viewEvent = async (req, res) => {
     res.render("admin-view-event", {
       layout: "layout",
       title: "Admin: Viewing Event Details",
-      cssFile1: "homepage",
-      cssFile2: "db-view",
+      cssFile1: "db-view",
+      cssFile2: "index",
       javascriptFile1: "components",
       javascriptFile2: "header",
     });

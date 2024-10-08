@@ -13,7 +13,7 @@
 }
 
 .back-button {
-  color: black;
+  color: black !important;
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
@@ -22,7 +22,7 @@
 }
 
 #white-back-button {
-  color: white;
+  color: white !important;
 }
 
 .back-button svg {

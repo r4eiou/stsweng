@@ -94,18 +94,18 @@
       <div class="row">
         <div class="col m-3">
           <label for="headline-event" class="form-label">Headline</label>
-          <input type="email" class="form-control p-0" id="headline-event" value="Headline Here"/>
+          <input type="email" class="form-control p-0" id="headline-event" value="Headline Here" />
         </div>
       </div>
 
       <div class="row">
         <div class="col m-3">
           <label for="start-event" class="form-label">Start Date</label>
-          <input type="date" class="form-control p-0" id="start-event" value="2024-09-04"/>
+          <input type="date" class="form-control p-0" id="start-event" value="2024-09-04" />
         </div>
         <div class="col m-3">
           <label for="end-event" class="form-label">End Date</label>
-          <input type="date" class="form-control p-0" id="end-event" value="2024-09-04"/>
+          <input type="date" class="form-control p-0" id="end-event" value="2024-09-04" />
         </div>
       </div>
 
@@ -118,13 +118,13 @@
 
     </div>
 
-    <div class="d-flex flex-column g-3 mx-auto">
+    <div class="d-flex flex-column g-3 mx-auto py-3">
       <div class="row">
-        <div class="col"><button type="button" class="form-btn save cert" onclick="#"><img src="/images/form-check.png" /><span>Save Changes</span></button></div>
-        <button type="button" class="form-btn delete cert" onclick="goBack()"><img src="/images/form-trash.png" /><span>Discard Changes</span></button>
-        <div class="col"></div>
+        <div class="col"><button type="button" class="form-btn save" onclick="#"><img src="/images/form-check.png" /><span>Save Changes</span></button></div>
+        <div class="col">
+          <button type="button" class="form-btn delete" onclick="goBack()"><img src="/images/form-trash.png" /><span>Discard Changes</span></button>
+        </div>
       </div>
-
     </div>
   </form>
 </div>
@@ -135,15 +135,3 @@
     <p id="modalMessage"></p>
   </div>
 </div>
-
-<script>
-  const { jsPDF } = window.jspdf; function titleCase(str) { return str.toLowerCase().split(' ').map(function(word) { return word.replace(word.charAt(0), word.charAt(0).toUpperCase()); }).join(' '); } function goBack () { const form = document.querySelector('.print-form'); const _id =
-  form.elements['_id'].value; window.location.href=`/certificate-view/${_id}`; } async function downloadFileEmployee() { // Perform validation const isValid = await validateFormEdit(); // If validation fails, exit the function if (!isValid) { return; } const form =
-  document.querySelector('.print-form'); const _id = form.elements['_id'].value; const name = titleCase(form.elements['name'].value); const birthday = formatBirthday(form.elements['bday-date'].value); const address = titleCase(form.elements['address'].value); const ctcDateIssued =
-  formatBirthday(form.elements['ctc-date'].value); const location = titleCase(form.elements['location'].value); const cedula = form.elements['cedula'].value; const birthPlace = titleCase(form.elements['birthplace'].value); const reason = form.elements['reason'].value.toUpperCase(); const profileImg
-  = document.getElementById('deets-profile-img').src; const today = new Date(); const yyyy = today.getFullYear(); const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0! const dd = String(today.getDate()).padStart(2, '0'); const formattedDate = `${yyyy}-${mm}-${dd}`; const
-  certDateIssued = formatBirthday(formattedDate); //send data const data = { _id, name, birthday:form.elements['bday-date'].value, address, ctc_no: cedula, ctc_date_issued: form.elements['ctc-date'].value, ctc_location: location, cert_date_issued: formattedDate, reason, img: profileImg };
-  console.log(JSON.stringify(data)); fetch('/submit-edit-certificate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }) .then(response => response.json()) .then(result => { window.location.href=`/certificate-view/${_id}`; }) .catch(error => {
-  console.log("error here fetch") console.error('Error:', error); }); }
-
-</script>
