@@ -1,9 +1,11 @@
-* :not(button){
+* :not(button) {
   box-sizing: content-box;
 }
 
-body{
+body {
   background-color: transparent !important;
+  font-family: "Inter", sans-serif !important;
+  line-height: normal !important;
 }
 
 #main-container {
@@ -20,32 +22,32 @@ body{
 .back-btn-container {
   display: flex;
   flex-direction: row;
-  width: 100%; 
+  width: 100%;
   padding-left: 7.2%;
   margin-top: -2%;
 }
 
 .sub-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .action-text {
-    display: block;
-    color: #004112;
-    font-weight: bold;
-    font-size: 1rem;
+  display: block;
+  color: #004112;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 button[value="back"] {
-    border: none;
-    background: none;
-    color: grey;
-    font-size: 1rem;
+  border: none;
+  background: none;
+  color: grey;
+  font-size: 1rem;
 }
 
 .print-panel {
@@ -53,7 +55,7 @@ button[value="back"] {
   height: 736px;
   border: 2px solid #004112;
   background-color: white;
-  
+
   margin-top: 5vh;
   margin-bottom: 5vh;
   border-radius: 5px;
@@ -63,6 +65,30 @@ button[value="back"] {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+}
+
+.events-panel {
+  height: fit-content;
+  width: 700px !important;
+  min-width: 540px;
+  border: 2px solid #004112;
+  background-color: white;
+  font-weight: bold;
+
+  padding: 1rem;
+  margin-bottom: 5vh;
+  border-radius: 5px;
+  box-shadow: black;
+}
+
+.events-panel input,
+.events-panel input:focus {
+  background-color: #eaf3f7;
+}
+
+.events-panel textarea,
+.events-panel textarea:focus {
+  background-color: #eaf3f7;
 }
 
 .photo-container {
@@ -85,6 +111,23 @@ button[value="back"] {
   object-fit: cover;
 }
 
+.event-photo-container {
+  width: 400px;
+  height: 230px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-photo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .image-upload-button {
   position: absolute;
   top: 50%;
@@ -94,9 +137,9 @@ button[value="back"] {
   font-size: 0.8rem;
   font-weight: bold;
   text-decoration: underline;
-  color: #1E42C1;
-  background-color: white; 
-  border: 1.5px solid #1E42C1;
+  color: #1e42c1;
+  background-color: white;
+  border: 1.5px solid #1e42c1;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
@@ -106,14 +149,16 @@ button[value="back"] {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.deets1-container, .deets3-container, .deets4-container {
+.deets1-container,
+.deets3-container,
+.deets4-container {
   display: flex;
   flex-direction: row;
 
   margin-bottom: 2%;
 }
 
-.deets2-container{
+.deets2-container {
   display: flex;
   flex-direction: column;
 
@@ -130,11 +175,11 @@ button[value="back"] {
 
 .deets-text {
   display: block;
-  color: #5E5E5E;
+  color: #5e5e5e;
   font-weight: bold;
   width: 100%;
   font-size: 1rem;
-  
+
   margin-bottom: 0.5%;
   margin-left: 10%;
 }
@@ -167,15 +212,15 @@ button[value="back"] {
   font-weight: normal;
 }
 
-input[id='name'] {
+input[id="name"] {
   width: 321px;
   height: 29px;
-  
+
   padding-left: 10px;
   margin-bottom: 0.5rem;
-  
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 15%;
@@ -183,14 +228,14 @@ input[id='name'] {
   text-transform: capitalize;
 }
 
-input[id='address'] {
+input[id="address"] {
   width: 494px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 10%;
@@ -198,24 +243,24 @@ input[id='address'] {
   text-transform: capitalize;
 }
 
-input[class='date'] {
+input[class="date"] {
   width: 120px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 }
 
-input[id='Birthday'] {
+input[id="Birthday"] {
   margin-left: 65%;
 
   color: gray;
 }
 
-input[id='ctc-date-issued'] {
+input[id="ctc-date-issued"] {
   margin-left: 39%;
 
   width: 220px;
@@ -224,14 +269,14 @@ input[id='ctc-date-issued'] {
   color: gray;
 }
 
-input[id='birthplace'] {
+input[id="birthplace"] {
   width: 220px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 22%;
@@ -239,27 +284,27 @@ input[id='birthplace'] {
   text-transform: capitalize;
 }
 
-input[id='cedula'] {
+input[id="cedula"] {
   width: 220px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 22%;
 }
 
-input[id='location'] {
+input[id="location"] {
   width: 220px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 38%;
@@ -267,14 +312,14 @@ input[id='location'] {
   text-transform: capitalize;
 }
 
-input[id='reason'] {
+input[id="reason"] {
   width: 494px;
   height: 29px;
-  
+
   margin-bottom: 0.5rem;
   padding-left: 10px;
-  background-color: #CCCCCC;
-  border: 1px solid #5E5E5E;
+  background-color: #cccccc;
+  border: 1px solid #5e5e5e;
   border-radius: 5px;
 
   margin-left: 10%;
@@ -287,6 +332,12 @@ input[id='reason'] {
   margin-left: 24px;
 }
 
+#crud-event-title {
+  font-weight: bold;
+  color: var(--dgreen);
+  text-align: center;
+}
+
 /* Modal styles */
 .modal {
   display: none;
@@ -297,14 +348,14 @@ input[id='reason'] {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   padding-top: 60px;
 }
 
 .modal-content {
   color: green;
-  font-family: 'Inter';
+  font-family: "Inter";
   background-color: #fefefe;
   margin: 5% auto;
   padding: 20px;
@@ -314,15 +365,16 @@ input[id='reason'] {
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  color: #aaa !important;
+  float: right !important;
+  font-size: 28px !important;
+  font-weight: bold !important;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+  color: black !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
 }

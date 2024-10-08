@@ -1,280 +1,271 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var checkboxes = document.getElementsByClassName("checkbox");
+document.addEventListener("DOMContentLoaded", function () {
+  var checkboxes = document.getElementsByClassName("checkbox");
 
-    Array.from(checkboxes).forEach(function(checkbox) {
-        checkbox.addEventListener("click", function() {
-            this.classList.toggle("clicked");
-        });
+  Array.from(checkboxes).forEach(function (checkbox) {
+    checkbox.addEventListener("click", function () {
+      this.classList.toggle("clicked");
     });
+  });
 
+  var status_btns = document.getElementsByClassName("status");
 
+  Array.from(status_btns).forEach(function (status_btns) {
+    status_btns.addEventListener("click", function () {
+      var currentState = this.classList[1];
+      var img = this.querySelector("img");
+      var text = this.querySelector("span");
 
-    var status_btns = document.getElementsByClassName("status");
-
-    Array.from(status_btns).forEach(function(status_btns) {
-        status_btns.addEventListener("click", function() {
-            var currentState = this.classList[1];
-            var img = this.querySelector('img');
-            var text = this.querySelector('span');
-
-            if (currentState == "resolved") {
-                this.classList.remove('resolved');
-                this.classList.add('ongoing');
-                img.src="/images/ongoing-circle.png"
-                text.textContent = "Ongoing";
-            } else {
-                this.classList.remove('ongoing');
-                this.classList.add('resolved');
-                img.src="/images/resolved-circle.png"
-                text.textContent = "Resolved";
-            }
-        });
+      if (currentState == "resolved") {
+        this.classList.remove("resolved");
+        this.classList.add("ongoing");
+        img.src = "/images/ongoing-circle.png";
+        text.textContent = "Ongoing";
+      } else {
+        this.classList.remove("ongoing");
+        this.classList.add("resolved");
+        img.src = "/images/resolved-circle.png";
+        text.textContent = "Resolved";
+      }
     });
+  });
 
-    var sort_btns = document.getElementsByClassName("sort");
+  var sort_btns = document.getElementsByClassName("sort");
 
-    Array.from(sort_btns).forEach(function(sort_btns) {
-        sort_btns.addEventListener("click", function() {
-            var currentState = this.classList[1];
-            var img = this.querySelector('img');
+  Array.from(sort_btns).forEach(function (sort_btns) {
+    sort_btns.addEventListener("click", function () {
+      var currentState = this.classList[1];
+      var img = this.querySelector("img");
 
-            if (currentState == "descending") {
-                this.classList.remove('descending');
-                this.classList.add('ascending');
-                img.src="../public/images/sort-ascending.png"
-            } else {
-                this.classList.remove('ascending');
-                this.classList.add('descending');
-                img.src="../public/images/sort-descending.png"
-            }
-        });
+      if (currentState == "descending") {
+        this.classList.remove("descending");
+        this.classList.add("ascending");
+        img.src = "../public/images/sort-ascending.png";
+      } else {
+        this.classList.remove("ascending");
+        this.classList.add("descending");
+        img.src = "../public/images/sort-descending.png";
+      }
     });
+  });
 
-    // TANOD
-    const resolvedButton = document.getElementById('resolvedButton');
-    const deleteButton = document.getElementById('deleteButton');
-    if (resolvedButton) {
-        resolvedButton.addEventListener('click', async () => {
-            const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
-            const selectedCaseIds = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+  // TANOD
+  const resolvedButton = document.getElementById("resolvedButton");
+  const deleteButton = document.getElementById("deleteButton");
+  if (resolvedButton) {
+    resolvedButton.addEventListener("click", async () => {
+      const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
+      const selectedCaseIds = Array.from(checkedCheckboxes).map((checkbox) => checkbox.value);
 
-            console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
+      console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
 
-            try {
-                const response = await fetch('/mark-as-resolved', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ caseIds: selectedCaseIds })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const result = await response.json();
-                console.log(result);
-                location.reload(true);
-
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
+      try {
+        const response = await fetch("/mark-as-resolved", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ caseIds: selectedCaseIds }),
         });
-    }
 
-    if (deleteButton) {
-        deleteButton.addEventListener('click', async () => {
-            const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
-            const selectedCaseIds = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-            console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
-            try {
-                const response = await fetch('/delete-cases', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ caseIds: selectedCaseIds })
-                });
+        const result = await response.json();
+        console.log(result);
+        location.reload(true);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    });
+  }
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+  if (deleteButton) {
+    deleteButton.addEventListener("click", async () => {
+      const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
+      const selectedCaseIds = Array.from(checkedCheckboxes).map((checkbox) => checkbox.value);
 
-                const result = await response.json();
-                console.log(result);
-                location.reload(true);
-
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
+      console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
+      try {
+        const response = await fetch("/delete-cases", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ caseIds: selectedCaseIds }),
         });
-    }
 
-    const searchForm = document.getElementById('searchForm');
-    if (searchForm) {
-        searchForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-            const formData = new FormData(searchForm);
-            const searchName = formData.get('search_name');
-            
-            try {
-                if(searchName) {
-                    const response = await fetch(`/search-cases/${searchName}`);
+        const result = await response.json();
+        console.log(result);
+        location.reload(true);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    });
+  }
 
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
+  const searchForm = document.getElementById("searchForm");
+  if (searchForm) {
+    searchForm.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent the default form submission
 
-                    const result = await response.json();
-                    console.log(result); 
+      const formData = new FormData(searchForm);
+      const searchName = formData.get("search_name");
 
-                    window.location.href = `/admin-tanod-db-view/${searchName}`;
-                } else {
-                    window.location.href = '/admin-tanod-db-view';
-                }
+      try {
+        if (searchName) {
+          const response = await fetch(`/search-cases/${searchName}`);
 
-            } catch (error) {
-                console.error('There was a problem with the search operation:', error);
-            }
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const result = await response.json();
+          console.log(result);
+
+          window.location.href = `/admin-tanod-db-view/${searchName}`;
+        } else {
+          window.location.href = "/admin-tanod-db-view";
+        }
+      } catch (error) {
+        console.error("There was a problem with the search operation:", error);
+      }
+    });
+  }
+
+  // LUPON
+  const resolvedButtonLupon = document.getElementById("resolvedButtonLupon");
+  const deleteButtonLupon = document.getElementById("deleteButtonLupon");
+  if (resolvedButtonLupon) {
+    resolvedButtonLupon.addEventListener("click", async () => {
+      const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
+      const selectedCaseIds = Array.from(checkedCheckboxes).map((checkbox) => checkbox.value);
+
+      console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
+
+      try {
+        const response = await fetch("/mark-as-resolved-lupon", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ caseIds: selectedCaseIds }),
         });
-    }
 
-    // LUPON
-    const resolvedButtonLupon = document.getElementById('resolvedButtonLupon');
-    const deleteButtonLupon = document.getElementById('deleteButtonLupon');
-    if (resolvedButtonLupon) {
-        resolvedButtonLupon.addEventListener('click', async () => {
-            const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
-            const selectedCaseIds = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-            console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
+        const result = await response.json();
+        console.log(result);
+        location.reload(true);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    });
+  }
 
-            try {
-                const response = await fetch('/mark-as-resolved-lupon', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ caseIds: selectedCaseIds })
-                });
+  if (deleteButtonLupon) {
+    deleteButtonLupon.addEventListener("click", async () => {
+      const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
+      const selectedCaseIds = Array.from(checkedCheckboxes).map((checkbox) => checkbox.value);
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const result = await response.json();
-                console.log(result);
-                location.reload(true);
-
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
+      console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
+      try {
+        const response = await fetch("/delete-cases-lupon", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ caseIds: selectedCaseIds }),
         });
-    }
 
-    if (deleteButtonLupon) {
-        deleteButtonLupon.addEventListener('click', async () => {
-            const checkedCheckboxes = document.querySelectorAll('button[name="caseIds"].clicked');
-            const selectedCaseIds = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-            console.log("Selected Case IDs:", selectedCaseIds); // Debugging log
-            try {
-                const response = await fetch('/delete-cases-lupon', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ caseIds: selectedCaseIds })
-                });
+        const result = await response.json();
+        console.log(result);
+        location.reload(true);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    });
+  }
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+  const searchFormLupon = document.getElementById("searchFormLupon");
+  if (searchFormLupon) {
+    searchFormLupon.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent the default form submission
 
-                const result = await response.json();
-                console.log(result);
-                location.reload(true);
+      const formData = new FormData(searchFormLupon);
+      const searchName = formData.get("search_name");
 
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
-        });
-    }
+      try {
+        if (searchName) {
+          const response = await fetch(`/search-cases-lupon/${searchName}`);
 
-    const searchFormLupon = document.getElementById('searchFormLupon');
-    if (searchFormLupon) {
-        searchFormLupon.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
 
-            const formData = new FormData(searchFormLupon);
-            const searchName = formData.get('search_name');
-            
-            try {
-                if(searchName) {
-                    const response = await fetch(`/search-cases-lupon/${searchName}`);
+          const result = await response.json();
+          console.log(result);
 
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
+          window.location.href = `/admin-lupon-db-view/${searchName}`;
+        } else {
+          window.location.href = "/admin-lupon-db-view";
+        }
+      } catch (error) {
+        console.error("There was a problem with the search operation:", error);
+      }
+    });
+  }
 
-                    const result = await response.json();
-                    console.log(result); 
+  //CERTIFICATE
+  const searchFormCertificate = document.getElementById("searchFormCertificate");
+  if (searchFormCertificate) {
+    searchFormCertificate.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent the default form submission
 
-                    window.location.href = `/admin-lupon-db-view/${searchName}`;
-                } else {
-                    window.location.href = '/admin-lupon-db-view';
-                }
+      const formData = new FormData(searchFormCertificate);
+      const searchName = formData.get("search_name");
 
-            } catch (error) {
-                console.error('There was a problem with the search operation:', error);
-            }
-        });
-    }
+      try {
+        if (searchName) {
+          const response = await fetch(`/search-cases-certificate/${searchName}`);
 
-    //CERTIFICATE
-    const searchFormCertificate = document.getElementById('searchFormCertificate');
-    if (searchFormCertificate) {
-        searchFormCertificate.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
 
-            const formData = new FormData(searchFormCertificate);
-            const searchName = formData.get('search_name');
-            
-            try {
-                if(searchName) {
-                    const response = await fetch(`/search-cases-certificate/${searchName}`);
+          const result = await response.json();
+          console.log(result);
 
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    const result = await response.json();
-                    console.log(result); 
-
-                    window.location.href = `/certificate-db/${searchName}`;
-                } else {
-                    window.location.href = '/certificate-db';
-                }
-
-            } catch (error) {
-                console.error('There was a problem with the search operation:', error);
-            }
-        });
-    }
+          window.location.href = `/certificate-db/${searchName}`;
+        } else {
+          window.location.href = "/certificate-db";
+        }
+      } catch (error) {
+        console.error("There was a problem with the search operation:", error);
+      }
+    });
+  }
 });
 
 function displayResults(results) {
-    const checkboxForm = $('#checkboxForm');
-    checkboxForm.empty(); // Clear previous results
+  const checkboxForm = $("#checkboxForm");
+  checkboxForm.empty(); // Clear previous results
 
-    results.forEach(result => {
-        const { _id, ReporteeInfo, Status } = result;
+  results.forEach((result) => {
+    const { _id, ReporteeInfo, Status } = result;
 
-        // Create HTML elements for each case
-        const caseElement = `
+    // Create HTML elements for each case
+    const caseElement = `
             <div class="db-main-box-content">
                 <div class="checkboxCol-Content">
                     <input type="checkbox" name="caseIds" value="${_id}" class="checkbox margin">
@@ -295,19 +286,19 @@ function displayResults(results) {
             </div>
         `;
 
-        checkboxForm.append(caseElement); // Append each case element to the form
-    });
+    checkboxForm.append(caseElement); // Append each case element to the form
+  });
 }
 
 function displayResultsLupon(results) {
-    const checkboxForm = $('#checkboxForm');
-    checkboxForm.empty(); // Clear previous results
+  const checkboxForm = $("#checkboxForm");
+  checkboxForm.empty(); // Clear previous results
 
-    results.forEach(result => {
-        const { _id, RespondentInfo, Status } = result;
+  results.forEach((result) => {
+    const { _id, RespondentInfo, Status } = result;
 
-        // Create HTML elements for each case
-        const caseElement = `
+    // Create HTML elements for each case
+    const caseElement = `
             <div class="db-main-box-content">
                 <div class="checkboxCol-Content">
                     <input type="checkbox" name="caseIds" value="${_id}" class="checkbox margin">
@@ -327,6 +318,10 @@ function displayResultsLupon(results) {
             </div>
         `;
 
-        checkboxForm.append(caseElement); // Append each case element to the form
-    });
+    checkboxForm.append(caseElement); // Append each case element to the form
+  });
+}
+
+function goBack() {
+  window.history.back();
 }
