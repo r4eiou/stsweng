@@ -23,6 +23,8 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  scroll-behavior: smooth;
 }
 
 html.dark {
@@ -127,6 +129,12 @@ h5 {
   min-width: 13rem;
 }
 
+.header-text-lp {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 /* header for login page */
 .login-header-left {
   margin-left: 20%;
@@ -155,6 +163,15 @@ h5 {
   align-items: center;
 
   width: 30%;
+  height: 100%;
+}
+
+.header-left-lp {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+
+  width: 20%;
   height: 100%;
 }
 
@@ -233,6 +250,148 @@ h5 {
   color: white;
   border: 0px;
   font-weight: bolder;
+}
+
+.header-login-btn {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.25rem;
+  height: fit-content;
+  left: 1.25rem;
+  top: 1.25rem;
+
+  padding: 0.3rem;
+
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 65, 18, 0);
+
+  border: 1px solid #fcfcfc;
+  border-radius: 0.25rem;
+}
+
+.header-signup-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.25rem;
+  height: fit-content;
+  left: 1.25rem;
+  top: 1.25rem;
+
+  padding: 0.3rem;
+
+  font-size: 1rem;
+  font-weight: bold;
+  background: #1c8a3b;
+  color: white;
+
+  border-radius: 0.25rem;
+  border: 1px none #fcfcfc;
+}
+
+.header-signup-btn:hover,
+.header-login-btn:hover {
+  border: 1px solid #fcfcfc;
+  border-radius: 0.25rem;
+  color: #1c8a3b;
+
+  background-color: white;
+  border: 0px;
+  font-weight: bolder;
+}
+
+.header a:not(#home-link2) {
+  text-decoration: none;
+}
+
+.signup-btn-lrg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
+  height: 60px;
+  left: 1.25rem;
+  top: 1.25rem;
+
+  padding: 0.3rem;
+
+  font-size: 24px;
+  font-weight: bold;
+  background: #1c8a3b;
+  color: white;
+
+  border-radius: 0.25rem;
+  border: 1px none #fcfcfc;
+}
+
+.login-btn-lrg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
+  height: 60px;
+  left: 1.25rem;
+  top: 1.25rem;
+
+  padding: 0.3rem;
+
+  font-size: 24px;
+  font-weight: bold;
+  background: white;
+  color: #004112;
+
+  border-radius: 0.25rem;
+  border: 3px solid #004112;
+}
+
+#home a {
+  text-decoration: none;
+}
+
+.header-links {
+  font-size: smaller;
+}
+
+.header-links a {
+  color: white;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+
+.header-links a:hover {
+  opacity: 0.5;
+}
+
+#home,
+#events,
+#aboutus,
+#contactus {
+  scroll-margin-top: 70px;
+}
+
+#contactus a {
+  color: white;
+}
+
+.events-carousel-btn {
+  border: none;
+  background: none;
+  color: #000;
+  width: 1%;
+  box-shadow: none !important;
 }
 
 .ls-panel {
