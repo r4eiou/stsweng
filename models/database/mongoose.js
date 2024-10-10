@@ -166,6 +166,10 @@ const LuponCase = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const TanodCase = new mongoose.Schema ({
@@ -253,6 +257,10 @@ const TanodCase = new mongoose.Schema ({
         type: String,
         required: true
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const SecurityQuestion = new mongoose.Schema ({
@@ -270,13 +278,97 @@ const SecurityQuestion = new mongoose.Schema ({
     },
 });
 
+const ResidentSchema = new mongoose.Schema ({
+    img : {
+        type: String,
+        required: true
+    },
+    _id: {
+        type: String,
+        required: true
+    },
+    FirstName: {
+        type: String,
+        required: true,
+    },
+    MiddleInitial: {
+        type: String,
+        required: true,
+    },
+    LastName: {
+        type: String,
+        required: true,
+    },
+    Birthday : {
+        type: String,
+        required: true
+    },
+    Sex : {
+        type: String,
+        required: true
+    },
+    Address : {
+        type: String,
+        required: true
+    },
+    Birthday : {
+        type: String,
+        required: true
+    },
+    isSeniorCitizen : {
+        type: String,
+        required: true
+    },
+    ContactNo : {
+        type: Number,
+        required: true
+    },
+    CivilStatus : {
+        type: String,
+        required: true
+    },
+    NoOfResident : {
+        type: Number,
+        required: true
+    },
+    HousingInfo : { //rent / own
+        type: String,
+        required: true
+    },
+    ServiceRequestID : { // can be null
+        type: Number,
+        required: true
+    },
+});
+
+const CertificateInfo = new mongoose.Schema ({
+    _id: {
+        type: String,
+        required: true
+    },
+    img : {
+        type: String, //di ko pa sure
+        required: true
+    },
+    brgy_capt_name: {
+        type: String,
+        required: true,
+    },
+    slogan: {
+        type: String,
+        required: true,
+    },
+});
+
+
 // MODELS //
 const CertificateModel          = mongoose.model("CertificateModel",        CertificateSchema,     "certificate");
 const UserModel                 = mongoose.model("UserModel",               UserSchema,            "user");
 const LuponCaseModel            = mongoose.model("LuponCaseModel",          LuponCase,             "lupon_case");
 const TanodCaseModel            = mongoose.model("TanodCaseModel",          TanodCase,             "tanod_case");
 const SecurityQuestionModel     = mongoose.model("SecurityQuestionModel",   SecurityQuestion,      "securityQuestion");
-
+const ResidentModel             = mongoose.model("ResidentModel",           ResidentSchema,        "resident");
+const CertificateInfoModel      = mongoose.model("CertificateInfoModel",    CertificateInfo,       "certificateInfo");
 
 // EXPORTS //
 module.exports = {
@@ -285,5 +377,7 @@ module.exports = {
     LuponCaseModel,
     TanodCaseModel,
     SecurityQuestionModel,
+    ResidentModel,
+    CertificateInfoModel,
     mongo_uri
 };
