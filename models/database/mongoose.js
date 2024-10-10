@@ -299,6 +299,10 @@ const ResidentSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    Email : {
+        type: String,
+        required: true
+    },
     Birthday : {
         type: String,
         required: true
