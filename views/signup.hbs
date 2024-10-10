@@ -17,13 +17,15 @@
         </div>
         <div class="login-panel-main">
           <span class="login-panel-title" id="login-title">Signup</span>
-          <!--
-          <div class="ls-error-notice">
-            <ul>
-              <li> sample error here </li>
-              <li>{{error}}</li>
-            </ul></div>
-            -->
+          
+          {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
+            <div class="ls-error-notice">
+              <ul>
+                <li>{{error}}</li>
+              </ul>
+            </div>
+          {{/if}}
+
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
@@ -68,5 +70,33 @@
         <p>Please contact the barangay for registration inquiries.</p>
       </div>
       -->
+
+    {{#if accountCreated}}
+      <!-- Success Modal -->
+      <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Account Created Successfully!</h2>
+          <p>Your account has been created. You can now log in.</p>
+        </div>
+      </div>
+    {{/if}}
+
+    <script>
+      var modal = document.getElementById("successModal");
+      if (modal) {
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+    </script>
   </body>
 </html>

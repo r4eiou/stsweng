@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
     var login_form = document.querySelector(".login-form");
 
     login_form.addEventListener('submit', function(event) {
@@ -125,3 +125,4 @@ function employeeView() {
 function login(userRole) {
     localStorage.setItem('userRole', userRole);
 }
+*/

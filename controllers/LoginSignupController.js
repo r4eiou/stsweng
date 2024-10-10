@@ -118,9 +118,13 @@ const checkSignup = async (req, res) => {
     //try to find user
     try{
         const residentUser = await ResidentModel.findOne({
-            firstname: firstname, 
-            lastname: lastname 
+            Email : email
         });
+
+        const existingUser = await UserModel.findOne({
+            email : email
+        });
+
         var errorMsg = "";
 
         if (!email || !password ||!firstname ||!lastname) {
@@ -129,15 +133,53 @@ const checkSignup = async (req, res) => {
         else if (!email.includes("@")) {
             errorMsg = "Invalid email.";
         }
+        else if (!residentUser) {
+            errorMsg = "Not yet registered.";
+        }
+        else if (existingUser && existingUser.role === "resident") {
+            errorMsg = "Resident already has an account.";
+        }
+        else if (residentUser) {
+            let newId;
+            const highestIdUser = await UserModel.findOne().sort({ _id: -1 });
+            
+            if (highestIdUser) {
+                newId = (parseInt(highestIdUser._id) + 1).toString();
+            } else {
+                newId = '1';
+            }
 
-        //di pa complete
+            while (await UserModel.findById(newId)) {
+                newId = (parseInt(newId) + 1).toString();
+            }
 
-        console.log("ERROR IN SIGNUP")
-        res.render('login', {
-            layout: 'index-login',
-            title: 'Login Page',
-            error: errorMsg
-        });
+            const userDetails = {
+                _id: newId,
+                email: email,
+                password: password,
+                role: "resident"
+            };
+
+            const newUser = new UserModel(userDetails);
+            await newUser.save();
+            console.log('User created and saved');
+
+            res.render('signup', {
+                layout: 'index-login',
+                title: 'Signup Page',
+                accountCreated: true
+            });
+            
+        }
+
+        if (errorMsg) {
+            console.log("ERROR IN SIGNUP");
+            return res.render('signup', {
+                layout: 'index-login',
+                title: 'Signup Page',
+                error: errorMsg
+            });
+        }
         
     } catch(error){
         console.error('Error during login:', error);
@@ -153,6 +195,7 @@ module.exports = {
     checkLogin,
     checkUserRole,
     login,
-    signup
+    signup,
+    checkSignup
 }
 
