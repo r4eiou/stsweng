@@ -137,7 +137,13 @@ const checkSignup = async (req, res) => {
             errorMsg = "Not yet registered.";
         }
         else if (existingUser && existingUser.role === "resident") {
-            errorMsg = "Resident already has an account.";
+            res.render('signup', {
+                layout: 'index-login',
+                title: 'Signup Page',
+                accountCreated: true,
+                header: "You are not yet registered.",
+                sub: "Please contact the barangay for registration inquiries."
+            });
         }
         else if (residentUser) {
             let newId;
@@ -167,7 +173,9 @@ const checkSignup = async (req, res) => {
             res.render('signup', {
                 layout: 'index-login',
                 title: 'Signup Page',
-                accountCreated: true
+                accountCreated: true,
+                header: "Account Created Successfully!",
+                sub: "Your account has been created. You can now log in."
             });
             
         }
