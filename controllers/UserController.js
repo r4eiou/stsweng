@@ -27,7 +27,7 @@ const checkAnswer = async (req, res) => {
         const { answer } = req.body;
         const question = await SecurityModel.findOne({ _id : 1 }).lean();
     
-        const correctAnswer = question.Answer; // Fetch this from your database
+        const correctAnswer = question.Answer;
         if (answer === correctAnswer) {
             res.json({ success: true });
         } else {

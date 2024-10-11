@@ -24,65 +24,66 @@ function add(app){
 
 
     /************************************************************EMPLOYEE************************************************/
-    //Employee-Login
-    app.get('/employee-login', function(req, resp){
-        resp.render('employee-login-page', {
-            layout: 'index-login',
-            title: 'Employee Login'
-        });
-    });
+    //Changes: in another page
+    // app.get('/login', function(req, resp){
+    //     resp.render('login', {
+    //         layout: 'index-login',
+    //         title: 'Login Page'
+    //     });
+    // });
 
     //Check the Login
-    app.post('/check-login', async function(req, resp){
-        const { email, password } = req.body; // Retrieve email and password from request body
 
-        //try to find user
-        try{
-            const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
-            var errorMsg = "";
-            // console.log(curUser.role);
-            // console.log(curUser.password);
-            // console.log(curUser.email);
+    // app.post('/check-login', async function(req, resp){
+    //     const { email, password } = req.body; // Retrieve email and password from request body
+
+    //     //try to find user
+    //     try{
+    //         const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
+    //         var errorMsg = "";
+    //         // console.log(curUser.role);
+    //         // console.log(curUser.password);
+    //         // console.log(curUser.email);
 
             
-            if (!email || !password) {
-                errorMsg = "Email and Password fields cannot be empty."
-            }
-            else if (!email.includes("@")) {
-                errorMsg = "Invalid email.";
-            }
-            else if (!curUser) {
-                errorMsg = "User Not Found."
-            }
-            else if (curUser.password != password) {
-                errorMsg = "Incorrect password."
-            }
-            else if (curUser.role != "employee") {
-                errorMsg = "Unathorized Access."
-            }
-            else {
-                console.log("here no error")
-                req.session.userRole = "Employee";
-                req.session.isAuth = true;
-                return resp.redirect("/employee-home");
+    //         if (!email || !password) {
+    //             errorMsg = "Email and Password fields cannot be empty."
+    //         }
+    //         else if (!email.includes("@")) {
+    //             errorMsg = "Invalid email.";
+    //         }
+    //         else if (!curUser) {
+    //             errorMsg = "User Not Found."
+    //         }
+    //         else if (curUser.password != password) {
+    //             errorMsg = "Incorrect password."
+    //         }
+    //         else if (curUser.role != "employee") {
+    //             errorMsg = "Unathorized Access."
+    //         }
+    //         else {
+    //             console.log("here no error")
+    //             req.session.userRole = "Employee";
+    //             req.session.isAuth = true;
+    //             return resp.redirect("/employee-home");
         
-            }
-            console.log("here")
-            resp.render('employee-login-page', {
-                layout: 'index-login',
-                title: 'Employee Login Retry',
-                error: errorMsg
-            });
+    //         }
+    //         console.log("here")
+    //         resp.render('employee-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Employee Login Retry',
+    //             error: errorMsg
+    //         });
             
-        } catch(error){
-            console.error('Error during login:', error);
-            resp.render('employee-login-page', {
-                layout: 'index-login',
-                title: 'Employee Login Retry',
-                error: 'Error Try Again'
-            });
-        }
-    });
+    //     } catch(error){
+    //         console.error('Error during login:', error);
+    //         resp.render('employee-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Employee Login Retry',
+    //             error: 'Error Try Again'
+    //         });
+    //     }
+    // });
 
     //Employee-Homepage
     app.get('/employee-home', isAuth, function(req, resp){
@@ -108,61 +109,61 @@ function add(app){
 
 
     //Tanod-Login
-    app.get('/tanod-login', function(req, resp){
-        resp.render('tanod-login-page', {
-            layout: 'index-login',
-            title: 'Tanod Login'
-        });
-    });
+    // app.get('/tanod-login', function(req, resp){
+    //     resp.render('tanod-login-page', {
+    //         layout: 'index-login',
+    //         title: 'Tanod Login'
+    //     });
+    // });
 
     //Check Login for tanod
-    app.post('/check-login-tanod', async function(req, resp){
-        const { email, password } = req.body; // Retrieve email and password from request body
+    // app.post('/check-login-tanod', async function(req, resp){
+    //     const { email, password } = req.body; // Retrieve email and password from request body
 
-        //try to find user
-        try{
-            const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
-            var errorMsg = "";
+    //     //try to find user
+    //     try{
+    //         const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
+    //         var errorMsg = "";
 
             
-            if (!email || !password) {
-                errorMsg = "Email and Password fields cannot be empty."
-            }
-            else if (!email.includes("@")) {
-                errorMsg = "Invalid email.";
-            }
-            else if (!curUser) {
-                errorMsg = "User Not Found."
-            }
-            else if (curUser.password != password) {
-                errorMsg = "Incorrect password."
-            }
-            else if (curUser.role != "tanod") {
-                errorMsg = "Unathorized Access."
-            }
-            else {
-                console.log("here no error")
-                req.session.isAuth = true;
-                req.session.userRole = "Tanod";
-                return resp.redirect('/tanod-home');
+    //         if (!email || !password) {
+    //             errorMsg = "Email and Password fields cannot be empty."
+    //         }
+    //         else if (!email.includes("@")) {
+    //             errorMsg = "Invalid email.";
+    //         }
+    //         else if (!curUser) {
+    //             errorMsg = "User Not Found."
+    //         }
+    //         else if (curUser.password != password) {
+    //             errorMsg = "Incorrect password."
+    //         }
+    //         else if (curUser.role != "tanod") {
+    //             errorMsg = "Unathorized Access."
+    //         }
+    //         else {
+    //             console.log("here no error")
+    //             req.session.isAuth = true;
+    //             req.session.userRole = "Tanod";
+    //             return resp.redirect('/tanod-home');
         
-            }
-            console.log("here")
-            resp.render('tanod-login-page', {
-                layout: 'index-login',
-                title: 'Tanod Login Retry',
-                error: errorMsg
-            });
+    //         }
+    //         console.log("here")
+    //         resp.render('tanod-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Tanod Login Retry',
+    //             error: errorMsg
+    //         });
             
-        } catch(error){
-            console.error('Error during login:', error);
-            resp.render('tanod-login-page', {
-                layout: 'index-login',
-                title: 'Tanod Login Retry',
-                error: 'Error Try Again'
-            });
-        }
-    });
+    //     } catch(error){
+    //         console.error('Error during login:', error);
+    //         resp.render('tanod-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Tanod Login Retry',
+    //             error: 'Error Try Again'
+    //         });
+    //     }
+    // });
 
     //Tanod Homepage
     app.get('/tanod-home', isAuth, async function(req, resp){
@@ -602,59 +603,59 @@ function add(app){
 
 
     //Lupon-Login
-    app.get('/lupon-login', function(req, resp){
-        resp.render('lupon-login-page', {
-            layout: 'index-login',
-            title: 'Lupon Login'
-        });
-    });
+    // app.get('/lupon-login', function(req, resp){
+    //     resp.render('lupon-login-page', {
+    //         layout: 'index-login',
+    //         title: 'Lupon Login'
+    //     });
+    // });
 
     //Check Login for Lupon
-    app.post('/check-login-lupon', async function(req, resp){
-        const { email, password } = req.body; // Retrieve email and password from request body
+    // app.post('/check-login-lupon', async function(req, resp){
+    //     const { email, password } = req.body; // Retrieve email and password from request body
 
-        try{
-            const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
-            var errorMsg = "";
+    //     try{
+    //         const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
+    //         var errorMsg = "";
 
-            if (!email || !password) {
-                errorMsg = "Email and Password fields cannot be empty."
-            }
-            else if (!email.includes("@")) {
-                errorMsg = "Invalid email.";
-            }
-            else if (!curUser) {
-                errorMsg = "User Not Found."
-            }
-            else if (curUser.password != password) {
-                errorMsg = "Incorrect password."
-            }
-            else if (curUser.role != "lupon") {
-                errorMsg = "Unathorized Access."
-            }
-            else {
-                console.log("here no error")
-                req.session.userRole = "Lupon";
-                req.session.isAuth = true;
-                return resp.redirect('/lupon-home');
+    //         if (!email || !password) {
+    //             errorMsg = "Email and Password fields cannot be empty."
+    //         }
+    //         else if (!email.includes("@")) {
+    //             errorMsg = "Invalid email.";
+    //         }
+    //         else if (!curUser) {
+    //             errorMsg = "User Not Found."
+    //         }
+    //         else if (curUser.password != password) {
+    //             errorMsg = "Incorrect password."
+    //         }
+    //         else if (curUser.role != "lupon") {
+    //             errorMsg = "Unathorized Access."
+    //         }
+    //         else {
+    //             console.log("here no error")
+    //             req.session.userRole = "Lupon";
+    //             req.session.isAuth = true;
+    //             return resp.redirect('/lupon-home');
         
-            }
-            console.log("here")
-            resp.render('lupon-login-page', {
-                layout: 'index-login',
-                title: 'Lupon Login Retry',
-                error: errorMsg
-            });
+    //         }
+    //         console.log("here")
+    //         resp.render('lupon-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Lupon Login Retry',
+    //             error: errorMsg
+    //         });
             
-        } catch(error){
-            console.error('Error during login:', error);
-            resp.render('lupon-login-page', {
-                layout: 'index-login',
-                title: 'Lupon Login Retry',
-                error: 'Error Try Again'
-            });
-        }
-    });
+    //     } catch(error){
+    //         console.error('Error during login:', error);
+    //         resp.render('lupon-login-page', {
+    //             layout: 'index-login',
+    //             title: 'Lupon Login Retry',
+    //             error: 'Error Try Again'
+    //         });
+    //     }
+    // });
 
 
     //Lupon Homepage

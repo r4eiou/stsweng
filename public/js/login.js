@@ -1,3 +1,4 @@
+/*
 document.addEventListener("DOMContentLoaded", function () {
   var login_form = document.querySelector(".login-form");
 
@@ -139,3 +140,4 @@ function hidePW(signup_or_login) {
     eye_icon.innerHTML = "<img src='/images/action-view.png'>";
   }
 }
+*/
