@@ -17,15 +17,13 @@
         </div>
         <div class="login-panel-main">
           <span class="login-panel-title" id="login-title">Signup</span>
-          
-          {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
-            <div class="ls-error-notice">
-              <ul>
-                <li>{{error}}</li>
-              </ul>
-            </div>
-          {{/if}}
-
+          <!--
+          <div class="ls-error-notice">
+            <ul>
+              <li> sample error here </li>
+              <li>{{error}}</li>
+            </ul></div>
+            -->
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
@@ -53,7 +51,7 @@
 
           <p>
             Already have an account?
-            <a class="login-link" href="/login">Login</a>
+            <a class="login-link" href="/admin-login-page">Login</a>
           </p>
           <div class="return-btn">
             <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
@@ -70,33 +68,5 @@
         <p>Please contact the barangay for registration inquiries.</p>
       </div>
       -->
-
-    {{#if accountCreated}}
-      <!-- Success Modal -->
-      <div id="successModal" class="modal" style="display: block;">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>{{header}}</h2>
-          <p>{{sub}}</p>
-        </div>
-      </div>
-    {{/if}}
-
-    <script>
-      var modal = document.getElementById("successModal");
-      if (modal) {
-        var span = document.getElementsByClassName("close")[0];
-
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-      }
-    </script>
   </body>
 </html>
