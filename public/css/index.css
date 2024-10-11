@@ -357,6 +357,35 @@ h5 {
   border: 3px solid #004112;
 }
 
+.dashboard-proceed-btn {
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 350px;
+  height: 130px;
+
+  padding: 0.3rem;
+
+  font-size: 32px;
+  font-weight: bold;
+  background: #5fd78d;
+  color: #004112;
+
+  border-radius: 0.25rem;
+  border: 1px none #fcfcfc;
+}
+
+.dashboard-panel {
+  background: url(../images/bg-light.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 500px;
+}
+
 #home a {
   text-decoration: none;
 }
