@@ -10,13 +10,13 @@
   <body>
     <!-- TO BE USED AS LOGIN PAGE replace with login.hbs after routes fixed -->
     <div class="main-container">
-      <div class="ls-panel">
-        <div class="ls-panel-left">
-          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+      <div class="login-panel">
+        <div class="login-panel-left">
+          <img src="/images/logo-revised.svg" class="login-panel-logo" />
           <h1>Barangay Parang</h1>
         </div>
-        <div class="ls-panel-main">
-          <span class="ls-panel-title" id="login-title">Login</span>
+        <div class="login-panel-main">
+          <span class="login-panel-title" id="login-title">Login</span>
           <!--
           <div class="ls-error-notice">
             <ul>
@@ -27,25 +27,13 @@
           <!--login main form-->
           
           <form class="login-form" action="check-login" method="post">
-            <div class="ls-field">
+            <div class="login-field" id="login-field">
               <label for="email">Email</label>
               <input type="text" id="email" name="email" placeholder="Email" />
             </div>
-            <div class="ls-field-pw">
+            <div class="login-field" id="login-field">
               <label for="password">Password</label>
-              <div class="input-container">
-                <input type="password" placeholder="Password" id="login-pw"/>
-                <button
-                  type="button"
-                  class="view-pw-btn"
-                  title="View Password"
-                  onclick="hidePW('login')"
-                  id="eye-login-pw"
-                  class="eye-login"
-                >
-                  <img src="/images/action-view.png" />
-                </button>
-              </div>
+              <input type="password" id="pw" name="password" placeholder="Password" />
             </div>
             <div class="login-submit">
               <input type="submit" value="Login" id="login-submit-btn" />
@@ -58,7 +46,6 @@
             <a class="signup-link" href="/employee-login">Signup</a>
           </p>
           <div class="login-return">
-            <!-- TODO: revise onclick function (should return to last page visited)-->
             <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
           </div>
         </div>

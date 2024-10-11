@@ -1,5 +1,5 @@
-.ls-panel-main {
-  width: 60%;
+.login-panel-main {
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,13 +49,13 @@
   background: #f3be72;
 }
 
-.ls-panel-title {
+.login-panel-title {
   font-weight: bold;
   font-size: 2rem;
   margin: 5%;
 }
 
-.ls-panel-title {
+.signup-panel-title {
   font-weight: bold;
   font-size: 2rem;
   margin: 5%;
@@ -77,7 +77,7 @@
   padding: 10%;
 }
 
-.ls-field {
+.login-field {
   font-family: "Inter";
   display: flex;
   flex-direction: column;
@@ -86,36 +86,13 @@
   width: 100%;
 }
 
-.ls-field input {
-  width: 100%;
-}
-
-.ls-field {
+.signup-field {
   font-family: "Inter";
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 1.5rem;
   width: 100%;
-}
-
-.ls-field-pw {
-  font-family: "Inter";
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
-  align-items: flex-start;
-  width: 100%;
-  position: relative;
-}
-
-.ls-field-pw input {
-  width: 100%;
-}
-
-.ls-field-pw button {
-  position: absolute;
-  right: 0;
 }
 
 input {
@@ -311,31 +288,4 @@ button[value="return"] {
 
   background-color: #ffaaaa;
   color: #b51d14;
-}
-
-.input-container {
-  display: flex;
-  width: 100%;
-  position: relative;
-  align-items: center;
-}
-
-.input-container input {
-  width: 100%;
-}
-
-.input-container button {
-  position: absolute;
-  right: 0;
-}
-
-.view-pw-btn {
-  display: block;
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-.view-pw-btn:hover {
-  box-shadow: none;
 }
