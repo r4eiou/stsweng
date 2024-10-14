@@ -3,21 +3,20 @@
     <title>
       Barangay Parang - Initial Login Page
     </title>
-
-    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <!-- TO BE USED AS SIGNUP PAGE replace with signup.hbs after routes fixed -->
     <div class="main-container">
-      <div class="ls-panel">
-        <div class="ls-panel-left">
-          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+      <div class="login-panel">
+        <div class="login-panel-left">
+          <img src="/images/logo-revised.svg" class="login-panel-logo" />
           <h1>Barangay Parang</h1>
         </div>
-        <div class="ls-panel-main">
-          <span class="ls-panel-title" id="signup-title">Signup</span>
+        <div class="login-panel-main">
+          <span class="login-panel-title" id="login-title">Signup</span>
           <!--
           <div class="ls-error-notice">
             <ul>
@@ -28,35 +27,21 @@
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="firstname">First Name</label>
               <input type="text" id="first_name" name="firstname" placeholder="First Name" />
             </div>
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="lastname">Last Name</label>
               <input type="text" id="last_name" name="lastname" placeholder="Last Name" />
             </div>
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="email">Email</label>
-              <div class="input-container">
-                <input type="text" id="email" name="email" placeholder="Email" />
-              </div>
+              <input type="text" id="email" name="email" placeholder="Email" />
             </div>
-            <div class="ls-field-pw">
+            <div class="signup-field" id="signup-field">
               <label for="password">Password</label>
-              <div class="input-container">
-                <input type="password" placeholder="Password" id="signup-pw" />
-                <button
-                  type="button"
-                  class="view-pw-btn"
-                  title="View Password"
-                  onclick="hidePW('signup')"
-                  id="eye-signup-pw"
-                  class="eye-signup"
-                >
-                  <img src="/images/action-view.png" />
-                </button>
-              </div>
+              <input type="password" id="pw" name="password" placeholder="Password" />
             </div>
             <div class="signup-submit">
               <input type="submit" value="Signup" id="signup-submit-btn" />
@@ -69,7 +54,6 @@
             <a class="login-link" href="/admin-login-page">Login</a>
           </p>
           <div class="return-btn">
-            <!-- TODO: revise onclick function (should return to last page visited)-->
             <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
           </div>
         </div>
