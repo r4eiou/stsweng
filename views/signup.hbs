@@ -10,39 +10,36 @@
   <body>
     <!-- TO BE USED AS SIGNUP PAGE replace with signup.hbs after routes fixed -->
     <div class="main-container">
-      <div class="ls-panel">
-        <div class="ls-panel-left">
-          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+      <div class="login-panel">
+        <div class="login-panel-left">
+          <img src="/images/logo-revised.svg" class="login-panel-logo" />
           <h1>Barangay Parang</h1>
         </div>
-        <div class="ls-panel-main">
-          <span class="ls-panel-title" id="signup-title">Signup</span>
-
-          {{#if error}}
-            <!-- IF NULL DONT SHOW ERROR CONTAINER -->
-            <div class="ls-error-notice">
-              <ul>
-                <li>{{error}}</li>
-              </ul>
-            </div>
-          {{/if}}
-
+        <div class="login-panel-main">
+          <span class="login-panel-title" id="login-title">Signup</span>
+          <!--
+          <div class="ls-error-notice">
+            <ul>
+              <li> sample error here </li>
+              <li>{{error}}</li>
+            </ul></div>
+            -->
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="firstname">First Name</label>
               <input type="text" id="first_name" name="firstname" placeholder="First Name" />
             </div>
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="lastname">Last Name</label>
               <input type="text" id="last_name" name="lastname" placeholder="Last Name" />
             </div>
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="email">Email</label>
               <input type="text" id="email" name="email" placeholder="Email" />
             </div>
-            <div class="ls-field">
+            <div class="signup-field" id="signup-field">
               <label for="password">Password</label>
               <input type="password" id="pw" name="password" placeholder="Password" />
             </div>
@@ -71,20 +68,5 @@
         <p>Please contact the barangay for registration inquiries.</p>
       </div>
       -->
-
-    {{#if accountCreated}}
-      <!-- Success Modal -->
-      <div id="successModal" class="modal" style="display: block;">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>{{header}}</h2>
-          <p>{{sub}}</p>
-        </div>
-      </div>
-    {{/if}}
-
-    <script>
-      var modal = document.getElementById("successModal"); if (modal) { var span = document.getElementsByClassName("close")[0]; span.onclick = function() { modal.style.display = "none"; } window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } } }
-    </script>
   </body>
 </html>
