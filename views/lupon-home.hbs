@@ -1,5 +1,7 @@
- <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
+
 <script src = "/js/header.js" type="text/javascript"></script>
  <div class = "main-container">
             <div class= "header" id="header">
@@ -26,9 +28,20 @@
         <!--New addition-->
         <div class="content-container-tanod-home">
             <div class="box-content-top">
-                <a href="/lupon-create"><button type="button" class="form-btn create size"><img src="/images/form-create.png"><span>Create New Record</span></button></a>
+                <a href="/lupon-create"><button type="button" id="create-btn" class="form-btn create size"><img src="/images/form-create.png"><span>Create New Record</span></button></a>
                 <button type="button"  id="resolve-btn" class="form-btn resolved margin size" ><img src="/images/form-check.png"><span>Mark as Resolved</span></button>
-                <button type="button" id="delete-btn" class="form-btn delete margin size"><img src="/images/form-trash.png"><span>Delete Selection</span></button>
+                <div class="dropdown">
+                    <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
+                        <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
+                    </button>
+                    <div id="dropdown-btn" class="dropdown-content margin">
+                        <a href="#" onclick="selectOption('View All Cases')">View All Cases</a>
+                        <a href="#" onclick="selectOption('View Ongoing')">View Ongoing</a>
+                        <a href="#" onclick="selectOption('View Resolved')">View Resolved</a>
+                        <a href="#" onclick="selectOption('View Archived')">View Archived</a>
+                    </div>                  
+                </div>
+
                 <div class="search-name-reg margin">
                     <form id="search-form" method="GET" action="/lupon-home">
                         <button type="submit"><img src="/images/search-reg.png"></button>
@@ -79,9 +92,9 @@
                         <th colspan="2">Case Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="lupon-db-table-body">
                     {{#each cases}}
-                        <tr>
+                        <tr data-id="{{this._id}}">
                             <td data-label="checkbox" class="align-right check-view-cell">
                                 <button type="button" class="checkbox" data-case-id="{{this.caseID}}"><img src="/images/Done.png"></button>
                             </td>
@@ -101,7 +114,7 @@
                                 {{this.complainerFirstName}} {{this.complainerLastName}}    
                             </td>
                             <td class="case-status-cell">
-                                <button type="button" class="status {{this.stat_lc}} margin3 markResolve" data-case-id="{{this.caseID}}"><img src="/images/{{this.stat_lc}}-circle.png"><span>{{this.status}}</span></button>
+                                <button type="button" class="status view-case-detail-link {{this.stat_lc}} margin3 markResolve" data-case-id="{{this.caseID}}"><img src="/images/{{this.stat_lc}}-circle.png"><span>{{this.status}}</span></button>
                             </td>
                             <td class="case-status-cell align-left">
                                 <a href="/lupon-edit-case/{{this.caseID}}" {{this.isEditable}}>
@@ -120,22 +133,143 @@
             </div>
         </div>
 
-         <script>
-            $(document).ready(function() {
-                const currentPage = {{currentPage}};
-                const totalPages = {{totalPages}};
-                const baseUrl = '/lupon-home?page=';
+    <script>
+    $(document).ready(function() {
+        const currentPage = {{currentPage}};
+        const totalPages = {{totalPages}};
+        const baseUrl = '/lupon-home?page=';
 
-                $('#count-down').click(function() {
-                    if (currentPage > 1) {
-                        window.location.href = baseUrl + (currentPage - 1);
-                    }
-                });
+        $('#count-down').click(function() {
+            if (currentPage > 1) {
+                window.location.href = baseUrl + (currentPage - 1);
+            }
+        });
 
-                $('#count-up').click(function() {
-                    if (currentPage < totalPages) {
-                        window.location.href = baseUrl + (currentPage + 1);
-                    }
-                });
+        $('#count-up').click(function() {
+            if (currentPage < totalPages) {
+                window.location.href = baseUrl + (currentPage + 1);
+            }
+        });
+    });
+</script>
+
+<script>
+        function dropdown() {
+            var dropdownContent = document.getElementById("dropdown-btn");
+            var dropdownImg = document.getElementById("dropdown-down-btn");
+
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                dropdownImg.src = "/images/dropdown-down.png";
+            } else {
+                dropdownContent.style.display = "block";
+                dropdownImg.src = "/images/dropdown-up.png";
+            }
+        }
+            
+        function selectOption(optionText) {
+            var dropdownButton = document.getElementById("dropdownButton");
+            var dropdownImg = document.getElementById("dropdown-down-btn"); //dropdown-btn
+            var viewCaseLinks = document.querySelectorAll(".status.view-case-detail-link");
+
+
+            dropdownButton.innerHTML = optionText + ' <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>';
+            document.getElementById("dropdown-btn").style.display = "none";
+    
+            if (optionText === 'View All Cases') {
+                showAllRows();
+                enableButtons();
+                filterRows('All');
+            }else if (optionText === 'View Ongoing') {
+                filterRows('Ongoing');
+            } else if (optionText === 'View Resolved') {
+                filterRows('Resolved');
+                enableButtons();
+            } else if (optionText === 'View Archived') {
+                filterRows('Archived');
+                disableButtons();
+            } 
+        }
+        function filterRows(status) {
+            var rows = document.querySelectorAll("#lupon-db-table-body tr");
+
+            rows.forEach(function(row) {
+                var statusText = row.querySelector(".case-status-cell button span").textContent.trim();
+                var viewCaseLink = row.querySelector(".view-case-detail-link");
+                var caseId = row.getAttribute("data-id"); 
+                var viewText = row.querySelector(".content-text-main.underline-lupon-tanod");
+
+                if (status === 'All' || statusText.toLowerCase() === status.toLowerCase()) {
+                    row.style.display = "table-row"; 
+                    viewText.textContent = status === 'Archived' ? "View Archive" : "View";
+                    viewCaseLink.href = status === 'Archived' 
+                        ? "/lupon-view-archive-case/"
+                        : "/lupon-view-case/" + caseId;
+                } else {
+                    row.style.display = "none";
+                }
             });
-        </script>
+        }
+
+        function showAllRows() {
+            var rows = document.querySelectorAll("#lupon-db-table-body tr");
+            rows.forEach(function(row) {
+                row.style.display = "table-row";
+            });
+        }
+
+
+        function disableButtons() {
+            var createButton = document.getElementById('create-btn');
+            var createLink = createButton.parentElement; 
+            var resolveButton = document.getElementById('resolve-btn');
+
+            createButton.classList.add('disabled');
+            createLink.classList.add('disabled'); 
+            createLink.setAttribute('href', '#');
+
+            resolveButton.classList.add('disabled');
+
+            createButton.onclick = function(event) {
+                event.preventDefault();
+            };
+            resolveButton.onclick = function(event) {
+                event.preventDefault();
+            };
+        }
+            
+        function enableButtons() {
+            var createButton = document.getElementById('create-btn');
+            var createLink = createButton.parentElement; 
+            var resolveButton = document.getElementById('resolve-btn');
+
+            createButton.classList.remove('disabled');
+            createLink.classList.remove('disabled'); 
+            createLink.setAttribute('href', '/submit-lupon-case');
+            
+            resolveButton.classList.remove('disabled');
+
+            createButton.onclick = null;
+            resolveButton.onclick = null;
+        }
+
+            
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            
+                var dropdownImg = document.getElementById("dropdown-down-btn");
+                dropdownImg.src = "/images/dropdown-down.png";
+            }
+        };
+
+    </script>
+
+
+
