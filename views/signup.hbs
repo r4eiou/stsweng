@@ -10,13 +10,13 @@
   <body>
     <!-- TO BE USED AS SIGNUP PAGE replace with signup.hbs after routes fixed -->
     <div class="main-container">
-      <div class="login-panel">
-        <div class="login-panel-left">
-          <img src="/images/logo-revised.svg" class="login-panel-logo" />
+      <div class="ls-panel">
+        <div class="ls-panel-left">
+          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
           <h1>Barangay Parang</h1>
         </div>
-        <div class="login-panel-main">
-          <span class="login-panel-title" id="login-title">Signup</span>
+        <div class="ls-panel-main">
+          <span class="ls-panel-title" id="login-title">Signup</span>
           
           {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
             <div class="ls-error-notice">
@@ -29,19 +29,19 @@
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
-            <div class="signup-field" id="signup-field">
+            <div class="ls-field" id="signup-field">
               <label for="firstname">First Name</label>
               <input type="text" id="first_name" name="firstname" placeholder="First Name" />
             </div>
-            <div class="signup-field" id="signup-field">
+            <div class="ls-field" id="signup-field">
               <label for="lastname">Last Name</label>
               <input type="text" id="last_name" name="lastname" placeholder="Last Name" />
             </div>
-            <div class="signup-field" id="signup-field">
+            <div class="ls-field" id="signup-field">
               <label for="email">Email</label>
               <input type="text" id="email" name="email" placeholder="Email" />
             </div>
-            <div class="signup-field" id="signup-field">
+            <div class="ls-field" id="signup-field">
               <label for="password">Password</label>
               <input type="password" id="pw" name="password" placeholder="Password" />
             </div>
