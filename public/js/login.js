@@ -126,3 +126,18 @@ function login(userRole) {
     localStorage.setItem('userRole', userRole);
 }
 */
+
+function hidePW(signup_or_login) {
+    var x = document.getElementById(signup_or_login + "-pw");
+    var eye_icon = document.getElementById("eye-" + signup_or_login + "-pw");
+  
+    // console.log(eye_icon)
+  
+    if (x.type === "password") {
+      x.type = "text";
+      eye_icon.innerHTML = "<img src='/images/action-hide.png'>";
+    } else {
+      x.type = "password";
+      eye_icon.innerHTML = "<img src='/images/action-view.png'>";
+    }
+  }
