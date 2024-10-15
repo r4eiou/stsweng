@@ -2,7 +2,20 @@ const express = require('express');
 const certificateController = require('../controllers/CertificateController');
 const router = express.Router();
 
-router.get('/employee-check-clearance', certificateController.viewCertClearance);
+// The routes for the rest of the options here for Employee are placed here for now :>
+router.get('/employee-check-clearance',                     certificateController.viewCertClearance);
+
+router.get('/employee-view-events-db',                      certificateController.viewEventsDB);
+router.get('/employee-view-event',                          certificateController.viewEvents);
+router.get('/employee-view-archive-event',                  certificateController.viewArchivedEvents);
+router.get('/employee-create-event',                        certificateController.createEvent);
+router.get('/employee-edit-event',                          certificateController.editEvent);
+
+router.get('/employee-resident-db',                         certificateController.viewResidentDB)
+router.get('/employee-view-resident',                       certificateController.viewResident)
+router.get('/employee-view-archive-resident',               certificateController.viewArchivedResident)
+router.get('/employee-edit-resident',                       certificateController.editResident)
+router.get('/employee-register-resident',                   certificateController.createResidentRecord)
 
 router.get('/search-cases-employee/:search_name',           certificateController.isClearedEmployee);
 router.get('/search-cases-employeeLupon/:search_name',      certificateController.isClearedEmployeeLupon);

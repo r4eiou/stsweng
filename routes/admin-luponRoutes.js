@@ -20,12 +20,17 @@ router.get('/search-cases-lupon/:search_name',  luponCaseController.searchLuponC
 
 router.get('/A-lupon-view-case/:id',            luponCaseController.viewLuponCase);
 
-router.get('/mark-resolved/:id',          luponCaseController.markResolved);
+router.get('/mark-resolved/:id',                luponCaseController.markResolved);
 
 router.get('/A-lupon-edit-case/:id',            luponCaseController.editLuponCase);
 
 router.post('/submit-edit-lupon-case',          luponCaseController.submitEditLuponCase);
 
 router.get('/delete-case-lupon/:id',            luponCaseController.deleteLuponCase);
+
+router.get('/admin-lupon-archive-view',         luponCaseController.viewAdminArchivedLupon);
+
+// Employee - Lupon 
+router.get('/lupon-view-archive-case',          luponCaseController.viewArchivedLupon);
 
 module.exports = router;

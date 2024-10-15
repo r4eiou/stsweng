@@ -918,7 +918,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 75%;
   max-width: 800px;
   min-width: 680px;
   box-sizing: border-box;
@@ -928,7 +928,17 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.content-container {
+.content-container
+.option_parent{
+  display: flex;
+  flex-direction: column;
+  width:95%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.content-container{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -975,14 +985,19 @@ a {
   font-size: 1.75em;
 }
 
-.options {
+.employee_option_row_1, .employee_option_row_2{
   display: flex;
   flex-direction: row;
   width: 90%;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 30px;
-  margin-top: 10px;
+}
+.options{
+  display: flex;
+  flex-direction: row;
+}
+.row{
+  margin:0px 10px;
 }
 
 .option {
@@ -1048,6 +1063,24 @@ a {
 #accounts-btn {
   background-color: #0d3919;
   color: #7bbd4e;
+}
+
+#view-events{
+  background-color: #725D12;
+  color: #E4C761;
+}
+#register-resident{
+  background-color: #0D3919;
+  color: #7BBD4E;
+}
+
+#eventdb-btn{
+  background-color: #6A27C1;
+  color: #CFBDE5;
+}
+#residentdb-btn{
+  background-color: #0F43A6;
+  color: #C7D6F5;
 }
 
 .hide {
