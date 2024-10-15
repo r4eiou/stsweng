@@ -30,5 +30,12 @@ router.get('/A-tanod-create-case',                      tanodCaseController.view
 
 router.post('/submit-tanod-case',                       tanodCaseController.createTanodCase);
 
-router.post('/check-entryno', tanodCaseController.checkEntryNo);
+router.post('/check-entryno',                           tanodCaseController.checkEntryNo);
+
+
+router.get('/A-tanod-case-details-archive',             tanodCaseController.viewAdminArchivedTanod);
+
+//EMPLOYEE - TANOD
+router.get('/tanod-view-archive-case',                   tanodCaseController.viewArchiveTanod)
+
 module.exports = router;

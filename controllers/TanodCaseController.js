@@ -446,6 +446,41 @@ const checkEntryNo = async (req, res) => {
     }
 };
 
+const viewAdminArchivedTanod = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-tanod-db-view';
+        res.render('A-tanod-case-details-archive', {
+            layout: 'layout',
+            title: 'Admin: Archived Tanod Cases',
+            cssFile1: 'homepage',
+            cssFile2: 'back-button',
+            javascriptFile1: 'case-form'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+const viewArchiveTanod = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/tanod-home';
+        res.render('tanod-view-archive-case', {
+            layout: 'layout',
+            title: 'Tanod: Archived Tanod Cases',
+            cssFile1: 'homepage',
+            cssFile2: 'back-button',
+            javascriptFile1: 'case-form'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+
 module.exports = {
     viewTanodDB,
     viewTanodCase,
@@ -462,6 +497,10 @@ module.exports = {
     checkEntryNo,
 
     viewSearchTanodDB,
-    viewPageTanodDB
+    viewPageTanodDB,
+
+    viewAdminArchivedTanod,
+    viewArchiveTanod
+
 }
 
