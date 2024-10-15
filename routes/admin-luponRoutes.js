@@ -30,6 +30,9 @@ router.get('/delete-case-lupon/:id',            luponCaseController.deleteLuponC
 
 router.get('/admin-lupon-archive-view',         luponCaseController.viewAdminArchivedLupon);
 
+// Admin Lupon Archive
+router.get('/A-lupon-case-details-archive',     luponCaseController.viewAdminLuponEventArchive)
+
 // Employee - Lupon 
 router.get('/lupon-view-archive-case',          luponCaseController.viewArchivedLupon);
 

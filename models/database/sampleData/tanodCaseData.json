@@ -207,7 +207,7 @@
             "LastName": "Wilson"
         },
         "Location": "Park",
-        "isArchived": true
+        "isArchived": false
     },
     {
         "_id": "8",
@@ -297,7 +297,7 @@
             "LastName": "Lee"
         },
         "Location": "Home",
-        "isArchived": true
+        "isArchived": false
     },
     {
         "_id": "11",
