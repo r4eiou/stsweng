@@ -1,0 +1,299 @@
+<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/index.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
+
+<style>
+    .underline{
+        margin-left: 0px;
+    }
+    .dropbtn.margin{
+        margin-left: 160px;
+        margin-right: 20px;
+    }
+    .dropdown-content.margin{
+        margin-left: 160px;
+    }
+    
+</style>
+
+<div class="main-container" id="main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Admin</span>
+                <img src="/images/admin-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
+        </div>
+    </div>
+</div>    
+<div class = "upper-container" id="form-upper-container">
+    <div class="back-and-title">
+        <a href="/admin-homepage" class="back-button" id="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+            </svg>
+            Back
+        </a>
+    </div>
+</div>
+
+<div class="content-container-tanod-home">
+
+    <div class="box-content-top">
+        <!-- missing: functions -->
+        <a href="/admin-register-resident">
+            <button type="button" class="form-btn create size" id="createButtonResident">                            
+                <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+        </a>
+        <div class="dropdown">
+            <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
+                <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
+            </button>
+            <div id="dropdown-btn" class="dropdown-content margin">
+                <a href="#" onclick="selectOption('View All Cases')">View All Cases</a>
+                <a href="#" onclick="selectOption('View Registered')">View Registered</a>
+                <a href="#" onclick="selectOption('View Archived')">View Archived</a>
+            </div>                  
+        </div>
+
+        <div class="search-name-reg margin">
+
+            <!-- implement search function -->
+            <form id="searchForm">
+                <button type="submit"><img src="/images/search-reg.png"></button>
+                <input type="text" placeholder="Search Name" name="search_name">
+            </form>
+        </div>
+    </div>
+
+    <table class="tanod-lupon-db-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th colspan="2">Contact No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
+                            <td class="name cell" id="resident-age">25</td>
+                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
+                            <td class="name cell" id="resident-contact-number">12345678</td>
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident">
+                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
+                            <td class="name cell" id="resident-age">25</td>
+                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
+                            <td class="name cell" id="resident-contact-number">12345678</td>
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident">
+                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
+                            <td class="name cell" id="resident-age">25</td>
+                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
+                            <td class="name cell" id="resident-contact-number">12345678</td>
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident" >
+                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
+                            <td class="name cell" id="resident-age">25</td>
+                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
+                            <td class="name cell" id="resident-contact-number">12345678</td>
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident">
+                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        </tr>
+                </tbody>
+    </table>
+
+    <!-- to be fixed -->
+    <div class="box-content-page">
+        <button class="page-btn" id="count-down">&lt;</button>
+        <div class="page-count" id="page-num">{{currentPage}}</div>
+        <button class="page-btn" id="count-up">&gt;</button>
+        {{#if (eq 0 totalPages)}}
+            <div class="page-number">Page {{currentPage}} of 1</div>
+        {{else}}
+            <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
+        {{/if}}
+    </div>
+
+<script>
+        $(document).ready(function() {
+            const currentPage = {{currentPage}};
+            const totalPages = {{totalPages}};
+            const baseUrl = '/admin-resident-db-view?page=';
+
+            $('#count-down').click(function() {
+                if (currentPage > 1) {
+                    window.location.href = baseUrl + (currentPage - 1);
+                }
+            });
+
+            $('#count-up').click(function() {
+                if (currentPage < totalPages) {
+                    window.location.href = baseUrl + (currentPage + 1);
+                }
+            });
+            /*
+            window.updateStatus = function(caseId, currentStatus) {
+                window.location.href = `/update-Status-Lupon/${caseId}/${currentStatus}/${currentPage}`;
+            }; */
+        });
+    </script>
+
+    <script>
+        function dropdown() {
+            var dropdownContent = document.getElementById("dropdown-btn");
+            var dropdownImg = document.getElementById("dropdown-down-btn");
+
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                dropdownImg.src = "/images/dropdown-down.png";
+            } else {
+                dropdownContent.style.display = "block";
+                dropdownImg.src = "/images/dropdown-up.png";
+            }
+        }
+            
+        function selectOption(optionText) {
+            var dropdownButton = document.getElementById("dropdownButton");
+            var dropdownImg = document.getElementById("dropdown-down-btn");
+            var viewCaseLinks = document.querySelectorAll(".view-resident-link");
+
+            viewCaseLinks.forEach(function(viewCaseLink) {
+                if (optionText === 'View Archived') {
+                    viewCaseLink.href = "/admin-view-archive-resident"; 
+                } else {
+                    viewCaseLink.href = "/admin-view-resident";
+                }
+            });
+
+            dropdownButton.innerHTML = optionText + ' <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>';
+            document.getElementById("dropdown-btn").style.display = "none";
+    
+            if (optionText === 'View Archived') {
+                hideCaseStatusColumn();
+                disableButtons();
+            } else {
+                showCaseStatusColumn();
+                enableButtons();
+            }
+        }
+
+        function disableButtons() {
+            var createButton = document.getElementById('createButtonResident');
+            var createLink = createButton.parentElement; 
+
+            createButton.classList.add('disabled');
+            createLink.classList.add('disabled'); 
+            createLink.setAttribute('href', '#');
+
+
+            createButton.onclick = function(event) {
+                event.preventDefault();
+            };
+        }
+            
+        function enableButtons() {
+            var createButton = document.getElementById('createButtonResident');
+            var createLink = createButton.parentElement; 
+
+            createButton.classList.remove('disabled');
+            createLink.classList.remove('disabled'); 
+            createLink.setAttribute('href', '/admin-register-resident');
+            
+
+            createButton.onclick = null;
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            
+                var dropdownImg = document.getElementById("dropdown-down-btn");
+                dropdownImg.src = "/images/dropdown-down.png";
+            }
+        };
+
+        function trimText(selector, maxLength) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    const text = element.textContent.trim();
+                    if (text.length > maxLength) {
+                        element.textContent = text.substring(0, maxLength) + '...';
+                    }
+                });
+            }
+        
+            document.addEventListener("DOMContentLoaded", function() {
+                trimText('.headline-cell', 15); 
+                trimText('.event-info-cell', 25); 
+            });
+
+
+        function hideCaseStatusColumn() {
+            var statusCells = document.querySelectorAll('.case-status-cell');
+            statusCells.forEach(function(cell) {
+                cell.style.display = 'none'; 
+            });
+
+            
+            var statusHeader = document.querySelector('th.case-status-header');
+            if (statusHeader) {
+                statusHeader.style.display = 'none';  
+            }
+        }
+        function showCaseStatusColumn() {
+            var statusCells = document.querySelectorAll('.case-status-cell');
+            statusCells.forEach(function(cell) {
+                cell.style.display = ''; 
+            });
+
+            var statusHeader = document.querySelector('th.case-status-header');
+            if (statusHeader) {
+                statusHeader.style.display = '';  
+            }
+        }
+        
+    </script>
+
+
