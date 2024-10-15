@@ -381,7 +381,7 @@ html {
     color: #1C8A3B;
   }
 
-  .status.ongoing {
+  .status.ongoing,  .status.archive {
     background: #FFD1CA;
     color: #F3533B;
   }
