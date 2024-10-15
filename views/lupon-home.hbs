@@ -166,12 +166,25 @@
                 dropdownImg.src = "/images/dropdown-up.png";
             }
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            var rows = document.querySelectorAll("#lupon-db-table-body tr");
+
+            rows.forEach(function(row) {
+                var statusButton = row.querySelector(".case-status-cell button");
+                var statusText = row.querySelector(".case-status-cell button span")?.textContent.trim();
+                var imgElement = row.querySelector(".case-status-cell img");
+                if (statusText === "Archived") {
+                    statusButton.classList.add("ongoing"); 
+                    imgElement.setAttribute("src", "/images/" + "archive-circle.png");
+                }
+            });
+        });
+
             
         function selectOption(optionText) {
             var dropdownButton = document.getElementById("dropdownButton");
             var dropdownImg = document.getElementById("dropdown-down-btn"); //dropdown-btn
             var viewCaseLinks = document.querySelectorAll(".status.view-case-detail-link");
-
 
             dropdownButton.innerHTML = optionText + ' <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>';
             document.getElementById("dropdown-btn").style.display = "none";
@@ -179,34 +192,35 @@
             if (optionText === 'View All Cases') {
                 showAllRows();
                 enableButtons();
-                filterRows('All');
+                filterRows('All', optionText);
             }else if (optionText === 'View Ongoing') {
-                filterRows('Ongoing');
+                filterRows('Ongoing', optionText);
             } else if (optionText === 'View Resolved') {
-                filterRows('Resolved');
+                filterRows('Resolved', optionText);
                 enableButtons();
             } else if (optionText === 'View Archived') {
-                filterRows('Archived');
+                filterRows('Archived', optionText);
                 disableButtons();
             } 
         }
-        function filterRows(status) {
+        function filterRows(status, optionText) {
             var rows = document.querySelectorAll("#lupon-db-table-body tr");
-
             rows.forEach(function(row) {
-                var statusText = row.querySelector(".case-status-cell button span").textContent.trim();
-                var viewCaseLink = row.querySelector(".view-case-detail-link");
+                var statusText = row.querySelector(".case-status-cell button span")?.textContent.trim();
                 var caseId = row.getAttribute("data-id"); 
                 var viewText = row.querySelector(".content-text-main.underline-lupon-tanod");
 
                 if (status === 'All' || statusText.toLowerCase() === status.toLowerCase()) {
                     row.style.display = "table-row"; 
-                    viewText.textContent = status === 'Archived' ? "View Archive" : "View";
-                    viewCaseLink.href = status === 'Archived' 
-                        ? "/lupon-view-archive-case/"
-                        : "/lupon-view-case/" + caseId;
+                    viewText.textContent = statusText === 'Archived' ? "View Archive" : "View";
+                    
+                    if (statusText === 'Archived' && optionText === 'View Archived') {
+                        viewText.href = "/lupon-view-archive-case"; 
+                    } else {
+                        viewText.href = "/lupon-view-case/" + caseId;
+                    }
                 } else {
-                    row.style.display = "none";
+                    row.style.display = "none";  
                 }
             });
         }
