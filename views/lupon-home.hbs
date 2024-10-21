@@ -205,19 +205,20 @@
         }
         function filterRows(status, optionText) {
             var rows = document.querySelectorAll("#lupon-db-table-body tr");
+            
             rows.forEach(function(row) {
                 var statusText = row.querySelector(".case-status-cell button span")?.textContent.trim();
-                var caseId = row.getAttribute("data-id"); 
-               var isArchived = row.getAttribute("data-isArchived") === '1';
+                var caseId = row.getAttribute("data-id");
+                var isArchived = row.getAttribute("data-isArchived") === '1'; 
                 var viewText = row.querySelector(".content-text-main.underline-lupon-tanod");
                 if (status === 'All' || statusText.toLowerCase() === status.toLowerCase()) {
                     row.style.display = "table-row"; 
                     viewText.textContent = statusText === 'Archived' ? "View Archive" : "View";
                     
-                    if (statusText === 'Archived' && optionText === 'View Archived' && archivedRowId) {
-                        viewText.href = "/lupon-view-archive-case"; 
+                    if (statusText === 'Archived' && optionText === 'View Archived' && isArchived) {
+                        viewText.href = "/lupon-view-archive-case/" + caseId; 
                     } else {
-                        viewText.href = "/lupon-view-case/" + caseId;
+                        viewText.href = "/lupon-view-case/" + caseId; 
                     }
                 } else {
                     row.style.display = "none";  
