@@ -445,11 +445,11 @@ const viewArchivedLupon = async (req, res) => {
     }
 }
 
-const viewAdminLuponEventArchive = async (req, res) => {
+const viewAdminLuponArchive = async (req, res) => {
     try {
         req.session.previousPage = req.session.lastpage;
-        req.session.lastpage = '/lupon-home';
-        res.render('A-lupon-case-details-archive', {
+        req.session.lastpage = '/admin-lupon-db-view';
+        res.render('admin-lupon-archive-view', {
             layout: 'layout',
             title: 'Admin Lupon: Archived Tanod Cases',
             cssFile1: 'homepage'
@@ -479,5 +479,5 @@ module.exports = {
     viewAdminArchivedLupon,
     viewArchivedLupon,
 
-    viewAdminLuponEventArchive
+    viewAdminLuponArchive
 }
