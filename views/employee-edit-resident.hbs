@@ -41,7 +41,7 @@
     <div class="sub-container">
         
         <div class = "text-container">
-            <h1 id = "event-details-title">Editing New Event</h1>
+            <h1 id = "event-details-title">Editing New Resident Record</h1>
         </div>
 
         <form action="/" method="post" class="print-form">
@@ -82,7 +82,7 @@
         </form>
     </div>
     <div class = "buttons-container">
-        <a href="/employee-view-event"><button type="button" id="editButton" class="form-btn edit">
+        <a href="/employee-view-resident"><button type="button" id="editButton" class="form-btn edit">
             <img src="/images/form-check.png"><span>Save Changes</span></button>
         </a>
         <button type="button" id="discardButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button>
@@ -93,7 +93,7 @@
         const discardButton = document.getElementById('discardButton'); 
 
         discardButton.addEventListener("click", function() { 
-            window.location.href = "/employee-view-event";
+            window.location.href = "/employee-resident-db";
         });
     });
 </script>
