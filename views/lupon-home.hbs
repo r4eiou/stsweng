@@ -94,7 +94,7 @@
                 </thead>
                 <tbody id="lupon-db-table-body">
                     {{#each cases}}
-                        <tr data-id="{{this.caseID}}">
+                        <tr data-id="{{this.caseID}}" data-isArchived="{{this.isArchived}}">
                             <td data-label="checkbox" class="align-right check-view-cell">
                                 <button type="button" class="checkbox" data-case-id="{{this.caseID}}"><img src="/images/Done.png"></button>
                             </td>
@@ -208,12 +208,13 @@
             rows.forEach(function(row) {
                 var statusText = row.querySelector(".case-status-cell button span")?.textContent.trim();
                 var caseId = row.getAttribute("data-id"); 
+               var isArchived = row.getAttribute("data-isArchived") === '1';
                 var viewText = row.querySelector(".content-text-main.underline-lupon-tanod");
                 if (status === 'All' || statusText.toLowerCase() === status.toLowerCase()) {
                     row.style.display = "table-row"; 
                     viewText.textContent = statusText === 'Archived' ? "View Archive" : "View";
                     
-                    if (statusText === 'Archived' && optionText === 'View Archived') {
+                    if (statusText === 'Archived' && optionText === 'View Archived' && archivedRowId) {
                         viewText.href = "/lupon-view-archive-case"; 
                     } else {
                         viewText.href = "/lupon-view-case/" + caseId;
