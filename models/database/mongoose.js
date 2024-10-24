@@ -299,6 +299,10 @@ const ResidentSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    Age : {
+        type: Number,
+        required: true
+    },
     Email : {
         type: String,
         required: true
@@ -343,6 +347,10 @@ const ResidentSchema = new mongoose.Schema ({
         type: Number,
         required: true
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const CertificateInfo = new mongoose.Schema ({

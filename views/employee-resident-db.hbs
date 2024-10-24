@@ -1,8 +1,9 @@
-<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type ="text/css" href = "/css/back-button.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/index.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
     .underline{
@@ -20,9 +21,10 @@
 
 <div class="main-container" id="main-container">
     <div class= "header" id="header">
+        {{!-- edited home link --}}
         <div class = "header-left">
-            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
-            <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
+            <a href="/employee-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/employee-home" class="header-home" id="home-link2"><h3>Home</h3></a>
         </div>
         
         <div class = "header-title">
@@ -55,25 +57,23 @@
 
     <div class="box-content-top">
         <!-- missing: functions -->
-        <a href="/employee-register-resident">
+        <a href="/employee-register-resident" id="createButtonResident">
             <button type="button" class="form-btn create size" id="createButtonResident">                            
-                <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+                <img src="/images/form-create.png"> <span>Register New Resident</span>  </button>
         </a>
+        {{!-- EDIT THIS  --}}
         <div class="dropdown">
-            <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
-                <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
-            </button>
-            <div id="dropdown-btn" class="dropdown-content margin">
-                <a href="#" onclick="selectOption('View All Cases')">View All Cases</a>
-                <a href="#" onclick="selectOption('View Registered')">View Registered</a>
-                <a href="#" onclick="selectOption('View Archived')">View Archived</a>
-            </div>                  
+            <select id="employeeResidentDropdown" name="caseView" class="form-btn status-dropdown" required>
+                <option value="0">View All</option>
+                <option value="1">View Registered</option>
+                <option value="2">View Archived</option>
+            </select>
         </div>
 
         <div class="search-name-reg margin">
 
             <!-- implement search function -->
-            <form id="searchForm">
+            <form id="searchForm_EResident">
                 <button type="submit"><img src="/images/search-reg.png"></button>
                 <input type="text" placeholder="Search Name" name="search_name">
             </form>
@@ -91,50 +91,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <tr>
-                            <td><a href="/employee-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/employee-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/employee-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/employee-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/employee-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/employee-edit-resident" >
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/employee-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/employee-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
+                        {{#each residents}}
+                            <tr>
+                                <td><a href="/employee-view-resident/{{this._id}}" class="content-text-main underline view-resident-link">View</a></td>
+                                <td class="name cell" id="resident-name">{{fullName FirstName MiddleInitial LastName}}</td>
+                                <td class="name cell" id="resident-age">{{this.Age}}</td>
+                                <td class="name cell" id="resident-address">{{this.Address}}</td>
+                                <td class="name cell" id="resident-contact-number">{{this.ContactNo}}</td>
+                                <td class="case-status-cell align-left">
+                                    <a href="/employee-edit-resident" id="editButton">
+                                    <button type="button" id="editButton" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
+                                </td>
+                            </tr>
+                        {{/each}}
                 </tbody>
     </table>
 
@@ -163,7 +132,7 @@
                 dropdownImg.src = "/images/dropdown-up.png";
             }
         }
-            
+        /*   
         function selectOption(optionText) {
             var dropdownButton = document.getElementById("dropdownButton");
             var dropdownImg = document.getElementById("dropdown-down-btn");
@@ -268,6 +237,82 @@
                 statusHeader.style.display = '';  
             }
         }
+        */
+
+        $(document).ready(function() {
+            const currentPage = {{currentPage}};
+            const totalPages = {{totalPages}};
+            const baseUrl = '/employee-resident-db?page=';
+
+            $('#count-down').click(function() {
+                if (currentPage > 1) {
+                    window.location.href = baseUrl + (currentPage - 1);
+                }
+            });
+
+            $('#count-up').click(function() {
+                if (currentPage < totalPages) {
+                    window.location.href = baseUrl + (currentPage + 1);
+                }
+            });
+
+            // Load the previously selected dropdown value from localStorage
+            const savedStatus = localStorage.getItem('selected_EmployeeResident');
+            if (savedStatus) {
+                $("#employeeResidentDropdown").val(savedStatus); // Set the dropdown to the saved value
+            }
+
+            // Event listener for the dropdown change
+            $("#employeeResidentDropdown").on("change", function() {
+                const selectedValue = $(this).val();
+                
+                // Save the selected value to localStorage
+                localStorage.setItem('selected_EmployeeResident', selectedValue);
+
+                // Send the AJAX request to update the case view
+                $.ajax({
+                    url: '/employee-resident-db', 
+                    type: 'GET', 
+                    data: { status: selectedValue },
+                    success: function(response) {
+                        // Handle success, e.g., update the case list
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading cases:', error);
+                    }
+                });
+
+                window.location.href = `/employee-resident-db?status=${selectedValue}`; //automatic refresh
+            });
+
+            // Function to disable or enable buttons based on dropdown value
+            function updateButtonState() {
+                const dropdown = document.getElementById('employeeResidentDropdown');
+                const editButton = document.getElementById('editButton');
+                const createButton = document.getElementById('createButtonResident');
+
+                switch (dropdown.value) {
+                    case '2':
+                        editButton.style.pointerEvents = 'none';
+                        editButton.style.opacity = '0.5';
+
+                        createButton.style.pointerEvents = 'none';
+                        createButton.style.opacity = '0.5';
+
+                        break;
+                    default:
+                        createButton.style.pointerEvents = 'auto';
+                        editButton.style.pointerEvents = 'auto';
+
+                        // Restore button appearance
+                        createButton.style.opacity = '1';
+                        editButton.style.opacity = '1';
+                }
+            }
+
+            // Call function
+            updateButtonState();
+        });
         
     </script>
 
