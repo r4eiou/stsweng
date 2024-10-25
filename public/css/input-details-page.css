@@ -77,6 +77,22 @@ button[value="back"] {
   align-items: flex-start;
 }
 
+.edit-cert-template-panel {
+  width: 620px;
+  height: fit-content;
+  border: 2px solid #004112;
+  background-color: white;
+  
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .photo-container {
   width: 130px;
   height: 130px;
@@ -196,6 +212,36 @@ input[id='name'] {
 }
 
 input[id='address'] {
+  width: 494px;
+  height: 29px;
+  
+  margin-bottom: 0.5rem;
+  padding-left: 10px;
+  background-color: #CCCCCC;
+  border: 1px solid #5E5E5E;
+  border-radius: 5px;
+
+  margin-left: 10%;
+
+  text-transform: capitalize;
+}
+
+input[id='brgy-captain-name'] {
+  width: 494px;
+  height: 29px;
+  
+  margin-bottom: 0.5rem;
+  padding-left: 10px;
+  background-color: #CCCCCC;
+  border: 1px solid #5E5E5E;
+  border-radius: 5px;
+
+  margin-left: 10%;
+
+  text-transform: capitalize;
+}
+
+input[id='slogan'] {
   width: 494px;
   height: 29px;
   

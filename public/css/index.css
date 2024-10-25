@@ -1112,3 +1112,9 @@ a {
   margin-top: -0.8%;
 }
 /* ================= */
+
+.edit-cert-template-header {
+  font-size: 32px;
+  color: var(--dgreen);
+  font-weight: bold;
+}
