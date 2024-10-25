@@ -1,9 +1,9 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel = "stylesheet" type ="text/css" href = "/css/back-button.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/index.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
     .underline{
@@ -291,27 +291,58 @@
                 const editButton = document.getElementById('editButton');
                 const createButton = document.getElementById('createButtonResident');
 
-                switch (dropdown.value) {
-                    case '2':
-                        editButton.style.pointerEvents = 'none';
-                        editButton.style.opacity = '0.5';
+                if (editButton && createButton) { // Check if both buttons exist
+                    switch (dropdown.value) {
+                        case '2':
+                            editButton.style.pointerEvents = 'none';
+                            editButton.style.opacity = '0.5';
 
-                        createButton.style.pointerEvents = 'none';
-                        createButton.style.opacity = '0.5';
+                            createButton.style.pointerEvents = 'none';
+                            createButton.style.opacity = '0.5';
+                            break;
+                        default:
+                            createButton.style.pointerEvents = 'auto';
+                            editButton.style.pointerEvents = 'auto';
 
-                        break;
-                    default:
-                        createButton.style.pointerEvents = 'auto';
-                        editButton.style.pointerEvents = 'auto';
-
-                        // Restore button appearance
-                        createButton.style.opacity = '1';
-                        editButton.style.opacity = '1';
+                            // Restore button appearance
+                            createButton.style.opacity = '1';
+                            editButton.style.opacity = '1';
+                    }
                 }
             }
 
             // Call function
             updateButtonState();
+
+            const searchFormResident = document.getElementById('searchForm_EResident');
+            if (searchFormResident) {
+                searchFormResident.addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const formData = new FormData(searchFormResident);
+                    const searchName = formData.get('search_name');
+                    
+                    try {
+                        if(searchName) {
+                            const response = await fetch(`/search-resident/${searchName}`);
+
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            const result = await response.json();
+                            //console.log(result); 
+
+                            window.location.href = `/employee-resident-db/${searchName}`;
+                        } else {
+                            window.location.href = '/employee-resident-db';
+                        }
+
+                    } catch (error) {
+                        console.error('There was a problem with the search operation:', error);
+                    }
+                });
+            }
         });
         
     </script>

@@ -52,7 +52,7 @@ const employeeViewResidentDB = async (req, res) => {
             title: 'Employee: Resident DB View',
             cssFile1: 'homepage',
             cssFile2: null,
-            javascriptFile1: 'resident',
+            javascriptFile1: null,
             javascriptFile2: null,
             residents: residents,
             currentPage: page, // Pass current page to the template
@@ -95,7 +95,7 @@ const viewSearchEmployeeResidentDB = async (req, res) => {
             title: 'Employee: Resident DB View',
             cssFile1: 'homepage',
             cssFile2: null,
-            javascriptFile1: 'resident',
+            javascriptFile1: null,
             javascriptFile2: null,
             residents: residents,
             currentPage: page, // Pass current page to the template
@@ -215,7 +215,64 @@ const searchResidentRecord = async (req, res) => {
     }
 };
 
+const createResidentRecordEmployee = async (req, res) => {
+    try {
+        const {
+            img,
+            FirstName,
+            MiddleInitial,
+            LastName,
+            Age,
+            Email,
+            Birthday,
+            Sex,
+            Address,
+            isSeniorCitizen,
+            ContactNo,
+            CivilStatus,
+            NoOfResident,
+            HousingInfo,
+            ServiceRequestID
 
+        } = req.body;
+
+        // _id
+        // Find all cases and convert _id to integers for sorting
+        const allResidents = await ResidentModel.find().exec();
+        const residentIds = allResidents.map(caseDoc => parseInt(caseDoc._id, 10)).filter(id => !isNaN(id));
+
+        // Get the highest _id
+        const latestIdNum = residentIds.length > 0 ? Math.max(...residentIds) : 0;
+        const newReviewId = (latestIdNum + 1).toString();
+        
+        console.log(newReviewId);
+
+        await ResidentModel.create({
+            _id: newReviewId,
+            img: img,
+            FirstName: FirstName,
+            MiddleInitial: MiddleInitial,
+            LastName: LastName,
+            Age: Age,
+            Email: Email,
+            Birthday: Birthday,
+            Sex: Sex,
+            Address: Address,
+            isSeniorCitizen: isSeniorCitizen,
+            ContactNo: ContactNo,
+            CivilStatus: CivilStatus,
+            NoOfResident: NoOfResident,
+            HousingInfo: HousingInfo,
+            ServiceRequestID: ServiceRequestID ? ServiceRequestID : null,
+            isArchived: false
+        });
+
+        res.redirect("/employee-resident-db" );
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error Here" });
+    }
+};
 
 module.exports = {
     employeeViewResidentDB,
@@ -229,4 +286,5 @@ module.exports = {
 
     archiveResidentRecord,
     searchResidentRecord,
+    createResidentRecordEmployee
 }

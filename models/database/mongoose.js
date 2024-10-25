@@ -319,10 +319,6 @@ const ResidentSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
-    Birthday : {
-        type: String,
-        required: true
-    },
     isSeniorCitizen : {
         type: String,
         required: true
@@ -345,7 +341,6 @@ const ResidentSchema = new mongoose.Schema ({
     },
     ServiceRequestID : { // can be null
         type: Number,
-        required: true
     },
     isArchived: {
         type: Boolean,

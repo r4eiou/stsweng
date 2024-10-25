@@ -11,6 +11,7 @@ router.get('/admin-view-archive-resident',          employeeResidentController.a
 router.get('/admin-edit-resident',                  employeeResidentController.adminEditResident);
 
 router.get('/archive-resident-info/:id',            employeeResidentController.archiveResidentRecord);              //delete resident info
-router.get('/search-resident/:search_name',         employeeResidentController.searchResidentRecord);               //ssearch
+router.get('/search-resident/:search_name',         employeeResidentController.searchResidentRecord);               //search
+router.post('/submit-resident-employee',            employeeResidentController.createResidentRecordEmployee);       //create
 
 module.exports = router;
