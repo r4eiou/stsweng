@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     if (result.results.length > 0 && resultLupon.results.length > 0) {
                         // Display both sets of results
-                        displayResults(result.results);
+                        // displayResults(result.results);
                         displayResultsLupon(resultLupon.results);
                         console.log("HERE-BOTH")
                     } else if (result.results.length > 0) {
@@ -180,7 +180,7 @@ function displayResults(results) {
 
 function displayResultsLupon(results) {
     const searchBox = document.getElementById("search-box");
-    const resultsContainer = document.getElementById('results-container-lupon');
+    const resultsContainer = document.getElementById('results-container');
     resultsContainer.innerHTML = ""; // Clear previous results
 
     if (results.length > 0) {
