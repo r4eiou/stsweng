@@ -12,8 +12,7 @@ const mongoose = require('mongoose');
 //     console.error('Something went wrong', error);
 // });
 
-const mongo_uri = 'mongodb+srv://brgyParang:qwerty12345@brgyparang.o1xerrk.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=brgyparang';
-// const mongo_uri = 'mongodb+srv://admin_parang:YT66GhDJ43QUqVpT@stsweng.2sxw2.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=STSWENG';
+const mongo_uri = 'mongodb+srv://admin_parang:YT66GhDJ43QUqVpT@stsweng.2sxw2.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=STSWENG';
 const run = async () => {
     await mongoose.connect(mongo_uri);
     console.log("Connected to myDB");
