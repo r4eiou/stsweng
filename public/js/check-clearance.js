@@ -35,15 +35,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (result.results.length > 0 && resultLupon.results.length > 0) {
                         // Display both sets of results
                         displayResults(result.results);
-                        console.log("im here")
+                        displayResultsLupon(resultLupon.results);
+                        console.log("HERE-BOTH")
                     } else if (result.results.length > 0) {
                         // Display only Tanod results
                         displayResults(result.results);
-                        console.log("RAWR")
+                        console.log("HERE-TANOD")
                     } else if (resultLupon.results.length > 0) {
                         // Display only Lupon results
                         displayResultsLupon(resultLupon.results);
-                        console.log("HERE")
+                        console.log("HERE-LUPON")
                     } else {
                         displayNoResult();
                     }
@@ -179,7 +180,7 @@ function displayResults(results) {
 
 function displayResultsLupon(results) {
     const searchBox = document.getElementById("search-box");
-    const resultsContainer = document.getElementById('results-container');
+    const resultsContainer = document.getElementById('results-container-lupon');
     resultsContainer.innerHTML = ""; // Clear previous results
 
     if (results.length > 0) {
@@ -191,8 +192,8 @@ function displayResultsLupon(results) {
         const listElement = document.createElement("ul");
         listElement.className = "results-list";
 
-        results.forEach(result => {
-            const { _id, RespondentInfo } = result;
+        paginatedResults.forEach(result => {
+            const { RespondentInfo } = result;
 
             const listItem = document.createElement("li");
             listItem.className = "result-item";
@@ -233,7 +234,7 @@ function displayResultsLupon(results) {
 
             prevLink.addEventListener("click", function() {
                 currentPage--;
-                displayResults(results); // Redisplay results for previous page
+                displayResultsLupon(results); // Redisplay results for previous page
             });
             paginationControls.appendChild(prevLink);
         }
@@ -250,7 +251,7 @@ function displayResultsLupon(results) {
             nextLink.addEventListener("click", function(event) {
                 event.preventDefault(); // Prevent default anchor behavior
                 currentPage++;
-                displayResults(results); // Redisplay results for next page
+                displayResultsLupon(results); // Redisplay results for next page
             });
             
             paginationControls.appendChild(nextLink);
