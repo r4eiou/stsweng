@@ -187,10 +187,7 @@
         </div>
         
         <div class = "buttons-container">
-            <!-- 
-            {{#checkStatus cases.Status}}
-                <a href="/delete-case-lupon/{{cases._id}}"><button type="button" class="form-btn delete"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
-            {{else}} -->
+            {{#checkArchived residents.isArchived}}
                 <button type="button" id="archiveButton" class="form-btn archive"><img src="/images/form-trash.png"><span>Archive this record</span></button></a>
 
                 <div class="overlay" id="overlay"></div>
@@ -219,12 +216,26 @@
                         <div class="prompt-label font-light small">Redirecting you to the Archives Database...</div>
                     </div>
                 </div>
-            <!--{{/checkStatus}} -->
+            {{else}}
+                <button type="button" class="form-btn edit" onclick="openRestore_EmployeeResident('{{residents._id}}')">
+                    <img src="/images/restore.png">
+                    <span>Restore Record</span>
+                </button>
+            {{/checkArchived}}
         </div>
     </div>
 
 </div>    
 
+<div id="restoreModal_EmployeeResident" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRestoreModal_EmployeeResident()">&times;</span>
+        <h2>Restore Record</h2>
+        <p>Are you sure you want to restore this record?</p>
+        <button id="confirmRestoreBtn_EmployeeResident" class="restore-btns">Yes</button>
+        <button class="restore-btns" onclick="closeRestoreModal_EmployeeResident()">No</button>
+    </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -246,28 +257,57 @@ document.addEventListener("DOMContentLoaded", function() {
         popup.style.display = 'none';    
     }
 
-    archiveButton.addEventListener('click', function() {
-        showPopup(popup1);
-    });
-
-    archiveBtnPopup.addEventListener('click', function() {
-        hidePopup(popup1); 
-        showPopup(popup2); 
-
-        setTimeout(function() {
-            window.location.href = "/employee-resident-db";
-        }, 500); 
-    });
-
-    cancelBtnPopup.addEventListener('click', function() {
-        hidePopup(popup1);
-    });
-
-    closeBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            hidePopup(this.closest('.popup1, .popup2'));
+    if(archiveButton) {
+        archiveButton.addEventListener('click', function() {
+            showPopup(popup1);
         });
-    });
+    }
+
+    if(archiveBtnPopup) {
+        archiveBtnPopup.addEventListener('click', function() {
+            hidePopup(popup1); 
+            showPopup(popup2); 
+
+            setTimeout(function() {
+                window.location.href = "/employee-resident-db";
+            }, 500); 
+        });
+    }
+
+    if(cancelBtnPopup) {
+        cancelBtnPopup.addEventListener('click', function() {
+            hidePopup(popup1);
+        });
+    }
+
+    if(closeBtns) {
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                hidePopup(this.closest('.popup1, .popup2'));
+            });
+        });
+    }
 });
+
+//MODAL
+function openRestore_EmployeeResident(residents) {
+    // Open the modal
+    document.getElementById('restoreModal_EmployeeResident').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtn_EmployeeResident').onclick = function() {
+        window.location.href = '/restore-resident-employee/' + residents; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModal_EmployeeResident() {
+    document.getElementById('restoreModal_EmployeeResident').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModal_EmployeeResident');
+    if (event.target == modal) {
+        closeRestoreModal_EmployeeResident();
+    }
+};
 
 </script>

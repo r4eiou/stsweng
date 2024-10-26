@@ -106,7 +106,7 @@ const viewSearchEmployeeResidentDB = async (req, res) => {
         return res.status(500).json({ message: "Server error" });
     }
 };
-
+//view register/create new unique record page
 const employeeRegisterResident = async (req, res) => {
     try {
         req.session.lastpage = '/employee-register-resident';
@@ -141,6 +141,7 @@ const employeeViewSpecificResident = async (req, res) => {
     }
 }
 
+//not needed--------------------------------------------
 const adminViewArchiveResident = async (req, res) => {
     try {
         req.session.previousPage = req.session.lastpage;
@@ -155,15 +156,24 @@ const adminViewArchiveResident = async (req, res) => {
         return res.status(500).json({ message: "Server error" });
     }
 }
+//------------------------------------------------------
 
-const adminEditResident = async (req, res) => {
+//view edit page
+const employeeEditResident = async (req, res) => {
     try {
-        req.session.previousPage = req.session.lastpage;
-        req.session.lastpage = '/admin-homepage';
-        res.render('admin-edit-resident', {
+        const residentID = req.params.id;
+        req.session.lastpage = `/employee-edit-resident/${residentID}`;
+
+        const specificResident = await ResidentModel.findOne({ _id : residentID}).lean();
+
+        res.render('employee-edit-resident', {
             layout: 'layout',
-            title: 'Admin: View Archive Resident Detail',
-            cssFile1: 'homepage'
+            title: 'Employee: Edit Resident Record',
+            cssFile1: 'homepage',
+            cssFile2: null,
+            javascriptFile1: null,
+            javascriptFile2: null,
+            residents: specificResident
         });
     } catch (err) {
         console.error(err);
@@ -188,7 +198,7 @@ const archiveResidentRecord = async (req, res) => {
         return res.status(500).json({ error: 'Failed to archive' });
      }
 }
-
+//search specific resident record
 const searchResidentRecord = async (req, res) => {
     const searchName = req.params.search_name;
     console.log(searchName); //Returns Juan Dela Cruz
@@ -214,7 +224,7 @@ const searchResidentRecord = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error searching cases', error });
     }
 };
-
+//actual create
 const createResidentRecordEmployee = async (req, res) => {
     try {
         const {
@@ -273,6 +283,23 @@ const createResidentRecordEmployee = async (req, res) => {
         return res.status(500).json({ message: "Server error Here" });
     }
 };
+//restore archived resident's info
+const restoreResidentRecord_Employee = async (req, res) => {
+    try {
+        const residentID = req.params.id;
+
+        await ResidentModel.findOneAndUpdate(
+            { _id : residentID},
+            { isArchived : false},
+            { new: true }
+        );
+
+        res.redirect("/employee-resident-db");
+     } catch (error) {
+        console.error('Error updating status:', error);
+        return res.status(500).json({ error: 'Failed to archive' });
+     }
+}
 
 module.exports = {
     employeeViewResidentDB,
@@ -282,9 +309,9 @@ module.exports = {
 
     adminViewArchiveResident,
 
-    adminEditResident,
-
+    employeeEditResident,
     archiveResidentRecord,
     searchResidentRecord,
-    createResidentRecordEmployee
+    createResidentRecordEmployee,
+    restoreResidentRecord_Employee
 }

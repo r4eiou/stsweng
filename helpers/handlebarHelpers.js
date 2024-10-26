@@ -55,6 +55,14 @@ const registerHelpers = () => {
         return statusArray[index];
     });
 
+    handlebars.registerHelper('checkArchived', function(isArchived, options) {
+        if (isArchived === false) {
+            return options.fn(this); 
+        } else {
+            return options.inverse(this); 
+        }
+    });
+    
     handlebars.registerHelper('checkHousing', function(value, status) {
         return value === status ? 'selected' : '';
     });
@@ -62,6 +70,8 @@ const registerHelpers = () => {
     handlebars.registerHelper('checkCivilStatus', function(value, status) {
         return value === status ? 'selected' : '';
     });
+
+
 };
 
 

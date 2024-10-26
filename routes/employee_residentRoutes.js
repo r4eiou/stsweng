@@ -3,15 +3,16 @@ const employeeResidentController = require('../controllers/employeeResidentContr
 const router = express.Router();
 
 router.get('/employee-resident-db',                 employeeResidentController.employeeViewResidentDB);             //view databasex
-router.get('/employee-resident-db/:search_name',    employeeResidentController.viewSearchEmployeeResidentDB); //view search result in db
+router.get('/employee-resident-db/:search_name',    employeeResidentController.viewSearchEmployeeResidentDB);       //view search result in db
 
-router.get('/employee-register-resident',           employeeResidentController.employeeRegisterResident);              //create new record
+router.get('/employee-register-resident',           employeeResidentController.employeeRegisterResident);           //view create new record page
 router.get('/employee-view-resident/:id',           employeeResidentController.employeeViewSpecificResident);       // view specific resident
 router.get('/admin-view-archive-resident',          employeeResidentController.adminViewArchiveResident);
-router.get('/admin-edit-resident',                  employeeResidentController.adminEditResident);
+router.get('/employee-edit-resident/:id',           employeeResidentController.employeeEditResident);               //view edit page
 
 router.get('/archive-resident-info/:id',            employeeResidentController.archiveResidentRecord);              //delete resident info
 router.get('/search-resident/:search_name',         employeeResidentController.searchResidentRecord);               //search
 router.post('/submit-resident-employee',            employeeResidentController.createResidentRecordEmployee);       //create
+router.get('/restore-resident-employee/:id',        employeeResidentController.restoreResidentRecord_Employee);     //restore record
 
 module.exports = router;
