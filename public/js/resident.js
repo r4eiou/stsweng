@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Check if the image source is empty
                 const imgElement = document.getElementById('deets-profile-img');
-                const imgSrc = imgElement ? imgElement.src : '';                //needs to be checked again
-                if (imgSrc === 'http://localhost:3000/images/customer.png' || 'https://brgy-parang-wfqm.onrender.com/images/customer.png') {
+                const imgSrc = imgElement ? imgElement.src : '';
+                if (imgSrc === 'http://localhost:3000/images/customer.png' || imgSrc === 'https://brgy-parang-wfqm.onrender.com/images/customer.png') {
                     formIsValid = false;
                     showModal('Please upload an image.'); 
                 }
@@ -126,16 +126,68 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-
-
     const discardButtonRecordEmployee = document.getElementById('discardButton-recordEmployee');
     if(discardButtonRecordEmployee) {
         discardButtonRecordEmployee.addEventListener('click', function () {
 
             console.log("checking discardButtonRecordEmployee")
 
-            discardChanges();
+            // discardChanges();
             window.location.href = '/employee-resident-db';
+        });
+    }
+
+    const saveBtnEditResidentEmployee = document.getElementById('edit-resident-record-employee');
+    if (saveBtnEditResidentEmployee) {
+        saveBtnEditResidentEmployee.addEventListener('click', function () {
+
+            console.log("checking employee save button resident")
+
+            if(checkChangesEdit()){
+                const form = document.querySelector('#case-form-employee_resident');
+
+                const _id = form.querySelector('[name="_id"]').value;
+                const residentData = {
+                    _id: _id,
+                    img: document.getElementById('deets-profile-img').src,
+                    FirstName: form.querySelector('#firstName').value,
+                    MiddleInitial: form.querySelector('#middleInitial').value,
+                    LastName: form.querySelector('#lastName').value,
+                    Age: form.querySelector('#age').value,
+                    Email: form.querySelector('#email').value,
+                    Birthday: form.querySelector('#birthdateInput').value,
+                    Sex: form.querySelector('#sex').value,
+                    Address: form.querySelector('#case-type').value,
+                    isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                    ContactNo: form.querySelector('#contactNo').value,
+                    CivilStatus: form.querySelector('#civilStatus').value,
+                    NoOfResident: form.querySelector('#noOfResident').value,
+                    HousingInfo: form.querySelector('#housingInfo').value,
+                    ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+                };
+
+                console.log(residentData);
+                // Send residentData to the server
+                fetch('/submit-edit-resident-employee', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(residentData),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success
+                        window.location.href = `/employee-view-resident/${_id}`;
+                    } else {
+                        // Handle error
+                        return response.json().then(errorData => {
+                            console.error('Error:', errorData.message);
+                            showModal('Error: ' + errorData.message);
+                        });
+                    }
+                })
+            }
         });
     }
 });
@@ -303,12 +355,30 @@ function capitalizeName(name) {
     return name_split.join(' '); 
 }
 
-function discardChanges() {
-    // Get all input fields
-    let inputs = document.querySelectorAll('input[type="text"], textarea');
+// function discardChanges() {
+//     // Get all input fields
+//     let inputs = document.querySelectorAll('input[type="text"], textarea');
 
-    // Loop through each input field
-    inputs.forEach(input => {
-        input.value = input.placeholder;
+//     // Loop through each input field
+//     inputs.forEach(input => {
+//         input.value = input.placeholder;
+//     });
+// }
+
+function checkChangesEdit() {
+    // Select only visible fields within the form
+    const requiredFields = document.querySelectorAll('.case-form input:not([type="hidden"]), .case-form select, .case-form textarea');
+    let allFilled = true;
+
+    requiredFields.forEach(field => {
+        if (field.required && field.value.trim() === '') {
+            allFilled = false;
+        }
     });
+
+    if (!allFilled) {
+        alert('Please fill out all the fields.');
+    }
+
+    return allFilled;
 }

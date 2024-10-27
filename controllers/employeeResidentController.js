@@ -299,6 +299,58 @@ const restoreResidentRecord_Employee = async (req, res) => {
         console.error('Error updating status:', error);
         return res.status(500).json({ error: 'Failed to archive' });
      }
+};
+
+const submitEditEmployeeResident = async (req, res) => {
+    try {
+        const {
+            _id,
+            img,
+            FirstName,
+            MiddleInitial,
+            LastName,
+            Age,
+            Email,
+            Birthday,
+            Sex,
+            Address,
+            isSeniorCitizen,
+            ContactNo,
+            CivilStatus,
+            NoOfResident,
+            HousingInfo,
+            ServiceRequestID
+        } = req.body;
+
+        await ResidentModel.findOneAndUpdate(
+            { _id: _id },
+            {
+                $set: {
+                    img: img,
+                    FirstName: FirstName,
+                    MiddleInitial: MiddleInitial,
+                    LastName: LastName,
+                    Age: Age,
+                    Email: Email,
+                    Birthday: Birthday,
+                    Sex: Sex,
+                    Address: Address,
+                    isSeniorCitizen: isSeniorCitizen,
+                    ContactNo: ContactNo,
+                    CivilStatus: CivilStatus,
+                    NoOfResident: NoOfResident,
+                    HousingInfo: HousingInfo,
+                    ServiceRequestID: ServiceRequestID ? ServiceRequestID : null,
+                }
+            },
+            { new: true }
+        );
+
+        res.redirect(`/employee-view-resident/${_id}`);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
 }
 
 module.exports = {
@@ -313,5 +365,6 @@ module.exports = {
     archiveResidentRecord,
     searchResidentRecord,
     createResidentRecordEmployee,
-    restoreResidentRecord_Employee
+    restoreResidentRecord_Employee,
+    submitEditEmployeeResident
 }

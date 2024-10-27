@@ -189,7 +189,7 @@
                         </div>
                         <div class = "input-pair">
                             <label for="middle-initial-input">Middle Initial</label>
-                            <input class = "middle-name-input" type = "text" value="{{residents.LastName}}" name="MiddleInitial" required id="middleInitial">
+                            <input class = "middle-name-input" type = "text" value="{{residents.MiddleInitial}}" name="MiddleInitial" required id="middleInitial">
                         </div>
                         <div class = "input-pair">
                             <label for="last-name-input">Last Name</label>
@@ -225,11 +225,11 @@
                         <div class="column-section">
                             <label for="case-form">Civil Status</label>
                             <select class="status-dropdown-view" name="CivilStatus" required id="civilStatus">
-                                <option value="" selected hidden>Select</option>
-                                <option value="Separated">  Separated</option>
-                                <option value="Widowed">    Widowed</option>
-                                <option value="Married">    Married</option>
-                                <option value="Single">     Single</option>
+                                <option value="" hidden>Select</option>
+                                <option value="Separated"   {{#if (eq residents.CivilStatus "Separated")}}selected{{/if}}>Separated</option>
+                                <option value="Widowed"     {{#if (eq residents.CivilStatus "Widowed")}}selected{{/if}}>Widowed</option>
+                                <option value="Married"     {{#if (eq residents.CivilStatus "Married")}}selected{{/if}}>Married</option>
+                                <option value="Single"      {{#if (eq residents.CivilStatus "Single")}}selected{{/if}}>Single</option>
                             </select>
                         </div>
                     </div>
@@ -239,8 +239,8 @@
                         <label for="register-senior">Senior</label>
                         <select class="register-senior-input" name="isSeniorCitizen" required id="seniorCitizen">
                             <option value="" selected hidden>Select</option> 
-                            <option value="Yes">Yes</option>
-                            <option value="No"> No</option>
+                            <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
+                            <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
                         </select>
                     </div>
 
@@ -256,8 +256,8 @@
                             <label for="resident-rent-own">Rent / Own</label>
                             <select class="resident-rent-own-dropdown-view" name="HousingInfo" required id="housingInfo">
                                 <option value="" selected hidden>Select</option> 
-                                <option value="Rent">   Rent</option>
-                                <option value="Own">    Own</option>
+                                <option value="Rent"{{#if (eq residents.HousingInfo "Rent")}}selected{{/if}}>   Rent</option>
+                                <option value="Own" {{#if (eq residents.HousingInfo "Own")}}selected{{/if}}>    Own</option>
                             </select>
                         </div>
                     
@@ -273,8 +273,8 @@
         </div>
         
         <div class = "buttons-container">
-            <button type="button" class="form-btn save"     id="create-resident-record-employee"><img src="/images/form-check.png"><span>Save Changes</span></button>
-            <button type="button" class="form-btn archive"  id="discardButton-recordEmployee"    ><img src="/images/form-trash.png"><span>Discard Changes</span></button>
+            <button type="button" class="form-btn save"     id="edit-resident-record-employee">     <img src="/images/form-check.png"><span>Save Changes</span></button>
+            <button type="button" class="form-btn archive"  id="discardButton-recordEmployee">      <img src="/images/form-trash.png"><span>Discard Changes</span></button>
         </div>
     </div>
 </div> 
