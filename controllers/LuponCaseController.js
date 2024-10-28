@@ -544,6 +544,7 @@ const restoreRecordLupon = async (req, res) => {
         console.error('Error updating status:', error);
         return res.status(500).json({ error: 'Failed to archive' });
      }
+}
 
 const viewAdminArchivedLupon = async (req, res) => {
     try {
@@ -607,8 +608,7 @@ module.exports = {
     searchLuponCase,
 
     viewSearchLuponDB,
-    restoreRecordLupon
-    viewPageLuponDB,
+    restoreRecordLupon,
     viewAdminArchivedLupon,
     viewArchivedLupon,
 
