@@ -445,6 +445,21 @@ const viewArchivedLupon = async (req, res) => {
     }
 }
 
+const viewAdminLuponEventArchive = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/lupon-home';
+        res.render('A-lupon-case-details-archive', {
+            layout: 'layout',
+            title: 'Admin Lupon: Archived Tanod Cases',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
 module.exports = {
     viewLuponDB,
     updateStatus,
@@ -462,5 +477,7 @@ module.exports = {
     viewSearchLuponDB,
     viewPageLuponDB,
     viewAdminArchivedLupon,
-    viewArchivedLupon
+    viewArchivedLupon,
+
+    viewAdminLuponEventArchive
 }
