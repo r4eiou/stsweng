@@ -190,6 +190,171 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    //ADMIN
+    const createRecordBtnAdmin = document.getElementById('create-resident-record-admin');
+    if (createRecordBtnAdmin) {
+        createRecordBtnAdmin.addEventListener('click', function () {
+            const form = document.querySelector('#case-form-admin_resident');
+            
+            // Check if the form exists
+            if (form == null) {
+                const errorMessage = 'Form not found.';
+                showModal(errorMessage);
+            } else {
+                const inputs = form.querySelectorAll('input, textarea, select');
+                let formIsValid = true;
+                let isAnyFieldEmpty = false;
+
+                // Validate each input
+                inputs.forEach(input => {
+                    if (input.required && input.id !== 'middleInitial' && input.id !== 'respondent-service-request-no' && !input.value) {
+                        isAnyFieldEmpty = true; 
+                    }
+
+                    if (input.id === 'email') {
+                        const emailValue = input.value;
+                        if (emailValue && !emailValue.includes('@')) {
+                            formIsValid = false;
+                            input.classList.add('error'); // Add error for invalid email
+                            showModal('Please enter a valid email address.');
+                        } else {
+                            input.classList.remove('error'); // Remove error if valid
+                        }
+                    }
+                });
+
+                // Check if the image source is empty
+                const imgElement = document.getElementById('deets-profile-img');
+                const imgSrc = imgElement ? imgElement.src : '';
+                if (imgSrc === 'http://localhost:3000/images/customer.png' || imgSrc === 'https://brgy-parang-wfqm.onrender.com/images/customer.png') {
+                    formIsValid = false;
+                    showModal('Please upload an image.'); 
+                }
+
+                if (isAnyFieldEmpty) {
+                    formIsValid = false;
+                    showModal('All fields must be filled out.'); // Show message for missing fields
+                }
+
+                // Proceed if the form is valid
+                if (formIsValid) {
+                    // Capture the image source
+                    const imgElement = document.getElementById('deets-profile-img');
+                    const imgSrc = imgElement ? imgElement.src : ''; 
+    
+                    const residentData = {
+                        img: imgSrc,
+                        FirstName: form.querySelector('#firstName').value,
+                        MiddleInitial: form.querySelector('#middleInitial').value,
+                        LastName: form.querySelector('#lastName').value,
+                        Age: form.querySelector('#age').value,
+                        Email: form.querySelector('#email').value,
+                        Birthday: form.querySelector('#birthdateInput').value,
+                        Sex: form.querySelector('#sex').value,
+                        Address: form.querySelector('#case-type').value,
+                        isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                        ContactNo: form.querySelector('#contactNo').value,
+                        CivilStatus: form.querySelector('#civilStatus').value,
+                        NoOfResident: form.querySelector('#noOfResident').value,
+                        HousingInfo: form.querySelector('#housingInfo').value,
+                        ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+                    };
+    
+                    // Send residentData to the server
+                    fetch('/submit-resident-admin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(residentData),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Handle success
+                            window.location.href = '/admin-resident-db-view';
+                        } else {
+                            // Handle error
+                            return response.json().then(errorData => {
+                                console.error('Error:', errorData.message);
+                                showModal('Error: ' + errorData.message);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Network error:', error);
+                        showModal('Network error: ' + error.message);
+                    });
+                }
+            }
+        });
+    }
+
+    const discardButtonRecordAdmin = document.getElementById('discardButton-recordAdmin');
+    if(discardButtonRecordAdmin) {
+        discardButtonRecordAdmin.addEventListener('click', function () {
+
+            console.log("checking discardButtonRecordAdmin")
+
+            // discardChanges();
+            window.location.href = '/admin-resident-db-view';
+        });
+    }
+
+    const saveBtnEditResidentAdmin = document.getElementById('edit-resident-record-admin');
+    if (saveBtnEditResidentAdmin) {
+        saveBtnEditResidentAdmin.addEventListener('click', function () {
+
+            console.log("checking admin save button resident")
+
+            if(checkChangesEdit()){
+                const form = document.querySelector('#case-form-admin_resident');
+
+                const _id = form.querySelector('[name="_id"]').value;
+                const residentData = {
+                    _id: _id,
+                    img: document.getElementById('deets-profile-img').src,
+                    FirstName: form.querySelector('#firstName').value,
+                    MiddleInitial: form.querySelector('#middleInitial').value,
+                    LastName: form.querySelector('#lastName').value,
+                    Age: form.querySelector('#age').value,
+                    Email: form.querySelector('#email').value,
+                    Birthday: form.querySelector('#birthdateInput').value,
+                    Sex: form.querySelector('#sex').value,
+                    Address: form.querySelector('#case-type').value,
+                    isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                    ContactNo: form.querySelector('#contactNo').value,
+                    CivilStatus: form.querySelector('#civilStatus').value,
+                    NoOfResident: form.querySelector('#noOfResident').value,
+                    HousingInfo: form.querySelector('#housingInfo').value,
+                    ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+                };
+
+                console.log(residentData);
+                // Send residentData to the server
+                fetch('/submit-edit-resident-admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(residentData),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success
+                        window.location.href = `/admin-view-resident/${_id}`;
+                    } else {
+                        // Handle error
+                        return response.json().then(errorData => {
+                            console.error('Error:', errorData.message);
+                            showModal('Error: ' + errorData.message);
+                        });
+                    }
+                })
+            }
+        });
+    }
+    //
 });
 
 //for webcam

@@ -1,0 +1,208 @@
+<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/form.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/input-details-page.css">
+
+<style>
+    .input-pair-row{
+        display: flex;
+        flex-direction: column;
+    }
+    .input-pair-row.second{
+        margin-left: 20px;
+    }
+     .input-pair.second{
+         margin-left: -13px;
+     }
+     .input-pair.third{
+         margin-left: 20px;
+     }
+    .form-encasing-container{
+        height: 500px;
+        margin-bottom: 20px;
+    }
+    
+    .form-section{
+        justify-content: space-between;
+    }
+    .first-name-input,          .middle-name-input,         .last-name-input, 
+    .resident-birthday-input,   .resident-sex-input,        .resident-email-input,
+    .register-senior-input,     .register-contactno-input,  .status-dropdown-view,
+    .resident-rent-own-dropdown-view,   .resident-number-of-residents-in-household-input{
+        width: 15rem;
+    }
+    input[readonly], .status-dropdown-view, .resident-rent-own-dropdown-view{
+        pointer-events: none;
+        background: var(--gray);
+    }
+    .last-name-input{
+         margin-right: 0px;
+    }
+    .column-section {
+        padding-right: 0rem;
+    }
+    .form-section.housing-row{
+        justify-content: flex-start;
+    }
+    #resident-details-title-archive{
+        color:#717171;
+        text-align: center;
+        margin: 0px 5px;
+    }
+    #resident-details-title{
+        color:var(--dgreen);
+        text-align: center;
+        margin: 0px 5px;
+    }
+    .text-container-archive{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+</style>
+<div class="main-container" id="main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Admin</span>
+                <img src="/images/admin-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
+        </div>
+    </div>
+
+     <div class = "page-content-container" id="view-case-page">
+        <div class="back-and-title">
+            <div class="upper-container" id="form-upper-container">
+                <a href="/admin-resident-db-view" class="back-button" id="black-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Back
+                </a>
+            </div>
+            <div class = "text-container-archive">
+            <h1 id = "resident-details-title-archive">Archive </h1>
+            <h1 id = "resident-details-title">Resident Details</h1>
+        </div>
+        </div>
+        <div class = "form-encasing-container">
+            <div class = "form-actual-container">
+                <form id="case-form" class="case-form">
+                    
+                    <div class = "form-section middle" id = "respondent-servicerequestno-row">
+                        <div class = "column-section">
+                            <div class="photo-container">
+                                <img src="/images/customer.png" class="details-profile" id="deets-profile-img">
+                            </div>
+                        </div>
+                        <div class = "column-section">
+                            <label for="respondent-service-request-no" class ="bold-label">Service Request ID #</label>
+                            <input class="case-type-input" type = "text" id = "case-type" placeholder="123456789" value="" readonly>
+                        </div>
+                    </div>
+
+                    <div class = "form-section" id = "respondent-fullname-row">
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." value="" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="" readonly>
+                        </div>
+                    </div>
+
+                    <div class = "form-section" id = "respondent-fullname-row">
+                        <div class = "input-pair">
+                            <label for="resident-birthday">Birthday</label>
+                            <input class = "resident-birthday-input" type = "test" placeholder="mm/dd/yy" value="" readonly>
+                        </div>
+                        <div class = "input-pair second">
+                            <label for="resident-sex">Sex</label>
+                            <input class = "resident-sex-input" type = "text" placeholder="M.I." value="" readonly>
+                        </div>
+                        <div class = "input-pair third">
+                            <label for="resident-email">Email</label>
+                            <input class = "resident-email-input" type ="text" placeholder="Last Name" value="" readonly>
+                        </div>
+                    </div>
+
+                    
+                    <div class = "form-section" id = "respondent-senior-contactno-civilstatus-row">
+                        <div class = "column-section">
+                            <label for="register-senior">Senior(Y/N)</label>
+                            <input class = "register-senior-input" id="case-title" type = "text" placeholder= "Case Title" value="" readonly>
+                        </div>
+                        <div class = "column-section">
+                            <label for="register-contactno">Contact No.</label>
+                            <input class="register-contactno-input" type = "text" id = "case-type" placeholder="Case Type" value="" readonly>
+                        </div>
+                        <div class="column-section1">
+                            <label for="case-form">Civil Status</label>
+                            <select name="case-form" class="status-dropdown-view">
+                                <option value="" disabled hidden>Select Status</option>
+                                <option value="2">Separated</option>
+                                <option value="2">Widowed</option>
+                                <option value="1" selected>Married</option>
+                                <option value="0">Single</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <span class = "section-name">Housing Information</span>
+                    <div class = "form-section housing-row" id = "respondent-address-row">
+                        <div class = "input-pair-row first">
+                            <label for="resident-rent-own">Rent / Own</label>
+                            <select name="resident-rent-own" class="resident-rent-own-dropdown-view">
+                                <option value="" disabled hidden>Select</option>
+                                <option value="1">Rent</option>
+                                <option value="0">Own</option>
+                            </select>
+                        </div>
+                    
+                        <div class = "input-pair-row second">
+                            <label for="resident-number-of-residents-in-household">Number of Resident/s in Household</label>
+                            <input class = "resident-number-of-residents-in-household-input" type = "text" placeholder="3" value="" readonly>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>  
+        </div>
+        
+        <div class = "buttons-container">
+            <button type="button" id="restoreButton" class="form-btn save"><img src="/images/form-check.png"><span>Restore this record</span></button>
+        </div>
+    </div>
+
+</div>    
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const restoreButton = document.getElementById('restoreButton');
+    
+    restoreButton.addEventListener('click', function() {
+        window.location.href = "/admin-resident-db-view#";
+    });
+});
+
+</script>
