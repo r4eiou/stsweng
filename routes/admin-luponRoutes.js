@@ -2,31 +2,33 @@ const express = require('express');
 const luponCaseController = require('../controllers/LuponCaseController');
 const router = express.Router();
 
-router.get('/admin-lupon-db-view',              luponCaseController.viewLuponDB);
+router.get('/admin-lupon-db-view',                          luponCaseController.viewLuponDB);
 
-router.get('/admin-lupon-db-view/:search_name', luponCaseController.viewSearchLuponDB);
+router.get('/admin-lupon-db-view/:search_name',             luponCaseController.viewSearchLuponDB);
 
-router.get('/update-Status-Lupon/:id/:status/:currentPage',  luponCaseController.updateStatus);
+router.get('/update-Status-Lupon/:id/:status/:currentPage', luponCaseController.updateStatus);
 
-router.get('/A-lupon-create-case',              luponCaseController.viewCreateLuponCase);
+router.get('/A-lupon-create-case',                          luponCaseController.viewCreateLuponCase);
 
-router.post('/submit-lupon-case',               luponCaseController.createLuponCase);
+router.post('/submit-lupon-case',                           luponCaseController.createLuponCase);
 
-router.post('/mark-as-resolved-lupon',          luponCaseController.markMultipleTCaseResolved);
+router.post('/mark-as-resolved-lupon',                      luponCaseController.markMultipleTCaseResolved);
 
-router.post('/delete-cases-lupon',              luponCaseController.deleteMultipleTanodCase);
+router.post('/delete-cases-lupon',                          luponCaseController.deleteMultipleLuponCase);
 
-router.get('/search-cases-lupon/:search_name',  luponCaseController.searchLuponCase);
+router.get('/search-cases-lupon/:search_name',              luponCaseController.searchLuponCase);
 
-router.get('/A-lupon-view-case/:id',            luponCaseController.viewLuponCase);
+router.get('/A-lupon-view-case/:id',                        luponCaseController.viewLuponCase);
 
-router.get('/mark-resolved/:id',                luponCaseController.markResolved);
+router.get('/mark-resolved/:id',                            luponCaseController.markResolved);
 
-router.get('/A-lupon-edit-case/:id',            luponCaseController.editLuponCase);
+router.get('/A-lupon-edit-case/:id',                        luponCaseController.editLuponCase);
 
-router.post('/submit-edit-lupon-case',          luponCaseController.submitEditLuponCase);
+router.post('/submit-edit-lupon-case',                      luponCaseController.submitEditLuponCase);
 
-router.get('/delete-case-lupon/:id',            luponCaseController.deleteLuponCase);
+router.get('/delete-case-lupon/:id',                        luponCaseController.deleteLuponCase);
+
+router.get('/restore-case-lupon/:id',                       luponCaseController.restoreRecordLupon);
 
 router.get('/admin-lupon-archive-view',         luponCaseController.viewAdminArchivedLupon);
 

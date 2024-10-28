@@ -23,9 +23,6 @@
         </div>
     </div>
 
-
-    
-
     <div class = "page-content-container" id="view-case-page">
         <div class="back-and-title">
             <div class="upper-container" id="form-upper-container">
@@ -38,6 +35,7 @@
             </div>
             <h1 id = "lupon-case-title">Lupon Case Details</h1>
         </div>
+
         <div class = "form-encasing-container">
             <div class = "form-actual-container">
                 {{!-- read only form : for viewing --}}
@@ -146,13 +144,45 @@
         </div>
         
         <div class = "buttons-container">
-            {{#checkStatus cases.Status}}
-                <a href="/delete-case-lupon/{{cases._id}}"><button type="button" class="form-btn delete"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
+            {{#checkArchived cases.isArchived}} 
+                {{#checkStatus cases.Status}}
+                    <button type="button" class="form-btn delete" onclick="openArchiveModalLupon('{{cases._id}}')">
+                        <img src="/images/form-trash.png">
+                        <span>Archive Record</span>
+                    </button>
+                {{else}}
+                    <a href="/mark-resolved/{{cases._id}}"><button type="button" class="form-btn resolved"><img src="/images/form-check.png"><span>Mark as Resolved</span></button></a>
+                    <a href="/A-lupon-edit-case/{{cases._id}}"><button type="button" class="form-btn edit"><img src="/images/form-edit.png"><span>Edit Data</span></button></a>
+                    {{!-- if ongoing, di pwede i-archived --}}
+                    {{!-- <a href="/delete-case-lupon/{{cases._id}}"><button type="button" class="form-btn delete"><img src="/images/form-trash.png"><span>Delete this record</span></button></a> --}}
+                {{/checkStatus}}
             {{else}}
-                <a href="/mark-resolved/{{cases._id}}"><button type="button" class="form-btn resolved"><img src="/images/form-check.png"><span>Mark as Resolved</span></button></a>
-                <a href="/A-lupon-edit-case/{{cases._id}}"><button type="button" class="form-btn edit"><img src="/images/form-edit.png"><span>Edit Data</span></button></a>
-                <a href="/delete-case-lupon/{{cases._id}}"><button type="button" class="form-btn delete"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
-            {{/checkStatus}}
+                    <button type="button" class="form-btn edit" onclick="openRestoreModalLupon('{{cases._id}}')">
+                        <img src="/images/restore.png">
+                        <span>Restore Record</span>
+                    </button>
+            {{/checkArchived}}
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="restoreModalLupon" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeRestoreModalLupon()">&times;</span>
+                <h2>Restore Record</h2>
+                <p>Are you sure you want to restore this record?</p>
+                <button id="confirmRestoreBtnLupon" class="restore-btns">Yes</button>
+                <button class="restore-btns" onclick="closeRestoreModalLupon()">No</button>
+            </div>
+        </div>
+
+        <div id="archiveModalLupon" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeArchiveModalLupon()">&times;</span>
+                <h2>Archive Record</h2>
+                <p>Are you sure you want to archive this record?</p>
+                <button id="confirmArchiveBtnLupon" class="restore-btns">Yes</button>
+                <button class="restore-btns" onclick="closeArchiveModalLupon()">No</button>
+            </div>
         </div>
     </div>
 </div>

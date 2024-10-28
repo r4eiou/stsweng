@@ -70,8 +70,6 @@ const registerHelpers = () => {
     handlebars.registerHelper('checkCivilStatus', function(value, status) {
         return value === status ? 'selected' : '';
     });
-
-
 };
 
 
