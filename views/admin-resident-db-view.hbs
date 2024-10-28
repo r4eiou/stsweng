@@ -1,4 +1,5 @@
-<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel = "stylesheet" type ="text/css" href = "/css/back-button.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/index.css">
@@ -20,9 +21,10 @@
 
 <div class="main-container" id="main-container">
     <div class= "header" id="header">
+        {{!-- edited home link --}}
         <div class = "header-left">
-            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
-            <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
+            <a href="/admin-homepage" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/admin-homepage" class="header-home" id="home-link2"><h3>Home</h3></a>
         </div>
         
         <div class = "header-title">
@@ -33,13 +35,14 @@
         </div>
         <div class="header-right">
             <div class="header-user-profile">
-                <span class="header-user-profile-text" id="profile-text">Admin</span>
-                <img src="/images/admin-profile.png" class="header-user-profile" id="profile-img">
+                <span class="header-user-profile-text" id="profile-text">Employee</span>
+                <img src="/images/employee-profile.png" class="header-user-profile" id="profile-img">
             </div>
             <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
         </div>
     </div>
-</div>    
+</div> 
+   
 <div class = "upper-container" id="form-upper-container">
     <div class="back-and-title">
         <a href="/admin-homepage" class="back-button" id="back-button">
@@ -54,26 +57,21 @@
 <div class="content-container-tanod-home">
 
     <div class="box-content-top">
-        <!-- missing: functions -->
-        <a href="/admin-register-resident">
+        <a href="/admin-register-resident" id="createButtonResident">
             <button type="button" class="form-btn create size" id="createButtonResident">                            
-                <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+                <img src="/images/form-create.png"> <span>Register New Resident</span>  </button>
         </a>
+
         <div class="dropdown">
-            <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
-                <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
-            </button>
-            <div id="dropdown-btn" class="dropdown-content margin">
-                <a href="#" onclick="selectOption('View All Cases')">View All Cases</a>
-                <a href="#" onclick="selectOption('View Registered')">View Registered</a>
-                <a href="#" onclick="selectOption('View Archived')">View Archived</a>
-            </div>                  
+            <select id="adminResidentDropdown" name="caseView" class="form-btn status-dropdown" required>
+                <option value="0">View All</option>
+                <option value="1">View Registered</option>
+                <option value="2">View Archived</option>
+            </select>
         </div>
 
         <div class="search-name-reg margin">
-
-            <!-- implement search function -->
-            <form id="searchForm">
+            <form id="searchForm_AResident">
                 <button type="submit"><img src="/images/search-reg.png"></button>
                 <input type="text" placeholder="Search Name" name="search_name">
             </form>
@@ -81,64 +79,49 @@
     </div>
 
     <table class="tanod-lupon-db-table">
-                <thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th colspan="2">Contact No.</th>
+            </tr>
+        </thead>
+        <tbody>
+                {{#each residents}}
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Address</th>
-                        <th colspan="2">Contact No.</th>
+                        {{#checkArchived this.isArchived}}
+                            <td><a href="/admin-view-resident/{{this._id}}" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name">{{fullName FirstName MiddleInitial LastName}}</td>
+                            <td class="name cell" id="resident-age">{{this.Age}}</td>
+                            <td class="name cell" id="resident-address">{{this.Address}}</td>
+                            <td class="name cell" id="resident-contact-number">{{this.ContactNo}}</td>
+                        {{else}}
+                            <td><a href="/admin-view-resident/{{this._id}}" class="content-text-main underline view-resident-link">View</a></td>
+                            <td class="name cell" id="resident-name" style="color: red;">{{fullName FirstName MiddleInitial LastName}}</td>
+                            <td class="name cell" id="resident-age">{{this.Age}}</td>
+                            <td class="name cell" id="resident-address">{{this.Address}}</td>
+                            <td class="name cell" id="resident-contact-number">{{this.ContactNo}}</td>
+                        {{/checkArchived}}
+                        
+                        {{#checkArchived this.isArchived}}
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident/{{this._id}}" id="editButtonA">
+                                <button type="button" id="editButton" class="form-action-btn" title="Edit Case Details"><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        {{else}}
+                            <td class="case-status-cell align-left">
+                                <a href="/admin-edit-resident/{{this._id}}" id="editButton" style="pointer-events: none;">
+                                <button type="button" id="editButton" class="form-action-btn" title="Edit Case Details" style="pointer-events: none; opacity: 0.5"><img src="/images/action-edit.png"></button></a>
+                            </td>
+                        {{/checkArchived}}
+                        
                     </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/admin-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/admin-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/admin-edit-resident" >
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/admin-view-resident" class="content-text-main underline view-resident-link">View</a></td>
-                            <td class="name cell" id="resident-name">Juan C. Dela Cruz</td>
-                            <td class="name cell" id="resident-age">25</td>
-                            <td class="name cell" id="resident-address">Brgy. Parang, Marikina</td>
-                            <td class="name cell" id="resident-contact-number">12345678</td>
-                            <td class="case-status-cell align-left">
-                                <a href="/admin-edit-resident">
-                                <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
-                            </td>
-                        </tr>
-                </tbody>
+                {{/each}}
+        </tbody>
     </table>
 
-    <!-- to be fixed -->
     <div class="box-content-page">
         <button class="page-btn" id="count-down">&lt;</button>
         <div class="page-count" id="page-num">{{currentPage}}</div>
@@ -150,7 +133,7 @@
         {{/if}}
     </div>
 
-<script>
+    <script>
         $(document).ready(function() {
             const currentPage = {{currentPage}};
             const totalPages = {{totalPages}};
@@ -167,133 +150,89 @@
                     window.location.href = baseUrl + (currentPage + 1);
                 }
             });
-            /*
-            window.updateStatus = function(caseId, currentStatus) {
-                window.location.href = `/update-Status-Lupon/${caseId}/${currentStatus}/${currentPage}`;
-            }; */
-        });
-    </script>
 
-    <script>
-        function dropdown() {
-            var dropdownContent = document.getElementById("dropdown-btn");
-            var dropdownImg = document.getElementById("dropdown-down-btn");
-
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-                dropdownImg.src = "/images/dropdown-down.png";
-            } else {
-                dropdownContent.style.display = "block";
-                dropdownImg.src = "/images/dropdown-up.png";
+            // Load the previously selected dropdown value from localStorage
+            const savedStatus = localStorage.getItem('selected_adminResident');
+            if (savedStatus) {
+                $("#adminResidentDropdown").val(savedStatus); // Set the dropdown to the saved value
             }
-        }
-            
-        function selectOption(optionText) {
-            var dropdownButton = document.getElementById("dropdownButton");
-            var dropdownImg = document.getElementById("dropdown-down-btn");
-            var viewCaseLinks = document.querySelectorAll(".view-resident-link");
 
-            viewCaseLinks.forEach(function(viewCaseLink) {
-                if (optionText === 'View Archived') {
-                    viewCaseLink.href = "/admin-view-archive-resident"; 
-                } else {
-                    viewCaseLink.href = "/admin-view-resident";
-                }
+            // Event listener for the dropdown change
+            $("#adminResidentDropdown").on("change", function() {
+                const selectedValue = $(this).val();
+                
+                // Save the selected value to localStorage
+                localStorage.setItem('selected_adminResident', selectedValue);
+
+                // Send the AJAX request to update the case view
+                $.ajax({
+                    url: '/admin-resident-db-view', 
+                    type: 'GET', 
+                    data: { status: selectedValue },
+                    success: function(response) {
+                        // Handle success, e.g., update the case list
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading cases:', error);
+                    }
+                });
+
+                window.location.href = `/admin-resident-db-view?status=${selectedValue}`; //automatic refresh
             });
 
-            dropdownButton.innerHTML = optionText + ' <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>';
-            document.getElementById("dropdown-btn").style.display = "none";
-    
-            if (optionText === 'View Archived') {
-                hideCaseStatusColumn();
-                disableButtons();
-            } else {
-                showCaseStatusColumn();
-                enableButtons();
-            }
-        }
+            // Function to disable or enable buttons based on dropdown value
+            function updateButtonState() {
+                const dropdown = document.getElementById('adminResidentDropdown');
+                const editButton = document.getElementById('editButton');
+                const createButton = document.getElementById('createButtonResident');
 
-        function disableButtons() {
-            var createButton = document.getElementById('createButtonResident');
-            var createLink = createButton.parentElement; 
+                {{!-- console.log(dropdown.value) --}}
 
-            createButton.classList.add('disabled');
-            createLink.classList.add('disabled'); 
-            createLink.setAttribute('href', '#');
-
-
-            createButton.onclick = function(event) {
-                event.preventDefault();
-            };
-        }
-            
-        function enableButtons() {
-            var createButton = document.getElementById('createButtonResident');
-            var createLink = createButton.parentElement; 
-
-            createButton.classList.remove('disabled');
-            createLink.classList.remove('disabled'); 
-            createLink.setAttribute('href', '/admin-register-resident');
-            
-
-            createButton.onclick = null;
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
+                if (editButton && createButton) { // Check if both buttons exist
+                    switch (dropdown.value) {
+                        case '2':
+                            createButton.style.pointerEvents = 'none';
+                            createButton.style.opacity = '0.5';
+                            break;
+                        default:
+                            createButton.style.pointerEvents = 'auto';
+                            createButton.style.opacity = '1';
                     }
                 }
-            
-                var dropdownImg = document.getElementById("dropdown-down-btn");
-                dropdownImg.src = "/images/dropdown-down.png";
             }
-        };
 
-        function trimText(selector, maxLength) {
-                const elements = document.querySelectorAll(selector);
-                elements.forEach(element => {
-                    const text = element.textContent.trim();
-                    if (text.length > maxLength) {
-                        element.textContent = text.substring(0, maxLength) + '...';
+            // Call function
+            updateButtonState();
+
+            const searchFormResident = document.getElementById('searchForm_AResident');
+            if (searchFormResident) {
+                searchFormResident.addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const formData = new FormData(searchFormResident);
+                    const searchName = formData.get('search_name');
+                    
+                    try {
+                        if(searchName) {
+                            const response = await fetch(`/admin-search-resident/${searchName}`);
+
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+
+                            const result = await response.json();
+                            //console.log(result); 
+
+                            window.location.href = `/admin-resident-db-view/${searchName}`;
+                        } else {
+                            window.location.href = '/admin-resident-db-view';
+                        }
+
+                    } catch (error) {
+                        console.error('There was a problem with the search operation:', error);
                     }
                 });
             }
-        
-            document.addEventListener("DOMContentLoaded", function() {
-                trimText('.headline-cell', 15); 
-                trimText('.event-info-cell', 25); 
-            });
-
-
-        function hideCaseStatusColumn() {
-            var statusCells = document.querySelectorAll('.case-status-cell');
-            statusCells.forEach(function(cell) {
-                cell.style.display = 'none'; 
-            });
-
-            
-            var statusHeader = document.querySelector('th.case-status-header');
-            if (statusHeader) {
-                statusHeader.style.display = 'none';  
-            }
-        }
-        function showCaseStatusColumn() {
-            var statusCells = document.querySelectorAll('.case-status-cell');
-            statusCells.forEach(function(cell) {
-                cell.style.display = ''; 
-            });
-
-            var statusHeader = document.querySelector('th.case-status-header');
-            if (statusHeader) {
-                statusHeader.style.display = '';  
-            }
-        }
-        
+        });
     </script>
-
-
+</div>
