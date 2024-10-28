@@ -678,5 +678,4 @@ module.exports = {
     adminViewResident,
     adminViewArchiveResident,
     adminEditResident
-
 }

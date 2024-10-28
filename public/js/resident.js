@@ -355,9 +355,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     //
-
-    
-
 });
 
 //for webcam

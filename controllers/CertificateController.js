@@ -2,19 +2,7 @@ const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
 
-//employee
-const viewCertClearance = async (req, res) => {
-    req.session.lastpage = '/employee-check-clearance';
-    res.render('employee-check-clearance',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee Homepage - test',
-        cssFile1: 'index',
-        cssFile2: 'checkclearance',
-        javascriptFile1: 'header',
-        javascriptFile2: 'check-clearance',
-    });
-};
-
+// PAKISEPARATE NG FILE
 const viewEventsDB = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-event-db-view',{
@@ -22,7 +10,6 @@ const viewEventsDB = async (req, res) => {
         title: 'Barangay Parang - Employee Event DB View'
     });
 };
-
 
 const viewEvents = async (req, res) => {
     req.session.lastpage = '/eemployee-view-events-db';
@@ -33,7 +20,6 @@ const viewEvents = async (req, res) => {
         cssFile2: 'event-details'
     }); 
 };
-
 
 const viewArchivedEvents = async (req, res) => {
     req.session.lastpage = '/employee-view-events-db';
@@ -55,7 +41,6 @@ const createEvent = async (req, res) => {
     });
 };
 
-
 const editEvent = async (req, res) => {
     req.session.lastpage = '/employee-view-event';
     res.render('employee-edit-event',{
@@ -65,52 +50,65 @@ const editEvent = async (req, res) => {
         cssFile2: 'event-details'
     });
 };
+// ----------------------------------------
 
-const viewResidentDB = async (req, res) => {
+// const viewResidentDB = async (req, res) => {
+//     req.session.lastpage = '/employee-check-clearance';
+//     res.render('employee-resident-db',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Event',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewArchivedResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-archive-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Archive Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const editResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-edit-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const createResidentRecord = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-register-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Create Resident Details',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+//employee
+const viewCertClearance = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
-    res.render('employee-resident-db',{
+    res.render('employee-check-clearance',{
         layout: 'layout',
-        title: 'Barangay Parang - Employee Edit Event',
-        cssFile1: 'homepage'
+        title: 'Barangay Parang - Employee Homepage - test',
+        cssFile1: 'index',
+        cssFile2: 'checkclearance',
+        javascriptFile1: 'header',
+        javascriptFile2: 'check-clearance',
     });
 };
-
-const viewResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-view-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee View Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const viewArchivedResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-view-archive-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee View Archive Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const editResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-edit-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee Edit Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const createResidentRecord = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-register-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Create Resident Details',
-        cssFile1: 'homepage'
-    });
-};
-
 
 const isClearedEmployee = async (req, res) => {
     const searchName = req.params.search_name;
@@ -576,9 +574,9 @@ module.exports = {
     editEvent,
 
 
-    viewResidentDB,
-    viewResident,
-    viewArchivedResident,
-    editResident,
-    createResidentRecord
+    // viewResidentDB,
+    // viewResident,
+    // viewArchivedResident,
+    // editResident,
+    // createResidentRecord
 }
