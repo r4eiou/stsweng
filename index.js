@@ -5,6 +5,7 @@ const admin_tanodRoutes = require('./routes/admin-tanodRoutes');
 const admin_luponRoutes = require('./routes/admin-luponRoutes');
 const certificate_PrintingRoutes = require('./routes/certificate-printingRoutes');
 const accoutns_Routes = require('./routes/account-ManageRoutes');
+const employee_residentRoutes = require('./routes/employee_residentRoutes');
 const loginSignup_Routes = require('./routes/loginSignup-Routes');
 const mongo_uri = require("./models/database/mongoose").mongo_uri;
 const { registerHelpers } = require('./helpers/handlebarHelpers');
@@ -112,6 +113,9 @@ app.use(accoutns_Routes);
 
 //all login
 app.use(loginSignup_Routes);
+
+// admin residents route
+app.use(employee_residentRoutes);
 
 const controllers = ['employee-tanod-lupon-routes']; //ung mga get eme nasa controller
 for(var i=0; i<controllers.length; i++){
