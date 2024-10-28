@@ -1,0 +1,363 @@
+<link rel="stylesheet" type ="text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/form.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/input-details-page.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/popups.css">
+
+<style>
+    .input-pair-row{
+        display: flex;
+        flex-direction: column;
+    }
+    .input-pair-row.second, .input-pair.second{
+        margin-left: 20px;
+    }
+     .column-section.second{
+         margin-left: 22px;
+     }
+     .input-pair.row1-col2{
+         margin-left: 22px;
+     }
+     .input-pair.third{
+         margin-left: 20px;
+     }
+    .form-encasing-container{
+        height: 650px;
+        margin-bottom: 20px;
+    }
+    .last-name-input {
+        margin-right: 0rem;
+    }
+    .column-section1{
+        margin-left: 20px;
+    }
+    .form-section{
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .first-name-input,          .middle-name-input,         .last-name-input, 
+    .resident-birthday-input,   .resident-sex-input,        
+    .register-senior-input,     .register-contactno-input,  .status-dropdown-view,
+    .resident-rent-own-dropdown-view,   .resident-number-of-residents-in-household-input{
+        width: 15rem;
+    }
+    input[readonly], .resident-rent-own-dropdown-view, .status-dropdown-view{
+        background: var(--gray) !important;
+    }
+    
+    .last-name-input{
+         margin-right: 0px;
+    }
+    .column-section {
+        padding-right: 0rem;
+    }
+    .form-section.housing-row{
+        justify-content: flex-start;
+    }
+    .button{
+        height: 3rem;
+        width: 6rem;
+    }
+
+    .resident-email-input {
+        margin-right: 18px;
+        width: 15rem;
+    }
+    .resident-age-input {
+        margin-left: -5px;
+        margin-right: 18px;
+        width: 15rem;
+    }
+
+    #senior-row {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 50px;
+    }
+
+    .register-senior-input{
+        height: 35px;
+    }
+
+    .register-address-input {
+        width: 780px;
+    }
+
+    #seniorCitizen[readonly] {
+        background-color: #D9D9D9;
+        pointer-events: none;
+    }
+</style>
+
+<div class="main-container" id="main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/admin-homepage" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/admin-homepage" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Employee</span>
+                <img src="/images/employee-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
+        </div>
+    </div>
+
+     <div class = "page-content-container" id="view-case-page">
+        <div class="back-and-title">
+            <div class="upper-container" id="form-upper-container">
+                <a href="/admin-resident-db-view" class="back-button" id="black-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Back
+                </a>
+            </div>
+            <h1 id = "lupon-case-title">Viewing Resident Details</h1>
+        </div>
+
+        <div class = "form-encasing-container">
+            <div class = "form-actual-container">
+                <form id="case-form" class="case-form">
+                    
+                    <div class = "form-section middle" id = "respondent-servicerequestno-row">
+                        <div class = "column-section">
+                            <div class="photo-container">
+                                <img src="{{residents.img}}" class="details-profile" id="deets-profile-img">
+                            </div>
+                        </div>
+                        
+                        <div class = "column-section">
+                            <label for="respondent-service-request-no" class ="bold-label">Service Request ID #</label>
+                            <input class="case-type-input" type = "text" id = "case-type" placeholder="---" value="{{residents.ServiceRequestID}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class = "form-section" id = "respondent-fullname-row">
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="{{residents.FirstName}}" readonly>
+                        </div>
+                        <div class = "input-pair row1-col2">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." value="{{residents.MiddleInitial}}" readonly>
+                        </div>
+                        <div class = "input-pair third">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{residents.LastName}}" readonly>
+                        </div>
+                    </div>
+                    
+
+                    <div class = "form-section" id = "respondent-fullname-row">
+                        <div class = "input-pair">
+                            <label for="resident-birthday">Birthday</label>
+                            <input class = "resident-birthday-input" id="birthdateInput" type = "date" value="{{residents.Birthday}}" name="Birthday" readonly>
+                        </div>
+                       
+                       <div class = "input-pair second">
+                            <label for="resident-age">Age</label>
+                            <input class = "resident-age-input" type = "number" value="{{residents.Age}}" name="Age" readonly id="age">
+                        </div>
+                        
+                        <div class = "input-pair Third">
+                            <label for="resident-sex">Sex</label>
+                            <input class = "resident-sex-input" type = "text" value="{{residents.Sex}}" name="Sex" readonly id="sex">
+                        </div>
+                    </div>
+
+                    
+                    <div class = "form-section" id = "respondent-senior-contactno-civilstatus-row">
+                        <div class = "column-section">
+                            <label for="resident-email">Email</label>
+                            <input class = "resident-email-input" type ="text" value="{{residents.Email}}" name="Email" readonly id="email">
+                        </div>
+                        
+                        <div class = "column-section">
+                            <label for="register-contactno">Contact No.</label>
+                            <input class="register-contactno-input" type = "number" value="{{residents.ContactNo}}" name="ContactNo" readonly id="contactNo">
+                        </div>
+                        
+                        <div class="column-section1">
+                            <label for="case-form">Civil Status</label>
+                            <select name="case-form" class="status-dropdown-view" readonly>
+                                <option value="" disabled hidden>Select Status</option>
+                                <option value="0" {{checkCivilStatus residents.CivilStatus 'Single'}}>Single</option>
+                                <option value="1" {{checkCivilStatus residents.CivilStatus 'Married'}}>Married</option>
+                                <option value="2" {{checkCivilStatus residents.CivilStatus 'Separated'}}>Separated</option>
+                                <option value="3" {{checkCivilStatus residents.CivilStatus 'Widowed'}}>Widowed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class = "column-section" id="senior-row">
+                        <label for="register-senior">Senior</label>
+                        <select class="register-senior-input" name="isSeniorCitizen" id="seniorCitizen" readonly>
+                            <option value="" selected hidden>Select</option> 
+                            <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
+                            <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
+                        </select>
+                    </div>
+
+                    <div class = "column-section" id="senior-row">
+                        <label for="register-address">Full Address</label>
+                        <input class="register-address-input case" type = "textarea" id = "case-type" value="{{residents.Address}}" name="Address" readonly>
+                    </div>
+
+                    <span class = "section-name">Housing Information</span>
+                    <div class = "form-section housing-row" id = "respondent-address-row">
+                        <div class = "input-pair-row first">
+                            <label for="resident-rent-own">Rent / Own</label>
+                            <select name="resident-rent-own" class="resident-rent-own-dropdown-view" readonly>
+                                <option value="" disabled hidden>Select</option>
+                                <option value="1" {{checkHousing residents.HousingInfo 'Rent'}}>Rent</option>
+                                <option value="0" {{checkHousing residents.HousingInfo 'Own'}}>Own</option>
+                            </select>
+                        </div>
+
+                        <div class = "input-pair-row second">
+                            <label for="resident-number-of-residents-in-household">Number of Resident/s in Household</label>
+                            <input class = "resident-number-of-residents-in-household-input" type = "text" placeholder="3" value="" readonly>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>  
+        </div>
+        
+        <div class = "buttons-container">
+            {{#checkArchived residents.isArchived}}
+                <button type="button" id="archiveButton" class="form-btn archive"><img src="/images/form-trash.png"><span>Archive this record</span></button></a>
+
+                <div class="overlay" id="overlay"></div>
+                <div class="popup1" id="popup1">
+                    <div class="upper-container-popup">
+                        <div class="main-header">
+                            <div class="question-label">Are you sure you want to <br> archive this record?</div>
+                            <img src="/images/close.png" class="closebtn"/>
+                        </div>
+
+                        <div class="prompt-label font-light">
+                            Archived records will be <span class="font-red font-light">deleted permanently</span> after 30 days. You may <span class="font-green font-light">recover</span> through the <span class="font-green">Archives Database</span>
+                        </div>.
+                        
+                        <div class="bottom-container">
+                            <a href="/admin-archive-resident-info/{{residents._id}}"><button class="archive-btn margin button">Archive</button></a>
+                            <button class="cancel-btn-popup margin button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup2" id="popup2">
+                    <div class="upper-container-popup">
+                        <div class="main-header">
+                            <div class="header-label">Record successfully archived</div>
+                            <img src="/images/close.png" class="closebtn"/>
+                        </div>
+                        <div class="prompt-label font-light small">Redirecting you to the Archives Database...</div>
+                    </div>
+                </div>
+            {{else}}
+                <button type="button" class="form-btn edit" onclick="openRestore_AdminResident('{{residents._id}}')">
+                    <img src="/images/restore.png">
+                    <span>Restore Record</span>
+                </button>
+            {{/checkArchived}}
+        </div>
+    </div>
+</div>    
+
+<div id="restoreModal_AdminResident" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRestoreModal_AdminResident()">&times;</span>
+        <h2>Restore Record</h2>
+        <p>Are you sure you want to restore this record?</p>
+        <button id="confirmRestoreBtn_AdminResident" class="restore-btns">Yes</button>
+        <button class="restore-btns" onclick="closeRestoreModal_AdminResident()">No</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const popup1 = document.getElementById('popup1');
+    const popup2 = document.getElementById('popup2');
+    const overlay = document.getElementById('overlay');
+    const archiveButton = document.getElementById('archiveButton');
+    const archiveBtnPopup = document.querySelector('.archive-btn');
+    const cancelBtnPopup = document.querySelector('.cancel-btn-popup');
+    const closeBtns = document.querySelectorAll('.closebtn');
+
+    function showPopup(popup) {
+        overlay.style.display = 'block'; 
+        popup.style.display = 'block';   
+    }
+
+    function hidePopup(popup) {
+        overlay.style.display = 'none';  
+        popup.style.display = 'none';    
+    }
+
+    if(archiveButton) {
+        archiveButton.addEventListener('click', function() {
+            showPopup(popup1);
+        });
+    }
+
+    if(archiveBtnPopup) {
+        archiveBtnPopup.addEventListener('click', function() {
+            hidePopup(popup1); 
+            showPopup(popup2); 
+
+            setTimeout(function() {
+                window.location.href = "/admin-resident-db-view";
+            }, 500); 
+        });
+    }
+
+    if(cancelBtnPopup) {
+        cancelBtnPopup.addEventListener('click', function() {
+            hidePopup(popup1);
+        });
+    }
+
+    if(closeBtns) {
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                hidePopup(this.closest('.popup1, .popup2'));
+            });
+        });
+    }
+});
+
+//MODAL
+function openRestore_AdminResident(residents) {
+    // Open the modal
+    document.getElementById('restoreModal_AdminResident').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtn_AdminResident').onclick = function() {
+        window.location.href = '/restore-resident-admin/' + residents; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModal_AdminResident() {
+    document.getElementById('restoreModal_AdminResident').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModal_AdminResident');
+    if (event.target == modal) {
+        closeRestoreModal_AdminResident();
+    }
+};
+
+</script>

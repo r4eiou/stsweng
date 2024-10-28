@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <title>
+      Barangay Parang - Signup Page
+    </title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- TO BE USED AS SIGNUP PAGE replace with signup.hbs after routes fixed -->
+    <div class="main-container">
+      <div class="ls-panel">
+        <div class="ls-panel-left">
+          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+          <h1>Barangay Parang</h1>
+        </div>
+        <div class="ls-panel-main">
+          <span class="ls-panel-title" id="login-title">Signup</span>
+          
+          {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
+            <div class="ls-error-notice">
+              <ul>
+                <li>{{error}}</li>
+              </ul>
+            </div>
+          {{/if}}
+
+          <!--signup main form-->
+          <!-- TODO: check-signup route -->
+          <form class="signup-form" action="check-signup" method="post">
+            <div class="ls-field" id="signup-field">
+              <label for="firstname">First Name</label>
+              <input type="text" id="first_name" name="firstname" placeholder="First Name" />
+            </div>
+            <div class="ls-field" id="signup-field">
+              <label for="lastname">Last Name</label>
+              <input type="text" id="last_name" name="lastname" placeholder="Last Name" />
+            </div>
+            <div class="ls-field" id="signup-field">
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email" placeholder="Email" />
+            </div>
+            <div class="ls-field" id="signup-field">
+              <label for="password">Password</label>
+              <input type="password" id="pw" name="password" placeholder="Password" />
+            </div>
+            <div class="signup-submit">
+              <input type="submit" value="Signup" id="signup-submit-btn" />
+            </div>
+            <!--signup main form-->
+          </form>
+
+          <p>
+            Already have an account?
+            <a class="login-link" href="/login">Login</a>
+          </p>
+          <div class="return-btn">
+            <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- for not registered 
+    <div id="notRegisteredModal" class="modal" style="display: block;">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>You are not yet registered.</h2>
+        <p>Please contact the barangay for registration inquiries.</p>
+      </div>
+      -->
+
+    {{#if accountCreated}}
+      <!-- Success Modal -->
+      <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>{{header}}</h2>
+          <p>{{sub}}</p>
+        </div>
+      </div>
+    {{/if}}
+
+    <script>
+      var modal = document.getElementById("successModal");
+      if (modal) {
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

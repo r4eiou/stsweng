@@ -1,0 +1,384 @@
+<link rel = "stylesheet" type="text/css" href="/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
+<style>
+    .search-name-reg form{
+        width: 220px;
+    }
+    .box-content-page{
+        width: 50px;
+        margin-left: -700px;
+    }
+</style>
+
+<div class = "main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/tanod-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/tanod-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
+                <img src=" /images/tanod-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+        </div>
+    </div>
+
+    <div class = "page-content-container" id="view-case-page">
+        <div class="back-and-title">
+            <div class="upper-container" id="form-upper-container">
+                <a href="/employee-home" class="back-button" id="black-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Back
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content-container-admin-tanod-archive-db">
+        <div class="box-content-top">
+            <a href="/employee-create-event">
+                <button type="button" class="form-btn create size" id="createButtonEvent">                                  
+                    <img src="/images/form-create.png"> <span>Create New Event</span>  
+                </button>
+            </a>
+            <button type="button" class="form-btn resolved margin size" id="resolvedButtonEvent">    
+                <img src="/images/form-check.png">  <span>Mark as Inactive</span>   
+            </button>
+            <div class="dropdown">
+                <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Events
+                    <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
+                </button>
+                <div id="dropdown-btn" class="dropdown-content margin">
+                    <a href="#" onclick="selectOption('View All Events')">View All Events</a>
+                    <a href="#" onclick="selectOption('View Active')">View Active</a>
+                    <a href="#" onclick="selectOption('View Inactive')">View Inactive</a>
+                    <a href="#" onclick="selectOption('View Archived')">View Archived</a>
+                </div>                  
+            </div>
+            
+            
+            <div class="search-name-reg margin">
+
+                <!-- implement search function -->
+                <form id="searchFormLupon">
+                    <button type="submit"><img src="/images/search-reg.png"></button>
+                    <input type="text" placeholder="Search Name" name="search_name">
+                </form>
+            </div>
+        </div>
+        
+        <table class="employee-event-table">
+            <thead>
+                <tr>
+                    <th colspan="1"></th>
+                    <th colspan="1" >Headline</th>
+                    <th>Event Information</th>
+                    <th colspan="2">Event Status</th>
+                </tr>
+            </thead>
+    
+            <tbody id="employee-event-table-body">
+                <tr> 
+                    <td data-label="checkbox " class="align-right check-view-cell">
+                        <button type="button" class="checkbox" name="" value=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link" >View Event Details</a>
+                    </td>
+                </tr>  
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr> 
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="headline-cell">
+                        Headline Here
+                    </td>
+                    <td class="event-info-cell">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                    </td>
+                    <td class="case-status-cell">
+                        <button type="button" class="status ongoing margin3" data-case-id=""><img src="/images/ongoing-circle.png"><span>Archived</span></button>
+                    </td>
+                    <td class="align-left">
+                        <a href="/employee-view-archive-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                    </td>
+                </tr>             
+            </tbody>
+        </table>
+    
+        <div class="box-content-page">
+            <button class="page-btn" id="count-down">&lt;</button>
+            <div class="page-count" id="page-num">{{currentPage}}</div>
+            <button class="page-btn" id="count-up">&gt;</button>
+            {{#if (eq 0 totalPages)}}
+                <div class="page-number">Page {{currentPage}} of 1</div>
+            {{else}}
+                <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
+            {{/if}}
+        </div>
+    </div>
+
+<script>
+    document.querySelectorAll('.checkbox').forEach(button => {
+        button.addEventListener('click', function() {
+            this.classList.toggle('clicked');
+        });
+    });
+
+
+    function dropdown() {
+        var dropdownContent = document.getElementById("dropdown-btn");
+        var dropdownImg = document.getElementById("dropdown-down-btn");
+
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+            dropdownImg.src = "/images/dropdown-down.png";
+        } else {
+            dropdownContent.style.display = "block";
+            dropdownImg.src = "/images/dropdown-up.png";
+        }
+    }
+
+    function selectOption(optionText) {
+        var dropdownButton = document.getElementById("dropdownButton");
+        var dropdownImg = document.getElementById("dropdown-down-btn");
+
+        dropdownButton.innerHTML = optionText + ' <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>';
+        document.getElementById("dropdown-btn").style.display = "none";
+
+        if (optionText === 'View All Events') {
+            showAllRows();
+            enableButtons();
+        }else if (optionText === 'View Active') {
+            filterRows('Active');
+        } else if (optionText === 'View Inactive') {
+            filterRows('Inactive');
+            enableButtons();
+        } else if (optionText === 'View Archived') {
+            
+            filterRows('Archived');
+            disableButtons();
+        } 
+    }
+
+    function filterRows(status) {
+    var rows = document.querySelectorAll("#employee-event-table-body tr");
+
+    rows.forEach(function(row) {
+        var statusText = row.querySelector(".case-status-cell button span").textContent.trim();
+        var viewCaseLink = row.querySelector(".view-event-detail-link");
+
+        if (statusText === status) {
+            row.style.display = "table-row";
+            if (status === "Archived") {
+                viewCaseLink.textContent = "View Archive Event";
+                viewCaseLink.href = "/employee-view-archive-event";
+            }
+        } else {
+            row.style.display = "none";
+            viewCaseLink.textContent = "View Event Details";
+            viewCaseLink.href = "/employee-view-event";
+        }
+    });
+    }
+
+
+    function showAllRows() {
+        var rows = document.querySelectorAll("#employee-event-table-body tr");
+        rows.forEach(function(row) {
+            row.style.display = "table-row";
+        });
+    }
+
+    function disableButtons() {
+        var createButton = document.getElementById('createButtonEvent');
+        var createLink = createButton.parentElement;
+        var resolveButton = document.getElementById('resolvedButtonEvent');
+
+        createButton.classList.add('disabled');
+        createLink.classList.add('disabled');
+        createLink.setAttribute('href', '#');
+
+        resolveButton.classList.add('disabled');
+
+        createButton.onclick = function(event) {
+            event.preventDefault();
+        };
+        resolveButton.onclick = function(event) {
+            event.preventDefault();
+        };
+    }
+
+    function enableButtons() {
+        var createButton = document.getElementById('createButtonEvent');
+        var createLink = createButton.parentElement;
+        var resolveButton = document.getElementById('resolvedButtonEvent');
+
+        createButton.classList.remove('disabled');
+        createLink.classList.remove('disabled');
+        createLink.setAttribute('href', '/employee-create-event');
+
+        resolveButton.classList.remove('disabled');
+
+        createButton.onclick = null;
+        resolveButton.onclick = null;
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+
+            var dropdownImg = document.getElementById("dropdown-down-btn");
+            dropdownImg.src = "/images/dropdown-down.png";
+        }
+    };
+
+    function trimText(selector, maxLength) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            const text = element.textContent.trim();
+            if (text.length > maxLength) {
+                element.textContent = text.substring(0, maxLength) + '...';
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        trimText('.headline-cell', 15);
+        trimText('.event-info-cell', 25);
+    });
+
+</script>
+
+</div>

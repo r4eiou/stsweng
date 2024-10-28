@@ -148,11 +148,11 @@ html {
     background-color: #EAF3F7;
   }
 
-  input[readonly], .status-dropdown-view, textarea[readonly]{
-    background-color: var(--gray) !important;
+  input[readonly], .status-dropdown-view, .resident-rent-own-dropdown-view, textarea[readonly]{
+    background-color: #EAF3F7;
   }
 
-  .status-dropdown, .status-dropdown-view {
+  .status-dropdown, .status-dropdown-view, .resident-rent-own-dropdown-view {
     height: 2.188rem;
     width: 9.65rem;
   }
@@ -314,7 +314,7 @@ html {
   }
   */
 
-.status-dropdown-view[readonly] {
+  .status-dropdown-view[readonly] ,.resident-rent-own-dropdown-view[readonly]{
     pointer-events: none;
 }
 
@@ -400,3 +400,25 @@ textarea {
   cursor: pointer;
 }
 
+.text-container-archive-box{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.text-container-archive{
+  display: flex;
+  flex-direction: row;
+  width:435px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#event-details-title{
+  color:var(--dgreen);
+  text-align: center;
+}
+#event-details-title-archive{
+  color:#717171;
+  text-align: center;
+}

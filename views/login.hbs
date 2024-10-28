@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>
+      Barangay Parang - Login Page
+    </title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/security.js"></script>
+    
+  </head>
+  <body>
+    <!-- TO BE USED AS LOGIN PAGE replace with login.hbs after routes fixed -->
+    <div class="main-container">
+      <div class="ls-panel">
+        <div class="ls-panel-left">
+          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+          <h1>Barangay Parang</h1>
+        </div>
+        <div class="ls-panel-main">
+          <span class="ls-panel-title" id="login-title">Login</span>
+          
+          {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
+            <div class="ls-error-notice">
+              <ul>
+                <li>{{error}}</li>
+              </ul>
+            </div>
+          {{/if}}
+          
+          <!--login main form-->
+          
+          <form class="login-form" action="check-login" method="post">
+            <div class="ls-field" id="login-field">
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email" placeholder="Email" />
+            </div>
+            <div class="ls-field" id="login-field">
+              <label for="password">Password</label>
+              <input type="password" id="pw" name="password" placeholder="Password" />
+            </div>
+
+            <!-- Forgot Password option, initially hidden -->
+            <a id="forgotPassword" href="/admin-forgot-password" style="display: none;">Forgot Password?</a>
+
+            <div class="login-submit">
+              <input type="submit" value="Login" id="login-submit-btn" />
+            </div>
+            <!--login main form-->
+          </form>
+
+          <p>
+            Don't have an account yet?
+            <a class="signup-link" href="/signup">Signup</a>
+          </p>
+          <div class="login-return">
+            <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+     
+    <div id="forgotPasswordModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Security Question</h2>
+        <p id="securityQuestion">{{securityQues}}</p> <!-- Placeholder for security question -->
+        <input type="text" id="securityAnswer" placeholder="Enter your answer" autocomplete="off" />
+        <button id="submitAnswer">Submit</button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -13,7 +13,6 @@ const mongoose = require('mongoose');
 // });
 
 const mongo_uri = 'mongodb+srv://admin_parang:YT66GhDJ43QUqVpT@stsweng.2sxw2.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=STSWENG';
-
 const run = async () => {
     await mongoose.connect(mongo_uri);
     console.log("Connected to myDB");
@@ -279,11 +278,11 @@ const SecurityQuestion = new mongoose.Schema ({
 });
 
 const ResidentSchema = new mongoose.Schema ({
-    img : {
+    _id: {
         type: String,
         required: true
     },
-    _id: {
+    img : {
         type: String,
         required: true
     },
@@ -299,6 +298,14 @@ const ResidentSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    Age : {
+        type: Number,
+        required: true
+    },
+    Email : {
+        type: String,
+        required: true
+    },
     Birthday : {
         type: String,
         required: true
@@ -308,10 +315,6 @@ const ResidentSchema = new mongoose.Schema ({
         required: true
     },
     Address : {
-        type: String,
-        required: true
-    },
-    Birthday : {
         type: String,
         required: true
     },
@@ -337,8 +340,11 @@ const ResidentSchema = new mongoose.Schema ({
     },
     ServiceRequestID : { // can be null
         type: Number,
-        required: true
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const CertificateInfo = new mongoose.Schema ({

@@ -568,6 +568,83 @@ const submitEditTanodAcc = async (req, res) => {
     }
 }
 
+
+const adminViewResidentDB = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-homepage';
+        res.render('admin-resident-db-view', {
+            layout: 'layout',
+            title: 'Admin: Resident DB View',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+const adminRegisterResident = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-homepage';
+        res.render('admin-register-resident', {
+            layout: 'layout',
+            title: 'Admin: Create Resident Detail',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+const adminViewResident = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-homepage';
+        res.render('admin-view-resident', {
+            layout: 'layout',
+            title: 'Admin: View Resident Detail',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+const adminViewArchiveResident = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-homepage';
+        res.render('admin-view-archive-resident', {
+            layout: 'layout',
+            title: 'Admin: View Archive Resident Detail',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+const adminEditResident = async (req, res) => {
+    try {
+        req.session.previousPage = req.session.lastpage;
+        req.session.lastpage = '/admin-homepage';
+        res.render('admin-edit-resident', {
+            layout: 'layout',
+            title: 'Admin: View Archive Resident Detail',
+            cssFile1: 'homepage'
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+
 module.exports = {
     getLogin,
     checkAnswer,
@@ -594,5 +671,11 @@ module.exports = {
     editTanodAcc,
     submitEditTanodAcc,
 
-    viewAllAccountsSecurity
+    viewAllAccountsSecurity,
+
+    adminViewResidentDB,
+    adminRegisterResident,
+    adminViewResident,
+    adminViewArchiveResident,
+    adminEditResident
 }

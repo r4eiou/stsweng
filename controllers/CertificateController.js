@@ -2,7 +2,102 @@ const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
 
-//EMPLOYEE
+// PAKISEPARATE NG FILE
+const viewEventsDB = async (req, res) => {
+    req.session.lastpage = '/employee-check-clearance';
+    res.render('employee-event-db-view',{
+        layout: 'layout',
+        title: 'Barangay Parang - Employee Event DB View'
+    });
+};
+
+const viewEvents = async (req, res) => {
+    req.session.lastpage = '/eemployee-view-events-db';
+    res.render('employee-view-event',{
+        layout: 'layout',
+        title: 'Barangay Parang - Employee Event View Details',
+        cssFile1: 'homepage',
+        cssFile2: 'event-details'
+    }); 
+};
+
+const viewArchivedEvents = async (req, res) => {
+    req.session.lastpage = '/employee-view-events-db';
+    res.render('employee-view-archive-event',{
+        layout: 'layout',
+        title: 'Barangay Parang - Employee Archive Event Details',
+        cssFile1: 'homepage',
+        cssFile2: 'event-details'
+    });
+};
+
+const createEvent = async (req, res) => {
+    req.session.lastpage = '/employee-view-events-db';
+    res.render('employee-create-event',{
+        layout: 'layout',
+        title: 'Barangay Parang - Employee Create Event',
+        cssFile1: 'homepage',
+        cssFile2: 'event-details'
+    });
+};
+
+const editEvent = async (req, res) => {
+    req.session.lastpage = '/employee-view-event';
+    res.render('employee-edit-event',{
+        layout: 'layout',
+        title: 'Barangay Parang - Employee Edit Event',
+        cssFile1: 'homepage',
+        cssFile2: 'event-details'
+    });
+};
+// ----------------------------------------
+
+// const viewResidentDB = async (req, res) => {
+//     req.session.lastpage = '/employee-check-clearance';
+//     res.render('employee-resident-db',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Event',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewArchivedResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-archive-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Archive Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const editResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-edit-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const createResidentRecord = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-register-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Create Resident Details',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+//employee
 const viewCertClearance = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-check-clearance',{
@@ -451,6 +546,8 @@ const checkCedulaNum = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     isClearedEmployee,
     onClickView,
@@ -468,5 +565,18 @@ module.exports = {
     deleteCertificate,
     searchCertificateCase,
     viewSearchCertificateDB,
-    checkCedulaNum
+    checkCedulaNum,
+
+    viewEvents,
+    viewArchivedEvents,
+    viewEventsDB,
+    createEvent,
+    editEvent,
+
+
+    // viewResidentDB,
+    // viewResident,
+    // viewArchivedResident,
+    // editResident,
+    // createResidentRecord
 }

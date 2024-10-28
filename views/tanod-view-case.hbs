@@ -1,145 +1,217 @@
 <link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/popups.css">
+
 <div class = "main-container">
-            <div class= "header" id="header">
-                <div class = "header-left">
-                    <a href="/tanod-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
-                    <a href="/tanod-home" class="header-home" id="home-link2"><h3>Home</h3></a>
-                </div>
-                
-                <div class = "header-title">
-                    <div class = "header-text">
-                        <h3>Sangguniang Barangay ng Parang</h3>
-                        <h5>Marikina City</h5>
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/tanod-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/tanod-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
+                <img src="/images/tanod-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+        </div>
+    </div>
+    <div class = "page-content-container" id="view-case-page">
+        <div class="back-and-title">
+            <div class="upper-container" id="form-upper-container">
+            <!-- Back button should be changed to admin tanod view page (database) -->
+                <a href="/tanod-home" class="back-button" id="black-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
+                    </svg>
+                    Back
+                </a>
+            </div>
+            <h1 id = "tanod-case-title">Tanod Case Details</h1>
+        </div>
+        <div class = "form-encasing-container">
+            <div class = "form-actual-container">
+                <form class="case-form">
+                    <div class = "form-section" id = "basic-info">
+                        <div class = "column-section">
+                            <label for="entry-number-input" class ="bold-label">Entry Number</label>
+                            <input class = "entry-number-input" type = "text" placeholder= "Entry Number" value="{{case.EntryNo}}" readonly>
+                        </div>
+                        <div class = "column-section">
+                            <label for="date" class ="bold-label">Date</label>
+                            <input type = "date" id = "dateInput" value="{{case.Date}}" readonly>
+                        </div>
+                        <div class = "column-section1">
+                            <label for="case-form" class ="bold-label">Status</label>
+                            <select name="case-form" class="status-dropdown-view" selected = "1">
+                                <option value="" disabled hidden>Select Status</option>
+                                <option value="Resolved" {{resolveStat}}>Resolved</option>
+                                <option value="Ongoing" {{ongoingStat}}>Ongoing</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="header-right">
-                    <div class="header-user-profile">
-                        <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
-                        <img src="/images/tanod-profile.png" class="header-user-profile" id="profile-img">
+                    <span class = "section-name">Reportee Information</span>
+                    <div class = "form-section" id = "reportee-info">
+                        <div class = "input-pair">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{reporteeInfo.LastName}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{reporteeInfo.MiddleInitial}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="{{reporteeInfo.FirstName}}" readonly>
+                        </div>
                     </div>
-                    <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
+                    <div class="form-section" id = "reportee-additional-info">
+                        <div class = "input-pair">
+                            <label for="">Reportee Address</label>
+                            <input class = "address-input" type = "text" placeholder="Reportee Address" value="{{reporteeInfo.Address}}" readonly> 
+                        </div>
+                    </div>
+                    <span class="section-name">Nature of Blotter</span>
+                    <div class = "form-section">
+                        <div class = "input-pair">
+                            <input class = "nature-of-blotter-input" type = "text" placeholder="Nature of Blotter" value="{{case.natureOfBlotter}}" readonly>
+                        </div>
+                    </div>
+                    <span class = "section-name">Respondent Information</span>
+                    <div class = "form-section" id = "respondent-info">
+                        <div class = "input-pair">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{respondentInfo.LastName}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{respondentInfo.MiddleInitial}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="{{respondentInfo.FirstName}}" readonly>
+                        </div>
+                    </div>
+                    <span class = "section-name">Desk Officer Information</span>
+
+                    <div class = "form-section" id = "desk-officer-information">
+                        <div class = "input-pair">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{deskInfo.LastName}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{deskInfo.MiddleInitial}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="{{deskInfo.FirstName}}" readonly>
+                        </div>
+                    </div>
+                    <span class = "section-name">Witness Information</span>
+                    <div class = "form-section" id = "witness-information">
+                        <div class = "input-pair">
+                            <label for="last-name-input">Last Name</label>
+                            <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{witnessInfo.LastName}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="middle-initial-input">Middle Initial</label>
+                            <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{witnessInfo.MiddleInitial}}" readonly>
+                        </div>
+                        <div class = "input-pair">
+                            <label for="first-name-input">First Name</label>
+                            <input class = "first-name-input" type = "text" placeholder="First Name" value="{{witnessInfo.FirstName}}" readonly>
+                        </div>
+                    </div>
+                    <span class ="section-name">Location</h5>
+                    <div class = "form-section" id="location">
+                        <div class = "input-pair">
+                            <input class = "location-input" type = "text" placeholder="Location" value="{{case.Location}}" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>  
+        </div>
+        <div class = "buttons-container">
+            <a href="/tanod-mark-resolve/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn resolved" {{isEditable}}><img src="/images/form-check.png"><span>Mark as Resolved</span></button></a>
+            <a href="/tanod-edit-case/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn edit " {{isEditable}}><img src="/images/form-edit.png"><span>Edit Data</span></button></a>
+            <button type="button" id="archiveButton" class="form-btn delete"><img src="/images/form-trash.png"><span>Archive this record</span></button>
+            <div class="overlay" id="overlay"></div>
+            <div class="popup1" id="popup1">
+                <div class="upper-container-popup">
+                    <div class="main-header">
+                        <div class="question-label">Are you sure you want to <br> archive this record?</div>
+                        <img src="/images/close.png" class="closebtn"/>
+                    </div>
+                    <div class="prompt-label font-light">
+                        Archived records will be <span class="font-red font-light">deleted permanently</span>  <br>after30 days. You may <span class="font-green font-light">recover</span> through the <span class="font-green">Archives Database</span></div>.
+                    </div>
+                    <div class="bottom-container-popup">
+                        <button class="archive-btn margin">Archive</button>
+                        <button class="cancel-btn-popup margin">Cancel</button>
+                    </div>
                 </div>
             </div>
-            <div class = "page-content-container" id="view-case-page">
-                <div class="back-and-title">
-                    <div class="upper-container" id="form-upper-container">
-                    <!-- Back button should be changed to admin tanod view page (database) -->
-                        <a href="/tanod-home" class="back-button" id="black-back-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
-                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"></path>
-                            </svg>
-                            Back
-                        </a>
+            <div class="popup2" id="popup2">
+                <div class="upper-container-popup">
+                    <div class="main-header">
+                        <div class="header-label">Record successfully archived</div>
+                        <img src="/images/close.png" class="closebtn"/>
                     </div>
-                    <h1 id = "tanod-case-title">Tanod Case Details</h1>
-                </div>
-                <div class = "form-encasing-container">
-                    <div class = "form-actual-container">
-                        <form class="case-form">
-                            <div class = "form-section" id = "basic-info">
-                                <div class = "column-section">
-                                    <label for="entry-number-input" class ="bold-label">Entry Number</label>
-                                    <input class = "entry-number-input" type = "text" placeholder= "Entry Number" value="{{case.EntryNo}}" readonly>
-                                </div>
-                                <div class = "column-section">
-                                    <label for="date" class ="bold-label">Date</label>
-                                    <input type = "date" id = "dateInput" value="{{case.Date}}" readonly>
-                                </div>
-                                <div class = "column-section1">
-                                    <label for="case-form" class ="bold-label">Status</label>
-                                    <select name="case-form" class="status-dropdown-view" selected = "1">
-                                        <option value="" disabled hidden>Select Status</option>
-                                        <option value="Resolved" {{resolveStat}}>Resolved</option>
-                                        <option value="Ongoing" {{ongoingStat}}>Ongoing</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <span class = "section-name">Reportee Information</span>
-                            <div class = "form-section" id = "reportee-info">
-                                <div class = "input-pair">
-                                    <label for="last-name-input">Last Name</label>
-                                    <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{reporteeInfo.LastName}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="middle-initial-input">Middle Initial</label>
-                                    <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{reporteeInfo.MiddleInitial}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="first-name-input">First Name</label>
-                                    <input class = "first-name-input" type = "text" placeholder="First Name" value="{{reporteeInfo.FirstName}}" readonly>
-                                </div>
-                            </div>
-                            <div class="form-section" id = "reportee-additional-info">
-                                <div class = "input-pair">
-                                    <label for="">Reportee Address</label>
-                                    <input class = "address-input" type = "text" placeholder="Reportee Address" value="{{reporteeInfo.Address}}" readonly> 
-                                </div>
-                            </div>
-                            <span class="section-name">Nature of Blotter</span>
-                            <div class = "form-section">
-                                <div class = "input-pair">
-                                    <input class = "nature-of-blotter-input" type = "text" placeholder="Nature of Blotter" value="{{case.natureOfBlotter}}" readonly>
-                                </div>
-                            </div>
-                            <span class = "section-name">Respondent Information</span>
-                            <div class = "form-section" id = "respondent-info">
-                                <div class = "input-pair">
-                                    <label for="last-name-input">Last Name</label>
-                                    <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{respondentInfo.LastName}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="middle-initial-input">Middle Initial</label>
-                                    <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{respondentInfo.MiddleInitial}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="first-name-input">First Name</label>
-                                    <input class = "first-name-input" type = "text" placeholder="First Name" value="{{respondentInfo.FirstName}}" readonly>
-                                </div>
-                            </div>
-                            <span class = "section-name">Desk Officer Information</span>
-
-                            <div class = "form-section" id = "desk-officer-information">
-                                <div class = "input-pair">
-                                    <label for="last-name-input">Last Name</label>
-                                    <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{deskInfo.LastName}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="middle-initial-input">Middle Initial</label>
-                                    <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{deskInfo.MiddleInitial}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="first-name-input">First Name</label>
-                                    <input class = "first-name-input" type = "text" placeholder="First Name" value="{{deskInfo.FirstName}}" readonly>
-                                </div>
-                            </div>
-                            <span class = "section-name">Witness Information</span>
-                            <div class = "form-section" id = "witness-information">
-                                <div class = "input-pair">
-                                    <label for="last-name-input">Last Name</label>
-                                    <input class = "last-name-input" type ="text" placeholder="Last Name" value="{{witnessInfo.LastName}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="middle-initial-input">Middle Initial</label>
-                                    <input class = "middle-name-input" type = "text" placeholder="M.I." maxlength="1" value="{{witnessInfo.MiddleInitial}}" readonly>
-                                </div>
-                                <div class = "input-pair">
-                                    <label for="first-name-input">First Name</label>
-                                    <input class = "first-name-input" type = "text" placeholder="First Name" value="{{witnessInfo.FirstName}}" readonly>
-                                </div>
-                            </div>
-                            <span class ="section-name">Location</h5>
-                            <div class = "form-section" id="location">
-                                <div class = "input-pair">
-                                    <input class = "location-input" type = "text" placeholder="Location" value="{{case.Location}}" readonly>
-                                </div>
-                            </div>
-                        </form>
-                    </div>  
-                </div>
-                <div class = "buttons-container">
-                    <a href="/tanod-mark-resolve/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn resolved" {{isEditable}}><img src="/images/form-check.png"><span>Mark as Resolved</span></button></a>
-                    <a href="/tanod-edit-case/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn edit " {{isEditable}}><img src="/images/form-edit.png"><span>Edit Data</span></button></a>
-                    <a href="/tanod-delete-case/{{case.EntryNo}}"><button type="button" class="form-btn delete"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
+                    <div class="prompt-label font-light small">Redirecting you to the Archives Database...</div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const popup1 = document.getElementById('popup1');
+    const popup2 = document.getElementById('popup2');
+    const overlay = document.getElementById('overlay');
+    const archiveButton = document.getElementById('archiveButton');
+    const archiveBtnPopup = document.querySelector('.archive-btn');
+    const cancelBtnPopup = document.querySelector('.cancel-btn-popup');
+    const closeBtns = document.querySelectorAll('.closebtn');
+
+    function showPopup(popup) {
+        overlay.style.display = 'block'; 
+        popup.style.display = 'block';   
+    }
+
+    function hidePopup(popup) {
+        overlay.style.display = 'none';  
+        popup.style.display = 'none';    
+    }
+
+    archiveButton.addEventListener('click', function() {
+        showPopup(popup1);
+    });
+
+    archiveBtnPopup.addEventListener('click', function() {
+        hidePopup(popup1); 
+        showPopup(popup2); 
+        setTimeout(function() {
+            window.location.href = "/tanod-home";
+        }, 1000);
+    });
+
+    cancelBtnPopup.addEventListener('click', function() {
+        hidePopup(popup1);
+    });
+
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            hidePopup(this.closest('.popup1, .popup2'));
+        });
+    });
+});
+
+</script>
