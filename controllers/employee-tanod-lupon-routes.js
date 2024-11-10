@@ -90,6 +90,14 @@ function add(app){
         req.session.lastpage = '/employee-home';
         resp.render('employee-home', {
             layout: 'index-employee',
+            title: 'Employee Dashboard'
+        });
+    });
+
+    app.get('/employee-index', isAuth, function(req, resp){
+        req.session.lastpage = '/employee-index';
+        resp.render('employee-index', {
+            layout: 'index-employee',
             title: 'Employee Homepage'
         });
     });

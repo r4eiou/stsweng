@@ -59,7 +59,7 @@ const checkLogin = async (req, res) => {
             console.log("ENTER EMPLOYEE PAGE")
             req.session.userRole = "Employee";
             req.session.isAuth = true;
-            return res.redirect("/employee-home");
+            return res.redirect("/employee-index");
     
         }
         //TO ADMIN PAGE
