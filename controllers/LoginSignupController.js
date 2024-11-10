@@ -38,21 +38,26 @@ const checkLogin = async (req, res) => {
     try{
         const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
         var errorMsg = "";
+        var errorflag = 0;
         // console.log(curUser.role);
         // console.log(curUser.password);
         // console.log(curUser.email);
 
         if (!email || !password) {
             errorMsg = "Email and Password fields cannot be empty."
+            errorflag = 1;
         }
         else if (!email.includes("@")) {
             errorMsg = "Invalid email.";
+            errorflag = 1;
         }
         else if (!curUser) {
             errorMsg = "User Not Found."
+            errorflag = 1;
         }
         else if (curUser.password != password) {
             errorMsg = "Incorrect password."
+            errorflag = 1;
         }
         //TO EMPLOYEE PAGE
         else if (curUser.role == "employee") {
@@ -95,12 +100,14 @@ const checkLogin = async (req, res) => {
     
         }
 
-        console.log("ERROR IN LOGIN")
-        res.render('login', {
-            layout: 'index-login',
-            title: 'Login Page',
-            error: errorMsg
-        });
+        if(errorflag) {
+            console.log("ERROR IN LOGIN")
+            res.render('login', {
+                layout: 'index-login',
+                title: 'Login Page',
+                error: errorMsg
+            });
+        }
         
     } catch(error){
         console.error('Error during login:', error);
