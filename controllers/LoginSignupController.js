@@ -67,7 +67,7 @@ const checkLogin = async (req, res) => {
             console.log("ENTER ADMIN PAGE")
             req.session.userRole = "Admin";
             req.session.isAuth = true;
-            return res.redirect("/admin-homepage");
+            return res.redirect("/admin-index");
     
         }
         //TO TANOD PAGE
@@ -75,7 +75,7 @@ const checkLogin = async (req, res) => {
             console.log("ENTER TANOD PAGE")
             req.session.userRole = "Tanod";
             req.session.isAuth = true;
-            return res.redirect("/tanod-home");
+            return res.redirect("/tanod-index");
     
         }
         //TO LUPON PAGE
@@ -83,11 +83,11 @@ const checkLogin = async (req, res) => {
             console.log("ENTER LUPON PAGE")
             req.session.userRole = "Lupon";
             req.session.isAuth = true;
-            return res.redirect("/lupon-home");
+            return res.redirect("/lupon-index");
     
         }
         //TO RESIDENT PAGE
-
+        
 
         console.log("ERROR IN LOGIN")
         res.render('login', {
