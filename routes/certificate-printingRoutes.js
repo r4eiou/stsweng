@@ -39,5 +39,7 @@ router.post('/check-cedula',                                certificateControlle
 
 //for edit cert info
 router.get('/certificate-edit-template',                   certificateController.viewCertInfoEditPage);
+router.get('/certificateInfo',                             certificateController.getCertificateInfo);
+router.post('/submit-edit-certificateInfo',                certificateController.submitEditCertInfo);
 
 module.exports = router;

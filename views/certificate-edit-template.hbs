@@ -50,28 +50,27 @@
             Editing Certificate Template Details
         </div>
 
-        <form action="/submit-edit-certificate" method="post" class="print-form">
-            <input type="hidden" name="_id" value="{{certificates._id}}" id="_id">
-            
+        <form action="/submit-edit-certificateInfo" method="post" class="print-form">   
             <div class = "edit-cert-template-panel">
                 <!-- for Photo-->
                 <div class="deets-text">Header Logo</div>
                 <div class="photo-container">
-                    
-                <img src="/images/transparent.jpg" class="details-profile" id="header-logo-img">
-                <label for="photo-upload" class="image-upload-button">Upload Photo</label>
-                <input type="file" 
-                    id="photo-upload" 
-                    accept="image/*"
-                    style="display: none;"
-                    onchange="document.getElementById('header-logo-img').src = window.URL.createObjectURL(this.files[0])">
-            </div>
+                    <img src="{{certificateInfo.img}}" class="details-profile" id="header-logo-img">
+                    <label for="photo-upload" class="image-upload-button">Upload Photo</label>
+                    <input type="file" 
+                        id="photo-upload" 
+                        accept="image/*"
+                        style="display: none;",
+                        onchange="convertToDataURL(this)">
+
+                    <input type="hidden" id="hidden-img-base64" name="img">
+                </div>
                 
                 <!-- for New Barangay Captain Name -->
                 <div class="deets2-container">
                     <div class="address-container">
                         <div class="deets-text">Barangay Captain</div>
-                        <input type="text" id="brgy-captain-name" name="brgy-captain-name" placeholder="" value="">
+                        <input type="text" id="brgy-captain-name" name="brgy_captain_name" placeholder="{{certificateInfo.brgy_capt_name}}" value="" style="text-transform: uppercase;">
                     </div>
                 </div>
 
@@ -79,7 +78,7 @@
                 <div class="deets2-container">
                     <div class="address-container">
                         <div class="deets-text">Slogan</div>
-                        <input type="text" id="slogan" name="slogan" placeholder="" value="">
+                        <input type="text" id="slogan" name="slogan" placeholder="{{certificateInfo.slogan}}" value="">
                     </div>
                 </div>
 
@@ -96,8 +95,10 @@
                     {{!-- <button type="button" class="download-btn lrg dark" onclick="downloadFileEmployee()"><img src="/images/download-dark.png"><span>Download</span></button> --}}
                     {{!-- <button type="button" class="cancel-btn light" onclick="cancelForm()"><img src="/images/cancel-light.png"><span>Cancel</span></button> --}}
                     
-                    <button type="button" class="form-btn save cert" onclick="#"><img src="/images/form-check.png"><span>Save Changes</span></button>
-                    <button type="button" class="form-btn delete cert" onclick="goBack()"><img src="/images/form-trash.png"><span>Discard Changes</span></button>
+                    <button type="button" class="form-btn save cert" id="submitBtn"><img src="/images/form-check.png"><span>Save Changes</span></button>
+                    <a href="/certificate-edit-template">
+                        <button type="button" class="form-btn delete cert"><img src="/images/form-trash.png"><span>Discard Changes</span></button>
+                    </a>
                 </div>
         </form>
     </div>
@@ -112,83 +113,52 @@
 </div>
 
 <script>
-    const { jsPDF } = window.jspdf;
+    function convertToDataURL(input) {
+        const file = input.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onloadend = function() {
+                // The result is the base64-encoded image data
+                document.getElementById('header-logo-img').src = reader.result;
+
+                // Set the value of the hidden input field to the Base64 string
+                document.getElementById('hidden-img-base64').value = reader.result;
+            };
+            
+            reader.readAsDataURL(file); // Converts the image to base64
+        }
+    }
 
     function titleCase(str) {
         return str.toLowerCase().split(' ').map(function(word) {
             return word.replace(word.charAt(0), word.charAt(0).toUpperCase());
         }).join(' ');
     }
-    
-    function goBack () {
-        const form = document.querySelector('.print-form');
 
-        const _id = form.elements['_id'].value;
+    function checkChanges() {
+        // Get all input fields
+        let inputs = document.querySelectorAll('input[type="text"], textarea');
 
-        window.location.href=`/certificate-view/${_id}`;
+        // Loop through each input field
+        inputs.forEach(input => {
+            // Check if the input field value is different from its placeholder
+            if (input.value === "") {
+                input.value = input.placeholder; // If value is empty, restore the placeholder
+            }
+        });
     }
 
-    async function downloadFileEmployee() 
-    {
-        // Perform validation
-        const isValid = await validateFormEdit();
-        
-        // If validation fails, exit the function
-        if (!isValid) {
-            return;
-        }
+    const submitButton = document.getElementById('submitBtn');
+    if (submitButton) {
+        submitButton.addEventListener('click', function () {
 
-        const form = document.querySelector('.print-form');
+            console.log("checking submitBtn")
 
-        const _id = form.elements['_id'].value;
-        const name = titleCase(form.elements['name'].value);
-        const birthday = formatBirthday(form.elements['bday-date'].value);
-        const address = titleCase(form.elements['address'].value);
-        const ctcDateIssued = formatBirthday(form.elements['ctc-date'].value);
-        const location = titleCase(form.elements['location'].value);
-        const cedula = form.elements['cedula'].value;
-        const birthPlace = titleCase(form.elements['birthplace'].value);
-        const reason = form.elements['reason'].value.toUpperCase();
-        const profileImg = document.getElementById('deets-profile-img').src;
-
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-        const dd = String(today.getDate()).padStart(2, '0');
-
-        const formattedDate = `${yyyy}-${mm}-${dd}`;
-        const certDateIssued = formatBirthday(formattedDate);
-        
-        //send data
-        const data = {
-            _id,
-            name,
-            birthday:form.elements['bday-date'].value,
-            address,
-            ctc_no: cedula,
-            ctc_date_issued: form.elements['ctc-date'].value,
-            ctc_location: location,
-            cert_date_issued: formattedDate,
-            reason,
-            img: profileImg
-        };
-
-        console.log(JSON.stringify(data));
-        
-        fetch('/submit-edit-certificate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            window.location.href=`/certificate-view/${_id}`;
-        })
-        .catch(error => {
-            console.log("error here fetch")
-            console.error('Error:', error);
+            checkChanges();
+            const form = document.querySelector('.print-form');
+            form.submit();
         });
     }
 
