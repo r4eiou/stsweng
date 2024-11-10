@@ -1,7 +1,7 @@
-const { ResidentModel } = require("../models/database/mongoose");
-
 const UserModel = require("../models/database/mongoose").UserModel;
 const SecurityModel = require("../models/database/mongoose").SecurityQuestionModel;
+
+const ResidentModel = require("../models/database/mongoose").ResidentModel;
 
 const login = async (req, res) => {
     const question = await SecurityModel.findOne({ _id : 1 }).lean();
@@ -38,28 +38,33 @@ const checkLogin = async (req, res) => {
     try{
         const curUser = await UserModel.findOne({email: email}); //finds if there is a match in users
         var errorMsg = "";
+        var errorflag = 0;
         // console.log(curUser.role);
         // console.log(curUser.password);
         // console.log(curUser.email);
 
         if (!email || !password) {
             errorMsg = "Email and Password fields cannot be empty."
+            errorflag = 1;
         }
         else if (!email.includes("@")) {
             errorMsg = "Invalid email.";
+            errorflag = 1;
         }
         else if (!curUser) {
             errorMsg = "User Not Found."
+            errorflag = 1;
         }
         else if (curUser.password != password) {
             errorMsg = "Incorrect password."
+            errorflag = 1;
         }
         //TO EMPLOYEE PAGE
         else if (curUser.role == "employee") {
             console.log("ENTER EMPLOYEE PAGE")
             req.session.userRole = "Employee";
             req.session.isAuth = true;
-            return res.redirect("/employee-home");
+            return res.redirect("/employee-index");
     
         }
         //TO ADMIN PAGE
@@ -67,7 +72,7 @@ const checkLogin = async (req, res) => {
             console.log("ENTER ADMIN PAGE")
             req.session.userRole = "Admin";
             req.session.isAuth = true;
-            return res.redirect("/admin-homepage");
+            return res.redirect("/admin-index");
     
         }
         //TO TANOD PAGE
@@ -75,7 +80,7 @@ const checkLogin = async (req, res) => {
             console.log("ENTER TANOD PAGE")
             req.session.userRole = "Tanod";
             req.session.isAuth = true;
-            return res.redirect("/tanod-home");
+            return res.redirect("/tanod-index");
     
         }
         //TO LUPON PAGE
@@ -83,18 +88,26 @@ const checkLogin = async (req, res) => {
             console.log("ENTER LUPON PAGE")
             req.session.userRole = "Lupon";
             req.session.isAuth = true;
-            return res.redirect("/lupon-home");
+            return res.redirect("/lupon-index");
     
         }
         //TO RESIDENT PAGE
+        else if (curUser.role == "resident") {
+            console.log("ENTER RESIDENT PAGE")
+            req.session.userRole = "Resident";
+            req.session.isAuth = true;
+            return res.redirect(`/resident-index/${email}`);
+    
+        }
 
-
-        console.log("ERROR IN LOGIN")
-        res.render('login', {
-            layout: 'index-login',
-            title: 'Login Page',
-            error: errorMsg
-        });
+        if(errorflag) {
+            console.log("ERROR IN LOGIN")
+            res.render('login', {
+                layout: 'index-login',
+                title: 'Login Page',
+                error: errorMsg
+            });
+        }
         
     } catch(error){
         console.error('Error during login:', error);
@@ -198,12 +211,26 @@ const checkSignup = async (req, res) => {
     }
 }
 
+//resident
+const viewResidentIndex = async (req, res) => {
+    const { email } = req.params;
+    const curResident = await ResidentModel.findOne({Email: email}).lean(); //finds if there is a match in users
+
+    req.session.lastpage = `/resident-index/${email}`;
+    res.render('resident-index', {
+        layout: 'index-employee',
+        title: 'Resident Homepage',
+        resident: curResident
+    });
+}
 
 module.exports = {
     checkLogin,
     checkUserRole,
     login,
     signup,
-    checkSignup
+    checkSignup,
+
+    viewResidentIndex
 }
 

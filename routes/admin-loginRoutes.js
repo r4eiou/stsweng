@@ -15,11 +15,23 @@ router.get('/admin-login-page',     userController.getLogin);
 
 router.post('/admin-login-page',    userController.isUser);
 
+router.get('/admin-index', isAuth, (req, res) => {
+    req.session.lastpage = '/admin-index';
+    res.render('admin-index',{
+        layout: 'layout',
+        title: 'Barangay Parang - Admin Homepage',
+        cssFile1: 'index',
+        cssFile2: null,
+        javascriptFile1: 'header',
+        javascriptFile2: null,
+    });
+})
+
 router.get('/admin-homepage', isAuth, (req, res) => {
     req.session.lastpage = '/admin-homepage';
     res.render('admin-homepage',{
         layout: 'layout',
-        title: 'Barangay Parang - Admin Homepage',
+        title: 'Barangay Parang - Admin Dashboard',
         cssFile1: 'index',
         cssFile2: null,
         javascriptFile1: 'header',

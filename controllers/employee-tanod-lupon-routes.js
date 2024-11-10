@@ -90,6 +90,14 @@ function add(app){
         req.session.lastpage = '/employee-home';
         resp.render('employee-home', {
             layout: 'index-employee',
+            title: 'Employee Dashboard'
+        });
+    });
+
+    app.get('/employee-index', isAuth, function(req, resp){
+        req.session.lastpage = '/employee-index';
+        resp.render('employee-index', {
+            layout: 'index-employee',
             title: 'Employee Homepage'
         });
     });
@@ -165,7 +173,15 @@ function add(app){
     //     }
     // });
 
-    //Tanod Homepage
+    app.get('/tanod-index', isAuth, function(req, resp){
+        req.session.lastpage = '/tanod-index';
+        resp.render('tanod-index', {
+            layout: 'index-employee',
+            title: 'Tanod Homepage'
+        });
+    });
+
+    //Tanod Dashboard
     app.get('/tanod-home', isAuth, async function(req, resp){
         try{
             const searchName = req.query.search_name || '';
@@ -241,7 +257,7 @@ function add(app){
             req.session.lastpage = '/tanod-home';
             resp.render('tanod-home', {
                 layout: 'index-tanod',
-                title: 'Tanod Homepage',
+                title: 'Tanod Dashboard',
                 cases: allCases,
                 currentPage: page,
                 totalPages: totalPages,
@@ -657,8 +673,15 @@ function add(app){
     //     }
     // });
 
+    app.get('/lupon-index', isAuth, function(req, resp){
+        req.session.lastpage = '/lupon-index';
+        resp.render('lupon-index', {
+            layout: 'index-employee',
+            title: 'Lupom Homepage'
+        });
+    });
 
-    //Lupon Homepage
+    //Lupon Dashboard
     app.get('/lupon-home', isAuth, async function(req, resp){
         try{
             const searchName = req.query.search_name || '';
@@ -728,7 +751,7 @@ function add(app){
             req.session.lastpage = 'lupon-home';
             resp.render('lupon-home', {
                 layout: 'index-lupon',
-                title: 'Lupon Homepage',
+                title: 'Lupon Dashboard',
                 cases: allCases,
                 currentPage: page,
                 totalPages: totalPages
