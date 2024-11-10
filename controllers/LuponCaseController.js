@@ -1,73 +1,140 @@
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 
+//old ver
+// const viewLuponDB = async (req, res) => {
+//     try {
+//         const page = parseInt(req.query.page) || 1; // Get the current page from query params, default to 1
+//         req.session.lastpage = '/admin-lupon-db-view';
+//         const casesPerPage = 10; // Number of cases to show per page
+
+//         const totalCases = await LuponCaseModel.countDocuments(); // Get total number of cases
+//         const totalPages = Math.ceil(totalCases / casesPerPage); // Calculate total pages
+
+//         // Fetch the cases for the current page
+//         const cases = await LuponCaseModel.find({})
+//             .skip((page - 1) * casesPerPage)
+//             .limit(casesPerPage)
+//             .lean();
+
+//         res.render('admin-lupon-db-view',{
+//             layout: 'layout',
+//             title: 'Admin: Lupon DB viewing',
+//             cssFile1: 'homepage',
+//             cssFile2: 'db-view',
+//             javascriptFile1: 'components',
+//             javascriptFile2: 'header',
+//             cases: cases,
+//             currentPage: page, // Pass current page to the template
+//             totalPages: totalPages // Pass total pages to the template
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         return res.status(500).json({ message: "Server error" });
+//     }
+// }
+
 const viewLuponDB = async (req, res) => {
-    try {
-        const page = parseInt(req.query.page) || 1; // Get the current page from query params, default to 1
-        req.session.lastpage = '/admin-lupon-db-view';
-        const casesPerPage = 10; // Number of cases to show per page
+    const status = req.query.status || req.session.selectedLuponStatus || "0"; 
+    req.session.selectedLuponStatus = status;
+    req.session.lastpage = '/admin-lupon-db-view';
 
-        const totalCases = await LuponCaseModel.countDocuments(); // Get total number of cases
-        const totalPages = Math.ceil(totalCases / casesPerPage); // Calculate total pages
+    var page = parseInt(req.query.page) || 1; 
+    const casesPerPage = 10; // Number of cases to show per page
 
-        // Fetch the cases for the current page
-        const cases = await LuponCaseModel.find({})
+    let cases;
+    let totalCases;
+
+    // console.log(status); //debugging
+
+    if (status === "0") {
+        // View All Cases (archived cases not included)
+        totalCases = await LuponCaseModel.countDocuments({isArchived: false}); // Get total number of all cases
+        cases = await LuponCaseModel.find({isArchived: false})
             .skip((page - 1) * casesPerPage)
             .limit(casesPerPage)
             .lean();
 
-        res.render('admin-lupon-db-view',{
-            layout: 'layout',
-            title: 'Admin: Lupon DB viewing',
-            cssFile1: 'homepage',
-            cssFile2: 'db-view',
-            javascriptFile1: 'components',
-            javascriptFile2: 'header',
-            cases: cases,
-            currentPage: page, // Pass current page to the template
-            totalPages: totalPages // Pass total pages to the template
-        });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Server error" });
-    }
-}
-
-const viewPageLuponDB = async (req, res) => {
-    try {
-        const currentPage = req.params.currentPage || 1;
-        
-        const casesPerPage = 10; // Number of cases to show per page
-
-        const totalCases = await LuponCaseModel.countDocuments(); // Get total number of cases
-        const totalPages = Math.ceil(totalCases / casesPerPage); // Calculate total pages
-
-        // Fetch the cases for the current page
-        const cases = await TanodCaseModel.find({})
-            .skip((currentPage - 1) * casesPerPage)
+    } else if (status === "1") {
+        // View Ongoing Cases na hindi pa nadedelete
+        totalCases = await LuponCaseModel.countDocuments({ Status: "Ongoing", isArchived: false }); // Count only ongoing cases
+        if (totalCases <= 10) {
+            page = 1
+        }
+        cases = await LuponCaseModel.find({ Status: "Ongoing", isArchived: false })
+            .skip((page - 1) * casesPerPage)
             .limit(casesPerPage)
             .lean();
-
-        res.render('admin-lupon-db-view',{
-            layout: 'layout',
-            title: 'Admin: Lupon DB viewing',
-            cssFile1: 'homepage',
-            cssFile2: 'db-view',
-            javascriptFile1: 'components',
-            javascriptFile2: 'header',
-            cases: cases,
-            currentPage: currentPage, // Pass current page to the template
-            totalPages: totalPages // Pass total pages to the template
-        });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Server error" });
+    } else if (status === "2") {
+        // View Resolved Cases na hindi pa nadedelete
+        if (totalCases <= 10) {
+            page = 1
+        }
+        totalCases = await LuponCaseModel.countDocuments({ Status: "Resolved", isArchived: false }); // Count only resolved cases
+        cases = await LuponCaseModel.find({ Status: "Resolved", isArchived: false })
+            .skip((page - 1) * casesPerPage)
+            .limit(casesPerPage)
+            .lean();
+    } else if (status === "3") {
+        // View Archived Cases
+        if (totalCases <= 10) {
+            page = 1
+        }
+        totalCases = await LuponCaseModel.countDocuments({ isArchived: true }); // Count only archived cases
+        cases = await LuponCaseModel.find({ isArchived: true })
+            .skip((page - 1) * casesPerPage)
+            .limit(casesPerPage)
+            .lean();
     }
-};
+
+    const totalPages = Math.ceil(totalCases / casesPerPage); // Calculate total pages
+
+    res.render('admin-lupon-db-view',{
+        layout: 'layout',
+        title: 'Admin: Lupon DB viewing',
+        cssFile1: 'homepage',
+        cssFile2: 'db-view',
+        javascriptFile1: 'components',
+        javascriptFile2: 'header',
+        cases: cases,
+        currentPage: page, // Pass current page to the template
+        totalPages: totalPages // Pass total pages to the template
+    });
+}
+
+// const viewPageLuponDB = async (req, res) => {
+//     try {
+//         const currentPage = req.params.currentPage || 1;
+        
+//         const casesPerPage = 10; // Number of cases to show per page
+
+//         const totalCases = await LuponCaseModel.countDocuments(); // Get total number of cases
+//         const totalPages = Math.ceil(totalCases / casesPerPage); // Calculate total pages
+
+//         // Fetch the cases for the current page
+//         const cases = await TanodCaseModel.find({})
+//             .skip((currentPage - 1) * casesPerPage)
+//             .limit(casesPerPage)
+//             .lean();
+
+//         res.render('admin-lupon-db-view',{
+//             layout: 'layout',
+//             title: 'Admin: Lupon DB viewing',
+//             cssFile1: 'homepage',
+//             cssFile2: 'db-view',
+//             javascriptFile1: 'components',
+//             javascriptFile2: 'header',
+//             cases: cases,
+//             currentPage: currentPage, // Pass current page to the template
+//             totalPages: totalPages // Pass total pages to the template
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         return res.status(500).json({ message: "Server error" });
+//     }
+// };
 
 const viewSearchLuponDB = async (req, res) => {
     try {
-        console.log("checking if im here");
-        
         const name = req.params.search_name;
         const searchWords = name.split(' ').filter(word => word.trim() !== '');
 
@@ -78,16 +145,34 @@ const viewSearchLuponDB = async (req, res) => {
             ]
         }));
         
+        //Retrieve current status (dropdown selection)
+        const selectedLuponStatus = req.query.status || req.session.selectedLuponStatus || "0"; // Default to "0"
+
+        // Prepare the query object
+        let query = { $or: orConditions }; // Start with search conditions
+
+        // Filter by status if selectedStatus is specified
+        if (selectedLuponStatus !== "0") { // Only filter if not "View All Cases"
+            if (selectedLuponStatus === "1") { // Ongoing
+                query['Status'] = "Ongoing"; // Assuming "Status" is the field name in your model
+            } else if (selectedLuponStatus === "2") { // Resolved
+                query['Status'] = "Resolved"; 
+            } else if (selectedLuponStatus === "3") { // Archived
+                query['isArchived'] = true;  
+            }
+            // You can add more conditions as needed
+        }
+
         const page = parseInt(req.query.page) || 1; // Get the current page from query params, default to 1
         const casesPerPage = 10; // Number of cases to show per page
 
         // Fetch the cases for the current page
-        const cases = await LuponCaseModel.find({ $or: orConditions })
+        const cases = await LuponCaseModel.find(query)
             .skip((page - 1) * LuponCaseModel)
             .limit(casesPerPage)
             .lean();
 
-        const totalCount = await LuponCaseModel.countDocuments({ $or: orConditions });
+        const totalCount = await LuponCaseModel.countDocuments(query);
         const totalPages = Math.ceil(totalCount / casesPerPage); // Calculate total pages
 
         res.render('admin-lupon-db-view',{
@@ -232,14 +317,28 @@ const markMultipleTCaseResolved = async (req, res) => {
     }
 };
 
-const deleteMultipleTanodCase = async (req, res) => {
+// const deleteMultipleTanodCase = async (req, res) => {
+//     const selectedCaseIds = req.body.caseIds;
+//     try {
+//         await LuponCaseModel.deleteMany({ _id : { $in: selectedCaseIds } });
+
+//         res.json({ success: true, message: 'Cases deleted successfully' });
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: 'Error deleting cases', error });
+//     }
+// };
+
+const deleteMultipleLuponCase = async (req, res) => {
     const selectedCaseIds = req.body.caseIds;
     try {
-        await LuponCaseModel.deleteMany({ _id : { $in: selectedCaseIds } });
+        await LuponCaseModel.updateMany(
+            { _id: { $in: selectedCaseIds } }, 
+            { $set: { isArchived: true } }
+        );
 
-        res.json({ success: true, message: 'Cases deleted successfully' });
+        res.json({ success: true, message: 'Cases archived successfully' });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error deleting cases', error });
+        res.status(500).json({ success: false, message: 'Error archiving cases', error });
     }
 };
 
@@ -400,17 +499,51 @@ const submitEditLuponCase = async (req, res) => {
     }
 }
 
+// const deleteLuponCase = async (req, res) => {
+//     try {
+//         const caseId = req.params.id;
+
+//         await LuponCaseModel.findByIdAndDelete(caseId);
+
+//         res.redirect("/admin-lupon-db-view");
+//     } catch (error) {
+//         console.error('Error updating status:', error);
+//         return res.status(500).json({ error: 'Failed to update status' });
+//     }
+// }
+
 const deleteLuponCase = async (req, res) => {
     try {
-        const caseId = req.params.id;
+       const caseId = req.params.id;
 
-        await LuponCaseModel.findByIdAndDelete(caseId);
+       await LuponCaseModel.findOneAndUpdate(
+           { _id : caseId},
+           { isArchived : true},
+           { new: true }
+       );
+
+       res.redirect("/admin-lupon-db-view");
+    } catch (error) {
+       console.error('Error updating status:', error);
+       return res.status(500).json({ error: 'Failed to archive' });
+    }
+}
+
+const restoreRecordLupon = async (req, res) => {
+    try {
+        const caseId = req.params.id;
+        
+        await LuponCaseModel.findOneAndUpdate(
+            { _id : caseId},
+            { isArchived : false},
+            { new: true }
+        );
 
         res.redirect("/admin-lupon-db-view");
-    } catch (error) {
+     } catch (error) {
         console.error('Error updating status:', error);
-        return res.status(500).json({ error: 'Failed to update status' });
-    }
+        return res.status(500).json({ error: 'Failed to archive' });
+     }
 }
 
 const viewAdminArchivedLupon = async (req, res) => {
@@ -466,7 +599,7 @@ module.exports = {
     viewLuponCase,
     markResolved,
     deleteLuponCase,
-    deleteMultipleTanodCase,
+    deleteMultipleLuponCase,
     markMultipleTCaseResolved,
     editLuponCase,
     submitEditLuponCase,
@@ -475,7 +608,7 @@ module.exports = {
     searchLuponCase,
 
     viewSearchLuponDB,
-    viewPageLuponDB,
+    restoreRecordLupon,
     viewAdminArchivedLupon,
     viewArchivedLupon,
 
