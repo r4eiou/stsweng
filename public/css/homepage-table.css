@@ -62,7 +62,7 @@ table {
     margin-top: 0px;
 }
 
-.tanod-lupon-db-table td {
+.tanod-lupon-db-table td , .employee-event-table td{
     background-color: white;
     width: fit-content;
     text-align: start;
@@ -75,13 +75,14 @@ table {
     text-align: start;
 }
 
-.tanod-lupon-db-table thead {
+.tanod-lupon-db-table thead ,.employee-event-table thead{
     width: 100%;
     color: white;
     background-color: #004112;
     font-size: 14px;
     display: table-header-group;
 }
+
 
 table th, td {
     padding: 1em;

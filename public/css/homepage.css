@@ -385,6 +385,15 @@ html {
     background: #FFD1CA;
     color: #F3533B;
   }
+  .status.active{
+    background: #BBF9AC;
+    color: #1C8A3B;
+  }
+  
+  .status.inactive{
+    background: #D1D1D1;
+    color: #666666;
+  }
 
   .sort.descending {
     display: flex;
@@ -430,6 +439,7 @@ html {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    /*margin-top: 10px;*/
   }
 
   .search-name-reg input {
@@ -572,8 +582,16 @@ html {
     color: #B51D14;
   }
 
+  .form-btn.archive {
+    color: #B51D14;
+  }
+
   .form-btn.discard {
     color: #B51D14;
+  }
+  .form-btn.restore {
+    color: #50AF12;
+    color: var(--dgreen)
   }
 
   .form-btn.create {
@@ -767,7 +785,7 @@ html {
   padding-right: 50px;
 }
 
-.content-container-tanod-home{
+.content-container-tanod-home, .content-container-admin-tanod-archive-db, .content-container-admin-lupon-archive-db{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -782,6 +800,20 @@ html {
   align-items: center;
   width: 100%;
   max-width: 900px;
+  height: 40px;
+  padding: 0px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.box-content-top-cert-db{
+  display: flex;
+  flex-direction: row;
+  border: transparent;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 820px;
   height: 40px;
   padding: 0px;
   margin-bottom: 10px;
@@ -896,6 +928,8 @@ html {
   margin: 0px;
   justify-content: center;
   align-items: center;
+  border: none;
+  background: none;
 }
 
 .content-text-main{
@@ -949,7 +983,7 @@ html {
   text-decoration: none;
 }
 
-.underline-lupon-tanod{
+.underline-lupon-tanod, .underline-employee-events{
   margin-left: 20px;
   margin-right: 20px;
   text-decoration: underline;

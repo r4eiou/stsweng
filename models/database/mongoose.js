@@ -279,11 +279,11 @@ const SecurityQuestion = new mongoose.Schema ({
 });
 
 const ResidentSchema = new mongoose.Schema ({
-    img : {
+    _id: {
         type: String,
         required: true
     },
-    _id: {
+    img : {
         type: String,
         required: true
     },
@@ -298,6 +298,10 @@ const ResidentSchema = new mongoose.Schema ({
     LastName: {
         type: String,
         required: true,
+    },
+    Email : {
+        type: String,
+        required: true
     },
     Birthday : {
         type: String,

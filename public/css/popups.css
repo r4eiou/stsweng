@@ -1,0 +1,107 @@
+.popup1, .popup2, .popup3 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001; 
+    
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 320px;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.closebtn {
+    width: 10px;   
+    height: 10px; 
+    flex-shrink: 0; 
+    flex-grow: 0;  
+    cursor: pointer;
+    margin-top:-40px;
+}
+.question-label,.header-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F3533B;
+    margin-bottom: 10px;
+    margin-top:-10px;
+}
+.font-light{
+    font-weight:normal;
+}
+.prompt-label.small{
+    font-size: 12px;
+}
+
+.prompt-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.font-red {
+    color: red;
+}
+
+.font-green {
+    color: green;
+}
+
+.bottom-container-popup {
+    display: flex;
+    justify-content: center;
+    
+}
+.margin{
+    margin: 0px 30px ;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.archive-btn {
+    background-color: #FFD1CA;
+    color: #F3533B;
+    transition: background-color 0.3s ease;
+}
+
+.archive-btn:hover {
+    background-color: darkred;
+}
+
+.cancel-btn-popup {
+    background-color: #ccc;
+    color: #504f4f;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn-popup:hover {
+    background-color: #363636;
+    color: #cecece
+}

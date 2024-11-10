@@ -1,4 +1,5 @@
 <!--NOTE: TEMPORARY LINKS TO LOGIN AND SIGNUP TO BE DELETED AFTER FINISHED ALL PAGES FOR CORRECT FLOW -->
+<!-- for roles to be renamed: "<role>-index.hbs"-->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
@@ -32,8 +33,8 @@
     </div>
 
     <div class="d-flex flex-row mx-2">
-      <a href="/signup"><button type="button" class="header-signup-btn mr-2" id="logout-btn">Sign up</button></a>
-      <a href="/login"><button type="button" class="header-login-btn" id="logout-btn">Log in</button></a>
+      <a href="/employee-login"><button type="button" class="header-signup-btn mr-2" id="logout-btn">Sign up</button></a>
+      <a href="/admin-login-page"><button type="button" class="header-login-btn" id="logout-btn">Log in</button></a>
     </div>
 
   </div>
@@ -42,18 +43,77 @@
 <section class="bg-white pb-5" id="home">
   <div class="container">
     <div class="border border-secondary rounded-sm">
-      <div class="row">
-        <div class="col-7 text-center">
-          <img src="/images/logo-revised.svg" class="img-fluid" alt="" />
-        </div>
-        <div class="col-5 p-5 text-center">
-          <h1 class="p-3">
-            Site of Sangguniang Barangay ng Parang
+      <div class="row justify-content-center">
+        <div class="col text-center justify-content-center p-3">
+          <h1 class="p-3" style="color: #004112">
+            Welcome, John F.
           </h1>
-          <h4 class="p-3 font-weight-normal">Sign up or log in your account to continue.</h4>
-          <a href="/signup"><button class="signup-btn-lrg mx-auto m-2">Sign up</button></a>
-          <a href="/login"><button class="login-btn-lrg mx-auto m-2">Log in</button></a>
+          <h5 class="text-secondary">Review your Resident details here.</h5>
         </div>
+      </div>
+      <!-- resident details -->
+      <div class="mx-auto" style="width: 900px;">
+
+        <div class="container p-5">
+          <div class="row mb-1">
+            <div class="col-5">
+              <label for="first-name">First Name</label>
+              <input id="first-name" type="text" class="form-control" readonly />
+            </div>
+            <div class="col-2">
+              <label for="middle-initial">Middle Initial</label>
+              <input id="middle-initial" type="text" class="form-control" readonly />
+            </div>
+            <div class="col-5">
+              <label for="last-name">Last Name</label>
+              <input id="last-name" type="text" class="form-control" readonly />
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-3">
+              <label for="birthdate">Birthdate</label>
+              <input id="birthdate" type="date" class="form-control" readonly />
+            </div>
+            <div class="col-3">
+              <label for="gender">Gender</label>
+              <input id="gender" type="text" class="form-control" readonly />
+            </div>
+            <div class="col-3">
+              <label for="age">Age</label>
+              <input id="age" type="number" class="form-control" readonly />
+            </div>
+            <div class="col-3">
+              <label for="senior">Senior? (Y/N)</label>
+              <input id="senior" type="text" maxlength="1" class="form-control" readonly />
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-9">
+              <label for="address">Address</label>
+              <input id="address" type="text" class="form-control" readonly />
+            </div>
+            <div class="col-3">
+              <label for="rent_own">Rent/Own? (Y/N)</label>
+              <input id="rent_own" type="text" maxlength="1" class="form-control" readonly />
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label for="num_residents" style="font-size:small;">Number of Residents in Household</label>
+              <input id="num_residents" type="number" class="form-control" readonly />
+            </div>
+            <div class="col-4">
+              <label for="civil_status">Civil Status</label>
+              <input id="civil_status" type="text" class="form-control" readonly />
+            </div>
+            <div class="col-4">
+              <label for="contact_num">Contact Number</label>
+              <input id="contact_num" type="number" class="form-control" readonly />
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>
@@ -212,3 +272,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+<!-- PREVIOUS CODE 
+
+<html>
+  <head>
+    <title>
+      Barangay Parang - Initial Login Page
+    </title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="ls-panel">
+        <div class="ls-panel-left">
+          <img src="/images/logo-revised.svg" class="ls-panel-logo" />
+          <h1>Barangay Parang</h1>
+        </div>
+        <div class="ls-panel-right">
+          <h1>Choose Portal:</h1>
+          <div class="portal-buttons">
+            NOTE: TEMPORARY LINKS TO LOGIN AND SIGNUP TO BE DELETED AFTER FINISHED ALL PAGES FOR CORRECT FLOW
+            <a href="/employee-login"><button type="button" class="portal-btn-employee">Signup</button></a>
+            <a href="/admin-login-page"><button type="button" class="portal-btn-admin">Login</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+-->

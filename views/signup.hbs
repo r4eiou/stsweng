@@ -1,11 +1,10 @@
 <html>
   <head>
     <title>
-      Barangay Parang - Initial Login Page
+      Barangay Parang - Signup Page
     </title>
-
-    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login-page.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -17,46 +16,34 @@
           <h1>Barangay Parang</h1>
         </div>
         <div class="ls-panel-main">
-          <span class="ls-panel-title" id="signup-title">Signup</span>
-          <!--
-          <div class="ls-error-notice">
-            <ul>
-              <li> sample error here </li>
-              <li>{{error}}</li>
-            </ul></div>
-            -->
+          <span class="ls-panel-title" id="login-title">Signup</span>
+          
+          {{#if error}} <!-- IF NULL DONT SHOW ERROR CONTAINER -->
+            <div class="ls-error-notice">
+              <ul>
+                <li>{{error}}</li>
+              </ul>
+            </div>
+          {{/if}}
+
           <!--signup main form-->
           <!-- TODO: check-signup route -->
           <form class="signup-form" action="check-signup" method="post">
-            <div class="ls-field">
+            <div class="ls-field" id="signup-field">
               <label for="firstname">First Name</label>
               <input type="text" id="first_name" name="firstname" placeholder="First Name" />
             </div>
-            <div class="ls-field">
+            <div class="ls-field" id="signup-field">
               <label for="lastname">Last Name</label>
               <input type="text" id="last_name" name="lastname" placeholder="Last Name" />
             </div>
-            <div class="ls-field">
+            <div class="ls-field" id="signup-field">
               <label for="email">Email</label>
-              <div class="input-container">
-                <input type="text" id="email" name="email" placeholder="Email" />
-              </div>
+              <input type="text" id="email" name="email" placeholder="Email" />
             </div>
-            <div class="ls-field-pw">
+            <div class="ls-field" id="signup-field">
               <label for="password">Password</label>
-              <div class="input-container">
-                <input type="password" placeholder="Password" id="signup-pw" />
-                <button
-                  type="button"
-                  class="view-pw-btn"
-                  title="View Password"
-                  onclick="hidePW('signup')"
-                  id="eye-signup-pw"
-                  class="eye-signup"
-                >
-                  <img src="/images/action-view.png" />
-                </button>
-              </div>
+              <input type="password" id="pw" name="password" placeholder="Password" />
             </div>
             <div class="signup-submit">
               <input type="submit" value="Signup" id="signup-submit-btn" />
@@ -66,10 +53,9 @@
 
           <p>
             Already have an account?
-            <a class="login-link" href="/admin-login-page">Login</a>
+            <a class="login-link" href="/login">Login</a>
           </p>
           <div class="return-btn">
-            <!-- TODO: revise onclick function (should return to last page visited)-->
             <a href="/"><button type="button" value="return" onclick="employeeView()" id="return-btn">Return</button></a>
           </div>
         </div>
@@ -84,5 +70,33 @@
         <p>Please contact the barangay for registration inquiries.</p>
       </div>
       -->
+
+    {{#if accountCreated}}
+      <!-- Success Modal -->
+      <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>{{header}}</h2>
+          <p>{{sub}}</p>
+        </div>
+      </div>
+    {{/if}}
+
+    <script>
+      var modal = document.getElementById("successModal");
+      if (modal) {
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+    </script>
   </body>
 </html>

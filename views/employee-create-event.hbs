@@ -1,0 +1,87 @@
+<link rel = "stylesheet" type="text/css" href="/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/event-details.css">
+<script src ="/js/header.js"></script>
+
+
+<div class="main-container" id="main-container">
+    <div class= "header" id="header">
+        <div class = "header-left">
+            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+            <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
+        </div>
+        
+        <div class = "header-title">
+            <div class = "header-text">
+                <h3>Sangguniang Barangay ng Parang</h3>
+                <h5>Marikina City</h5>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-user-profile">
+                <span class="header-user-profile-text" id="profile-text">Employee</span>
+                <img src="/images/employee-profile.png" class="header-user-profile" id="profile-img">
+            </div>
+            <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
+        </div>
+    </div>
+    
+    <div class = "upper-container" id="form-upper-container">
+        <div class="back-and-title">
+            <a href="/employee-view-events-db" class="back-button" id="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
+                </svg>
+                Back
+            </a>
+        </div>
+    </div>
+
+    <div class="sub-container">
+        
+        <div class = "text-container">
+            <h1 id = "event-details-title">Creating a New Event</h1>
+        </div>
+
+        <form action="/" method="post" class="print-form">
+            <div class = "print-panel">
+                <!-- for Photo-->
+                <div class="photo-container">
+                    <img src="/images/transparent.jpg" class="details-profile" id="deets-profile-img">
+                </div>
+                
+
+                <!-- Headline-->
+                <div class="deets1-container">
+                    <div class="name-container">
+                        <div class="deets-text">Headline</div>
+                        <input type="text" id="headline-edit" name="headline-edit" placeholder="Headline Here">
+                    </div>
+                </div>
+
+                <!-- for Start Date, Finish Date -->
+                <div class="deets2-container">
+                    <div class="date-container">
+                        <div class="deets-text">Start Date</div>
+                        <input type="text" id="startDate-edit"  name="startDate-edit" placeholder="mm/dd/yyyy">                             
+                    </div>
+                    <div class="address-container">
+                        <div class="deets-text">Finish Date</div>
+                        <input type="text" id="finishDate-edit" name="finishDate-edit" placeholder="mm/dd/yyyy">
+                    </div>
+                </div>
+
+
+                <!-- for Details -->
+                <div class="deets5-container"> 
+                    <div class="deets-text">Details</div>
+                    <textarea type="text" id="details-edit" name="details-edit" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class = "buttons-container">
+        <a href="/employee-view-events-db"><button type="button" id="editButton"       class="form-btn edit">      <img src="/images/form-check.png"><span>Save Changes</span></button> </a>
+        <a href="/employee-view-events-db"><button type="button" id="archiveButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button> </a>
+    </div>
+</div>
