@@ -806,6 +806,20 @@ html {
   background-color: transparent;
 }
 
+.box-content-top-cert-db{
+  display: flex;
+  flex-direction: row;
+  border: transparent;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 820px;
+  height: 40px;
+  padding: 0px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
 
 .box-content {
   border: 1px solid transparent;

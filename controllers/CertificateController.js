@@ -1,8 +1,9 @@
 const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
+const CertificateInfoModel = require("../models/database/mongoose").CertificateInfoModel;
 
-// PAKISEPARATE NG FILE
+// PAKISEPARATE NG FILE -------------------
 const viewEventsDB = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-event-db-view',{
@@ -52,6 +53,7 @@ const editEvent = async (req, res) => {
 };
 // ----------------------------------------
 
+// ----------------------------------------
 // const viewResidentDB = async (req, res) => {
 //     req.session.lastpage = '/employee-check-clearance';
 //     res.render('employee-resident-db',{
@@ -96,6 +98,7 @@ const editEvent = async (req, res) => {
 //         cssFile1: 'homepage'
 //     });
 // };
+// ----------------------------------------
 
 //employee
 const viewCertClearance = async (req, res) => {
@@ -546,7 +549,73 @@ const checkCedulaNum = async (req, res) => {
     }
 }
 
+//edit-cert-info
+const viewCertInfoEditPage = async (req, res) => {
+    const certificateInfo = await CertificateInfoModel.findOne({_id: "1"}).lean();
 
+    req.session.lastpage = `/certificate-edit-template`;
+    res.render('certificate-edit-template', {
+        layout: 'layout',
+        title: 'Admin: Certificate Edit Information',
+        cssFile1: 'homepage',
+        cssFile2: 'cert-db-view',
+        javascriptFile1: 'components',
+        javascriptFile2: 'header',
+        certificateInfo: certificateInfo
+    });
+};
+
+const getCertificateInfo = async (req, res) => {
+    try {
+        // Fetch the required certificate information from the database
+        const certificateInfo = await CertificateInfoModel.findOne({_id: "1"}).exec();
+
+        // If no certificate info is found, send a 404 response
+        if (!certificateInfo) {
+            return res.status(404).send({ message: 'Certificate information not found' });
+        }
+
+        // Extract necessary fields from the certificate info
+        const { brgy_capt_name, slogan, img } = certificateInfo;
+
+        // Send the certificate info back to the client
+        res.status(200).json({
+            brgy_capt_name,
+            slogan,
+            img
+        });
+    } catch (error) {
+        console.error('Error fetching certificate information:', error);
+        res.status(500).send({ message: 'Internal server error' });
+    }
+};
+
+const submitEditCertInfo = async (req, res) => {
+    try {
+        const {
+            img,
+            brgy_captain_name,
+            slogan
+        } = req.body;
+
+        await CertificateInfoModel.findOneAndUpdate(
+            { _id: "1" },
+            {
+                $set: {
+                    img: img,
+                    brgy_capt_name: brgy_captain_name,
+                    slogan: slogan,
+                }
+            },
+            { new: true }
+        );
+
+        res.redirect(`/certificate-edit-template`);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
 
 module.exports = {
     isClearedEmployee,
@@ -566,6 +635,9 @@ module.exports = {
     searchCertificateCase,
     viewSearchCertificateDB,
     checkCedulaNum,
+    viewCertInfoEditPage,
+    getCertificateInfo,
+    submitEditCertInfo,
 
     viewEvents,
     viewArchivedEvents,
