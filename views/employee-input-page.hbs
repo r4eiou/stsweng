@@ -174,7 +174,7 @@
     
     async function downloadFileEmployee() 
     {
-        /*
+        
         // Perform validation
         const isValid = await validateForm();
         
@@ -182,7 +182,7 @@
         if (!isValid) {
             return;
         }
-        */
+        
 
         const form = document.querySelector('.print-form');
         const name = titleCase(form.elements['name'].value);
@@ -230,7 +230,7 @@
         const new_slogan = certificateInfo.slogan;
         const midLogo = certificateInfo.img;
 
-        /*
+        
         fetch('/saveCertificate', {
             method: 'POST',
             headers: {
@@ -246,7 +246,7 @@
             console.log("error here fetch")
             console.error('Error:', error);
         });
-        */
+        
 
         //generating part
         const doc = new jsPDF({
