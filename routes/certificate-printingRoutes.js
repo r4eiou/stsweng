@@ -37,4 +37,7 @@ router.get('/certificate-db/:search_name',                  certificateControlle
 
 router.post('/check-cedula',                                certificateController.checkCedulaNum);
 
+//for edit cert info
+router.get('/certificate-edit-template',                   certificateController.viewCertInfoEditPage);
+
 module.exports = router;

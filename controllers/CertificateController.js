@@ -2,7 +2,7 @@ const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
 
-// PAKISEPARATE NG FILE
+// PAKISEPARATE NG FILE -------------------
 const viewEventsDB = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-event-db-view',{
@@ -52,6 +52,7 @@ const editEvent = async (req, res) => {
 };
 // ----------------------------------------
 
+// ----------------------------------------
 // const viewResidentDB = async (req, res) => {
 //     req.session.lastpage = '/employee-check-clearance';
 //     res.render('employee-resident-db',{
@@ -96,6 +97,7 @@ const editEvent = async (req, res) => {
 //         cssFile1: 'homepage'
 //     });
 // };
+// ----------------------------------------
 
 //employee
 const viewCertClearance = async (req, res) => {
@@ -546,7 +548,18 @@ const checkCedulaNum = async (req, res) => {
     }
 }
 
-
+//edit-cert-info
+const viewCertInfoEditPage = async (req, res) => {
+    req.session.lastpage = `/certificate-edit-template`;
+    res.render('certificate-edit-template', {
+        layout: 'layout',
+        title: 'Admin: Certificate Edit Information',
+        cssFile1: 'homepage',
+        cssFile2: 'cert-db-view',
+        javascriptFile1: 'components',
+        javascriptFile2: 'header'
+    });
+};
 
 module.exports = {
     isClearedEmployee,
@@ -566,6 +579,7 @@ module.exports = {
     searchCertificateCase,
     viewSearchCertificateDB,
     checkCedulaNum,
+    viewCertInfoEditPage,
 
     viewEvents,
     viewArchivedEvents,
