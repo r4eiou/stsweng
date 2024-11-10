@@ -1,7 +1,7 @@
-const { ResidentModel } = require("../models/database/mongoose");
-
 const UserModel = require("../models/database/mongoose").UserModel;
 const SecurityModel = require("../models/database/mongoose").SecurityQuestionModel;
+
+const ResidentModel = require("../models/database/mongoose").ResidentModel;
 
 const login = async (req, res) => {
     const question = await SecurityModel.findOne({ _id : 1 }).lean();
@@ -87,7 +87,13 @@ const checkLogin = async (req, res) => {
     
         }
         //TO RESIDENT PAGE
-        
+        else if (curUser.role == "resident") {
+            console.log("ENTER RESIDENT PAGE")
+            req.session.userRole = "Resident";
+            req.session.isAuth = true;
+            return res.redirect(`/resident-index/${email}`);
+    
+        }
 
         console.log("ERROR IN LOGIN")
         res.render('login', {
@@ -198,12 +204,26 @@ const checkSignup = async (req, res) => {
     }
 }
 
+//resident
+const viewResidentIndex = async (req, res) => {
+    const { email } = req.params;
+    const curResident = await ResidentModel.findOne({Email: email}).lean(); //finds if there is a match in users
+
+    req.session.lastpage = `/resident-index/${email}`;
+    res.render('resident-index', {
+        layout: 'index-employee',
+        title: 'Resident Homepage',
+        resident: curResident
+    });
+}
 
 module.exports = {
     checkLogin,
     checkUserRole,
     login,
     signup,
-    checkSignup
+    checkSignup,
+
+    viewResidentIndex
 }
 

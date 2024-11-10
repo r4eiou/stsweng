@@ -8,8 +8,11 @@ router.post('/check-login',     LoginSignupController.checkLogin);
 
 router.get('/signup',           LoginSignupController.signup);
 
-router.post('/check-signup',     LoginSignupController.checkSignup);
+router.post('/check-signup',    LoginSignupController.checkSignup);
 
 router.post('/check-user-role', LoginSignupController.checkUserRole);
+
+//resident
+router.get('/resident-index/:email',   LoginSignupController.viewResidentIndex);
 
 module.exports = router;
