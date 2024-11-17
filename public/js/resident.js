@@ -75,51 +75,69 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Proceed if the form is valid
                 if (formIsValid) {
-                    // Capture the image source
-                    const imgElement = document.getElementById('deets-profile-img');
-                    const imgSrc = imgElement ? imgElement.src : ''; 
-    
-                    const residentData = {
-                        img: imgSrc,
-                        FirstName: form.querySelector('#firstName').value,
-                        MiddleInitial: form.querySelector('#middleInitial').value,
-                        LastName: form.querySelector('#lastName').value,
-                        Age: form.querySelector('#age').value,
-                        Email: form.querySelector('#email').value,
-                        Birthday: form.querySelector('#birthdateInput').value,
-                        Sex: form.querySelector('#sex').value,
-                        Address: form.querySelector('#case-type').value,
-                        isSeniorCitizen: form.querySelector('#seniorCitizen').value,
-                        ContactNo: form.querySelector('#contactNo').value,
-                        CivilStatus: form.querySelector('#civilStatus').value,
-                        NoOfResident: form.querySelector('#noOfResident').value,
-                        HousingInfo: form.querySelector('#housingInfo').value,
-                        ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
-                    };
-    
-                    // Send residentData to the server
-                    fetch('/submit-resident-employee', {
+                    // Check if the email already exists
+                    fetch('/check-email-exists-employee', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify(residentData),
+                        body: JSON.stringify({ Email: form.querySelector('#email').value }),
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            // Handle success
-                            window.location.href = '/employee-resident-db';
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            showModal('A resident with this email already exists.');
                         } else {
-                            // Handle error
-                            return response.json().then(errorData => {
-                                console.error('Error:', errorData.message);
-                                showModal('Error: ' + errorData.message);
+                            // Capture the image source
+                            const imgSrc = imgElement ? imgElement.src : ''; 
+    
+                            const residentData = {
+                                img: imgSrc,
+                                FirstName: form.querySelector('#firstName').value,
+                                MiddleInitial: form.querySelector('#middleInitial').value,
+                                LastName: form.querySelector('#lastName').value,
+                                Age: form.querySelector('#age').value,
+                                Email: form.querySelector('#email').value,
+                                Birthday: form.querySelector('#birthdateInput').value,
+                                Sex: form.querySelector('#sex').value,
+                                Address: form.querySelector('#case-type').value,
+                                isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                                ContactNo: form.querySelector('#contactNo').value,
+                                CivilStatus: form.querySelector('#civilStatus').value,
+                                NoOfResident: form.querySelector('#noOfResident').value,
+                                HousingInfo: form.querySelector('#housingInfo').value,
+                                ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+                            };
+    
+                            // Send residentData to the server
+                            fetch('/submit-resident-employee', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(residentData),
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Handle success
+                                    window.location.href = '/employee-resident-db';
+                                } else {
+                                    // Handle error
+                                    return response.json().then(errorData => {
+                                        console.error('Error:', errorData.message);
+                                        showModal('Error: ' + errorData.message);
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Network error:', error);
+                                showModal('Network error: ' + error.message);
                             });
                         }
                     })
                     .catch(error => {
-                        console.error('Network error:', error);
-                        showModal('Network error: ' + error.message);
+                        console.error('Error:', error);
+                        showModal('Error: ' + error.message);
                     });
                 }
             }
@@ -143,50 +161,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
             console.log("checking employee save button resident")
 
-            if(checkChangesEdit()){
+            if (checkChangesEdit()) {
                 const form = document.querySelector('#case-form-employee_resident');
-
                 const _id = form.querySelector('[name="_id"]').value;
-                const residentData = {
-                    _id: _id,
-                    img: document.getElementById('deets-profile-img').src,
-                    FirstName: form.querySelector('#firstName').value,
-                    MiddleInitial: form.querySelector('#middleInitial').value,
-                    LastName: form.querySelector('#lastName').value,
-                    Age: form.querySelector('#age').value,
-                    Email: form.querySelector('#email').value,
-                    Birthday: form.querySelector('#birthdateInput').value,
-                    Sex: form.querySelector('#sex').value,
-                    Address: form.querySelector('#case-type').value,
-                    isSeniorCitizen: form.querySelector('#seniorCitizen').value,
-                    ContactNo: form.querySelector('#contactNo').value,
-                    CivilStatus: form.querySelector('#civilStatus').value,
-                    NoOfResident: form.querySelector('#noOfResident').value,
-                    HousingInfo: form.querySelector('#housingInfo').value,
-                    ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
-                };
-
-                console.log(residentData);
-                // Send residentData to the server
-                fetch('/submit-edit-resident-employee', {
+    
+                // Check if the email already exists for other residents
+                fetch('/check-email-exists-employeeEdit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(residentData),
+                    body: JSON.stringify({ Email: form.querySelector('#email').value, _id: _id }),
                 })
-                .then(response => {
-                    if (response.ok) {
-                        // Handle success
-                        window.location.href = `/employee-view-resident/${_id}`;
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        showModal('A resident with this email already exists.');
                     } else {
-                        // Handle error
-                        return response.json().then(errorData => {
-                            console.error('Error:', errorData.message);
-                            showModal('Error: ' + errorData.message);
+                        const residentData = {
+                            _id: _id,
+                            img: document.getElementById('deets-profile-img').src,
+                            FirstName: form.querySelector('#firstName').value,
+                            MiddleInitial: form.querySelector('#middleInitial').value,
+                            LastName: form.querySelector('#lastName').value,
+                            Age: form.querySelector('#age').value,
+                            Email: form.querySelector('#email').value,
+                            Birthday: form.querySelector('#birthdateInput').value,
+                            Sex: form.querySelector('#sex').value,
+                            Address: form.querySelector('#case-type').value,
+                            isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                            ContactNo: form.querySelector('#contactNo').value,
+                            CivilStatus: form.querySelector('#civilStatus').value,
+                            NoOfResident: form.querySelector('#noOfResident').value,
+                            HousingInfo: form.querySelector('#housingInfo').value,
+                            ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+
+                            prevEmail: form.querySelector('#prevEmailValue').value
+                        };
+    
+                        // console.log(residentData);
+                        // Send residentData to the server
+                        fetch('/submit-edit-resident-employee', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(residentData),
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Handle success
+                                window.location.href = `/employee-view-resident/${_id}`;
+                            } else {
+                                // Handle error
+                                return response.json().then(errorData => {
+                                    console.error('Error:', errorData.message);
+                                    showModal('Error: ' + errorData.message);
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Network error:', error);
+                            showModal('Network error: ' + error.message);
                         });
                     }
                 })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showModal('Error: ' + error.message);
+                });
             }
         });
     }
@@ -239,51 +282,69 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Proceed if the form is valid
                 if (formIsValid) {
-                    // Capture the image source
-                    const imgElement = document.getElementById('deets-profile-img');
-                    const imgSrc = imgElement ? imgElement.src : ''; 
-    
-                    const residentData = {
-                        img: imgSrc,
-                        FirstName: form.querySelector('#firstName').value,
-                        MiddleInitial: form.querySelector('#middleInitial').value,
-                        LastName: form.querySelector('#lastName').value,
-                        Age: form.querySelector('#age').value,
-                        Email: form.querySelector('#email').value,
-                        Birthday: form.querySelector('#birthdateInput').value,
-                        Sex: form.querySelector('#sex').value,
-                        Address: form.querySelector('#case-type').value,
-                        isSeniorCitizen: form.querySelector('#seniorCitizen').value,
-                        ContactNo: form.querySelector('#contactNo').value,
-                        CivilStatus: form.querySelector('#civilStatus').value,
-                        NoOfResident: form.querySelector('#noOfResident').value,
-                        HousingInfo: form.querySelector('#housingInfo').value,
-                        ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
-                    };
-    
-                    // Send residentData to the server
-                    fetch('/submit-resident-admin', {
+                    // Check if the email already exists
+                    fetch('/check-email-exists', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify(residentData),
+                        body: JSON.stringify({ Email: form.querySelector('#email').value }),
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            // Handle success
-                            window.location.href = '/admin-resident-db-view';
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            showModal('A resident with this email already exists.');
                         } else {
-                            // Handle error
-                            return response.json().then(errorData => {
-                                console.error('Error:', errorData.message);
-                                showModal('Error: ' + errorData.message);
+                            // Capture the image source
+                            const imgSrc = imgElement ? imgElement.src : ''; 
+    
+                            const residentData = {
+                                img: imgSrc,
+                                FirstName: form.querySelector('#firstName').value,
+                                MiddleInitial: form.querySelector('#middleInitial').value,
+                                LastName: form.querySelector('#lastName').value,
+                                Age: form.querySelector('#age').value,
+                                Email: form.querySelector('#email').value,
+                                Birthday: form.querySelector('#birthdateInput').value,
+                                Sex: form.querySelector('#sex').value,
+                                Address: form.querySelector('#case-type').value,
+                                isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                                ContactNo: form.querySelector('#contactNo').value,
+                                CivilStatus: form.querySelector('#civilStatus').value,
+                                NoOfResident: form.querySelector('#noOfResident').value,
+                                HousingInfo: form.querySelector('#housingInfo').value,
+                                ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+                            };
+    
+                            // Send residentData to the server
+                            fetch('/submit-resident-admin', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(residentData),
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Handle success
+                                    window.location.href = '/admin-resident-db';
+                                } else {
+                                    // Handle error
+                                    return response.json().then(errorData => {
+                                        console.error('Error:', errorData.message);
+                                        showModal('Error: ' + errorData.message);
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Network error:', error);
+                                showModal('Network error: ' + error.message);
                             });
                         }
                     })
                     .catch(error => {
-                        console.error('Network error:', error);
-                        showModal('Network error: ' + error.message);
+                        console.error('Error:', error);
+                        showModal('Error: ' + error.message);
                     });
                 }
             }
@@ -307,50 +368,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
             console.log("checking admin save button resident")
 
-            if(checkChangesEdit()){
+            if (checkChangesEdit()) {
                 const form = document.querySelector('#case-form-admin_resident');
-
                 const _id = form.querySelector('[name="_id"]').value;
-                const residentData = {
-                    _id: _id,
-                    img: document.getElementById('deets-profile-img').src,
-                    FirstName: form.querySelector('#firstName').value,
-                    MiddleInitial: form.querySelector('#middleInitial').value,
-                    LastName: form.querySelector('#lastName').value,
-                    Age: form.querySelector('#age').value,
-                    Email: form.querySelector('#email').value,
-                    Birthday: form.querySelector('#birthdateInput').value,
-                    Sex: form.querySelector('#sex').value,
-                    Address: form.querySelector('#case-type').value,
-                    isSeniorCitizen: form.querySelector('#seniorCitizen').value,
-                    ContactNo: form.querySelector('#contactNo').value,
-                    CivilStatus: form.querySelector('#civilStatus').value,
-                    NoOfResident: form.querySelector('#noOfResident').value,
-                    HousingInfo: form.querySelector('#housingInfo').value,
-                    ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
-                };
-
-                console.log(residentData);
-                // Send residentData to the server
-                fetch('/submit-edit-resident-admin', {
+    
+                // Check if the email already exists for other residents
+                fetch('/check-email-exists-adminEdit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(residentData),
+                    body: JSON.stringify({ Email: form.querySelector('#email').value, _id: _id }),
                 })
-                .then(response => {
-                    if (response.ok) {
-                        // Handle success
-                        window.location.href = `/admin-view-resident/${_id}`;
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        showModal('A resident with this email already exists.');
                     } else {
-                        // Handle error
-                        return response.json().then(errorData => {
-                            console.error('Error:', errorData.message);
-                            showModal('Error: ' + errorData.message);
+                        const residentData = {
+                            _id: _id,
+                            img: document.getElementById('deets-profile-img').src,
+                            FirstName: form.querySelector('#firstName').value,
+                            MiddleInitial: form.querySelector('#middleInitial').value,
+                            LastName: form.querySelector('#lastName').value,
+                            Age: form.querySelector('#age').value,
+                            Email: form.querySelector('#email').value,
+                            Birthday: form.querySelector('#birthdateInput').value,
+                            Sex: form.querySelector('#sex').value,
+                            Address: form.querySelector('#case-type').value,
+                            isSeniorCitizen: form.querySelector('#seniorCitizen').value,
+                            ContactNo: form.querySelector('#contactNo').value,
+                            CivilStatus: form.querySelector('#civilStatus').value,
+                            NoOfResident: form.querySelector('#noOfResident').value,
+                            HousingInfo: form.querySelector('#housingInfo').value,
+                            ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
+
+                            prevEmail: form.querySelector('#prevEmailValue').value
+                        };
+    
+                        // console.log(residentData);
+                        // Send residentData to the server
+                        fetch('/submit-edit-resident-admin', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(residentData),
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Handle success
+                                window.location.href = `/admin-view-resident/${_id}`;
+                            } else {
+                                // Handle error
+                                return response.json().then(errorData => {
+                                    console.error('Error:', errorData.message);
+                                    showModal('Error: ' + errorData.message);
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Network error:', error);
+                            showModal('Network error: ' + error.message);
                         });
                     }
                 })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showModal('Error: ' + error.message);
+                });
             }
         });
     }

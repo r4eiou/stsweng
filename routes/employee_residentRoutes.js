@@ -15,6 +15,9 @@ router.get('/search-resident/:search_name',         employeeResidentController.s
 router.post('/submit-resident-employee',            employeeResidentController.createResidentRecordEmployee);       //create
 router.get('/restore-resident-employee/:id',        employeeResidentController.restoreResidentRecord_Employee);     //restore record
 
-router.post('/submit-edit-resident-employee',        employeeResidentController.submitEditEmployeeResident);
+router.post('/submit-edit-resident-employee',       employeeResidentController.submitEditEmployeeResident);
+
+router.post('/check-email-exists-employee',         employeeResidentController.checkEmailEmployee);
+router.post('/check-email-exists-employeeEdit',     employeeResidentController.checkEmailEditEmployee);
 
 module.exports = router;

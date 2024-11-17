@@ -1,4 +1,5 @@
 const ResidentModel = require("../models/database/mongoose").ResidentModel;
+const UserModel = require("../models/database/mongoose").UserModel;
 
 //view database
 const employeeViewResidentDB = async (req, res) => {
@@ -319,7 +320,9 @@ const submitEditEmployeeResident = async (req, res) => {
             CivilStatus,
             NoOfResident,
             HousingInfo,
-            ServiceRequestID
+            ServiceRequestID,
+
+            prevEmail
         } = req.body;
 
         await ResidentModel.findOneAndUpdate(
@@ -346,12 +349,51 @@ const submitEditEmployeeResident = async (req, res) => {
             { new: true }
         );
 
+        await UserModel.findOneAndUpdate(
+            { email: prevEmail },
+            {
+                $set: {
+                    email: Email,
+                }
+            },
+            { new: true }
+        );
+
         res.redirect(`/employee-view-resident/${_id}`);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Server error" });
     }
-}
+};
+
+const checkEmailEmployee = async (req, res) => {
+    try {
+        const { Email } = req.body;
+        const existingResident = await ResidentModel.findOne({ Email }).exec();
+        if (existingResident) {
+            return res.status(200).json({ exists: true });
+        }
+        return res.status(200).json({ exists: false });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
+
+
+const checkEmailEditEmployee = async (req, res) => {
+    try {
+        const { Email, _id } = req.body;
+        const existingResident = await ResidentModel.findOne({ Email, _id: { $ne: _id } }).exec();
+        if (existingResident) {
+            return res.status(200).json({ exists: true });
+        }
+        return res.status(200).json({ exists: false });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
 
 module.exports = {
     employeeViewResidentDB,
@@ -366,5 +408,8 @@ module.exports = {
     searchResidentRecord,
     createResidentRecordEmployee,
     restoreResidentRecord_Employee,
-    submitEditEmployeeResident
+    submitEditEmployeeResident,
+
+    checkEmailEmployee,
+    checkEmailEditEmployee
 }

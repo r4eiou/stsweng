@@ -21,4 +21,7 @@ router.get('/restore-resident-admin/:id',           adminResidentController.rest
 
 router.post('/submit-edit-resident-admin',          adminResidentController.submitEditAdminResident);
 
+router.post('/check-email-exists',                  adminResidentController.checkEmailAdmin);
+router.post('/check-email-exists-adminEdit',        adminResidentController.checkEmailEditAdmin);
+
 module.exports = router;

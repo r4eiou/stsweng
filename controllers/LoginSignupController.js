@@ -31,6 +31,7 @@ const checkUserRole = async (req, res) => {
     }
 }
 
+/*
 const checkLogin = async (req, res) => {
     const { email, password } = req.body; // Retrieve email and password from request body
 
@@ -114,6 +115,83 @@ const checkLogin = async (req, res) => {
         res.render('login', {
             layout: 'index-login',
             title: 'Login Page'
+        });
+    }
+}
+*/
+
+const checkLogin = async (req, res) => {
+    const { email, password } = req.body; // Retrieve email and password from request body
+
+    try {
+        const curUser = await UserModel.findOne({ email: email }); // Finds if there is a match in users
+        var errorMsg = "";
+        var errorflag = 0;
+
+        if (!email || !password) {
+            errorMsg = "Email and Password fields cannot be empty.";
+            errorflag = 1;
+        } else if (!email.includes("@")) {
+            errorMsg = "Invalid email.";
+            errorflag = 1;
+        } else if (!curUser) {
+            errorMsg = "User Not Found.";
+            errorflag = 1;
+        } else if (curUser.password !== password) { 
+            errorMsg = "Incorrect password.";
+            errorflag = 1;
+        } else {
+            req.session.userRole = curUser.role.charAt(0).toUpperCase() + curUser.role.slice(1); // Capitalize the role for session
+            req.session.isAuth = true;
+
+            req.session.save((err) => {
+                if (err) {
+                    console.error('Session save error:', err);
+                    return res.render('login', {
+                        layout: 'index-login',
+                        title: 'Login Page',
+                        error: 'Session save error. Please try again.'
+                    });
+                }
+
+                switch (curUser.role) {
+                    case "employee":
+                        console.log("ENTER EMPLOYEE PAGE");
+                        return res.redirect("/employee-index");
+                    case "admin":
+                        console.log("ENTER ADMIN PAGE");
+                        return res.redirect("/admin-index");
+                    case "tanod":
+                        console.log("ENTER TANOD PAGE");
+                        return res.redirect("/tanod-index");
+                    case "lupon":
+                        console.log("ENTER LUPON PAGE");
+                        return res.redirect("/lupon-index");
+                    case "resident":
+                        console.log("ENTER RESIDENT PAGE");
+                        return res.redirect(`/resident-index/${email}`);
+                    default:
+                        console.log("GO BACK TO INDEX");
+                        return res.redirect("/login"); // Add a default redirect if necessary
+                }
+            });
+        }
+
+        if (errorflag) {
+            console.log("ERROR IN LOGIN");
+            res.render('login', {
+                layout: 'index-login',
+                title: 'Login Page',
+                error: errorMsg
+            });
+        }
+        
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.render('login', {
+            layout: 'index-login',
+            title: 'Login Page',
+            error: 'An unexpected error occurred. Please try again.'
         });
     }
 }
