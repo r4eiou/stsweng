@@ -798,6 +798,7 @@ html {
   flex-direction: row;
   border: transparent;
   align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 900px;
   height: 40px;
