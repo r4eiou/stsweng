@@ -364,6 +364,32 @@ const CertificateInfo = new mongoose.Schema ({
     },
 });
 
+<<<<<<< Updated upstream
+=======
+const EventSchema = new mongoose.Schema ({
+    pic : {
+        type: String,
+        required: false
+    },
+    header: {
+        type: String,
+        required: true
+    },
+    start_date: {
+        type: Date,
+        required: true
+    },
+    end_date: {
+        type: Date,
+        required: true
+    },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
+});
+
+>>>>>>> Stashed changes
 
 // MODELS //
 const CertificateModel          = mongoose.model("CertificateModel",        CertificateSchema,     "certificate");
@@ -373,6 +399,10 @@ const TanodCaseModel            = mongoose.model("TanodCaseModel",          Tano
 const SecurityQuestionModel     = mongoose.model("SecurityQuestionModel",   SecurityQuestion,      "securityQuestion");
 const ResidentModel             = mongoose.model("ResidentModel",           ResidentSchema,        "resident");
 const CertificateInfoModel      = mongoose.model("CertificateInfoModel",    CertificateInfo,       "certificateInfo");
+<<<<<<< Updated upstream
+=======
+const EventModel                = mongoose.model("EventModel",              EventSchema,            "events");
+>>>>>>> Stashed changes
 
 // EXPORTS //
 module.exports = {
@@ -383,5 +413,10 @@ module.exports = {
     SecurityQuestionModel,
     ResidentModel,
     CertificateInfoModel,
+<<<<<<< Updated upstream
+=======
+    EventModel,
+>>>>>>> Stashed changes
     mongo_uri
 };
+

@@ -1,15 +1,13 @@
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
-<link rel = "stylesheet" type = "text/css" href = "/css/index.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
 
 <script src = "/js/header.js" type="text/javascript"></script>
-
-<div class = "main-container">
+ <div class = "main-container">
             <div class= "header" id="header">
                 <div class = "header-left">
-                    <a href="/tanod-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
-                    <a href="/tanod-home" class="header-home" id="home-link2"><h3>Home</h3></a>
+                    <a href="/lupon-home" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
+                    <a href="/lupon-home" class="header-home" id="home-link2"><h3>Home</h3></a>
                 </div>
                 
                 <div class = "header-title">
@@ -20,90 +18,77 @@
                 </div>
                 <div class="header-right">
                     <div class="header-user-profile">
-                        <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
-                        <img src="/images/tanod-profile.png" class="header-user-profile" id="profile-img">
+                        <span class="header-user-profile-text lupon" id="profile-text">Lupon</span>
+                        <img src="/images/lupon-profile.png" class="header-user-profile" id="profile-img">
                     </div>
                     <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
                 </div>
             </div>
         </div>
-        
+        <!--New addition-->
         <div class="content-container-tanod-home">
             <div class="box-content-top">
-                <a href="/tanod-create"><button type="button" id="create-btn" class="form-btn create size"><img src="/images/form-create.png"><span>Create New Record</span></button></a>
-                <button type="button" id="resolve-btn" class=" form-btn resolved margin size"><img src="/images/form-check.png"><span>Mark as Resolved</span></button>
-
-            <div class="dropdown">
-                <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
-                    <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
-                </button>
-                <div id="dropdown-btn" class="dropdown-content margin">
-<<<<<<< Updated upstream
-                    <a href="#" onclick="selectOption('View All Cases')">View All Cases</a>
-                    <a href="#" onclick="selectOption('View Ongoing')">View Ongoing</a>
-                    <a href="#" onclick="selectOption('View Resolved')">View Resolved</a>
-                    <a href="#" onclick="selectOption('View Archived')">View Archived</a>
-=======
-                    <a href="/tanod-home">View All Cases</a>
-                    <a href="#" onclick="selectOption('View Ongoing')">View Ongoing</a>
-                    <a href="#" onclick="selectOption('View Resolved')">View Resolved</a>
-                    <a href="/tanod-home-archived">View Archived</a>
->>>>>>> Stashed changes
-                </div>                  
-            </div>
+                <a href="/lupon-create"><button type="button" id="create-btn" class="form-btn create size"><img src="/images/form-create.png"><span>Create New Record</span></button></a>
+                <button type="button"  id="resolve-btn" class="form-btn resolved margin size" ><img src="/images/form-check.png"><span>Mark as Resolved</span></button>
+                <div class="dropdown">
+                    <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Cases
+                        <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
+                    </button>
+                    <div id="dropdown-btn" class="dropdown-content margin">
+                        <a href="/lupon-home">View All Cases</a>
+                        <a href="#" onclick="selectOption('View Ongoing')">View Ongoing</a>
+                        <a href="#" onclick="selectOption('View Resolved')">View Resolved</a>
+                        <a href="/lupon-home-archived">View Archived</a>
+                    </div>                  
+                </div>
 
                 <div class="search-name-reg margin">
-                    <form id="search-form" method="GET" action="/tanod-home"> 
+                    <form id="search-form" method="GET" action="/lupon-home">
                         <button type="submit"><img src="/images/search-reg.png"></button>
                         <input type="text" placeholder="Search Name" name="search_name">
                     </form>
                   </div>
             </div>
-          
+            <div class="box-content">          
+            </div>
+
             <table class="tanod-lupon-db-table">
                 <thead>
                     <tr>
                         <th colspan="2"></th>
-                        <th class="entry-date-cell"><div class="content-text-group pair">
-                            <button type="button" class="sort {{sortField 'EntryNo'}} {{sortOrder sortOrder}} pair" id="sortEntryNum"><img src="/images/sort-{{sortOrder}}.png"></button>
-                            <div class="content-text">Entry #</div>
-                        </div>
-                        </th>
-                        <th class="entry-date-cell"><div class="content-text-group pair">
-                            <button type="button" class="sort {{sortField 'Data'}} {{sortOrder sortOrder}} pair" id="sortDate"><img src="/images/sort-.png"></button>
-                            <div class="content-text">Date</div></th>
-                        <th>Reportee</th>
+                        <th>Case Title</th>
+                        <th>Case Type</th>
                         <th>Respondent</th>
-                        <th colspan="2">Status</th>
+                        <th>Complainer</th>
+                        <th colspan="2">Case Status</th>
                     </tr>
                 </thead>
-                <tbody id="tanod-db-table-body">
+                <tbody id="lupon-db-table-body">
                     {{#each cases}}
                         <tr data-id="{{this._id}}">
                             <td data-label="checkbox" class="align-right check-view-cell">
-
                                 <button type="button" class="checkbox" data-case-id="{{this.caseID}}"><img src="/images/Done.png"></button>
                             </td>
                             <td class="align-left">
-                                <a href="/page-view-case/{{this.entryNo}}" class="content-text-main underline-lupon-tanod">View</a>
+                                <a href="/lupon-view-archived/{{this.caseID}}" class="content-text-main underline-lupon-tanod">View</a>
                             </td>
                             <td>
-                                {{this.entryNo}}
+                                {{this.caseTitle}}
                             </td>
                             <td>
-                                {{this.date}}
+                                {{this.caseType}}
                             </td>
                             <td class="name-cell">
-                                {{this.reporteeFirstName}} {{this.reporteeLastName}}
+                                {{this.respondentFirstName}} {{this.respondentLastName}}    
                             </td>
                             <td class="name-cell">
-                                {{this.respondentFirstName}} {{this.respondentLastName}}
+                                {{this.complainerFirstName}} {{this.complainerLastName}}    
                             </td>
                             <td class="case-status-cell">
                                 <button type="button" class="status view-case-detail-link {{this.stat_lc}} margin3 markResolve" data-case-id="{{this.caseID}}"><img src="/images/{{this.stat_lc}}-circle.png"><span>{{this.status}}</span></button>
                             </td>
                             <td class="case-status-cell align-left">
-                                <a href="/tanod-edit-case/{{this.entryNo}}" {{isEditable}}>
+                                <a href="/lupon-edit-case/{{this.caseID}}" {{this.isEditable}}>
                                 <button type="button" class="form-action-btn" title="Edit Case Details" {{isEditable}}><img src="/images/action-edit.png"></button></a>
                             </td>
                         </tr>
@@ -119,31 +104,27 @@
             </div>
         </div>
 
-       <script>
-             $(document).ready(function() {
-            const currentPage = {{currentPage}};
-            const totalPages = {{totalPages}};
-            const urlParams = new URLSearchParams(window.location.search);
-            const sortField = urlParams.get('sort_field') || 'EntryNo';
-            const sortOrder = urlParams.get('sort_order') || 'desc';
-            const searchName = urlParams.get('search_name') || '';
-            const baseUrl = `/tanod-home?sort_field=${sortField}&sort_order=${sortOrder}&search_name=${searchName}&page=`;
-
-            $('#count-down').click(function() {
-                if (currentPage > 1) {
-                    window.location.href = baseUrl + (currentPage - 1);
-                }
-            });
-
-            $('#count-up').click(function() {
-                if (currentPage < totalPages) {
-                    window.location.href = baseUrl + (currentPage + 1);
-                }
-            });
-        });
-    </script>
-
     <script>
+    $(document).ready(function() {
+        const currentPage = {{currentPage}};
+        const totalPages = {{totalPages}};
+        const baseUrl = '/lupon-home?page=';
+
+        $('#count-down').click(function() {
+            if (currentPage > 1) {
+                window.location.href = baseUrl + (currentPage - 1);
+            }
+        });
+
+        $('#count-up').click(function() {
+            if (currentPage < totalPages) {
+                window.location.href = baseUrl + (currentPage + 1);
+            }
+        });
+    });
+</script>
+
+<script>
         function dropdown() {
             var dropdownContent = document.getElementById("dropdown-btn");
             var dropdownImg = document.getElementById("dropdown-down-btn");
@@ -181,7 +162,7 @@
             } 
         }
         function filterRows(status) {
-            var rows = document.querySelectorAll("#tanod-db-table-body tr");
+            var rows = document.querySelectorAll("#lupon-db-table-body tr");
 
             rows.forEach(function(row) {
                 var statusText = row.querySelector(".case-status-cell button span").textContent.trim();
@@ -193,18 +174,16 @@
                     row.style.display = "table-row"; 
                     viewText.textContent = status === 'Archived' ? "View Archive" : "View";
                     viewCaseLink.href = status === 'Archived' 
-                        ? "/tanod-view-archive-case/" + caseId 
-                        : "/tanod-view-case/" + caseId;
+                        ? "/lupon-view-archive-case/"
+                        : "/lupon-view-case/" + caseId;
                 } else {
                     row.style.display = "none";
                 }
             });
         }
 
-
-
         function showAllRows() {
-            var rows = document.querySelectorAll("#tanod-db-table-body tr");
+            var rows = document.querySelectorAll("#lupon-db-table-body tr");
             rows.forEach(function(row) {
                 row.style.display = "table-row";
             });
@@ -237,7 +216,7 @@
 
             createButton.classList.remove('disabled');
             createLink.classList.remove('disabled'); 
-            createLink.setAttribute('href', '/tanod-create-case');
+            createLink.setAttribute('href', '/submit-lupon-case');
             
             resolveButton.classList.remove('disabled');
 
@@ -262,5 +241,6 @@
         };
 
     </script>
+
 
 

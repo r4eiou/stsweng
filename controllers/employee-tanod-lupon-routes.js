@@ -13,17 +13,10 @@ const isAuth = (req, res, next) => {
 function add(app){
     const mongoose = require('mongoose');
 
-    //Start
-    //changes: meron na sa index
-    // app.get('/', function(req, resp){
-    //     resp.render('index', {
-    //         layout: 'index-main',
-    //         title: 'Welcome to Barangay Parang Website'
-    //     });
-    // });
-
+ 
 
     /************************************************************EMPLOYEE************************************************/
+<<<<<<< Updated upstream
     //Changes: in another page
     // app.get('/login', function(req, resp){
     //     resp.render('login', {
@@ -84,6 +77,9 @@ function add(app){
     //         });
     //     }
     // });
+=======
+    
+>>>>>>> Stashed changes
 
     //Employee-Homepage
     app.get('/employee-home', isAuth, function(req, resp){
@@ -94,19 +90,10 @@ function add(app){
         });
     });
 
-    //changes: moved to index
-    // app.get('/logout', (req, res) => {
-    //     req.session.destroy(err => {
-    //         if (err) {
-    //             return res.redirect('/index'); // Redirect to a protected route if there's an error
-    //         }
-    //         res.clearCookie('connect.sid'); // Clear the session cookie
-    //         res.redirect('/index'); // Redirect to the login page or home page
-    //     });
-    // });
 
     /************************************************************TANOD************************************************/
 
+<<<<<<< Updated upstream
 
     //Tanod-Login
     // app.get('/tanod-login', function(req, resp){
@@ -165,6 +152,8 @@ function add(app){
     //     }
     // });
 
+=======
+>>>>>>> Stashed changes
     //Tanod Homepage
     app.get('/tanod-home', isAuth, async function(req, resp){
         try{
@@ -185,6 +174,7 @@ function add(app){
 
             //get all cases with pagination
             const cases = await TanodCaseModel.find({
+                isArchived : false, 
                 $or:[
                     {'ReporteeInfo.FirstName': searchRegex},
                     {'ReporteeInfo.LastName': searchRegex},
@@ -198,6 +188,7 @@ function add(app){
             .exec();
 
             const totalCases = await TanodCaseModel.countDocuments({
+                isArchived : false, 
                 $or:[
                     {'ReporteeInfo.FirstName': searchRegex},
                     {'ReporteeInfo.LastName': searchRegex},
@@ -254,6 +245,192 @@ function add(app){
             resp.status(500).send('Internal Server Error');
         }   
     });
+
+
+    //tanod homepage to view archived
+    app.get('/tanod-home-archived', isAuth, async function(req, resp){
+        try{
+            const searchName = req.query.search_name || '';
+            const searchRegex = new RegExp(searchName, 'i');
+
+            //pages
+            const page = parseInt(req.query.page) || 1;
+            const limit = 10;
+            const skip = (page - 1) * limit;
+
+            //new code
+            //for sorting
+            const sortField = req.query.sort_field || 'EntryNo';
+            const sortOrder = req.query.sort_order === 'asc' ? 1 : -1;
+            const sortOptions = {};
+            sortOptions[sortField] = sortOrder;
+
+            //get all cases with pagination
+            const cases = await TanodCaseModel.find({
+                isArchived : true, 
+                $or:[
+                    {'ReporteeInfo.FirstName': searchRegex},
+                    {'ReporteeInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            })
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit)
+            .exec();
+
+            const totalCases = await TanodCaseModel.countDocuments({
+                isArchived : true, 
+                $or:[
+                    {'ReporteeInfo.FirstName': searchRegex},
+                    {'ReporteeInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            });
+
+            let allCases = [];
+            for(const item of cases){
+                let stat_lc = 'resolved';
+                let isEditable = 'hidden';
+                if(item.Status == 'Ongoing'){
+                    stat_lc = 'ongoing';
+                    isEditable = '';
+                }
+
+                allCases.push({
+                    caseID : item._id,
+                    entryNo: item.EntryNo,
+                    date: item.Date,
+                    reporteeFirstName: item.ReporteeInfo.FirstName,
+                    reporteeLastName: item.ReporteeInfo.LastName,
+                    respondentFirstName: item.RespondentInfo.FirstName,
+                    respondentLastName: item.RespondentInfo.LastName,
+                    status: item.Status,
+                    stat_lc: stat_lc,
+                    isEditable: isEditable
+                });
+            }
+
+            let totalPages = 0;
+
+            if(totalCases == 0){
+                totalPages = 1;
+            }else{
+                totalPages = Math.ceil(totalCases/limit);
+            }
+           // const totalPages = Math.ceil(totalCases/limit);
+            
+            req.session.lastpage = '/tanod-home-archived';
+            resp.render('tanod-home-archived', {
+                layout: 'index-tanod',
+                title: 'Tanod Homepage',
+                cases: allCases,
+                currentPage: page,
+                totalPages: totalPages,
+                sortField: sortField,
+                sortOrder: req.query.sort_order || 'desc' //make it default descending
+            });
+
+        } catch(error){
+            console.error('Error fetching all cases:', error);
+            resp.status(500).send('Internal Server Error');
+        }   
+    });
+
+
+    //to view tanod cases that are archived 
+    /** app.get('/tanod-home-archived', isAuth, async function(req, resp){
+        try{
+            const searchName = req.query.search_name || '';
+            const searchRegex = new RegExp(searchName, 'i');
+
+            //pages
+            const page = parseInt(req.query.page) || 1;
+            const limit = 10;
+            const skip = (page - 1) * limit;
+
+            //new code
+            //for sorting
+            const sortField = req.query.sort_field || 'EntryNo';
+            const sortOrder = req.query.sort_order === 'asc' ? 1 : -1;
+            const sortOptions = {};
+            sortOptions[sortField] = sortOrder;
+
+            //get all cases with pagination
+            const cases = await TanodCaseModel.find({
+                isArchived : true, 
+                $or:[
+                    {'ReporteeInfo.FirstName': searchRegex},
+                    {'ReporteeInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            })
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit)
+            .exec();
+
+            const totalCases = await TanodCaseModel.countDocuments({
+                isArchived : true, 
+                $or:[
+                    {'ReporteeInfo.FirstName': searchRegex},
+                    {'ReporteeInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            });
+
+            let allCases = [];
+            for(const item of cases){
+                let stat_lc = 'resolved';
+                let isEditable = 'hidden';
+                if(item.Status == 'Ongoing'){
+                    stat_lc = 'ongoing';
+                    isEditable = '';
+                }
+
+                allCases.push({
+                    caseID : item._id,
+                    entryNo: item.EntryNo,
+                    date: item.Date,
+                    reporteeFirstName: item.ReporteeInfo.FirstName,
+                    reporteeLastName: item.ReporteeInfo.LastName,
+                    respondentFirstName: item.RespondentInfo.FirstName,
+                    respondentLastName: item.RespondentInfo.LastName,
+                    status: item.Status,
+                    stat_lc: stat_lc,
+                    isEditable: isEditable
+                });
+            }
+
+            let totalPages = 0;
+
+            if(totalCases == 0){
+                totalPages = 1;
+            }else{
+                totalPages = Math.ceil(totalCases/limit);
+            }
+           // const totalPages = Math.ceil(totalCases/limit);
+            
+            req.session.lastpage = '/tanod-home';
+            resp.render('tanod-home', {
+                layout: 'index-tanod',
+                title: 'Tanod Homepage',
+                cases: allCases,
+                currentPage: page,
+                totalPages: totalPages,
+                sortField: sortField,
+                sortOrder: req.query.sort_order || 'desc' //make it default descending
+            });
+
+        } catch(error){
+            console.error('Error fetching all cases:', error);
+            resp.status(500).send('Internal Server Error');
+        }   
+    }); */
 
     //Tanod-Create-Case
     app.get('/tanod-create', function(req, resp){
@@ -333,7 +510,8 @@ function add(app){
                 MiddleInitial: req.body.witnessMiddleInitial,
                 LastName: req.body.witnessLastName,
             },
-            Location: req.body.location
+            Location: req.body.location,
+            isArchived: false
         }
 
         //put all details in the db
@@ -384,6 +562,52 @@ function add(app){
 
                 req.session.lastpage = `/page-view-case/${entryNumber}`;
                 resp.render('tanod-view-case', {
+                    layout: 'index-view-tl', 
+                    title: 'View Tanod Case',
+                    case: caseDetails,
+                    resolveStat: resolveStat,
+                    ongoingStat: ongoingStat,
+                    reporteeInfo: reporteeInfo,
+                    respondentInfo: respondentInfo,
+                    deskInfo: deskInfo,
+                    witnessInfo: witnessInfo,
+                    isEditable : isEditable
+                });
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error fetching case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+    });
+
+    //view archived tanod case
+    app.get('/tanod-view-archived/:id', async function(req, resp){
+        const id = Number(req.params.id);
+        console.log(id);
+        let resolveStat = 'selected';
+        let ongoingStat = 'disabled';
+        let isEditable = "hidden";
+
+        try {
+            const caseDetails = await TanodCaseModel.findOne({ _id: id }).lean();
+            if (caseDetails) {
+                console.log('found case');
+                const reporteeInfo = caseDetails.ReporteeInfo;
+                const respondentInfo = caseDetails.RespondentInfo;
+                const deskInfo = caseDetails.DeskOfficerInfo;
+                const witnessInfo = caseDetails.WitnessInfo;
+
+
+                if(caseDetails.Status == 'Ongoing'){
+                    resolveStat = 'disabled';
+                    ongoingStat = 'selected';
+                    isEditable = '';
+                }
+
+                req.session.lastpage = `/tanod-view-archived/${id}`;
+                resp.render('tanod-view-archived', {
                     layout: 'index-view-tl', 
                     title: 'View Tanod Case',
                     case: caseDetails,
@@ -599,9 +823,21 @@ function add(app){
          }
     });
 
-    /************************************************************LUPON************************************************/
+    //new archive function - tanod 
+    app.get('/archive-tanod-case/:_id', async function(req, resp){
+        const caseID = req.params._id;
 
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedCase = await TanodCaseModel.findOneAndUpdate(
+                { _id : caseID },
+                {
+                    isArchived: true
+                },
+                { new: true } // Return the updated document
+            );
 
+<<<<<<< Updated upstream
     //Lupon-Login
     // app.get('/lupon-login', function(req, resp){
     //     resp.render('lupon-login-page', {
@@ -656,6 +892,49 @@ function add(app){
     //         });
     //     }
     // });
+=======
+            if (updatedCase) {
+                resp.redirect(`/tanod-home`);
+                //resp.redirect(`/lupon-view-case/${updatedCase._id}`); // Redirect to the homepage after successful update
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+    });
+>>>>>>> Stashed changes
+
+    //restore record -tanod
+    app.get('/restore-tanod-case/:_id', async function(req, resp){
+        const caseID = req.params._id;
+
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedCase = await TanodCaseModel.findOneAndUpdate(
+                { _id : caseID },
+                {
+                    isArchived: false
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (updatedCase) {
+                resp.redirect(`/tanod-home`);
+                //resp.redirect(`/lupon-view-case/${updatedCase._id}`); // Redirect to the homepage after successful update
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+    });
+
+    /************************************************************LUPON************************************************/
 
 
     //Lupon Homepage
@@ -671,6 +950,7 @@ function add(app){
 
             //get all cases with pagination
             const cases = await LuponCaseModel.find({
+                isArchived : false, 
                 $or:[
                     {'ComplainerInfo.FirstName': searchRegex},
                     {'ComplainerInfo.LastName': searchRegex},
@@ -683,6 +963,7 @@ function add(app){
             .exec();
 
             const totalCases = await LuponCaseModel.countDocuments({
+                isArchived : false, 
                 $or:[
                     {'ComplainerInfo.FirstName': searchRegex},
                     {'ComplainerInfo.LastName': searchRegex},
@@ -739,6 +1020,90 @@ function add(app){
             resp.status(500).send('Internal Server Error');
         }   
     });
+
+    app.get('/lupon-home-archived', isAuth, async function(req, resp){
+        try{
+            const searchName = req.query.search_name || '';
+            const searchRegex = new RegExp(searchName, 'i');
+
+            //pages
+            const page = parseInt(req.query.page) || 1;
+            const limit = 10;
+            const skip = (page - 1) * limit;
+
+            //get all cases with pagination
+            const cases = await LuponCaseModel.find({
+                isArchived : true, 
+                $or:[
+                    {'ComplainerInfo.FirstName': searchRegex},
+                    {'ComplainerInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            })
+            .skip(skip)
+            .limit(limit)
+            .exec();
+
+            const totalCases = await LuponCaseModel.countDocuments({
+                isArchived : true, 
+                $or:[
+                    {'ComplainerInfo.FirstName': searchRegex},
+                    {'ComplainerInfo.LastName': searchRegex},
+                    {'RespondentInfo.FirstName' : searchRegex},
+                    {'RespondentInfo.LastName': searchRegex}
+                ]
+            });
+
+
+            let allCases = [];
+            for(const item of cases){
+                let stat_lc = 'resolved';
+                let isEditable = 'hidden';
+                if(item.Status == 'Ongoing'){
+                    stat_lc = 'ongoing';
+                    isEditable ='';
+                }
+                
+
+                allCases.push({
+                    caseID: item._id,
+                        caseTitle: item.CaseTitle,
+                        caseType: item.CaseType,
+                        complainerFirstName: item.ComplainerInfo.FirstName,
+                        complainerLastName: item.ComplainerInfo.LastName,
+                        respondentFirstName: item.RespondentInfo.FirstName,
+                        respondentLastName: item.RespondentInfo.LastName,
+                        status: item.Status,
+                        stat_lc: stat_lc,
+                        isEditable: isEditable
+                });
+            }
+
+            let totalPages = 0;
+
+            if(totalCases == 0){
+                totalPages = 1;
+            }else{
+                totalPages = Math.ceil(totalCases/limit);
+            }
+            //const totalPages = Math.ceil(totalCases/limit);
+
+            req.session.lastpage = 'lupon-home';
+            resp.render('lupon-home-archived', {
+                layout: 'index-lupon',
+                title: 'Lupon Homepage',
+                cases: allCases,
+                currentPage: page,
+                totalPages: totalPages
+            });
+
+        } catch(error){
+            console.error('Error fetching all cases:', error);
+            resp.status(500).send('Internal Server Error');
+        }   
+    });
+
 
     //Lupon create case
     app.get('/lupon-create', function(req, resp){
@@ -810,7 +1175,8 @@ function add(app){
                 MiddleInitial: req.body.conciliationMiddleInitial,
                 LastName: req.body.conciliationLastName
             },
-            Case: req.body.Case
+            Case: req.body.Case,
+            isArchived: false
         };
 
         try{
@@ -873,6 +1239,55 @@ function add(app){
             resp.status(500).send('Internal Server Error');
         }
 
+    });
+
+
+    //lupon archived case view
+    app.get('/lupon-view-archived/:_id', async function (req, resp){
+        const caseID = req.params._id;
+        console.log(caseID);
+
+        let resolveStat = 'selected';
+        let ongoingStat = 'disabled';
+        let isEditable = "hidden";
+
+
+        try {
+            const caseDetails = await LuponCaseModel.findOne({ _id: caseID }).lean();
+            if (caseDetails) {
+                console.log('found case');
+                const respondentInfo = caseDetails.RespondentInfo;
+                const complainerInfo = caseDetails.ComplainerInfo;
+                const mediationInfo = caseDetails.MediationInfo;
+                const conciliationInfo = caseDetails.ConciliationInfo;
+
+
+
+                if(caseDetails.Status == 'Ongoing'){
+                    resolveStat = 'disabled';
+                    ongoingStat = 'selected';
+                    isEditable = '';
+                }
+                req.session.lastpage = `/lupon-view-archived/${caseID}`;
+                resp.render('lupon-view-archived', {
+                    layout: 'index-view-tl', 
+                    title: 'View Lupon Case',
+                    case: caseDetails,
+                    resolveStat: resolveStat,
+                    ongoingStat: ongoingStat,
+                    respondentInfo: respondentInfo,
+                    complainerInfo: complainerInfo,
+                    mediationInfo:  mediationInfo,
+                    conciliationInfo: conciliationInfo,
+                    isEditable : isEditable
+                });
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error fetching case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
     });
 
     //Lupon Edit case
@@ -976,7 +1391,8 @@ function add(app){
                         MiddleInitial: req.body.conciliationMiddleInitial,
                         LastName: req.body.conciliationLastName
                     },
-                    Case: req.body.Case
+                    Case: req.body.Case,
+                    isArchived: false
                 },
                 { new: true } // Return the updated document
             );
@@ -993,7 +1409,7 @@ function add(app){
         }
     });
 
-    //Lupon delete
+    //Lupon delete change
     app.get('/lupon-delete-case/:_id', async function(req, resp){
         const caseID = req.params._id;
         try{
@@ -1030,6 +1446,7 @@ function add(app){
         }
     });
 
+    //changee
     app.post('/lupon-delete-cases', async function(req, resp) {
         const { caseIds } = req.body;
         try {
@@ -1040,6 +1457,61 @@ function add(app){
             resp.json({ success: false });
         }
     });
+
+    //new archive function - lupon 
+    app.get('/archive-lupon-case/:_id', async function(req, resp){
+        const caseID = req.params._id;
+
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedCase = await LuponCaseModel.findOneAndUpdate(
+                { _id: caseID },
+                {
+                    isArchived: true
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (updatedCase) {
+                resp.redirect(`/lupon-home`);
+                //resp.redirect(`/lupon-view-case/${updatedCase._id}`); // Redirect to the homepage after successful update
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+    });
+
+    //restore archived case -lupon
+    app.get('/restore-lupon-case/:_id', async function(req, resp){
+        const caseID = req.params._id;
+
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedCase = await LuponCaseModel.findOneAndUpdate(
+                { _id: caseID },
+                {
+                    isArchived: false
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (updatedCase) {
+                resp.redirect(`/lupon-home`);
+                //resp.redirect(`/lupon-view-case/${updatedCase._id}`); // Redirect to the homepage after successful update
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+    });
+
 
     app.post('/lupon-resolve-cases', async function(req, resp) {
         const { caseIds } = req.body;

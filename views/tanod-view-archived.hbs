@@ -1,5 +1,8 @@
 <link rel = "stylesheet" type = "text/css" href = "/css/back-button.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/popups.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/form.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
 
 <div class = "main-container">
     <div class= "header" id="header">
@@ -33,7 +36,13 @@
                     Back
                 </a>
             </div>
-            <h1 id = "tanod-case-title">Tanod Case Details</h1>
+            <div class="text-container-archive-box">
+                <div class = "text-container-archive">
+                    <h1 id = "event-details-title-archive">Archive </h1>
+                    <h1 id = "event-details-title">Tanod Case Details</h1>
+                </div>
+            </div>
+            <!--<h1 id = "tanod-case-title">Tanod Case Details</h1>-->
         </div>
         <div class = "form-encasing-container">
             <div class = "form-actual-container">
@@ -139,42 +148,15 @@
             </div>  
         </div>
         <div class = "buttons-container">
-            <a href="/tanod-mark-resolve/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn resolved" {{isEditable}}><img src="/images/form-check.png"><span>Mark as Resolved</span></button></a>
-            <a href="/tanod-edit-case/{{case.EntryNo}}" {{isEditable}}><button type="button" class="form-btn edit " {{isEditable}}><img src="/images/form-edit.png"><span>Edit Data</span></button></a>
-            <button type="button" id="archiveButton" class="form-btn delete"><img src="/images/form-trash.png"><span>Archive this record</span></button>
-            <div class="overlay" id="overlay"></div>
-            <div class="popup1" id="popup1">
-                <div class="upper-container-popup">
-                    <div class="main-header">
-                        <div class="question-label">Are you sure you want to <br> archive this record?</div>
-                        <img src="/images/close.png" class="closebtn"/>
-                    </div>
-                    <div class="prompt-label font-light">
-                        Archived records will be <span class="font-red font-light">deleted permanently</span>  <br>after30 days. You may <span class="font-green font-light">recover</span> through the <span class="font-green">Archives Database</span></div>.
-                    </div>
-                    <div class="bottom-container-popup">
-<<<<<<< Updated upstream
-                        <button class="archive-btn margin">Archive</button>
-=======
-                        <a href="/archive-tanod-case/{{case._id}}"><button class="archive-btn margin">Archive</button></a>
->>>>>>> Stashed changes
-                        <button class="cancel-btn-popup margin">Cancel</button>
-                    </div>
-                </div>
-            </div>
-            <div class="popup2" id="popup2">
-                <div class="upper-container-popup">
-                    <div class="main-header">
-                        <div class="header-label">Record successfully archived</div>
-                        <img src="/images/close.png" class="closebtn"/>
-                    </div>
-                    <div class="prompt-label font-light small">Redirecting you to the Archives Database...</div>
-                </div>
-            </div>
+             <a href="/restore-tanod-case/{{case._id}}"> 
+            <button type="button" id="restoreButton" class="form-btn restore"><img src="/images/form-restore.png"><span>Restore record</span></button>
+            </a>
         </div>
     </div>
 </div>
 
+
+<!--
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     const popup1 = document.getElementById('popup1');
@@ -219,3 +201,4 @@
 });
 
 </script>
+-->
