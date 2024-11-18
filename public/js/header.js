@@ -89,29 +89,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 case "Lupon":
                     document.getElementById("profile-text").style.color="#F3BE72";
                     user_profile.src = "/images/lupon-profile.png";
-                    home_link1.href = "/lupon-home";
-                    home_link2.href = "/lupon-home";
+                    home_link1.href = "/lupon-index";
+                    home_link2.href = "/lupon-index";
                     break;
     
                 case "Tanod":
                     document.getElementById("profile-text").style.color="#AFE1D7";
                     user_profile.src = "/images/tanod-profile.png";
-                    home_link1.href = "/tanod-home";
-                    home_link2.href = "/tanod-home";
+                    home_link1.href = "/tanod-index";
+                    home_link2.href = "/tanod-index";
                     break;
     
                 case "Employee":
                     document.getElementById("profile-text").style.color="#779FE5";
                     user_profile.src = "/images/employee-profile.png";
-                    home_link1.href = "/employee-home";
-                    home_link2.href = "/employee-home";
+                    home_link1.href = "/employee-index";
+                    home_link2.href = "/employee-index";
                     break;
     
                 case "Admin":
                     document.getElementById("profile-text").style.color="#F07507";
                     user_profile.src = "/images/admin-profile.png";
-                    home_link1.href = "/admin-homepage";
-                    home_link2.href = "/admin-homepage";
+                    home_link1.href = "/admin-index";
+                    home_link2.href = "/admin-index";
                     break;
                 default:
                     document.getElementById("profile-text").style.color="#FFFFFF";
