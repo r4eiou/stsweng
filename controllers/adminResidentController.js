@@ -1,5 +1,6 @@
 const ResidentModel = require("../models/database/mongoose").ResidentModel;
 const UserModel = require("../models/database/mongoose").UserModel;
+const CertificateModel = require("../models/database/mongoose").CertificateModel;
 
 //view database ✔
 const adminViewResidentDB = async (req, res) => {
@@ -258,6 +259,9 @@ const createResidentRecordAdmin = async (req, res) => {
         
         console.log(newReviewId);
 
+        // find if email exists in ResidentModel. If so increment req_counter of ResidentModel
+        const emailCount = await CertificateModel.countDocuments({ Email: Email });
+
         await ResidentModel.create({
             _id: newReviewId,
             img: img,
@@ -275,7 +279,8 @@ const createResidentRecordAdmin = async (req, res) => {
             NoOfResident: NoOfResident,
             HousingInfo: HousingInfo,
             ServiceRequestID: ServiceRequestID ? ServiceRequestID : null,
-            isArchived: false
+            isArchived: false,
+            Req_counter: emailCount || 0
         });
 
         res.redirect("/admin-resident-db-view" );

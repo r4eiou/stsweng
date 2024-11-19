@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             .then(response => {
                                 if (response.ok) {
                                     // Handle success
-                                    window.location.href = '/admin-resident-db';
+                                    window.location.href = '/admin-resident-db-view';
                                 } else {
                                     // Handle error
                                     return response.json().then(errorData => {

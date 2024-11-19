@@ -2,6 +2,7 @@ const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
 const CertificateInfoModel = require("../models/database/mongoose").CertificateInfoModel;
+const ResidentModel = require("../models/database/mongoose").ResidentModel;
 
 // PAKISEPARATE NG FILE -------------------
 const viewEventsDB = async (req, res) => {
@@ -264,7 +265,8 @@ const submitCertificate = async (req, res) => {
             ctc_location,
             cert_date_issued,
             reason,
-            img
+            img,
+            email
         } = req.body;
 
         //DEBUGGING
@@ -304,12 +306,23 @@ const submitCertificate = async (req, res) => {
             ctc_date_issued: ctc_date_issued,
             ctc_location: ctc_location,
             cert_date_issued: cert_date_issued,
-            reason: reason
+            reason: reason,
+            email: email
         });
+
+        //console.log(email)
+
+        //find if email exists in ResidentModel. If so increment req_counter of ResidentModel
+        const resident = await ResidentModel.findOne({ Email: email });
+
+        if (resident) {
+            resident.Req_counter = (resident.Req_counter || 0) + 1;
+            await resident.save();
+        }
 
         res.status(201).send({ message: 'Certificate saved successfully' });
     } catch (error) {
-        console.log("error here in controller cert")
+        console.log(error)
         res.status(400).send(error);
     }
 }
