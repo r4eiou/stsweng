@@ -302,6 +302,20 @@ const viewResidentIndex = async (req, res) => {
     });
 }
 
+const viewSeparateReg = async (req, res) => {
+    try {
+        req.session.lastpage = '/employee-separate-reg-resident';
+        res.render('employee-separate-reg-resident', {
+            layout: 'layout',
+            title: 'Employee: Create Resident Detail',
+            cssFile1: null
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
 module.exports = {
     checkLogin,
     checkUserRole,
@@ -309,6 +323,8 @@ module.exports = {
     signup,
     checkSignup,
 
-    viewResidentIndex
+    viewResidentIndex,
+
+    viewSeparateReg
 }
 
