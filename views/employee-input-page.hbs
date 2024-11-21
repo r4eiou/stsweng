@@ -140,6 +140,13 @@
                     </div>
                 </div>
 
+                <div class="deets4-container">
+                    <div class="email-container">
+                        <div class="deets-text">Email Address</div>
+                        <input type="text" id="email_input" name="email" placeholder="@gmail.com">
+                    </div>
+                </div>
+
                 <!-- for Reason For Certificate -->
                 <div class="deets5-container"> 
                     <div class="deets-text">Reason For Certificate</div>
@@ -183,7 +190,6 @@
             return;
         }
         
-
         const form = document.querySelector('.print-form');
         const name = titleCase(form.elements['name'].value);
         const birthday = formatBirthday(form.elements['bday-date'].value);
@@ -194,6 +200,7 @@
         const birthPlace = titleCase(form.elements['birthplace'].value);
         const reason = form.elements['reason'].value.toUpperCase();
         const profileImg = document.getElementById('deets-profile-img').src;
+        const email = document.getElementById('email_input').value;
 
         const today = new Date();
         const yyyy = today.getFullYear();
@@ -214,7 +221,8 @@
             ctc_location: location,
             cert_date_issued: formattedDate,
             reason,
-            img: profileImg
+            img: profileImg,
+            email: email
         };
 
         //console.log(JSON.stringify(data));
@@ -241,6 +249,12 @@
         .then(response => response.json())
         .then(result => {
             console.log('Success:', result);
+
+            // Check if the response contains a success message
+            if (result.message === 'Certificate saved successfully') {
+                // Redirect to the input page
+                window.location.reload();
+            }
         })
         .catch(error => {
             console.log("error here fetch")

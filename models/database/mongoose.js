@@ -66,7 +66,11 @@ const CertificateSchema = new mongoose.Schema ({
     reason : {
         type: String,
         required: true
-    }
+    },
+    email : {
+        type: String,
+        required: true
+    },
 });
 
 const UserSchema = new mongoose.Schema ({
@@ -344,6 +348,9 @@ const ResidentSchema = new mongoose.Schema ({
     isArchived: {
         type: Boolean,
         required: true
+    },
+    Req_counter : {
+        type: Number
     }
 });
 

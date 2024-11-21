@@ -140,6 +140,13 @@
                     </div>
                 </div>
 
+                <div class="deets4-container">
+                    <div class="email-container">
+                        <div class="deets-text">Email Address</div>
+                        <input type="text" id="email_input" name="email" placeholder="@gmail.com">
+                    </div>
+                </div>
+
                 <!-- for Reason For Certificate -->
                 <div class="deets5-container"> 
                     <div class="deets-text">Reason For Certificate</div>
@@ -174,6 +181,7 @@
     
     async function downloadFileEmployee() 
     {
+        
         // Perform validation
         const isValid = await validateForm();
         
@@ -181,7 +189,7 @@
         if (!isValid) {
             return;
         }
-
+        
         const form = document.querySelector('.print-form');
         const name = titleCase(form.elements['name'].value);
         const birthday = formatBirthday(form.elements['bday-date'].value);
@@ -192,6 +200,7 @@
         const birthPlace = titleCase(form.elements['birthplace'].value);
         const reason = form.elements['reason'].value.toUpperCase();
         const profileImg = document.getElementById('deets-profile-img').src;
+        const email = document.getElementById('email_input').value;
 
         const today = new Date();
         const yyyy = today.getFullYear();
@@ -212,10 +221,23 @@
             ctc_location: location,
             cert_date_issued: formattedDate,
             reason,
-            img: profileImg
+            img: profileImg,
+            email: email
         };
 
         //console.log(JSON.stringify(data));
+        
+        const response = await fetch('/certificateInfo');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const certificateInfo = await response.json();
+
+        // Extract data from certificateInfo
+        const brgyCaptName = certificateInfo.brgy_capt_name.toUpperCase();
+        const new_slogan = certificateInfo.slogan;
+        const midLogo = certificateInfo.img;
+
         
         fetch('/saveCertificate', {
             method: 'POST',
@@ -227,11 +249,18 @@
         .then(response => response.json())
         .then(result => {
             console.log('Success:', result);
+
+            // Check if the response contains a success message
+            if (result.message === 'Certificate saved successfully') {
+                // Redirect to the input page
+                window.location.reload();
+            }
         })
         .catch(error => {
             console.log("error here fetch")
             console.error('Error:', error);
         });
+        
 
         //generating part
         const doc = new jsPDF({
@@ -243,10 +272,13 @@
         doc.setFont('Times', 'bold'); 
 
         // Title and Header
-        
-        const logoWidth = 100;
+        //const imageFile = '/images/' + userInputFileName;
+
+        const logoWidth = 30;
         const logolength = 30;
-        doc.addImage('/images/logo-cert.png', 'PNG', 57, 10, logoWidth, logolength);
+        doc.addImage('/images/logo-left.jpg',   'JPG', 60, 8, logoWidth, logoWidth);
+        doc.addImage(midLogo,                   'PNG', 92, 7, logoWidth, logoWidth); //dynamic papalitan {{mid_logo}}
+        doc.addImage('/images/logo-right.png',  'PNG', 125, 10, 27, 27);
 
         doc.setFontSize(12);
         doc.text('Republic of the Philippines',     105, 45, null, null, 'center');
@@ -446,13 +478,32 @@
         doc.text(`Parang, Marikina City.`, 20, 157 + (splitText.length * 6) + (splitTextAdd.length * 6));
 
         // Signature
-        doc.addImage('/images/footer-cert.png', 'PNG', 20, 200, 155, 75);
-        
+        //doc.addImage('/images/footer-cert.png', 'PNG', 20, 200, 155, 75);
+                    
+                    //brgy-capt-name 
+        var brgy_capt_name  = brgyCaptName //dynamic papalitan {{brgy_capt_name}}
+        var capt_nameWidth = doc.getTextWidth(brgy_capt_name);
+
+        var brgy_title = "Punong Barangay";
+        var brgy_capt_width = doc.getTextWidth(brgy_title);
+        var xPositionTitle = 20 + (capt_nameWidth - brgy_capt_width) / 2;
+
+        doc.text(brgy_capt_name, 20, 215);
+        doc.text(brgy_title,  xPositionTitle   , 221)
+
+        doc.addImage('/images/logo-parang.jpg',  'JPG', xPositionTitle, 223, 35, 32);
+
+        doc.setFont('Times', 'bolditalic');
+        var slogan = `"${new_slogan}"` //dynamic papalitan {{slogan}}
+        doc.text(slogan,  xPositionTitle + 40, 240)
+        doc.setFont("Times", "normal");
+
+        doc.addImage('/images/footer.png', 'PNG', 20, 252, 150, 20);
 
         // Open PDF in a new window
         // doc.output('dataurlnewwindow');
 
-        var pdfBlob = doc.output('blob');
+        var pdfBlob = doc.output('blob'); 
         var url = URL.createObjectURL(pdfBlob);
         var newWindow = window.open(url, '_blank');
 

@@ -75,6 +75,7 @@ async function validateForm() {
     const cedula = document.getElementById('cedula').value.trim();
     const location = document.getElementById('location').value.trim();
     const reason = document.getElementById('reason').value.trim();
+    const email = document.getElementById('email_input').value.trim();
 
     let valid = true;
     let errorMessage = '';
@@ -144,6 +145,22 @@ async function validateForm() {
     if (!reason) {
         valid = false;
         errorMessage += 'Reason of Certificate is required.\n';
+    }
+
+    // Check if email exists in ResidentModel
+    const checkEmailResponse = await fetch('/check-email-exists-employee', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ Email: email })
+    });
+
+    const checkEmailResult = await checkEmailResponse.json();
+
+    if (!checkEmailResult.exists) {
+        valid = false;
+        errorMessage += 'Email address does not exist. Please register first.\n';
     }
 
     if (!valid) {

@@ -187,6 +187,10 @@ button[value="back"] {
   margin-left: 22%;
 }
 
+.deets4-container .email-container .deets-text {
+  margin-left: 22%;
+}
+
 .deets4-container .date-container .deets-text {
   margin-left: 39%;
 }
@@ -298,6 +302,19 @@ input[id='birthplace'] {
 }
 
 input[id='cedula'] {
+  width: 220px;
+  height: 29px;
+  
+  margin-bottom: 0.5rem;
+  padding-left: 10px;
+  background-color: #CCCCCC;
+  border: 1px solid #5E5E5E;
+  border-radius: 5px;
+
+  margin-left: 22%;
+}
+
+input[id='email_input'] {
   width: 220px;
   height: 29px;
   
