@@ -123,6 +123,19 @@
     .register-senior-input{
         height: 35px;
     }
+
+    .row-senior{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #counter-row {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 20px;
+        height: 50px;
+    }
 </style>
 
 <div class="main-container" id="main-container">
@@ -235,13 +248,20 @@
                         </div>
                     </div>
 
-                    <div class = "column-section" id="senior-row">
-                        <label for="register-senior">Senior</label>
-                        <select class="register-senior-input" name="isSeniorCitizen" required id="seniorCitizen">
-                            <option value="" selected hidden>Select</option> 
-                            <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
-                            <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
-                        </select>
+                    <div class="row-senior">
+                        <div class = "column-section" id="senior-row">
+                            <label for="register-senior">Senior</label>
+                            <select class="register-senior-input" name="isSeniorCitizen" required id="seniorCitizen">
+                                <option value="" selected hidden>Select</option> 
+                                <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
+                                <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
+                            </select>
+                        </div>
+
+                        <div class = "column-section" id="counter-row">
+                            <label for="req_counter">Certificate Request Counter</label>
+                            <input id="req_counter" type="number" class="form-control" placeholder="{{residents.Req_counter}}" readonly style="width:50px"/>
+                        </div>
                     </div>
 
                     <div class = "column-section" id="senior-row">

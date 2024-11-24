@@ -76,6 +76,33 @@
         margin-left: 50px;
     }
 
+    #counter-row {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 32px;
+    }
+
+    #contact-row {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 3px;
+    }
+
+    #age-row {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+
+    .row-senior{
+        display: flex;
+        flex-direction: row;
+    }
+
     .register-senior-input{
         height: 35px;
     }
@@ -160,7 +187,7 @@
                             <input class = "resident-birthday-input" id="birthdateInput" type = "date" value="{{residents.Birthday}}" name="Birthday" readonly>
                         </div>
                        
-                       <div class = "input-pair second">
+                       <div class = "input-pair second" id="age-row">
                             <label for="resident-age">Age</label>
                             <input class = "resident-age-input" type = "number" value="{{residents.Age}}" name="Age" readonly id="age">
                         </div>
@@ -178,7 +205,7 @@
                             <input class = "resident-email-input" type ="text" value="{{residents.Email}}" name="Email" readonly id="email">
                         </div>
                         
-                        <div class = "column-section">
+                        <div class = "column-section" id="contact-row">
                             <label for="register-contactno">Contact No.</label>
                             <input class="register-contactno-input" type = "number" value="{{residents.ContactNo}}" name="ContactNo" readonly id="contactNo">
                         </div>
@@ -195,13 +222,20 @@
                         </div>
                     </div>
                     
-                    <div class = "column-section" id="senior-row">
-                        <label for="register-senior">Senior</label>
-                        <select class="register-senior-input" name="isSeniorCitizen" id="seniorCitizen" readonly>
-                            <option value="" selected hidden>Select</option> 
-                            <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
-                            <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
-                        </select>
+                    <div class="row-senior">
+                        <div class = "column-section" id="senior-row">
+                            <label for="register-senior">Senior</label>
+                            <select class="register-senior-input" name="isSeniorCitizen" id="seniorCitizen" readonly>
+                                <option value="" selected hidden>Select</option> 
+                                <option value="Yes"{{#if (eq residents.isSeniorCitizen "Yes")}}selected{{/if}}>Yes</option>
+                                <option value="No" {{#if (eq residents.isSeniorCitizen "No")}}selected{{/if}} >No</option>
+                            </select>
+                        </div>
+
+                        <div class = "column-section" id="counter-row">
+                            <label for="req_counter">Certificate Request Counter</label>
+                            <input id="req_counter" type="number" class="form-control" placeholder="{{residents.Req_counter}}" readonly style="width:50px"/>
+                        </div>
                     </div>
 
                     <div class = "column-section" id="senior-row">
@@ -242,10 +276,11 @@
                             <div class="question-label">Are you sure you want to <br> archive this record?</div>
                             <img src="/images/close.png" class="closebtn"/>
                         </div>
-
+                        {{!--
                         <div class="prompt-label font-light">
                             Archived records will be <span class="font-red font-light">deleted permanently</span> after 30 days. You may <span class="font-green font-light">recover</span> through the <span class="font-green">Archives Database</span>
                         </div>.
+                        --}}
                         
                         <div class="bottom-container">
                             <a href="/admin-archive-resident-info/{{residents._id}}"><button class="archive-btn margin button">Archive</button></a>
