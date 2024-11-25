@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const mongo_uri = 'mongodb+srv://admin_parang:YT66GhDJ43QUqVpT@stsweng.2sxw2.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=STSWENG';
 const run = async () => {
     await mongoose.connect(mongo_uri);
-    console.log("Connected to myDB");
+    //console.log("Connected to myDB");
   }
   
   run()
