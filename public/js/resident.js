@@ -193,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             CivilStatus: form.querySelector('#civilStatus').value,
                             NoOfResident: form.querySelector('#noOfResident').value,
                             HousingInfo: form.querySelector('#housingInfo').value,
-                            ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
 
                             prevEmail: form.querySelector('#prevEmailValue').value
                         };
@@ -399,7 +398,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             CivilStatus: form.querySelector('#civilStatus').value,
                             NoOfResident: form.querySelector('#noOfResident').value,
                             HousingInfo: form.querySelector('#housingInfo').value,
-                            ServiceRequestID: form.querySelector('#respondent-service-request-no').value || null,
 
                             prevEmail: form.querySelector('#prevEmailValue').value
                         };
