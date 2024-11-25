@@ -133,6 +133,11 @@ for(var i=0; i<controllers.length; i++){
 }
 
 const port = process.env.PORT || 3000;
-app.listen(port, function(){
-    console.log('Listening at port '+ port);
-});
+
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, function () {
+        console.log('Listening at port ' + port);
+    });
+}
+
+module.exports = app; // Export the app for testing
