@@ -2,8 +2,6 @@
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 <style>
     .search-name-reg form{
         width: 220px;
@@ -108,135 +106,14 @@
                         <button type="button" class="status margin3 {{stat_lc}}" data-case-id=""><img src="/images/{{stat_lc}}-circle.png"><span>{{this.stat}}</span></button>
                     </td>
                     <td class="align-left">
-                        <a href="/employee-view-event/{{this.eventID}}" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                        <a href="/employee-view-archive/{{this.eventID}}" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
                     </td>
                 </tr>
                 {{/each}}
-                <!--
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link" >View Event Details</a>
-                    </td>
-                </tr>  
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 inactive" data-case-id=""><img src="/images/inactive-circle.png"><span>Inactive</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="checkbox" class="align-right check-view-cell">
-                        <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
-                    </td>
-                    <td class="headline-cell">
-                        Headline Here
-                    </td>
-                    <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    </td>
-                    <td class="case-status-cell">
-                        <button type="button" class="status ongoing margin3" data-case-id=""><img src="/images/ongoing-circle.png"><span>Archived</span></button>
-                    </td>
-                    <td class="align-left">
-                        <a href="/employee-view-archive-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
-                    </td>
-                </tr>  
-                -->           
             </tbody>
         </table>
     
-        {{!-- <div class="box-content-page">
+        <div class="box-content-page">
             <button class="page-btn" id="count-down">&lt;</button>
             <div class="page-count" id="page-num">{{currentPage}}</div>
             <button class="page-btn" id="count-up">&gt;</button>
@@ -245,55 +122,8 @@
             {{else}}
                 <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
             {{/if}}
-        </div> --}}
-
-        <div class="box-content-page">
-                <button class="page-btn" id="count-prev">&lt;</button>
-                <div class="page-count" id="page-num">{{currentPage}}</div>
-                <button class="page-btn" name="count-next" id="count-next">&gt;</button>
-                <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
-            </div>
+        </div>
     </div>
-
-
-<script>
-    //page navigations
-   $(document).ready(function() {
-    const currentPage = {{currentPage}}; // Injected from the backend
-    const totalPages = {{totalPages}};  // Injected from the backend
-    const baseUrl = '/employee-events-db?page='; // Base URL for pagination
-
-    // For navigating to the previous page
-    $('#count-prev').click(function() {
-        if (currentPage > 1) {
-            window.location.href = baseUrl + (currentPage - 1);
-        }
-    });
-
-    // For navigating to the next page
-    $('#count-next').click(function() {
-        if (currentPage < totalPages) {
-             console.log("Count Up Clicked");
-            console.log("Current Page:", currentPage);
-            window.location.href = baseUrl + (currentPage + 1);
-        }
-    });
-});
-
- $(document).on('click', '#count-prev', function() {
-    console.log('Previous button clicked');
-});
-
-$(document).on('click', '#count-next', function() {
-    console.log('Next button clicked');
-});
-
-
-</script>
-
-
-
-
 
 <script>
     document.querySelectorAll('.checkbox').forEach(button => {

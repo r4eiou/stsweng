@@ -373,6 +373,42 @@ const CertificateInfo = new mongoose.Schema ({
     },
 });
 
+const EventSchema = new mongoose.Schema ({
+    _id: {
+        type: String,
+        required: true
+    },
+    pic : {
+        type: String,
+        required: false
+    },
+    header: {
+        type: String,
+        required: true
+    },
+    start_date: {
+        type: String,
+        required: true
+    },
+    end_date: {
+        type: String,
+        required: true
+    },
+    details: {
+        type: String,
+        required: true
+    },
+    isArchived: {
+        type: Boolean,
+        required: true
+    },
+    isInactive: {
+        type: Boolean,
+        required: true
+    }
+});
+
+
 
 // MODELS //
 const CertificateModel          = mongoose.model("CertificateModel",        CertificateSchema,     "certificate");
@@ -382,6 +418,8 @@ const TanodCaseModel            = mongoose.model("TanodCaseModel",          Tano
 const SecurityQuestionModel     = mongoose.model("SecurityQuestionModel",   SecurityQuestion,      "securityQuestion");
 const ResidentModel             = mongoose.model("ResidentModel",           ResidentSchema,        "resident");
 const CertificateInfoModel      = mongoose.model("CertificateInfoModel",    CertificateInfo,       "certificateInfo");
+const EventModel                = mongoose.model("EventModel",              EventSchema,            "events");
+
 
 // EXPORTS //
 module.exports = {
@@ -392,5 +430,6 @@ module.exports = {
     SecurityQuestionModel,
     ResidentModel,
     CertificateInfoModel,
+    EventModel,
     mongo_uri
 };
