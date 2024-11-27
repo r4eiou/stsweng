@@ -152,9 +152,15 @@
                     {{!-- <button type="button" class="cancel-btn light" onclick="cancelForm()"><img src="/images/cancel-light.png"><span>Cancel</span></button> --}}
                     
                     {{!-- <a href="/certificate-edit/{{certificates._id}}" class="cert-link"><button type="button" class="form-btn edit cert"><img src="/images/form-edit.png"><span>Edit Data</span></button></a> --}}
-                    <a href="/delete-certificate/{{certificates._id}}" class="cert-link"><button type="button" class="form-btn delete cert"><img src="/images/form-trash.png"><span>Delete this record</span></button></a>
-                </div>
+                    
+                    {{#checkArchived certificates.isArchived}}
+                        <a href="/delete-certificate/{{certificates._id}}" class="cert-link">
+                            <button type="button" class="form-btn delete cert"><img src="/images/form-trash.png"><span>Archive record</span></button>
+                        </a>
+                    {{else}}
+                        {{!-- show nothing --}}
+                    {{/checkArchived}}
+            </div>
         </form>
     </div>
-
 </div>

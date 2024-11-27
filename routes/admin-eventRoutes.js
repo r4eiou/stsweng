@@ -1,6 +1,6 @@
-const express = require('express');
-const adminEventController = require('../controllers/adminEventController');
-const router = express.Router();
+// const express = require('express');
+// const adminEventController = require('../controllers/adminEventController');
+// const router = express.Router();
 
 // router.get('/admin-view-events-db',                      adminEventController.viewEventsDB);
 // router.get('/admin-view-event',                          adminEventController.viewEvents);
@@ -8,4 +8,4 @@ const router = express.Router();
 // router.get('/admin-create-event',                        adminEventController.createEvent);
 // router.get('/admin-edit-event',                          adminEventController.editEvent);
 
-module.exports = router;
+// module.exports = router;

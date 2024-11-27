@@ -307,7 +307,8 @@ const submitCertificate = async (req, res) => {
             ctc_location: ctc_location,
             cert_date_issued: cert_date_issued,
             reason: reason,
-            email: email
+            email: email,
+            isArchived: false
         });
 
         //console.log(email)
@@ -466,12 +467,16 @@ const deleteCertificate = async (req, res) => {
     try {
         const caseId = req.params.id;
 
-        await CertificateModel.findByIdAndDelete(caseId);
+        await CertificateModel.findOneAndUpdate(
+            { _id : caseId},
+            { isArchived : true},
+            { new: true }
+        );
 
         res.redirect("/certificate-db");
     } catch (error) {
         console.error('Error updating status:', error);
-        return res.status(500).json({ error: 'Failed to update status' });
+        return res.status(500).json({ error: 'Failed to archive' });
     }
 }
 
