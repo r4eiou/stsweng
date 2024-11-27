@@ -1,7 +1,6 @@
 <link rel = "stylesheet" type="text/css" href="/css/back-button.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/event-details.css">
-<link rel = "stylesheet" type = "text/css" href = "/css/popups.css">
 <script src ="/js/header.js"></script>
 
 
@@ -29,7 +28,7 @@
     
     <div class = "upper-container" id="form-upper-container">
         <div class="back-and-title">
-            <a href="/employee-view-event" class="back-button" id="back-button">
+            <a href="/employee-events-db" class="back-button" id="back-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="black" class="size-4">
                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd"/>
                 </svg>
@@ -41,14 +40,20 @@
     <div class="sub-container">
         
         <div class = "text-container">
-            <h1 id = "event-details-title">Editing New Event</h1>
+            <h1 id = "event-details-title">Editing Event</h1>
         </div>
 
-        <form action="/" method="post" class="print-form">
+        <form id='event-editForm' action="submit-edit-event" method="post" class="print-form" enctype="multipart/form-data" >
+        <div hidden>
+            <input id="eventID" value="{{eventID}}" name="eventID" hidden>
+        </div>
             <div class = "print-panel">
                 <!-- for Photo-->
                 <div class="photo-container">
-                    <img src="/images/transparent.jpg" class="details-profile" id="deets-profile-img">
+                    <div></div>
+                    <label for="event_pic" class="deets-text">Upload Photo</label>
+                    <input type="file" id="event_pic" name="event_pic" accept="image/*">
+                    <img src="{{pic}}" class="details-profile" id="deets-profile-img" hidden>
                 </div>
                 
 
@@ -56,7 +61,7 @@
                 <div class="deets1-container">
                     <div class="name-container">
                         <div class="deets-text">Headline</div>
-                        <input type="text" id="headline-edit" name="headline-edit" placeholder="Headline Here">
+                        <input type="text" id="headline-edit" name="headline_edit" value="{{headline}}" placeholder="Headline Here">
                     </div>
                 </div>
 
@@ -64,11 +69,11 @@
                 <div class="deets2-container">
                     <div class="date-container">
                         <div class="deets-text">Start Date</div>
-                        <input type="text" id="startDate-edit"  name="startDate-edit" placeholder="mm/dd/yyyy">                             
+                        <input type="date" id="startDate-edit"  name="startDate_edit" value="{{startDate}}" placeholder="mm/dd/yyyy">                             
                     </div>
                     <div class="address-container">
                         <div class="deets-text">Finish Date</div>
-                        <input type="text" id="finishDate-edit" name="finishDate-edit" placeholder="mm/dd/yyyy">
+                        <input type="date" id="finishDate-edit" name="finishDate_edit" value="{{finishDate}}" placeholder="mm/dd/yyyy">
                     </div>
                 </div>
 
@@ -76,24 +81,13 @@
                 <!-- for Details -->
                 <div class="deets5-container"> 
                     <div class="deets-text">Details</div>
-                    <textarea type="text" id="details-edit" name="details-edit" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "></textarea>
+                    <textarea type="text" id="details-edit" name="details_edit" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ">{{details}}</textarea>
                 </div>
             </div>
         </form>
     </div>
     <div class = "buttons-container">
-        <a href="/employee-view-event"><button type="button" id="editButton" class="form-btn edit">
-            <img src="/images/form-check.png"><span>Save Changes</span></button>
-        </a>
-        <button type="button" id="discardButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button>
+        <button type="submit" form='event-editForm' id="editButton"       class="form-btn edit"> <img src="/images/form-check.png"><span>Save Changes</span></button>
+        <a href="/employee-view-event/{{eventID}}"><button type="button" id="archiveButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button> </a>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const discardButton = document.getElementById('discardButton'); 
-
-        discardButton.addEventListener("click", function() { 
-            window.location.href = "/employee-view-event";
-        });
-    });
-</script>
