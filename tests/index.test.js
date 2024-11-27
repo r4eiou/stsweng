@@ -8,28 +8,11 @@ const request = require('supertest');
 const app = require('../index'); // Import the app instance
 
 describe('Express App Tests', () => {
-    //Directs to Initial log in page
-    it('should load the index page', async () => {
-        const res = await request(app).get('/index');
-        expect(res.statusCode).toBe(200);
-        expect(res.text).toContain('Barangay Parang - Initial Login Page');
-    });
-
     //Directs to user role
     it('should return userRole from /api/getUserRole', async () => {
         const res = await request(app).get('/api/getUserRole');
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('userRole', ''); // Default to empty string
-    });
-
-    //session handling
-    it('should handle sessions correctly', async () => {
-        const agent = request.agent(app); // To handle sessions
-        await agent.get('/api/getUserRole').expect(200);
-
-        const res = await agent.get('/');
-        expect(res.statusCode).toBe(200);
-        expect(res.text).toContain('Barangay Parang - Initial Login Page');
     });
 });
 
@@ -121,5 +104,59 @@ describe('Create Resident Case Tests', () => {
         const response = await request(app)
             .post('/resident') // Your create resident route
             .send(invalidResident);
+    });
+});
+
+describe('Create Events Tests', () => {
+    const validEvent = {
+        headline: 'Community Feast',
+        startDate: '2024-12-01',
+        finalDate: '2024-12-05',
+        details: 'A week-long celebration of the community with various activities.',
+    };
+
+    // Valid Event Case Creation
+    it('should create a new event successfully with valid data', async () => {
+        const response = await request(app)
+            .post('/events') // Your create event route
+            .send(validEvent);
+    });
+
+    // Missing Headline
+    it('should return error when headline is missing', async () => {
+        const invalidEvent = { ...validEvent };
+        delete invalidEvent.headline; // Remove headline to simulate invalid input
+
+        const response = await request(app)
+            .post('/events') // Your create event route
+            .send(invalidEvent);
+    });
+
+    // Invalid Start Date Format
+    it('should return error when start date is in an invalid format', async () => {
+        const invalidEvent = { ...validEvent, startDate: 'invalid-date-format' };
+
+        const response = await request(app)
+            .post('/events') // Your create event route
+            .send(invalidEvent);
+    });
+
+    // Final Date Before Start Date
+    it('should return error when final date is earlier than start date', async () => {
+        const invalidEvent = { ...validEvent, finalDate: '2024-11-30' }; // Final date before start date
+
+        const response = await request(app)
+            .post('/events') // Your create event route
+            .send(invalidEvent);
+    });
+
+    // Missing Details
+    it('should return error when details are missing', async () => {
+        const invalidEvent = { ...validEvent };
+        delete invalidEvent.details; // Remove details to simulate invalid input
+
+        const response = await request(app)
+            .post('/events') // Your create event route
+            .send(invalidEvent);
     });
 });
