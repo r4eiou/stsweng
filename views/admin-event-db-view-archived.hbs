@@ -65,10 +65,10 @@
                     <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
                 </button>
                 <div id="dropdown-btn" class="dropdown-content margin">
-                    <a href="/admin-view-events-db">View All Events</a>
+                    <a href="admin-view-events-db" >View All Events</a>
                     <a href="#" onclick="selectOption('View Active')">View Active</a>
                     <a href="#" onclick="selectOption('View Inactive')">View Inactive</a>
-                    <a href="/admin-view-events-db-archived" >View Archived</a>
+                    <a href="/admin-view-events-db-archived">View Archived</a>
                 </div>                  
             </div>
             
@@ -109,7 +109,7 @@
                         <button type="button" class="status margin3 {{stat_lc}}" data-case-id=""><img src="/images/{{stat_lc}}-circle.png"><span>{{this.stat}}</span></button>
                     </td>
                     <td class="align-left">
-                        <a href="/admin-view-event/{{this.eventID}}" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                        <a href="/admin-view-event-archive/{{this.eventID}}" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -265,7 +265,7 @@
    $(document).ready(function() {
     const currentPage = {{currentPage}}; // Injected from the backend
     const totalPages = {{totalPages}};  // Injected from the backend
-    const baseUrl = '/admin-view-events-db?page='; // Base URL for pagination
+    const baseUrl = '/admin-view-events-db-archived?page='; // Base URL for pagination
 
     // For navigating to the previous page
     $('#count-prev').click(function() {

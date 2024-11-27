@@ -1,15 +1,15 @@
-<link rel = "stylesheet" type="text/css" href="./css/back-button.css">
-<link rel = "stylesheet" type = "text/css" href = "./css/homepage.css">
-<link rel = "stylesheet" type = "text/css" href = "./css/event-details.css">
+<link rel = "stylesheet" type="text/css" href="/css/back-button.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
+<link rel = "stylesheet" type = "text/css" href = "/css/event-details.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/popups.css">
 
-<script src ="./js/header.js"></script>
+<script src ="/js/header.js"></script>
 
 
 <div class="main-container" id="main-container">
     <div class= "header" id="header">
         <div class = "header-left">
-            <a href="/" class="header-logo-link" id="home-link1"><img src="./images/logo.png" class="header-logo"></a>
+            <a href="/" class="header-logo-link" id="home-link1"><img src="/images/logo.png" class="header-logo"></a>
             <a href="/" class="header-home" id="home-link2"><h3>Home</h3></a>
         </div>
         
@@ -22,7 +22,7 @@
         <div class="header-right">
             <div class="header-user-profile">
                 <span class="header-user-profile-text" id="profile-text">Admin</span>
-                <img src="./images/admin-profile.png" class="header-user-profile" id="profile-img">
+                <img src="/images/admin-profile.png" class="header-user-profile" id="profile-img">
             </div>
             <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn" onclick="logout()">Logout</button></a>
         </div>
@@ -49,7 +49,7 @@
             <div class = "print-panel">
                 <!-- for Photo-->
                 <div class="photo-container">
-                    <img src="./images/transparent.jpg" class="details-profile" id="deets-profile-img">
+                    <img src="{{pic}}" class="details-profile" id="deets-profile-img">
                 </div>
                 
 
@@ -58,7 +58,7 @@
                 <div class="deets1-container">
                     <div class="name-container">
                         <div class="deets-text">Headline</div>
-                        <input type="text" id="headline" name="name" placeholder="Headline Here">
+                        <input type="text" id="headline" name="name" placeholder="Headline Here" value="{{headline}}" readonly>
                     </div>
                 </div>
 
@@ -66,11 +66,11 @@
                 <div class="deets2-container">
                     <div class="date-container">
                         <div class="deets-text">Start Date</div>
-                        <input type="text" id="startDate"  name="startDate" placeholder="mm/dd/yyyy">                             
+                        <input type="text" id="startDate"  name="startDate" placeholder="mm/dd/yyyy" value="{{startDate}}" readonly>                             
                     </div>
                     <div class="address-container">
                         <div class="deets-text">Finish Date</div>
-                        <input type="text" id="finishDate" name="finishDate" placeholder="mm/dd/yyyy">
+                        <input type="text" id="finishDate" name="finishDate" placeholder="mm/dd/yyyy" value="{{finishDate}}" readonly>
                     </div>
                 </div>
 
@@ -78,15 +78,15 @@
                 <!-- for Details -->
                 <div class="deets5-container"> 
                     <div class="deets-text">Details</div>
-                    <textarea type="text" id="details" name="details" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "></textarea>
+                    <textarea type="text" id="details" name="details" readonly >{{details}}</textarea>
                 </div>
             </div>
         </form>
     </div>
     <div class="buttons-container">
-        <a href="/admin-edit-event">
-            <button type="button" id="editButton" class="form-btn save">
-                <img src="./images/form-check.png"><span>Edit Data</span>
+        <a href="/admin-edit-event/{{eventID}}" {{isEditable}}>
+            <button type="button" id="editButton" class="form-btn save" {{isEditable}}>
+                <img src="/images/form-check.png"><span>Edit Data</span>
             </button>
         </a>
         <div class="overlay" id="overlay"></div>
@@ -100,7 +100,7 @@
                     Archived records will be <span class="font-red font-light">deleted permanently</span> after 30 days. You may <span class="font-green font-light">recover</span> through the <span class="font-green">Archives Database</span></div>.
                 </div>
                 <div class="bottom-container">
-                    <button class="archive-btn margin">Archive</button>
+                    <a href="/admin-archive-event/{{eventID}}"><button class="archive-btn margin">Archive</button></a>
                     <button class="cancel-btn-popup margin">Cancel</button>
                 </div>
             </div>
@@ -115,7 +115,7 @@
             </div>
         </div>
        <button type="button" id="archiveButton" class="form-btn archive">
-            <img src="./images/form-trash.png"><span>Archive this record</span>
+            <img src="/images/form-trash.png"><span>Archive this record</span>
         </button>
 
         <!-- Commenting out popup3 for now -->
@@ -161,14 +161,14 @@ document.addEventListener("DOMContentLoaded", function() {
         showPopup(popup1);
     });
 
-    archiveBtnPopup.addEventListener('click', function() {
-        hidePopup(popup1); 
-        showPopup(popup2); 
+    //archiveBtnPopup.addEventListener('click', function() {
+    //    hidePopup(popup1); 
+      //  showPopup(popup2); 
 
-        setTimeout(function() {
-            window.location.href = "/admin-view-event";
-        }, 500); 
-    });
+        //setTimeout(function() {
+          //  window.location.href = "/admin-view-event";
+       // }, 500); 
+    //});
 
     cancelBtnPopup.addEventListener('click', function() {
         hidePopup(popup1);

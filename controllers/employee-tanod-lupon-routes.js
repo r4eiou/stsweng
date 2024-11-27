@@ -21,7 +21,504 @@ const isAuth = (req, res, next) => {
 function add(app){
     const mongoose = require('mongoose');
 
+
+    /************************************************************ADMIN************************************************/
+    
+    //Admin view events db
+    app.get('/admin-view-events-db', isAuth, async function(req, resp){
+        try{
+
+                    //update inactive events
+                   const currentDate = new Date();
+                   const eventsToUpdate = await EventModel.find({ isArchived: false, isInactive: false });
+            
+                   for(let event of eventsToUpdate){
+                       const endDate = new Date(event.end_date);
+            
+                       if(currentDate > endDate){
+                           event.isInactive = true;
+                           await event.save();
+                       }
+                   }
+            
+                   //update events to archive
+                   const inactiveEvents = await EventModel.find({ isArchived: false, isInactive: true });
+            
+                   for (let event of inactiveEvents) {
+                       const inactiveDuration = Math.floor((currentDate - new Date(event.end_date)) / (1000 * 60 * 60 * 24)); // Calculate the number of days since the event ended
+            
+                       // If the event has been inactive for 30 days, archive it
+                       if (inactiveDuration >= 30) {
+                           event.isArchived = true; // Mark the event as archived
+                           await event.save(); // Save the updated event to the database
+                       }
+                   }
+            
+            
+                   const searchName = req.query.search_name || '';
+                   const searchRegex = new RegExp(searchName, 'i');
+            
+                   //pages
+                   const page = parseInt(req.query.page) || 1;
+                   const limit = 10;
+                   const skip = (page - 1) * limit;
+            
+                   //get all cases with pagination
+                   const events = await EventModel.find({
+                       isArchived: false,
+                       $or:[
+                           {'header': searchRegex}
+                       ]
+                   })
+                   .skip(skip)
+                   .limit(limit)
+                   .exec();
+            
+                   const totalCases = await EventModel.countDocuments({
+                       isArchived: false,
+                       $or:[
+                           {'header': searchRegex}
+                       ]
+                   });
+            
+                   let allEvents = [];
+                   for(const item of events){
+                       let stat_lc = 'active';
+                       let stat = 'Active';
+                       let isEditable = 'hidden';
+                       if(item.isInactive){
+                           stat_lc = 'inactive';
+                           isEditable = '';
+                           stat = 'Inactive';
+                       }
+            
+                       allEvents.push({
+                           eventID : item._id,
+                           headline: item.header,
+                           start_date: item.start_date,
+                           end_date: item.end_date,
+                           details: item.details,
+                           pic: item.pic,
+                           status: item.Status,
+                           stat_lc: stat_lc,
+                           stat: stat,
+                           isEditable: isEditable
+                       });
+                   }
+            
+                   let totalPages = 0;
+            
+                   if(totalCases == 0){
+                       totalPages = 1;
+                   }else{
+                       totalPages = Math.ceil(totalCases/limit);
+                   }
+               // const totalPages = Math.ceil(totalCases/limit);
+                   
+                   req.session.lastpage = '/admin-homepage';
+            
+                   console.log(page, totalPages);
+            
+                   resp.render('admin-event-db-view', {
+                       layout: 'layout',
+                       title: 'Admin Events DB', 
+                       totalPages: totalPages,
+                       currentPage: page,
+                       events: allEvents
+                   });
+            
+               } catch(error){
+                   console.error('Error fetching all cases:', error);
+                   resp.status(500).send('Internal Server Error');
+               }   
+    }); 
+
+    //Admin view archived events db
+    app.get('/admin-view-events-db-archived', isAuth, async function(req, resp){
+        try{
+                   const searchName = req.query.search_name || '';
+                   const searchRegex = new RegExp(searchName, 'i');
+            
+                   //pages
+                   const page = parseInt(req.query.page) || 1;
+                   const limit = 10;
+                   const skip = (page - 1) * limit;
+            
+                   //get all cases with pagination
+                   const events = await EventModel.find({
+                       isArchived: true,
+                       $or:[
+                           {'header': searchRegex}
+                       ]
+                   })
+                   .skip(skip)
+                   .limit(limit)
+                   .exec();
+            
+                   const totalCases = await EventModel.countDocuments({
+                       isArchived: true,
+                       $or:[
+                           {'header': searchRegex}
+                       ]
+                   });
+            
+                   let allEvents = [];
+                   for(const item of events){
+                       let stat_lc = 'active';
+                       let stat = 'Active';
+                       let isEditable = 'hidden';
+                       if(item.isInactive){
+                           stat_lc = 'inactive';
+                           isEditable = '';
+                           stat = 'Inactive';
+                       }
+            
+                       allEvents.push({
+                           eventID : item._id,
+                           headline: item.header,
+                           start_date: item.start_date,
+                           end_date: item.end_date,
+                           details: item.details,
+                           pic: item.pic,
+                           status: item.Status,
+                           stat_lc: stat_lc,
+                           stat: stat,
+                           isEditable: isEditable
+                       });
+                   }
+            
+                   let totalPages = 0;
+            
+                   if(totalCases == 0){
+                       totalPages = 1;
+                   }else{
+                       totalPages = Math.ceil(totalCases/limit);
+                   }
+               // const totalPages = Math.ceil(totalCases/limit);
+                   
+                   req.session.lastpage = '/admin-homepage';
+            
+                   console.log(page, totalPages);
+            
+                   resp.render('admin-event-db-view-archived', {
+                       layout: 'layout',
+                       title: 'Admin Events DB', 
+                       totalPages: totalPages,
+                       currentPage: page,
+                       events: allEvents
+                   });
+            
+               } catch(error){
+                   console.error('Error fetching all cases:', error);
+                   resp.status(500).send('Internal Server Error');
+               }   
+    }); 
+
+    //Admin create event
+    app.get('/admin-create-event', isAuth, async function(req, resp){
+        req.session.lastpage = '/admin-create-event';
+        resp.render('admin-create-event', {
+            layout: 'layout',
+            title: 'Admins Create Event'
+        });
+    });
+
+    //Admin submit event
+    app.post('/admin-submit-event', isAuth, upload.single('event_pic'), async function(req, resp){
+        try {
+            const {headline, startDate, finishDate, details} = req.body;
+
+            if(!headline|| !startDate || !finishDate || !details){
+   
+                //return resp.status(400).send("Missing required field");
+                
+                return resp.status(400).json({ message: 'All fields are required.'});
+
+            }
+
+            let picString = "";
+            if (req.file) {
+                picString = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+            }
+
+            // _id
+            // Find all cases and convert _id to integers for sorting
+            const allCases = await EventModel.find().exec();
+            const caseIds = allCases.map(caseDoc => parseInt(caseDoc._id, 10)).filter(id => !isNaN(id));
+
+            // Get the highest _id
+            const latestIdNum = caseIds.length > 0 ? Math.max(...caseIds) : 0;
+            const newReviewId = (latestIdNum + 1).toString();
+
+            const newEvent = new EventModel({
+                _id : newReviewId,
+                pic: picString || "/images/brgy-parang-1.png",
+                header: headline,
+                start_date: startDate,
+                end_date: finishDate,
+                details: details,
+                isArchived: false,
+                isInactive: false
+            });
+
+            await newEvent.save();
+
+            resp.redirect('/admin-view-events-db');
+            //res.status(200).json({ redirectUrl: '/employee-events-db' });
+
+        }catch(error){
+            console.error(error);
+            resp.status(500).send('Internal Server Error')
+        }
+    });
+
+    //Admin view event
+    app.get('/admin-view-event/:_id', async function(req, resp){
+        const eventID = req.params._id;
+        console.log(eventID);
+
+        let isEditable = "";
+
+        try{
+            const eventDetails = await EventModel.findOne({ _id: eventID }).lean();
+            if(eventDetails){
+                console.log('found case');
+                const headline = eventDetails.header;
+                const pic = eventDetails.pic;
+                const details = eventDetails.details;
+                const startDate = eventDetails.start_date;
+                const finishDate = eventDetails.end_date;
+
+                if(eventDetails.isInactive || eventDetails.isArchived){
+                    isEditable = "hidden";
+                }
+
+                req.session.lastpage = `/admin-view-event/${eventID}`;
+
+                resp.render('admin-view-event', {
+                    layout: 'layout',
+                    title: 'Admin View Event',
+                    isEditable: isEditable,
+                    headline: headline,
+                    pic: pic,
+                    details: details,
+                    startDate: startDate,
+                    finishDate: finishDate,
+                    eventID: eventID
+                });
+
+            }
+            else{
+                resp.status(404).send('Case not found');
+            }
+
+        }catch(error){
+            console.error(error);
+            resp.status(500).send('Internal Server Error')
+        }
+    });
+
+    //Admin edit event
+    app.get('/admin-edit-event/:_id', isAuth, async function(req, resp){
+        const eventID = req.params._id;
+        console.log(eventID);
+
+        try{
+
+            const isEditable = '';
+
+            const eventDetails = await EventModel.findOne({ _id: eventID }).lean();
+            if(eventDetails){
+                console.log('found case');
+                const headline = eventDetails.header;
+                const pic = eventDetails.pic;
+                const details = eventDetails.details;
+                const startDate = eventDetails.start_date;
+                const finishDate = eventDetails.end_date;
+
+                if(eventDetails.isInactive || eventDetails.isArchived){
+                   isEditable = "hidden";
+                }
+
+                req.session.lastpage = `/admin-edit-event/${eventID}`;
+
+                resp.render('admin-edit-event', {
+                    layout: 'layout',
+                    title: 'Admin Edit Event',
+                    isEditable: isEditable,
+                    headline: headline,
+                    pic: pic,
+                    details: details,
+                    startDate: startDate,
+                    finishDate: finishDate,
+                    eventID: eventID
+                });
+
+            }
+            else{
+                resp.status(404).send('Case not found');
+            }
+
+        }catch(error){
+            console.error(error);
+            resp.status(500).send('Internal Server Error')
+        }
+
+
+    });
+
+    //admin submit edited event
+    app.post('/admin-edit-event/submit-edit-event-admin', upload.single('event_pic'), async function(req, resp){
+        console.log("Updating");
+
+        try{
+
+            const {eventID, headline_edit, startDate_edit, finishDate_edit, details_edit} = req.body;
+            console.log("case to update: ");
+            console.log(eventID);
+
+            let picString = "";
+
+            if(req.file){
+                picString = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+
+            }else{
+                const existingEvent = await EventModel.findById(eventID).exec();
+                if (existingEvent) {
+                    picString = existingEvent.pic; // Use the existing picture
+                }
+
+            }
+
+            const updatedEvent = await EventModel.findOneAndUpdate(
+                {_id : eventID},
+                {
+                    pic: picString,
+                    header: headline_edit,
+                    start_date: startDate_edit,
+                    end_date: finishDate_edit,
+                    details: details_edit,
+                },
+                { new: true }
+            );
+
+            if(updatedEvent){
+                console.log('successfully updated')
+                resp.redirect(`/admin-view-event/${eventID}`);
+            }
+            else{
+                resp.status(404).send('Case not found');s
+            }
+            
+
+
+        }catch(error){
+            console.error(error);
+            resp.status(500).send('Internal Server Error')
+        }
+
+    });
+
+    //admin archive event 
+    app.get('/admin-archive-event/:_id', async function(req, resp){
+        const eventID = req.params._id;
+        console.log(eventID);
+
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedEvent = await EventModel.findOneAndUpdate(
+                { _id : eventID },
+                {
+                    isArchived: true
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (updatedEvent) {
+                resp.redirect(`/admin-view-events-db`);
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+
+    });
  
+    //admin view archived
+    app.get('/admin-view-event-archive/:_id', async function(req, resp){
+        const eventID = req.params._id;
+        console.log(eventID);
+
+        let isEditable = "";
+
+        try{
+            const eventDetails = await EventModel.findOne({ _id: eventID }).lean();
+            if(eventDetails){
+                console.log('found case');
+                const headline = eventDetails.header;
+                const pic = eventDetails.pic;
+                const details = eventDetails.details;
+                const startDate = eventDetails.start_date;
+                const finishDate = eventDetails.end_date;
+
+                if(eventDetails.isInactive || eventDetails.isArchived){
+                    isEditable = "hidden";
+                }
+
+                req.session.lastpage = `/admine-view-event-archive/${eventID}`;
+
+                resp.render('admin-view-archive-event', {
+                    layout: 'layout',
+                    title: 'Admin View Event',
+                    isEditable: isEditable,
+                    headline: headline,
+                    pic: pic,
+                    details: details,
+                    startDate: startDate,
+                    finishDate: finishDate,
+                    eventID: eventID
+                });
+
+            }
+            else{
+                resp.status(404).send('Case not found');
+            }
+
+        }catch(error){
+            console.error(error);
+            resp.status(500).send('Internal Server Error')
+        }
+    });
+
+    //admin restore
+    app.get('/admin-restore-event/:_id', async function(req, resp){
+        const eventID = req.params._id;
+
+        try {
+            // Find the case by EntryNo and update it with new values
+            const updatedEvent = await EventModel.findOneAndUpdate(
+                { _id : eventID },
+                {
+                    isArchived: false
+                },
+                { new: true } // Return the updated document
+            );
+
+            if (updatedEvent) {
+                resp.redirect(`/admin-view-events-db`);
+                //resp.redirect(`/lupon-view-case/${updatedCase._id}`); // Redirect to the homepage after successful update
+            } else {
+                resp.status(404).send('Case not found');
+            }
+        } catch (error) {
+            console.error('Error updating case details:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+
+    });
 
     /************************************************************EMPLOYEE************************************************/
     

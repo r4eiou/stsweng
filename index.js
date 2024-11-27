@@ -239,6 +239,7 @@ app.use(employee_residentRoutes);
 // app.use(admin_eventRoutes);
 
 
+
 const controllers = ['employee-tanod-lupon-routes']; //ung mga get eme nasa controller
 for(var i=0; i<controllers.length; i++){
   const model = require('./controllers/'+controllers[i]);
