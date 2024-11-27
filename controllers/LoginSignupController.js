@@ -3,6 +3,9 @@ const SecurityModel = require("../models/database/mongoose").SecurityQuestionMod
 
 const ResidentModel = require("../models/database/mongoose").ResidentModel;
 
+const {EventModel } = require('../models/database/mongoose');
+
+
 const login = async (req, res) => {
     const question = await SecurityModel.findOne({ _id : 1 }).lean();
     res.render('login', {
@@ -294,12 +297,50 @@ const viewResidentIndex = async (req, res) => {
     const { email } = req.params;
     const curResident = await ResidentModel.findOne({Email: email}).lean(); //finds if there is a match in users
 
-    req.session.lastpage = `/resident-index/${email}`;
-    res.render('resident-index', {
-        layout: 'index-employee',
-        title: 'Resident Homepage',
-        resident: curResident
-    });
+    try{
+        
+        //proceed to get all events
+        const events = await EventModel.find({ isArchived: false, isInactive: false })
+            .sort({ start_date: 1 }) // Optional: Sort by start_date
+           
+    
+        let allEvents = [];
+            for(const item of events){
+                let stat_lc = 'active';
+                let stat = 'Active';
+                let isEditable = 'hidden';
+                if(item.isInactive){
+                    stat_lc = 'inactive';
+                    isEditable = '';
+                    stat = 'Inactive';
+                }
+
+                allEvents.push({
+                    eventID : item._id,
+                    headline: item.header,
+                    start_date: item.start_date,
+                    end_date: item.end_date,
+                    details: item.details,
+                    pic: item.pic,
+                    status: item.Status,
+                    stat_lc: stat_lc,
+                    stat: stat,
+                    isEditable: isEditable
+                });
+            }
+
+            req.session.lastpage = `/resident-index/${email}`;
+            res.render('resident-index',{
+                layout: 'index-employee',
+                title: 'Resident Homepage',
+                resident: curResident,
+                events: allEvents,
+            });
+        
+    }catch (error) {
+        console.error('Error fetching events:', error);
+        res.status(500).send('Internal Server Error');
+    }
 }
 
 const viewSeparateReg = async (req, res) => {
