@@ -2,6 +2,8 @@
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage-table.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/homepage.css">
 <link rel = "stylesheet" type = "text/css" href = "/css/dropdown.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <style>
     .search-name-reg form{
         width: 220px;
@@ -27,7 +29,7 @@
         </div>
         <div class="header-right">
             <div class="header-user-profile">
-                <span class="header-user-profile-text tanod" id="profile-text">Tanod</span>
+                <span class="header-user-profile-text tanod" id="profile-text">Employee</span>
                 <img src=" /images/tanod-profile.png" class="header-user-profile" id="profile-img">
             </div>
             <a href="/logout"><button type="button" class="header-logout-btn" id="logout-btn">Logout</button></a>
@@ -55,18 +57,18 @@
                     <img src="/images/form-create.png"> <span>Create New Event</span>  
                 </button>
             </a>
-            <button type="button" class="form-btn resolved margin size" id="resolvedButtonEvent">    
+            {{!-- <button type="button" class="form-btn resolved margin size" id="resolvedButtonEvent">    
                 <img src="/images/form-check.png">  <span>Mark as Inactive</span>   
-            </button>
+            </button> --}}
             <div class="dropdown">
                 <button onclick="dropdown()" class="dropbtn margin" id="dropdownButton">View All Events
                     <img src="/images/dropdown-down.png" id="dropdown-down-btn"/>
                 </button>
                 <div id="dropdown-btn" class="dropdown-content margin">
-                    <a href="#" onclick="selectOption('View All Events')">View All Events</a>
+                    <a href="/employee-events-db" >View All Events</a>
                     <a href="#" onclick="selectOption('View Active')">View Active</a>
                     <a href="#" onclick="selectOption('View Inactive')">View Inactive</a>
-                    <a href="#" onclick="selectOption('View Archived')">View Archived</a>
+                    <a href="/employee-events-archived">View Archived</a>
                 </div>                  
             </div>
             
@@ -74,7 +76,7 @@
             <div class="search-name-reg margin">
 
                 <!-- implement search function -->
-                <form id="searchFormLupon">
+                <form id="searchFormLupon" method="get" action="employee-events-db">
                     <button type="submit"><img src="/images/search-reg.png"></button>
                     <input type="text" placeholder="Search Name" name="search_name">
                 </form>
@@ -90,25 +92,27 @@
                     <th colspan="2">Event Status</th>
                 </tr>
             </thead>
-    
             <tbody id="employee-event-table-body">
+                {{#each events}}
                 <tr> 
                     <td data-label="checkbox " class="align-right check-view-cell">
                         <button type="button" class="checkbox" name="" value=""><img src="/images/Done.png"></button>
                     </td>
                     <td class="headline-cell">
-                        Headline Here
+                        {{this.headline}}
                     </td>
                     <td class="event-info-cell">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                        {{this.details}} 
                     </td>
                     <td class="case-status-cell">
-                        <button type="button" class="status margin3 active" data-case-id=""><img src="/images/active-circle.png"><span>Active</span></button>
+                        <button type="button" class="status margin3 {{stat_lc}}" data-case-id=""><img src="/images/{{stat_lc}}-circle.png"><span>{{this.stat}}</span></button>
                     </td>
                     <td class="align-left">
-                        <a href="/employee-view-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
+                        <a href="/employee-view-event/{{this.eventID}}" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
                     </td>
                 </tr>
+                {{/each}}
+                <!--
                 <tr>
                     <td data-label="checkbox" class="align-right check-view-cell">
                         <button type="button" class="checkbox" data-case-id=""><img src="/images/Done.png"></button>
@@ -227,11 +231,12 @@
                     <td class="align-left">
                         <a href="/employee-view-archive-event" class="content-text-main underline-employee-events view-event-detail-link">View Event Details</a>
                     </td>
-                </tr>             
+                </tr>  
+                -->           
             </tbody>
         </table>
     
-        <div class="box-content-page">
+        {{!-- <div class="box-content-page">
             <button class="page-btn" id="count-down">&lt;</button>
             <div class="page-count" id="page-num">{{currentPage}}</div>
             <button class="page-btn" id="count-up">&gt;</button>
@@ -240,8 +245,55 @@
             {{else}}
                 <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
             {{/if}}
-        </div>
+        </div> --}}
+
+        <div class="box-content-page">
+                <button class="page-btn" id="count-prev">&lt;</button>
+                <div class="page-count" id="page-num">{{currentPage}}</div>
+                <button class="page-btn" name="count-next" id="count-next">&gt;</button>
+                <div class="page-number">Page {{currentPage}} of {{totalPages}}</div>
+            </div>
     </div>
+
+
+<script>
+    //page navigations
+   $(document).ready(function() {
+    const currentPage = {{currentPage}}; // Injected from the backend
+    const totalPages = {{totalPages}};  // Injected from the backend
+    const baseUrl = '/employee-events-db?page='; // Base URL for pagination
+
+    // For navigating to the previous page
+    $('#count-prev').click(function() {
+        if (currentPage > 1) {
+            window.location.href = baseUrl + (currentPage - 1);
+        }
+    });
+
+    // For navigating to the next page
+    $('#count-next').click(function() {
+        if (currentPage < totalPages) {
+             console.log("Count Up Clicked");
+            console.log("Current Page:", currentPage);
+            window.location.href = baseUrl + (currentPage + 1);
+        }
+    });
+});
+
+ $(document).on('click', '#count-prev', function() {
+    console.log('Previous button clicked');
+});
+
+$(document).on('click', '#count-next', function() {
+    console.log('Next button clicked');
+});
+
+
+</script>
+
+
+
+
 
 <script>
     document.querySelectorAll('.checkbox').forEach(button => {

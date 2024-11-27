@@ -89,29 +89,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 case "Lupon":
                     document.getElementById("profile-text").style.color="#F3BE72";
                     user_profile.src = "/images/lupon-profile.png";
-                    home_link1.href = "/lupon-home";
-                    home_link2.href = "/lupon-home";
+                    home_link1.href = "/lupon-index";
+                    home_link2.href = "/lupon-index";
                     break;
     
                 case "Tanod":
                     document.getElementById("profile-text").style.color="#AFE1D7";
                     user_profile.src = "/images/tanod-profile.png";
-                    home_link1.href = "/tanod-home";
-                    home_link2.href = "/tanod-home";
+                    home_link1.href = "/tanod-index";
+                    home_link2.href = "/tanod-index";
                     break;
     
                 case "Employee":
                     document.getElementById("profile-text").style.color="#779FE5";
                     user_profile.src = "/images/employee-profile.png";
-                    home_link1.href = "/employee-home";
-                    home_link2.href = "/employee-home";
+                    home_link1.href = "/employee-index";
+                    home_link2.href = "/employee-index";
                     break;
     
                 case "Admin":
                     document.getElementById("profile-text").style.color="#F07507";
                     user_profile.src = "/images/admin-profile.png";
-                    home_link1.href = "/admin-homepage";
-                    home_link2.href = "/admin-homepage";
+                    home_link1.href = "/admin-index";
+                    home_link2.href = "/admin-index";
                     break;
                 default:
                     document.getElementById("profile-text").style.color="#FFFFFF";
@@ -158,6 +158,94 @@ document.addEventListener("DOMContentLoaded", function() {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function(){
             window.location.href="/logout";
+            localStorage.setItem('selectedStatus', "0");
+            localStorage.setItem('selectedLuponStatus', "0");
         });
     }
 });
+
+//for modal tanod
+function openRestoreModal(caseId) {
+    // Open the modal
+    document.getElementById('restoreModal').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtn').onclick = function() {
+        window.location.href = '/restore-case/' + caseId; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModal() {
+    document.getElementById('restoreModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModal');
+    if (event.target == modal) {
+        closeRestoreModal();
+    }
+};
+
+function openArchiveModal(caseId) {
+    // Open the archive modal
+    document.getElementById('archiveModal').style.display = 'block';
+
+    // Set up the confirm button to archive the record
+    document.getElementById('confirmArchiveBtn').onclick = function() {
+        window.location.href = '/delete-case/' + caseId; // Redirect to archive URL
+    };
+}
+
+function closeArchiveModal() {
+    // Close the archive modal
+    document.getElementById('archiveModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('archiveModal');
+    if (event.target == modal) {
+        closeArchiveModal();
+    }
+};
+
+//modal lupon
+function openArchiveModalLupon(caseId) {
+    // Open the archive modal
+    document.getElementById('archiveModalLupon').style.display = 'block';
+
+    // Set up the confirm button to archive the record
+    document.getElementById('confirmArchiveBtnLupon').onclick = function() {
+        window.location.href = '/delete-case-lupon/' + caseId; // Redirect to archive URL
+    };
+}
+
+function closeArchiveModalLupon() {
+    // Close the archive modal
+    document.getElementById('archiveModalLupon').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('archiveModalLupon');
+    if (event.target == modal) {
+        closeArchiveModal();
+    }
+};
+
+function openRestoreModalLupon(caseId) {
+    // Open the modal
+    document.getElementById('restoreModalLupon').style.display = 'block';
+
+    document.getElementById('confirmRestoreBtnLupon').onclick = function() {
+        window.location.href = '/restore-case-lupon/' + caseId; // Redirect to restore URL
+    };
+}
+
+function closeRestoreModalLupon() {
+    document.getElementById('restoreModalLupon').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('restoreModalLupon');
+    if (event.target == modal) {
+        closeRestoreModalLupon();
+    }
+};

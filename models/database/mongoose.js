@@ -13,10 +13,9 @@ const mongoose = require('mongoose');
 // });
 
 const mongo_uri = 'mongodb+srv://admin_parang:YT66GhDJ43QUqVpT@stsweng.2sxw2.mongodb.net/brgy_parang?retryWrites=true&w=majority&appName=STSWENG';
-
 const run = async () => {
     await mongoose.connect(mongo_uri);
-    console.log("Connected to myDB");
+    //console.log("Connected to myDB");
   }
   
   run()
@@ -67,7 +66,11 @@ const CertificateSchema = new mongoose.Schema ({
     reason : {
         type: String,
         required: true
-    }
+    },
+    email : {
+        type: String,
+        required: true
+    },
 });
 
 const UserSchema = new mongoose.Schema ({
@@ -299,6 +302,10 @@ const ResidentSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    Age : {
+        type: Number,
+        required: true
+    },
     Email : {
         type: String,
         required: true
@@ -312,10 +319,6 @@ const ResidentSchema = new mongoose.Schema ({
         required: true
     },
     Address : {
-        type: String,
-        required: true
-    },
-    Birthday : {
         type: String,
         required: true
     },
@@ -341,8 +344,14 @@ const ResidentSchema = new mongoose.Schema ({
     },
     ServiceRequestID : { // can be null
         type: Number,
+    },
+    isArchived: {
+        type: Boolean,
         required: true
     },
+    Req_counter : {
+        type: Number
+    }
 });
 
 const CertificateInfo = new mongoose.Schema ({
@@ -364,6 +373,42 @@ const CertificateInfo = new mongoose.Schema ({
     },
 });
 
+const EventSchema = new mongoose.Schema ({
+    _id: {
+        type: String,
+        required: true
+    },
+    pic : {
+        type: String,
+        required: false
+    },
+    header: {
+        type: String,
+        required: true
+    },
+    start_date: {
+        type: String,
+        required: true
+    },
+    end_date: {
+        type: String,
+        required: true
+    },
+    details: {
+        type: String,
+        required: true
+    },
+    isArchived: {
+        type: Boolean,
+        required: true
+    },
+    isInactive: {
+        type: Boolean,
+        required: true
+    }
+});
+
+
 
 // MODELS //
 const CertificateModel          = mongoose.model("CertificateModel",        CertificateSchema,     "certificate");
@@ -373,6 +418,8 @@ const TanodCaseModel            = mongoose.model("TanodCaseModel",          Tano
 const SecurityQuestionModel     = mongoose.model("SecurityQuestionModel",   SecurityQuestion,      "securityQuestion");
 const ResidentModel             = mongoose.model("ResidentModel",           ResidentSchema,        "resident");
 const CertificateInfoModel      = mongoose.model("CertificateInfoModel",    CertificateInfo,       "certificateInfo");
+const EventModel                = mongoose.model("EventModel",              EventSchema,            "events");
+
 
 // EXPORTS //
 module.exports = {
@@ -383,5 +430,6 @@ module.exports = {
     SecurityQuestionModel,
     ResidentModel,
     CertificateInfoModel,
+    EventModel,
     mongo_uri
 };

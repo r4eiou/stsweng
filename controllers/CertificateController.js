@@ -1,20 +1,10 @@
 const TanodCaseModel = require("../models/database/mongoose").TanodCaseModel;
 const LuponCaseModel = require("../models/database/mongoose").LuponCaseModel;
 const CertificateModel = require("../models/database/mongoose").CertificateModel;
+const CertificateInfoModel = require("../models/database/mongoose").CertificateInfoModel;
+const ResidentModel = require("../models/database/mongoose").ResidentModel;
 
-//employee
-const viewCertClearance = async (req, res) => {
-    req.session.lastpage = '/employee-check-clearance';
-    res.render('employee-check-clearance',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee Homepage - test',
-        cssFile1: 'index',
-        cssFile2: 'checkclearance',
-        javascriptFile1: 'header',
-        javascriptFile2: 'check-clearance',
-    });
-};
-
+// PAKISEPARATE NG FILE -------------------
 const viewEventsDB = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
     res.render('employee-event-db-view',{
@@ -22,7 +12,6 @@ const viewEventsDB = async (req, res) => {
         title: 'Barangay Parang - Employee Event DB View'
     });
 };
-
 
 const viewEvents = async (req, res) => {
     req.session.lastpage = '/eemployee-view-events-db';
@@ -33,7 +22,6 @@ const viewEvents = async (req, res) => {
         cssFile2: 'event-details'
     }); 
 };
-
 
 const viewArchivedEvents = async (req, res) => {
     req.session.lastpage = '/employee-view-events-db';
@@ -55,7 +43,6 @@ const createEvent = async (req, res) => {
     });
 };
 
-
 const editEvent = async (req, res) => {
     req.session.lastpage = '/employee-view-event';
     res.render('employee-edit-event',{
@@ -65,52 +52,67 @@ const editEvent = async (req, res) => {
         cssFile2: 'event-details'
     });
 };
+// ----------------------------------------
 
-const viewResidentDB = async (req, res) => {
+// ----------------------------------------
+// const viewResidentDB = async (req, res) => {
+//     req.session.lastpage = '/employee-check-clearance';
+//     res.render('employee-resident-db',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Event',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const viewArchivedResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-view-archive-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee View Archive Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const editResident = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-edit-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Employee Edit Resident Record',
+//         cssFile1: 'homepage'
+//     });
+// };
+
+// const createResidentRecord = async (req, res) => {
+//     req.session.lastpage = '/employee-resident-db';
+//     res.render('employee-register-resident',{
+//         layout: 'layout',
+//         title: 'Barangay Parang - Create Resident Details',
+//         cssFile1: 'homepage'
+//     });
+// };
+// ----------------------------------------
+
+//employee
+const viewCertClearance = async (req, res) => {
     req.session.lastpage = '/employee-check-clearance';
-    res.render('employee-resident-db',{
+    res.render('employee-check-clearance',{
         layout: 'layout',
-        title: 'Barangay Parang - Employee Edit Event',
-        cssFile1: 'homepage'
+        title: 'Barangay Parang - Employee Homepage - test',
+        cssFile1: 'index',
+        cssFile2: 'checkclearance',
+        javascriptFile1: 'header',
+        javascriptFile2: 'check-clearance',
     });
 };
-
-const viewResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-view-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee View Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const viewArchivedResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-view-archive-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee View Archive Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const editResident = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-edit-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Employee Edit Resident Record',
-        cssFile1: 'homepage'
-    });
-};
-
-const createResidentRecord = async (req, res) => {
-    req.session.lastpage = '/employee-resident-db';
-    res.render('employee-register-resident',{
-        layout: 'layout',
-        title: 'Barangay Parang - Create Resident Details',
-        cssFile1: 'homepage'
-    });
-};
-
 
 const isClearedEmployee = async (req, res) => {
     const searchName = req.params.search_name;
@@ -263,7 +265,8 @@ const submitCertificate = async (req, res) => {
             ctc_location,
             cert_date_issued,
             reason,
-            img
+            img,
+            email
         } = req.body;
 
         //DEBUGGING
@@ -303,12 +306,23 @@ const submitCertificate = async (req, res) => {
             ctc_date_issued: ctc_date_issued,
             ctc_location: ctc_location,
             cert_date_issued: cert_date_issued,
-            reason: reason
+            reason: reason,
+            email: email
         });
+
+        //console.log(email)
+
+        //find if email exists in ResidentModel. If so increment req_counter of ResidentModel
+        const resident = await ResidentModel.findOne({ Email: email });
+
+        if (resident) {
+            resident.Req_counter = (resident.Req_counter || 0) + 1;
+            await resident.save();
+        }
 
         res.status(201).send({ message: 'Certificate saved successfully' });
     } catch (error) {
-        console.log("error here in controller cert")
+        console.log(error)
         res.status(400).send(error);
     }
 }
@@ -548,7 +562,73 @@ const checkCedulaNum = async (req, res) => {
     }
 }
 
+//edit-cert-info
+const viewCertInfoEditPage = async (req, res) => {
+    const certificateInfo = await CertificateInfoModel.findOne({_id: "1"}).lean();
 
+    req.session.lastpage = `/certificate-edit-template`;
+    res.render('certificate-edit-template', {
+        layout: 'layout',
+        title: 'Admin: Certificate Edit Information',
+        cssFile1: 'homepage',
+        cssFile2: 'cert-db-view',
+        javascriptFile1: 'components',
+        javascriptFile2: 'header',
+        certificateInfo: certificateInfo
+    });
+};
+
+const getCertificateInfo = async (req, res) => {
+    try {
+        // Fetch the required certificate information from the database
+        const certificateInfo = await CertificateInfoModel.findOne({_id: "1"}).exec();
+
+        // If no certificate info is found, send a 404 response
+        if (!certificateInfo) {
+            return res.status(404).send({ message: 'Certificate information not found' });
+        }
+
+        // Extract necessary fields from the certificate info
+        const { brgy_capt_name, slogan, img } = certificateInfo;
+
+        // Send the certificate info back to the client
+        res.status(200).json({
+            brgy_capt_name,
+            slogan,
+            img
+        });
+    } catch (error) {
+        console.error('Error fetching certificate information:', error);
+        res.status(500).send({ message: 'Internal server error' });
+    }
+};
+
+const submitEditCertInfo = async (req, res) => {
+    try {
+        const {
+            img,
+            brgy_captain_name,
+            slogan
+        } = req.body;
+
+        await CertificateInfoModel.findOneAndUpdate(
+            { _id: "1" },
+            {
+                $set: {
+                    img: img,
+                    brgy_capt_name: brgy_captain_name,
+                    slogan: slogan,
+                }
+            },
+            { new: true }
+        );
+
+        res.redirect(`/certificate-edit-template`);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
 
 module.exports = {
     isClearedEmployee,
@@ -568,6 +648,9 @@ module.exports = {
     searchCertificateCase,
     viewSearchCertificateDB,
     checkCedulaNum,
+    viewCertInfoEditPage,
+    getCertificateInfo,
+    submitEditCertInfo,
 
     viewEvents,
     viewArchivedEvents,
@@ -576,9 +659,9 @@ module.exports = {
     editEvent,
 
 
-    viewResidentDB,
-    viewResident,
-    viewArchivedResident,
-    editResident,
-    createResidentRecord
+    // viewResidentDB,
+    // viewResident,
+    // viewArchivedResident,
+    // editResident,
+    // createResidentRecord
 }

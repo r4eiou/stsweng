@@ -11,11 +11,11 @@ router.get('/employee-view-archive-event',                  certificateControlle
 router.get('/employee-create-event',                        certificateController.createEvent);
 router.get('/employee-edit-event',                          certificateController.editEvent);
 
-router.get('/employee-resident-db',                         certificateController.viewResidentDB)
-router.get('/employee-view-resident',                       certificateController.viewResident)
-router.get('/employee-view-archive-resident',               certificateController.viewArchivedResident)
-router.get('/employee-edit-resident',                       certificateController.editResident)
-router.get('/employee-register-resident',                   certificateController.createResidentRecord)
+// router.get('/employee-resident-db',                         certificateController.viewResidentDB)
+// router.get('/employee-view-resident',                       certificateController.viewResident)
+// router.get('/employee-view-archive-resident',               certificateController.viewArchivedResident)
+// router.get('/employee-edit-resident',                       certificateController.editResident)
+// router.get('/employee-register-resident',                   certificateController.createResidentRecord)
 
 router.get('/search-cases-employee/:search_name',           certificateController.isClearedEmployee);
 router.get('/search-cases-employeeLupon/:search_name',      certificateController.isClearedEmployeeLupon);
@@ -36,5 +36,10 @@ router.get('/search-cases-certificate/:search_name',        certificateControlle
 router.get('/certificate-db/:search_name',                  certificateController.viewSearchCertificateDB);
 
 router.post('/check-cedula',                                certificateController.checkCedulaNum);
+
+//for edit cert info
+router.get('/certificate-edit-template',                   certificateController.viewCertInfoEditPage);
+router.get('/certificateInfo',                             certificateController.getCertificateInfo);
+router.post('/submit-edit-certificateInfo',                certificateController.submitEditCertInfo);
 
 module.exports = router;

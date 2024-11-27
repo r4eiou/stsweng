@@ -39,13 +39,22 @@
 
 <div class="content-container-tanod-home">
     <div class="box-content-top">
-        <a href="/A-lupon-create-case">
-            <button type="button" class="form-btn create size">                                  <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
+        <a href="/A-lupon-create-case" id="createButtonLupon">
+            <button type="button" class="form-btn create size" >                                 <img src="/images/form-create.png"> <span>Create New Record</span>  </button>
         </a>
         <button type="button" class="form-btn resolved margin size" id="resolvedButtonLupon">    <img src="/images/form-check.png">  <span>Mark as Resolved</span>   </button>
-        <button type="button" class="form-btn delete margin size"   id="deleteButtonLupon">      <img src="/images/form-trash.png">  <span>Delete Selection</span>   </button>
-        <div class="search-name-reg margin">
+        <button type="button" class="form-btn delete margin size"   id="deleteButtonLupon">      <img src="/images/form-trash.png">  <span>Archive Selection</span>   </button>
+        
+        <div class="dropdown">
+            <select id="AdminCaseLuponDropdown" name="caseView" class="form-btn status-dropdown" required>
+                <option value="0">View All Cases</option>
+                <option value="1">View Ongoing</option>
+                <option value="2">View Resolved</option>
+                <option value="3">View Archived</option>
+            </select>
+        </div>
 
+        <div class="search-name-reg margin">
             <!-- implement search function -->
             <form id="searchFormLupon">
                 <button type="submit"><img src="/images/search-reg.png"></button>
@@ -54,85 +63,42 @@
         </div>
     </div>
 
-    <div class="db-main-box">
-        <!--
-        <div class="db-main-box-header">
-            <div class="checkboxCol"></div>
-            <div class="nameCol">Name</div>
-            <div class="statusCol">Lupon Case Status</div>
-            <div class="viewCol"></div>
-        </div>
-
-        <form id="checkboxForm" action="/checkbox-action" method="POST">
-            {{#each cases}}
-                <div class="db-main-box-content">
-                    <div class="checkboxCol-Content">
-                        <input type="checkbox" name="caseIds" value="{{this._id}}" class="checkbox margin">
-                    </div>
-
-                    <div class="nameCol-Content">{{fullName RespondentInfo.FirstName RespondentInfo.MiddleInitial RespondentInfo.LastName}}</div>
-
-                    {{#checkStatus Status}}
-                        <div class="statusCol-Content">
-                            {{!-- <a href="/update-Status-Lupon/{{this._id}}/{{this.Status}}"><button type="button" class="status resolved" ><img src="/images/resolved-circle.png"><span>Resolved</span></button></a> --}}
-                            <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
-                        </div>
-                    {{else}}
-                        <div class="statusCol-Content">
-                            {{!-- <a href="/update-Status/{{this._id}}/{{this.Status}}"><button type="button" class="status ongoing"><img src="/images/ongoing-circle.png"><span>Ongoing</span></button></a> --}}
-                            <button type="button" class="status ongoing" onclick="updateStatus('{{this._id}}', '{{this.Status}}')">
-                                <img src="/images/ongoing-circle.png"><span>Ongoing</span>
-                            </button>
-                        </div>
-                    {{/checkStatus}}
-
-                    <div class="viewCol-Content">
-                        <a href="/A-lupon-view-case/{{this._id}}" class="content-text-main underline">View Lupon Case</a>
-                    </div>
-                    
-                </div>
-            {{/each}}
-        </form>
-        -->
-
-    </div>
-
     <table class="tanod-lupon-db-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Lupon Case Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    {{#each cases}}
-                        <tr>
-                            <td data-label="checkbox" class="align-right check-view-cell">
-                                <button type="button" class="checkbox" name="caseIds" value="{{this._id}}"><img src="/images/Done.png"></button>
-                            </td>
-                            <td class="truncate-text-150px">
-                                {{fullName RespondentInfo.FirstName RespondentInfo.MiddleInitial RespondentInfo.LastName}}
-                            </td>
-                            {{#checkStatus Status}}
-                            <td class="case-status-cell-admin">
-                                <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
-                            </td>
-                            {{else}}
-                            <td class="fit-button">
-                                <button type="button" class="status ongoing" onclick="updateStatus('{{this._id}}', '{{this.Status}}')">
-                                    <img src="/images/ongoing-circle.png"><span>Ongoing</span>
-                                </button>
-                            </td>
-                            {{/checkStatus}}
-                            <td>
-                                <a href="/A-lupon-view-case/{{this._id}}" class="content-text-main underline">View Lupon Case</a>
-                            </td>
-                        </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Lupon Case Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody> 
+            {{#each cases}}
+                <tr>
+                    <td data-label="checkbox" class="align-right check-view-cell">
+                        <button type="button" class="checkbox" name="caseIds" value="{{this._id}}"><img src="/images/Done.png"></button>
+                    </td>
+                    <td class="truncate-text-150px">
+                        {{fullName RespondentInfo.FirstName RespondentInfo.MiddleInitial RespondentInfo.LastName}}
+                    </td>
+                    {{#checkStatus Status}}
+                    <td class="case-status-cell-admin">
+                        <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
+                    </td>
+                    {{else}}
+                    <td class="fit-button">
+                        <button type="button" class="status ongoing" onclick="updateStatus('{{this._id}}', '{{this.Status}}')">
+                            <img src="/images/ongoing-circle.png"><span>Ongoing</span>
+                        </button>
+                    </td>
+                    {{/checkStatus}}
+                    <td>
+                        <a href="/A-lupon-view-case/{{this._id}}" class="content-text-main underline">View Lupon Case</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
     <div class="box-content-page">
         <button class="page-btn" id="count-down">&lt;</button>
@@ -166,6 +132,74 @@
             window.updateStatus = function(caseId, currentStatus) {
                 window.location.href = `/update-Status-Lupon/${caseId}/${currentStatus}/${currentPage}`;
             };
+
+            // Load the previously selected dropdown value from localStorage
+            const savedLuponStatus = localStorage.getItem('selectedLuponStatus');
+            if (savedLuponStatus) {
+                $("#AdminCaseLuponDropdown").val(savedLuponStatus); // Set the dropdown to the saved value
+            }
+
+            // Event listener for the dropdown change
+            $("#AdminCaseLuponDropdown").on("change", function() {
+                const selectedValue = $(this).val();
+                
+                // Save the selected value to localStorage
+                localStorage.setItem('selectedLuponStatus', selectedValue);
+
+                // Send the AJAX request to update the case view
+                $.ajax({
+                    url: '/admin-lupon-db-view', 
+                    type: 'GET', 
+                    data: { status: selectedValue },
+                    success: function(response) {
+                        // Handle success, e.g., update the case list
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading cases:', error);
+                    }
+                });
+
+                window.location.href = `/admin-lupon-db-view?status=${selectedValue}`; //automatic refresh
+            });
+
+            // Function to disable or enable buttons based on dropdown value
+            function updateButtonState() {
+                const dropdown          = document.getElementById('AdminCaseLuponDropdown');
+                const createButton      = document.getElementById('createButtonLupon');
+                const resolvedButton    = document.getElementById('resolvedButtonLupon');
+                const deleteButton      = document.getElementById('deleteButtonLupon');
+
+                switch (dropdown.value) {
+                    case '2':
+                        resolvedButton.style.pointerEvents = 'none';
+                        resolvedButton.style.opacity = '0.5';
+
+                        break;
+                    case '3':
+                        // Disable pointer events for all buttons
+                        createButton.style.pointerEvents = 'none';
+                        resolvedButton.style.pointerEvents = 'none';
+                        deleteButton.style.pointerEvents = 'none';
+
+                        createButton.style.opacity = '0.5';
+                        resolvedButton.style.opacity = '0.5';
+                        deleteButton.style.opacity = '0.5';
+                        
+                        break;
+                    default:
+                        createButton.style.pointerEvents = 'auto';
+                        resolvedButton.style.pointerEvents = 'auto';
+                        deleteButton.style.pointerEvents = 'auto';
+
+                        // Restore button appearance
+                        createButton.style.opacity = '1';
+                        resolvedButton.style.opacity = '1';
+                        deleteButton.style.opacity = '1';
+                }
+            }
+
+            // Call function
+            updateButtonState();
         });
     </script>
 </div>

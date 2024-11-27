@@ -4,22 +4,33 @@
   "description": "The Barangay Parang Database aims to aid the Barangay Captain and Secretary in organizing information and administering document requests through the implementation of the software. The specific objectives of the software are as follows:  To provide a platform for Barangay Captain and secretary to manage information of civil/criminal trials and blotter requests of residents; To provide convenience to the employees when processing the document; and To provide a platform for them to streamline the process of generating and issuing of the barangay certification.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
     "connect-mongodb-session": "^5.0.0",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
     "express-flash": "^0.0.2",
     "express-handlebars": "^7.1.3",
-    "express-session": "^1.18.0",
+    "express-session": "^1.18.1",
     "handlebars": "^4.7.8",
-    "mongoose": "^8.5.1"
+    "mongodb": "^6.11.0",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "selenium-webdriver": "^4.27.0",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "jest": "^27.5.1",
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
