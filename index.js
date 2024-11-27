@@ -236,7 +236,7 @@ app.use(admin_residentRoutes);
 app.use(employee_residentRoutes);
 
 // admin events routes
-app.use(admin_eventRoutes);
+//app.use(admin_eventRoutes);
 
 
 const controllers = ['employee-tanod-lupon-routes']; //ung mga get eme nasa controller
