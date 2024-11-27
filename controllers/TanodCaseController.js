@@ -552,7 +552,8 @@ const createTanodCase = async (req, res) => {
                 MiddleInitial: witnessMiddleInitial,
                 LastName: witnessLastName
             },
-            Location: location
+            Location: location,
+            isArchived: false
         });
 
         res.redirect("/admin-tanod-db-view" );

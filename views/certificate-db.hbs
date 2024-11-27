@@ -102,9 +102,17 @@
                         <td>
                             {{this.ctc_no}}
                         </td>
-                        <td class="truncate-text-150px">
-                            {{this.name}}
-                        </td>
+                        
+                        {{#checkArchived this.isArchived}}
+                            <td class="truncate-text-150px">
+                                {{this.name}}
+                            </td>
+                        {{else}}
+                            <td class="truncate-text-150px" style="color: red;">
+                                {{this.name}}
+                            </td>
+                        {{/checkArchived}}
+
                         <td class="truncate-text-150px">
                             {{this.reason}}
                         </td>

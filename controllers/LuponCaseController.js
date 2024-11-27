@@ -290,7 +290,8 @@ const createLuponCase = async (req, res) => {
                 MiddleInitial: ConciliationMiddleInitial,
                 LastName: ConciliationLastName
             },
-            Case: Case
+            Case: Case,
+            isArchived: false
         });
 
         res.redirect("/admin-lupon-db-view");
