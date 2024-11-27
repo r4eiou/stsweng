@@ -28,10 +28,52 @@ function add(app){
 
     //Employee-index
     app.get('/employee-index',async function(req, resp){
-        resp.render('employee-index', {
-            layout: 'index-employee',
-            title: 'Employee Index'
-        });
+        try{
+        
+            //proceed to get all events
+            const events = await EventModel.find({ isArchived: false, isInactive: false })
+                .sort({ start_date: 1 }) // Optional: Sort by start_date
+               
+        
+            let allEvents = [];
+                for(const item of events){
+                    let stat_lc = 'active';
+                    let stat = 'Active';
+                    let isEditable = 'hidden';
+                    if(item.isInactive){
+                        stat_lc = 'inactive';
+                        isEditable = '';
+                        stat = 'Inactive';
+                    }
+    
+                    allEvents.push({
+                        eventID : item._id,
+                        headline: item.header,
+                        start_date: item.start_date,
+                        end_date: item.end_date,
+                        details: item.details,
+                        pic: item.pic,
+                        status: item.Status,
+                        stat_lc: stat_lc,
+                        stat: stat,
+                        isEditable: isEditable
+                    });
+                }
+
+                resp.render('employee-index',{
+                    layout: 'index-employee',
+                    title: 'Employee Index',
+                    cssFile1: 'index',
+                    cssFile2: null,
+                    javascriptFile1: null,
+                    javascriptFile2: null,
+                    events: allEvents,
+                });
+            
+        }catch (error) {
+            console.error('Error fetching events:', error);
+            resp.status(500).send('Internal Server Error');
+        }
     });
 
     //Employee-Homepage
@@ -539,7 +581,55 @@ function add(app){
 
     /************************************************************TANOD************************************************/
 
+    //Tanod Index
+    app.get('/tanod-index',async function(req, resp){
+        try{
+            //proceed to get all events
+            const events = await EventModel.find({ isArchived: false, isInactive: false })
+                .sort({ start_date: 1 }) // Optional: Sort by start_date
+               
+        
+            let allEvents = [];
+                for(const item of events){
+                    let stat_lc = 'active';
+                    let stat = 'Active';
+                    let isEditable = 'hidden';
+                    if(item.isInactive){
+                        stat_lc = 'inactive';
+                        isEditable = '';
+                        stat = 'Inactive';
+                    }
     
+                    allEvents.push({
+                        eventID : item._id,
+                        headline: item.header,
+                        start_date: item.start_date,
+                        end_date: item.end_date,
+                        details: item.details,
+                        pic: item.pic,
+                        status: item.Status,
+                        stat_lc: stat_lc,
+                        stat: stat,
+                        isEditable: isEditable
+                    });
+                }
+
+                resp.render('tanod-index',{
+                    layout: 'index-tanod',
+                    title: 'Tanod Index',
+                    cssFile1: 'index',
+                    cssFile2: null,
+                    javascriptFile1: null,
+                    javascriptFile2: null,
+                    events: allEvents,
+                });
+            
+        }catch (error) {
+            console.error('Error fetching events:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+    });
+
     //Tanod Homepage
     app.get('/tanod-home', isAuth, async function(req, resp){
         try{
@@ -1265,6 +1355,54 @@ function add(app){
 
     /************************************************************LUPON************************************************/
 
+    //Lupon Index
+    app.get('/lupon-index',async function(req, resp){
+        try{
+            //proceed to get all events
+            const events = await EventModel.find({ isArchived: false, isInactive: false })
+                .sort({ start_date: 1 }) // Optional: Sort by start_date
+               
+        
+            let allEvents = [];
+                for(const item of events){
+                    let stat_lc = 'active';
+                    let stat = 'Active';
+                    let isEditable = 'hidden';
+                    if(item.isInactive){
+                        stat_lc = 'inactive';
+                        isEditable = '';
+                        stat = 'Inactive';
+                    }
+    
+                    allEvents.push({
+                        eventID : item._id,
+                        headline: item.header,
+                        start_date: item.start_date,
+                        end_date: item.end_date,
+                        details: item.details,
+                        pic: item.pic,
+                        status: item.Status,
+                        stat_lc: stat_lc,
+                        stat: stat,
+                        isEditable: isEditable
+                    });
+                }
+
+                resp.render('lupon-index',{
+                    layout: 'index-lupon',
+                    title: 'Lupon Index',
+                    cssFile1: 'index',
+                    cssFile2: null,
+                    javascriptFile1: null,
+                    javascriptFile2: null,
+                    events: allEvents,
+                });
+            
+        }catch (error) {
+            console.error('Error fetching events:', error);
+            resp.status(500).send('Internal Server Error');
+        }
+    });
 
     //Lupon Homepage
     app.get('/lupon-home', isAuth, async function(req, resp){

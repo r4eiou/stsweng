@@ -15,4 +15,3 @@ Node Packages to be installed:
 - mongoose   
 - connect-mongodb-session
 - nodemon (as dev dependencies)
-- multer
