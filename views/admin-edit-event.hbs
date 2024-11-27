@@ -40,17 +40,20 @@
     <div class="sub-container">
         
         <div class = "text-container">
-            <h1 id = "event-details-title">Creating a New Event</h1>
+            <h1 id = "event-details-title">Editing Event</h1>
         </div>
 
-        <form id='eventForm' action="admin-submit-event" method="post" class="print-form" enctype="multipart/form-data">
+        <form id='event-editForm' action="submit-edit-event-admin" method="post" class="print-form" enctype="multipart/form-data" >
+        <div hidden>
+            <input id="eventID" value="{{eventID}}" name="eventID" hidden>
+        </div>
             <div class = "print-panel">
                 <!-- for Photo-->
                 <div class="photo-container">
                     <div></div>
                     <label for="event_pic" class="deets-text">Upload Photo</label>
                     <input type="file" id="event_pic" name="event_pic" accept="image/*">
-                    {{!-- <img src="/images/transparent.jpg" class="details-profile" id="deets-profile-img"> --}}
+                    <img src="{{pic}}" class="details-profile" id="deets-profile-img" hidden>
                 </div>
                 
 
@@ -58,7 +61,7 @@
                 <div class="deets1-container">
                     <div class="name-container">
                         <div class="deets-text">Headline</div>
-                        <input type="text" id="headline-edit" name="headline" placeholder="Headline Here">
+                        <input type="text" id="headline-edit" name="headline_edit" value="{{headline}}" placeholder="Headline Here">
                     </div>
                 </div>
 
@@ -66,11 +69,11 @@
                 <div class="deets2-container">
                     <div class="date-container">
                         <div class="deets-text">Start Date</div>
-                        <input type="date" id="startDate-edit"  name="startDate" placeholder="mm/dd/yyyy">                             
+                        <input type="date" id="startDate-edit"  name="startDate_edit" value="{{startDate}}" placeholder="mm/dd/yyyy">                             
                     </div>
                     <div class="address-container">
                         <div class="deets-text">Finish Date</div>
-                        <input type="date" id="finishDate-edit" name="finishDate" placeholder="mm/dd/yyyy">
+                        <input type="date" id="finishDate-edit" name="finishDate_edit" value="{{finishDate}}" placeholder="mm/dd/yyyy">
                     </div>
                 </div>
 
@@ -78,13 +81,13 @@
                 <!-- for Details -->
                 <div class="deets5-container"> 
                     <div class="deets-text">Details</div>
-                    <textarea type="text" id="details-edit" name="details" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "></textarea>
+                    <textarea type="text" id="details-edit" name="details_edit" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ">{{details}}</textarea>
                 </div>
             </div>
         </form>
     </div>
     <div class = "buttons-container">
-        <a><button type="submit" id="editButton"   form="eventForm"   class="form-btn edit">      <img src="/images/form-check.png"><span>Save Changes</span></button> </a>
-        <a href="/admin-view-events-db"><button type="button" id="archiveButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button> </a>
+        <button type="submit" form='event-editForm' id="editButton"       class="form-btn edit"> <img src="/images/form-check.png"><span>Save Changes</span></button>
+        <a href="/admin-view-event/{{eventID}}"><button type="button" id="archiveButton"    class="form-btn archive">   <img src="/images/form-trash.png"><span>Discard Changes</span></button> </a>
     </div>
 </div>
