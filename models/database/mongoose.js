@@ -71,6 +71,10 @@ const CertificateSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
+    isArchived: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const UserSchema = new mongoose.Schema ({

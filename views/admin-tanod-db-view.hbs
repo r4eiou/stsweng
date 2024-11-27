@@ -80,9 +80,17 @@
                     <td data-label="checkbox" class="align-right check-view-cell">
                         <button type="button" class="checkbox" name="caseIds" value="{{this._id}}"><img src="/images/Done.png"></button>
                     </td>
-                    <td class="truncate-text-150px">
-                        {{fullName ReporteeInfo.FirstName ReporteeInfo.MiddleInitial ReporteeInfo.LastName}}
-                    </td>
+
+                    {{#checkArchived this.isArchived}}
+                        <td class="truncate-text-150px">
+                            {{fullName ReporteeInfo.FirstName ReporteeInfo.MiddleInitial ReporteeInfo.LastName}}
+                        </td>
+                    {{else}}
+                        <td class="truncate-text-150px" style="color: red;">
+                            {{fullName ReporteeInfo.FirstName ReporteeInfo.MiddleInitial ReporteeInfo.LastName}}
+                        </td>
+                    {{/checkArchived}}
+                    
                     {{#checkStatus Status}}
                     <td class="case-status-cell-admin">
                         <button type="button" class="status resolved" style="pointer-events: none;" disabled><img src="/images/resolved-circle.png"><span>Resolved</span></button>
